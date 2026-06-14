@@ -1,0 +1,159 @@
+// ...existing code...
+'use client';
+
+import React, { useEffect } from 'react';
+import { PackageItem } from '../../../lib/types';
+import PackageList from './PackageList';
+import PriceSidebar from './PriceSidebar';
+import RoomDetailsModal from './RoomDetailsModal';
+import { typography } from '@/src/app/lib/typography';
+import { Flower2, Sofa, Sunset } from 'lucide-react';
+
+type Props = {
+    showPackages: boolean;
+    setShowPackages: (v: boolean) => void;
+};
+
+export default function SelectRoomSection({ showPackages, setShowPackages }: Props) {
+    const [currentStep, setCurrentStep] = React.useState(1);
+    const [showDetails, setShowDetails] = React.useState(false);
+    const [selected, setSelected] = React.useState<PackageItem[]>([]);
+    const [openQtyFor, setOpenQtyFor] = React.useState<string | null>(null);
+    const [qtyAdults, setQtyAdults] = React.useState(1);
+    const [qtyChildren, setQtyChildren] = React.useState(0);
+    const [promo, setPromo] = React.useState('');
+
+    const packages: PackageItem[] = [
+        { id: 'p1', title: 'WITH FOOD', subtitle: 'SEA VIEW', price: 'INR 6,578', details: '1NIGHT 1ROOM 2 ADULT' },
+        { id: 'p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: '1NIGHT 1ROOM 2 ADULT' },
+        { id: 'p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: '1NIGHT 1ROOM 2 ADULT' },
+    ];
+
+    function onSelectPackage() {
+        setShowPackages(true);
+        window.scrollTo({ top: 400, behavior: 'smooth' });
+    }
+
+    useEffect(() => {
+        // When showPackages becomes true (e.g. via EDIT), ensure UI scrolls into view
+        if (showPackages) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 400,
+                    behavior: "smooth",
+                });
+            }, 100);
+        }
+    }, [showPackages]);
+
+    function addPackage(pkg: PackageItem) {
+        setSelected((s) => [...s, pkg]);
+        setOpenQtyFor(null);
+        setQtyAdults(1);
+        setQtyChildren(0);
+    }
+
+    function removePackage(id: string) {
+        setSelected((s) => s.filter((p) => p.id !== id));
+    }
+
+    return (
+        <div className="p-8  min-h-105">
+            {showDetails && <RoomDetailsModal onClose={() => setShowDetails(false)} />}
+            {/* Top bar */}
+            <div className="flex items-start justify-between mb-6">
+                <div className={`text-gray-700 ${typography.textBase}`}>
+                    Fri, 22 JUN, 2026 - Fri, 22 JUN, 2026
+                </div>
+
+                <div className="flex items-center gap-3">
+                    <div className={`text-gray-700 ${typography.textBase}`}>
+                        1NIGHT · 1ROOM · 2 ADULT</div>
+                    <button
+                        onClick={() => setShowPackages(false)}
+                        className="text-xs uppercase tracking-wide px-4 h-8 border border-primary text-primary rounded"
+                    >
+                        Edit
+                    </button>
+                </div>
+            </div>
+
+            {/* Main layout */}
+            <div className="grid grid-cols-[1fr_360px] gap-20">
+                {/* Left: room card + packages */}
+                <div className="flex flex-col gap-6">
+                    <div className="grid grid-cols-12 gap-4">
+                        <div className="relative lg:col-span-8  shrink-0 rounded overflow-hidden shadow-sm">
+                            <img
+                                src="/images/Rectangle.png"
+                                alt="room"
+                                className="w-full h-full object-cover"
+                            />
+                            <button
+                                onClick={() => setShowDetails(true)}
+                                className="absolute top-4 right-4 backdrop-blur-md bg-accent/51 text-white text-xs font-semibold px-3 py-1 rounded"
+                            >
+                                View Details
+                            </button>
+                        </div>
+
+                        <div className="lg:col-span-4">
+                            <div className="">
+                                <div className={`${typography.textLg} font-semibold mt-1`}>ECONOMY</div>
+                                <div className="text-xs text-dark-gray mt-1">SEA VIEW</div>
+
+                                <ul className="mt-4 mb-10 space-y-1 text-sm text-gray-600">
+                                    <li className="flex items-center gap-2">
+                                        <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Flower2 size={22} strokeWidth={1.5} /></span>
+                                        BALLCONY
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <span className="w-4 h-4 rounded-full flex items-center justify-center text-xs">    <Sofa size={22} strokeWidth={1.5} />
+                                        </span>
+                                        WALKOUT SPACE
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Sunset size={22} strokeWidth={1.5} />
+                                        </span>
+                                        SUNSET VIEW POINT
+                                    </li>
+                                </ul>
+
+                                <div className="text-sm text-gray-500 ">From</div>
+                                <div className={`${typography.textThXl} font-extrabold`}>INR 8,999<span className="text-sm font-medium text-gray-500">/Night</span></div>
+                                <div className="text-xs text-gray-400 mt-1">subject to GST and charges</div>
+
+                                <button
+                                    onClick={onSelectPackage}
+                                    className={`mt-2 bg-primary text-white px-4 h-10 rounded uppercase ${typography.textBase} tracking-wide`}
+                                >
+                                    Select Package
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Choose package list (shown after clicking Select Package) */}
+                    {showPackages && (
+                        <PackageList
+                            packages={packages}
+                            openQtyFor={openQtyFor}
+                            setOpenQtyFor={setOpenQtyFor}
+                            qtyAdults={qtyAdults}
+                            setQtyAdults={setQtyAdults}
+                            qtyChildren={qtyChildren}
+                            setQtyChildren={setQtyChildren}
+                            addPackage={addPackage}
+                        />
+                    )}
+                </div>
+
+                {/* Right: sidebar */}
+                <div>
+                    <PriceSidebar selected={selected} removePackage={removePackage} promo={promo} setPromo={setPromo} />
+                </div>
+            </div>
+        </div>
+    );
+}
+// ...existing code...
