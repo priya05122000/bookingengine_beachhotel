@@ -12,7 +12,7 @@
   --light-white: #EBEBF0;
   --light-green: #53BE90;
   --pale-green: #F0F8F2;
-  --off-white:#F6F6F6;
+  --off-white: #F6F6F6;
 
 }
 
@@ -27,9 +27,10 @@
   --color-accent: var(--accent);
   --color-light-white: var(--light-white);
   --color-light-green: var(--light-green);
-  --color-pale-green:var(--pale-green);
-  --color-off-white:var(--off-white);
+  --color-pale-green: var(--pale-green);
+  --color-off-white: var(--off-white);
   --font-arizona: var(--font-arizona);
+  --font-nobel: var(--font-nobel);
 }
 
 
@@ -37,5 +38,15 @@ body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden !important;
-  font-family: var(--font-arizona);
+  font-family: var(--font-nobel);
+}
+
+@layer utilities {
+  .font-arizona {
+    font-family: var(--font-arizona);
+  }
+
+  .font-nobel {
+    font-family: var(--font-nobel);
+  }
 }

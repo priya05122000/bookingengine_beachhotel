@@ -1,6 +1,6 @@
 'use client';
 
-import { typography } from '@/src/app/lib/typography';
+import { typography } from '@/src/lib/typography';
 import React from 'react';
 
 export default function ConfirmationSection() {
@@ -19,7 +19,7 @@ export default function ConfirmationSection() {
                         </div>
                         <div>
                             <h2 className={`${typography.textThXl} font-bold text-primary leading-snug`}>Your Booking Is Confirmed</h2>
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-dark-gray mt-1">
                                 Thank you for choosing the beach hotel<br />
                                 we look forward to hosting you
                             </p>
@@ -31,9 +31,9 @@ export default function ConfirmationSection() {
 
                     {/* Right: booking reference */}
                     <div className="sm:pl-6 ">
-                        <p className="text-xs text-gray-400 tracking-wide">Booking reference</p>
+                        <p className="text-xs text-dark-gray tracking-wide">Booking reference</p>
                         <p className="text-2xl font-bold text-primary leading-tight mt-0.5">LB4567854</p>
-                        <p className="text-xs text-gray-400 mt-1">
+                        <p className="text-xs text-dark-gray mt-1">
                             A confirmation email has been sent to<br />thebeachhotel@gmail.com
                         </p>
                     </div>
@@ -51,33 +51,33 @@ export default function ConfirmationSection() {
                                 {/* Row 1: GUEST | CHECK-IN | CHECK-OUT */}
                                 <div className="grid grid-cols-3 gap-6 mb-8">
                                     <div>
-                                        <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Guest</p>
+                                        <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">Guest</p>
                                         <p className="text-sm font-semibold text-primary">Nuva rey</p>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Check - In</p>
+                                        <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">Check - In</p>
                                         <p className="text-sm font-semibold text-primary">Sun, 22 May 2026</p>
-                                        <p className="text-xs text-gray-400 mt-1">From 6:00 pm</p>
+                                        <p className="text-xs text-dark-gray mt-1">From 6:00 pm</p>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Check - Out</p>
+                                        <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">Check - Out</p>
                                         <p className="text-sm font-semibold text-primary">Mon, 23 May 2026</p>
-                                        <p className="text-xs text-gray-400 mt-1">by 6:00 pm</p>
+                                        <p className="text-xs text-dark-gray mt-1">by 6:00 pm</p>
                                     </div>
                                 </div>
 
                                 {/* Row 2: YOUR RESERVATION | PHONE | EMAIL */}
                                 <div className="grid grid-cols-3 gap-6">
                                     <div>
-                                        <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Your Reservation</p>
+                                        <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">Your Reservation</p>
                                         <p className="text-sm font-semibold text-primary">3 nights, 1<br />apartment</p>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Phone</p>
+                                        <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">Phone</p>
                                         <p className="text-sm font-semibold text-primary">+91 65478 98756</p>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Email</p>
+                                        <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">Email</p>
                                         <p className="text-sm text-primary">nuvaray26@gmail.com</p>
                                     </div>
                                 </div>
@@ -87,14 +87,26 @@ export default function ConfirmationSection() {
                         {/* Bottom strip */}
                         <div className="bg-white border border-primary px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-2">
                             <div>
-                                <p className="text-sm font-bold text-gray-800 uppercase tracking-wide">
+                                <p className="text-sm font-bold text-dark-gray uppercase tracking-wide">
                                     Manage Your Booking N The Go
                                 </p>
-                                <p className="text-sm text-gray-400 mt-0.5">
+                                <p className="text-sm text-dark-gray mt-0.5">
                                     View modify or cancel your booking anytime
                                 </p>
                             </div>
-                            <button className="bg-primary rounded text-white px-5 h-10 text-sm font-semibold uppercase tracking-wide shrink-0">
+                            <button
+                                onClick={() => {
+                                    window.dispatchEvent(
+                                        new CustomEvent("search:check-availability", {
+                                            detail: {
+                                                step: 0,
+                                                showPackages: false,
+                                            },
+                                        })
+                                    );
+                                }}
+                                className="bg-primary rounded-xs text-white px-5 h-10 text-sm font-semibold uppercase tracking-wide shrink-0"
+                            >
                                 Go To My Booking
                             </button>
                         </div>
@@ -110,24 +122,24 @@ export default function ConfirmationSection() {
                                 {/* Check-in / Check-out */}
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Check - In</p>
+                                        <p className="text-[10px] text-dark-gray uppercase tracking-widest mb-1">Check - In</p>
                                         <p className="text-sm font-semibold text-primary">Mon, 23 May 2026</p>
-                                        <p className="text-[10px] text-gray-400 mt-0.5">From 6:00 pm</p>
+                                        <p className="text-[10px] text-dark-gray mt-0.5">From 6:00 pm</p>
                                     </div>
                                     <div>
-                                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Check - Out</p>
+                                        <p className="text-[10px] text-dark-gray uppercase tracking-widest mb-1">Check - Out</p>
                                         <p className="text-sm font-semibold text-primary">Mon, 23 May 2026</p>
-                                        <p className="text-[10px] text-gray-400 mt-0.5">by 6:00 pm</p>
+                                        <p className="text-[10px] text-dark-gray mt-0.5">by 6:00 pm</p>
                                     </div>
                                 </div>
                                 {/* Total Length of Stay */}
                                 <div>
-                                    <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Total Length Of Stay</p>
+                                    <p className="text-[10px] text-dark-gray uppercase tracking-widest mb-1">Total Length Of Stay</p>
                                     <p className={`${typography.textBase} font-bold text-primary`}>5</p>
                                 </div>
                                 {/* You Selected */}
                                 <div>
-                                    <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-1">You Selected</p>
+                                    <p className="text-[10px] text-dark-gray uppercase tracking-widest mb-1">You Selected</p>
                                     <p className="text-sm font-semibold text-primary">king bed economy</p>
                                 </div>
                             </div>
@@ -137,11 +149,11 @@ export default function ConfirmationSection() {
                                 <div className="">
                                     <h4 className={`${typography.textBase} font-bold text-primary mb-4`}>Price Summery</h4>
 
-                                    <div className="flex justify-between text-sm text-gray-600">
+                                    <div className="flex justify-between text-sm text-dark-gray">
                                         <span>Rooms &amp; offer</span>
                                         <span>₹ 6,000</span>
                                     </div>
-                                    <div className="flex justify-between text-sm text-gray-600">
+                                    <div className="flex justify-between text-sm text-dark-gray">
                                         <span>Extras</span>
                                         <span>₹ 700</span>
                                     </div>
@@ -153,7 +165,7 @@ export default function ConfirmationSection() {
 
                             </div>
 
-                            <button className="mt-3 w-full bg-primary text-white h-11 rounded text-xs font-bold uppercase tracking-widest">
+                            <button className="mt-3 w-full bg-primary text-white h-10 rounded-xs  text-xs font-bold uppercase tracking-widest">
                                 Download Invoice
                             </button>
                         </div>
@@ -165,7 +177,7 @@ export default function ConfirmationSection() {
 
                 {/* ── Explore More ── */}
                 <div className="bg-white px-6 py-8">
-                    <h3 className="text-center text-sm font-bold text-primary mb-6">
+                    <h3 className={`text-center ${typography.textThXl} font-bold text-primary mb-6`}>
                         Explore More For Your Hotel Room
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -177,8 +189,8 @@ export default function ConfirmationSection() {
                                     className="w-full h-64 object-cover"
                                 />
                                 <div className="p-3">
-                                    <p className="text-sm font-bold text-gray-800">SPA &amp; WELLNESS</p>
-                                    <p className="text-sm text-gray-400 mt-0.5">relax &amp; rejuvenate</p>
+                                    <p className="text-sm font-bold text-dark-gray">SPA &amp; WELLNESS</p>
+                                    <p className="text-sm text-dark-gray mt-0.5">relax &amp; rejuvenate</p>
                                     <button className="text-sm text-primary mt-2">Explore →</button>
                                 </div>
                             </div>

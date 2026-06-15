@@ -1,3 +1,10 @@
+// ...existing code...
+"use client";
+
+import React from "react";
+import { usePathname, useRouter } from "next/navigation";
+// ...existing code...
+
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
@@ -5,11 +12,16 @@ interface AuthLayoutProps {
 export default function AuthLayout({
   children,
 }: AuthLayoutProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const isSignin = pathname?.toLowerCase().includes("signin");
+  const isSignup = pathname?.toLowerCase().includes("signup");
+
   return (
     <div className="min-h-screen bg-gray">
       <div className="flex min-h-screen flex-col lg:flex-row">
         {/* Left Side */}
-        <div className="w-full flex flex-col lg:w-[50%] lg:h-screen lg:sticky lg:top-0">
+        <div className="w-full hidden lg:flex  flex-col lg:w-[50%] lg:h-screen lg:sticky lg:top-0">
           <div className="relative h-62 overflow-hidden sm:h-87 lg:flex-1">
             <img
               src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80"
@@ -18,7 +30,7 @@ export default function AuthLayout({
             />
           </div>
 
-          <div className="h-42 shrink-0 px-8 py-8">
+          <div className="h-42 shrink-0 px-8 py-8 font-arizona">
             <p className="mb-3 text-xs uppercase tracking-[0.15em] text-dark-gray">
               Exclusive Offers
             </p>
@@ -31,7 +43,25 @@ export default function AuthLayout({
         </div>
 
         {/* Form Area */}
-        <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="relative flex flex-1 items-center justify-center px-6 pt-24 pb-10">
+          {/* Top controls */}
+          <div className="absolute top-4 right-4 z-50 font-arizona flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="rounded-md px-3 py-2 text-sm text-dark-gray hover:bg-gray/10"
+            >
+              Back
+            </button>
+
+            <button
+              type="button"
+              className="flex h-10 items-center border border-primary px-4 text-sm text-primary transition hover:bg-primary hover:text-white"
+            >
+              {isSignup ? "Register" : "Sign in"}
+            </button>
+          </div>
+
           {children}
         </div>
       </div>

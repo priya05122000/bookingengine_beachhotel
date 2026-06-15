@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { JSX } from "react";
-import { typography } from "../../lib/typography";
+import { typography } from "../../../lib/typography";
 import Section from "../common/Section";
 
 const quickLinks = [

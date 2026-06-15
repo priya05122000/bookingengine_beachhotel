@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import { PackageItem } from '../../../lib/types';
+import { PackageItem } from './types';
 import { X } from 'lucide-react';
 
 type Props = {
@@ -36,12 +36,12 @@ function PriceLineItem({
                 <div className=" flex-1 ">
                     <div className="font-medium text-sm">{item.title}</div>
                     <div className="text-xs text-primary">{item.subtitle}</div>
-                    <div className="text-xs text-gray-500 mt-1">{item.details}</div>
+                    <div className="text-xs text-dark-gray mt-1">{item.details}</div>
                 </div>
 
                 <div className=" flex flex-col text-end justify-between  ">
                     <button
-                        className="self-end cursor-pointer text-gray-400 hover:text-red-500"
+                        className="self-end cursor-pointer text-dark-gray hover:text-red-500"
                         onClick={() => onRemove(item.id)}
                         aria-label={`Remove ${item.title}`}
                     >
@@ -59,7 +59,7 @@ function PriceLineItem({
 
 function SummaryRow({ label, value, strong }: { label: string; value: React.ReactNode; strong?: boolean }) {
     return (
-        <div className={`text-sm ${strong ? 'font-medium text-[#1b2b7a]' : 'text-gray-600'} flex items-center justify-between py-3`}>
+        <div className={`text-sm ${strong ? 'font-medium text-[#1b2b7a]' : 'text-dark-gray'} flex items-center justify-between py-3`}>
             <div>{label}</div>
             <div>{value}</div>
         </div>
@@ -76,8 +76,8 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
 
     return (
         <div className="space-y-3 bg-white p-3 shadow-[1px_4px_4px_0px_#00000040] rounded">
-            <div className="bg-light-white rounded shadow-[1px_4px_4px_0px_#00000040] p-4">
-                <h4 className="text-sm font-semibold text-gray-700 mb-4">PRICE BREAKUP</h4>
+            <div className="bg-light-white rounded-xs shadow-[1px_4px_4px_0px_#00000040] p-4">
+                <h4 className="text-sm font-semibold text-dark-gray mb-4">PRICE BREAKUP</h4>
 
                 {selected.length > 0 ? (
                     <div className="space-y-3 mb-3">
@@ -86,10 +86,10 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
                         ))}
                     </div>
                 ) : (
-                    <div className="text-sm text-gray-600 flex items-center justify-between py-3">
+                    <div className="text-sm text-dark-gray flex items-center justify-between py-3">
                         <div>
                             <div className="text-sm">Base Price</div>
-                            <div className="text-xs text-gray-500">
+                            <div className="text-xs text-dark-gray">
                                 {roomCount} Room{roomCount !== 1 ? 's' : ''} x {nights} Nights
                             </div>
                         </div>
@@ -97,7 +97,7 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
                     </div>
                 )}
 
-                <div className="text-sm border-t py-3 text-gray-600 flex items-center justify-between">
+                <div className="text-sm border-t py-3 text-dark-gray flex items-center justify-between">
                     <div>Hotel Taxes</div>
                     <div>₹ {formatINR(hotelTaxes)}</div>
                 </div>
@@ -110,12 +110,12 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
                 {selected.length > 0 && (
                     <>
                         <div className="mt-4">
-                            <label className="text-sm text-gray-500 mb-1 block">Promo Code</label>
+                            <label className="text-sm font-arizona text-dark-gray mb-1 block">Promo Code</label>
                             <input
                                 value={promo}
                                 onChange={(e) => setPromo(e.target.value)}
                                 placeholder="KJ676"
-                                className="flex-1 w-full border-b border-black/35 py-2 text-sm  text-gray-600 focus:outline-0"
+                                className="flex-1 w-full border-b border-black/35 py-2 text-sm  text-dark-gray focus:outline-0"
                             />
                         </div>
 
@@ -124,7 +124,7 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
                                 onClick={() =>
                                     window.dispatchEvent(new CustomEvent('search:check-availability', { detail: { step: 2 } }))
                                 }
-                                className="w-full bg-[#1b2b7a] text-white px-4 h-10 rounded text-sm font-semibold"
+                                className="w-full bg-[#1b2b7a] text-white px-4 h-10 rounded-xs text-sm font-semibold"
                             >
                                 PROCEED
                             </button>
@@ -133,9 +133,9 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
                 )}
             </div>
 
-            <div className="bg-light-white rounded shadow-[1px_4px_4px_0px_#00000040] p-4">
-                <h4 className="text-sm font-semibold text-gray-700 mb-3">SIGN UP OR LOGIN</h4>
-                <ul className="text-sm text-gray-600 space-y-2">
+            <div className="bg-light-white rounded-xs shadow-[1px_4px_4px_0px_#00000040] p-4">
+                <h4 className="text-sm font-semibold text-dark-gray mb-3">SIGN UP OR LOGIN</h4>
+                <ul className="text-sm text-dark-gray space-y-2">
                     <li className="flex items-start gap-2">
                         <span className="text-accent font-bold">✓</span>
                         Get access to Secret Deals

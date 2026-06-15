@@ -31,7 +31,7 @@ export default function InputField({
   rightSlot,
 }: Props) {
   const baseInputClass =
-    "w-full border-0 border-b border-deep-blue bg-transparent pb-2 text-sm outline-none";
+    "w-full border-0 border-b border-primary bg-transparent pb-2 text-sm outline-none";
 
   // add right padding if there's a slot
   const inputClass = `${baseInputClass} ${rightSlot ? "pr-10" : ""} ${className}`;
@@ -39,7 +39,7 @@ export default function InputField({
   return (
     <div>
       {label && (
-        <label htmlFor={id} className="mb-2 block text-sm text-deep-blue">
+        <label htmlFor={id} className="mb-2 block text-sm text-primary font-arizona">
           {label}
         </label>
       )}

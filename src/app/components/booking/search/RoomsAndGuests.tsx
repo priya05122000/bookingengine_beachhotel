@@ -1,4 +1,4 @@
-import { typography } from '@/src/app/lib/typography';
+import { typography } from '@/src/lib/typography';
 import { ChevronDown, Minus, Plus, X } from "lucide-react";
 import { useState } from 'react';
 
@@ -38,18 +38,18 @@ function Counter({
                 <p className="text-sm uppercase tracking-widest text-dark-gray font-semibold">{label}</p>
                 {sublabel && <p className="text-[9px] text-silver tracking-wider">{sublabel}</p>}
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 border border-primary" >
                 <button
                     onClick={onDec}
                     disabled={value <= min}
-                    className="w-7 h-7 border border-gray flex items-center justify-center text-deep-blue disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors"
+                    className="w-7 h-7 flex items-center justify-center text-primary disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors"
                 >
                     <Minus size={12} />
                 </button>
-                <span className="text-sm text-dark-gray w-4 text-center font-medium">{value}</span>
+                <span className="text-sm text-primary w-4 text-center font-medium">{value}</span>
                 <button
                     onClick={onInc}
-                    className="w-7 h-7 border border-gray flex items-center justify-center text-deep-blue hover:bg-gray transition-colors"
+                    className="w-7 h-7  flex items-center justify-center text-primary hover:bg-gray transition-colors"
                 >
                     <Plus size={12} />
                 </button>
@@ -90,6 +90,11 @@ export default function RoomsAndGuests({
     const removeRoom = (index: number) => {
         setRooms((prev) => prev.filter((_, i) => i !== index));
     };
+
+
+
+    // promo code state (fixes undefined `promo` used in the input)
+    const [promo, setPromo] = useState<string>('');
 
 
     return (
@@ -135,18 +140,18 @@ export default function RoomsAndGuests({
                 ))}
 
                 {/* Add Room */}
-                <button
+                {/* <button
                     onClick={() =>
                         setRooms(prev => [...prev, { adults: 1, children: 0 }])
                     }
-                    className="text-sm uppercase tracking-widest text-deep-blue font-semibold hover:underline mt-3"
+                    className="text-sm uppercase tracking-widest text-dark-gray font-semibold  mt-3"
                 >
                     Add Another Room +
-                </button>
+                </button> */}
 
                 {/* IATA Code */}
                 <div className="mt-4 pt-3">
-                    <button
+                    {/* <button
                         onClick={() => setIataOpen(o => !o)}
                         className="flex items-center justify-between w-full text-sm uppercase tracking-widest text-dark-gray font-semibold"
                     >
@@ -158,7 +163,15 @@ export default function RoomsAndGuests({
                         >
                             <ChevronDown size={14} />
                         </span>
-                    </button>
+                    </button> */}
+
+                    {/* <label className="text-sm text-dark-gray mb-1 block">Promo Code</label> */}
+                    <input
+                        value={promo}
+                        onChange={(e) => setPromo(e.target.value)}
+                        placeholder="Promo Code"
+                        className="flex-1 w-full border-b border-black/35 py-2 text-sm  text-dark-gray focus:outline-0"
+                    />
 
                     {iataOpen && (
                         <input
@@ -175,7 +188,7 @@ export default function RoomsAndGuests({
             {/* Fixed CTA */}
             <div className="pt-4 mt-auto bg-white">
                 <button onClick={onCheckAvailability}
-                    className="w-full bg-deep-blue text-white uppercase tracking-widest text-xs h-10 rounded hover:bg-primary transition-colors font-semibold">
+                    className="w-full bg-primary text-white uppercase tracking-widest text-xs h-10 rounded-xs  hover:bg-primary transition-colors font-semibold">
                     Check Availability
                 </button>
             </div>

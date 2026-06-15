@@ -4,6 +4,7 @@
 import React, { useMemo, useState } from 'react';
 import DatesOfStay from './DatesOfStay';
 import RoomsAndGuests, { Room } from './RoomsAndGuests';
+import { typography } from '@/src/lib/typography';
 
 const DATE_FORMAT: Intl.DateTimeFormatOptions = {
     weekday: 'short',
@@ -34,6 +35,8 @@ export default function SearchForm() {
         return d;
     }, []);
 
+
+
     const [calendarStart, setCalendarStart] = useState<Date>(() => {
         const d = new Date();
         d.setDate(1);
@@ -54,6 +57,10 @@ export default function SearchForm() {
     });
 
     const [selectingCheckOut, setSelectingCheckOut] = useState(false);
+
+
+
+
 
     const [rooms, setRooms] = useState<Room[]>([
         {
@@ -87,6 +94,13 @@ export default function SearchForm() {
         }
     };
 
+    const maxCheckoutDate = useMemo(() => {
+        if (!selectingCheckOut || !checkIn) return null;
+        const m = new Date(checkIn);
+        m.setDate(m.getDate() + 7); // allow up to 7 days after check-in (inclusive)
+        return m;
+    }, [selectingCheckOut, checkIn]);
+
     const handlePrev = () => {
         setCalendarStart(
             (prev) =>
@@ -117,34 +131,34 @@ export default function SearchForm() {
     return (
         <div className="bg-white border border-primary">
             {/* ================= MOBILE ================= */}
-            <div className="lg:hidden">
+            <div className="xl:hidden">
                 {/* Dates */}
                 <section>
-                    <div className="border-b border-[#ddd] px-4 py-6">
-                        <h3 className="uppercase tracking-[0.15em] text-lg font-medium mb-6">
+                    <div className="border-b  px-4 py-6">
+                        <h3 className={`uppercase ${typography.textBase} font-medium mb-6 `}>
                             Dates Of Stay
                         </h3>
 
-                        <div className="space-y-5">
+                        <div className="space-y-5 sm:space-y-0 xl:space-y-5 grid sm:grid-cols-3 ">
                             <div>
                                 <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
                                     Check-In
                                 </p>
-                                <p className="text-sm">{formatDate(checkIn)}</p>
+                                <p className="text-xs">{formatDate(checkIn)}</p>
                             </div>
 
                             <div>
                                 <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
                                     Check-Out
                                 </p>
-                                <p className="text-sm">{formatDate(checkOut)}</p>
+                                <p className="text-xs">{formatDate(checkOut)}</p>
                             </div>
 
                             <div>
                                 <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
                                     Duration
                                 </p>
-                                <p className="text-sm">{calcDuration(checkIn, checkOut)}</p>
+                                <p className="text-xs">{calcDuration(checkIn, checkOut)}</p>
                             </div>
                         </div>
                     </div>
@@ -157,6 +171,8 @@ export default function SearchForm() {
                         onPrev={handlePrev}
                         onNext={handleNext}
                         onDayClick={handleDayClick}
+                        selectingCheckOut={selectingCheckOut}
+                        maxCheckoutDate={maxCheckoutDate}
                     />
                 </section>
 
@@ -181,13 +197,13 @@ export default function SearchForm() {
             </div>
 
             {/* ================= DESKTOP ================= */}
-            <div className="hidden lg:block">
+            <div className="hidden xl:block">
                 {/* Header */}
                 <div className="grid grid-cols-[1fr_320px] border-b border-primary ">
                     {/* Dates Header */}
-                    <div className="border-r border-primary px-8 py-6 ">
-                        <div className="grid  grid-cols-2 items-center">
-                            <h3 className="uppercase tracking-[0.15em] text-xl font-medium  whitespace-nowrap">
+                    <div className="border-r border-primary px-4 py-6 ">
+                        <div className="grid  grid-cols-[1fr_500px] items-center">
+                            <h3 className={`uppercase ${typography.textXl} font-medium  whitespace-nowrap`}>
                                 Dates Of Stay
                             </h3>
 
@@ -196,29 +212,29 @@ export default function SearchForm() {
                                     <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
                                         Check-In
                                     </p>
-                                    <p className="text-sm">{formatDate(checkIn)}</p>
+                                    <p className="text-xs">{formatDate(checkIn)}</p>
                                 </div>
 
                                 <div>
                                     <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
                                         Check-Out
                                     </p>
-                                    <p className="text-sm">{formatDate(checkOut)}</p>
+                                    <p className="text-xs">{formatDate(checkOut)}</p>
                                 </div>
 
                                 <div>
                                     <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
                                         Duration
                                     </p>
-                                    <p className="text-sm">{calcDuration(checkIn, checkOut)}</p>
+                                    <p className="text-xs">{calcDuration(checkIn, checkOut)}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Rooms Header */}
-                    <div className="px-8 py-6 flex items-center">
-                        <h3 className="uppercase tracking-[0.15em]  text-xl font-medium">
+                    <div className="px-4 py-6 flex items-center">
+                        <h3 className={`uppercase ${typography.textXl} font-medium  whitespace-nowrap`}>
                             Rooms & Guests
                         </h3>
                     </div>
@@ -235,10 +251,12 @@ export default function SearchForm() {
                             onPrev={handlePrev}
                             onNext={handleNext}
                             onDayClick={handleDayClick}
+                            selectingCheckOut={selectingCheckOut}
+                            maxCheckoutDate={maxCheckoutDate}
                         />
                     </div>
 
-                    <div className="h-136">
+                    <div >
                         <RoomsAndGuests
                             rooms={rooms}
                             setRooms={setRooms}

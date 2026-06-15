@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { Wifi, UtensilsCrossed, Percent } from 'lucide-react';
-import { typography } from '@/src/app/lib/typography';
+import { typography } from '@/src/lib/typography';
+import Link from 'next/link';
 
 export default function GuestPaymentSection() {
     return (
-        <div className="bg-[#f3f3f6] px-4 sm:px-8 py-8">
-            <div className="max-w-[1100px] mx-auto flex flex-col lg:grid lg:grid-cols-[1fr_300px] gap-6 items-start">
-
+        <div className=" py-8">
+            <div className="  flex flex-col lg:grid lg:grid-cols-[1fr_300px] gap-6 items-start">
                 {/* ── Left column ── */}
                 <div className="space-y-5 w-full">
 
@@ -18,9 +18,12 @@ export default function GuestPaymentSection() {
                             <h3 className={`${typography.textBase} font-bold tracking-widest text-dark-gray uppercase`}>
                                 Guest Information
                             </h3>
-                            <button className="text-sm text-gray-700 border border-primary px-3 py-1 rounded">
-                                Sign in
-                            </button>
+                            <Link href="/sigin">
+                                <button className="text-sm text-dark-gray border border-primary px-3 py-1 rounded-xs">
+                                    Sign in
+                                </button>
+                            </Link>
+
                         </div>
                         <hr className="border-primary " />
 
@@ -72,7 +75,7 @@ export default function GuestPaymentSection() {
                             {/* Terms */}
                             <div className="flex items-center justify-center gap-2">
                                 <input type="checkbox" id="terms" className="mt-0.5 shrink-0" />
-                                <label htmlFor="terms" className="text-sm text-dark-gray leading-snug">
+                                <label htmlFor="terms" className="text-sm text-dark-gray leading-snug font-arizona">
                                     By completing this reservation you are accepting our{' '}
                                     <span className="text-primary underline cursor-pointer">Terms &amp; Conditions</span>
                                 </label>
@@ -82,7 +85,7 @@ export default function GuestPaymentSection() {
 
                     {/* Available Add Ons */}
                     <div className="border border-primary bg-white ">
-                        <h4 className={`${typography.textBase} font-bold tracking-widest text-gray-800 uppercase p-5`}>
+                        <h4 className={`${typography.textBase} font-bold tracking-widest text-dark-gray uppercase p-5`}>
                             Available Add Ons
                         </h4>
 
@@ -100,17 +103,17 @@ export default function GuestPaymentSection() {
                                 If Cancellation Is Done Within 48 Hours Of Arrival, Then Full Amount Will Be Charged.
                             </p>
 
-                            <h6 className="text-sm font-semibold text-gray-800 mb-3">Inclusions</h6>
+                            <h6 className="text-sm font-semibold text-dark-gray mb-3">Inclusions</h6>
                             <ul className="space-y-3">
-                                <li className="flex items-center gap-3 text-sm text-gray-700">
+                                <li className="flex items-center gap-3 text-sm text-dark-gray">
                                     <Wifi size={16} className="text-dark-gray shrink-0" />
                                     Free Wifi
                                 </li>
-                                <li className="flex items-center gap-3 text-sm text-gray-700">
+                                <li className="flex items-center gap-3 text-sm text-dark-gray">
                                     <UtensilsCrossed size={16} className="text-dark-gray shrink-0" />
                                     Breakfast Included For 2 Guest
                                 </li>
-                                <li className="flex items-center gap-3 text-sm text-gray-700">
+                                <li className="flex items-center gap-3 text-sm text-dark-gray">
                                     <Percent size={16} className="text-dark-gray shrink-0" />
                                     15% Discount On FnB
                                 </li>
@@ -119,15 +122,7 @@ export default function GuestPaymentSection() {
 
                     </div>
 
-                    {/* Book Now */}
-                    <button
-                        onClick={() =>
-                            window.dispatchEvent(new CustomEvent('search:check-availability', { detail: { step: 3 } }))
-                        }
-                        className="w-[320px] bg-primary text-white h-10 rounded text-xs font-semibold tracking-wide"
-                    >
-                        BOOK NOW
-                    </button>
+
                 </div>
 
                 {/* ── Right column: summary card ── */}
@@ -145,7 +140,7 @@ export default function GuestPaymentSection() {
                             {/* Title row */}
                             <div className="flex items-start justify-between">
                                 <div>
-                                    <p className="text-sm font-bold text-gray-800 tracking-wide">ECONOMY</p>
+                                    <p className="text-sm font-bold text-dark-gray tracking-wide">ECONOMY</p>
                                     <p className="text-sm text-dark-gray mt-0.5">SEA VIEW</p>
                                 </div>
                                 <button
@@ -176,14 +171,14 @@ export default function GuestPaymentSection() {
                             {/* Pricing */}
                             <div className="mt-3 pt-3 border-t border-gray-100">
                                 <div className="flex items-baseline gap-2">
-                                    <span className="text-sm text-gray-400 line-through">₹ 15,308</span>
-                                    <span className="text-xs text-gray-400 uppercase tracking-wide">Per Night:</span>
+                                    <span className="text-sm text-dark-gray line-through">₹ 15,308</span>
+                                    <span className="text-xs text-dark-gray uppercase tracking-wide">Per Night:</span>
                                 </div>
                                 <div className="flex items-baseline gap-1 mt-1">
                                     <span className="text-sm font-semibold text-dark-gray">₹ 11,571</span>
-                                    <span className="text-xs text-gray-400">+</span>
-                                    <span className="text-xs text-gray-400">₹ 2,417</span>
-                                    <span className="text-xs text-gray-400 uppercase tracking-wide">Taxes &amp; Fees</span>
+                                    <span className="text-xs text-dark-gray">+</span>
+                                    <span className="text-xs text-dark-gray">₹ 2,417</span>
+                                    <span className="text-xs text-dark-gray uppercase tracking-wide">Taxes &amp; Fees</span>
                                 </div>
                                 <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-gray-100">
                                     <span className="text-sm font-semibold text-primary uppercase tracking-wide">Total</span>
@@ -193,6 +188,16 @@ export default function GuestPaymentSection() {
                         </div>
                     </div>
                 </aside>
+
+                {/* Book Now */}
+                <button
+                    onClick={() =>
+                        window.dispatchEvent(new CustomEvent('search:check-availability', { detail: { step: 3 } }))
+                    }
+                    className="w-full sm:w-[320px] bg-primary text-white h-10 rounded-xs text-xs font-semibold tracking-wide"
+                >
+                    BOOK NOW
+                </button>
 
             </div >
         </div >

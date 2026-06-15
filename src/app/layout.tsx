@@ -1,5 +1,5 @@
 import "./globals.css";
-import { arizonaFlare } from "./lib/font";
+import { arizonaFlare, nobel } from "../lib/font";
 
 export default async function RootLayout({
   children,
@@ -9,8 +9,9 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
+      className={`${arizonaFlare.variable} ${nobel.variable}`}
     >
-      <body className={`${arizonaFlare.variable}`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>

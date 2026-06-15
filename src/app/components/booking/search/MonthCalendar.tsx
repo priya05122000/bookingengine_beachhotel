@@ -1,5 +1,5 @@
 import React from 'react';
-import { getMockPrice } from '../../../lib/mockPrices';
+import { getMockPrice } from '../../../../lib/mockPrices';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // ...existing code...
@@ -17,7 +17,9 @@ interface MonthCalendarProps {
     onPrev?: () => void;
     onNext?: () => void;
     prevDisabled?: boolean;
+    isDesktopSecondMonth?: boolean;
 }
+
 
 // ================= CONSTANTS =================
 const MONTH_NAMES = [
@@ -45,13 +47,27 @@ function getCalendarDays(year: number, month: number): (Date | null)[] {
     return cells;
 }
 
-type CellState = 'past' | 'checkIn' | 'checkOut' | 'inRange' | 'normal';
+type CellState = 'past' | 'checkIn' | 'checkOut' | 'inRange' | 'normal' | 'disabled';
 
-function getCellState(date: Date, today: Date, checkIn: Date | null, checkOut: Date | null): CellState {
+function getCellState(
+    date: Date,
+    today: Date,
+    checkIn: Date | null,
+    checkOut: Date | null,
+    selectingCheckOut?: boolean,
+    maxCheckoutDate?: Date | null
+): CellState {
     if (date < today) return 'past';
     if (checkIn && isSameDay(date, checkIn)) return 'checkIn';
     if (checkOut && isSameDay(date, checkOut)) return 'checkOut';
     if (checkIn && checkOut && date > checkIn && date < checkOut) return 'inRange';
+
+    // When selecting checkout only allow dates from checkIn up to maxCheckoutDate
+    if (selectingCheckOut && checkIn) {
+        if (date < checkIn) return 'disabled';
+        if (maxCheckoutDate && date > maxCheckoutDate) return 'disabled';
+    }
+
     return 'normal';
 }
 
@@ -68,6 +84,14 @@ function DayCell({ date, state, price, onClick }: {
         return (
             <div className={`${base} cursor-default`}>
                 <span className="text-sm text-silver/50">{date}</span>
+            </div>
+        );
+    }
+
+    if (state === 'disabled') {
+        return (
+            <div className={`${base} cursor-not-allowed opacity-60`}>
+                <span className="text-sm text-silver/40">{date}</span>
             </div>
         );
     }
@@ -97,7 +121,7 @@ function DayCell({ date, state, price, onClick }: {
             <div className={`${base}  cursor-pointer `} onClick={onClick}>
                 <span className="text-dark-gray text-xs font-medium">{date}</span>
                 {price !== null && (
-                    <span className="text-[10px] text-deep-blue/60 leading-none mt-0.5">S${price}</span>
+                    <span className="text-[10px] text-primary/60 leading-none mt-0.5">S${price}</span>
                 )}
             </div>
         );
@@ -150,7 +174,7 @@ export default function MonthCalendar({
             ${showPrev
                             ? prevDisabled
                                 ? "opacity-40 cursor-not-allowed"
-                                : "hover:text-deep-blue"
+                                : "hover:text-primary"
                             : "invisible"
                         }
         `}
@@ -158,20 +182,17 @@ export default function MonthCalendar({
                     <ChevronLeft size={16} />
                 </button>
 
-                <p className="flex-1 text-center text-deep-blue uppercase tracking-widest text-sm font-semibold">
+                <p className="flex-1 text-center text-primary uppercase tracking-widest text-sm font-semibold">
                     {MONTH_NAMES[month]} {year}
                 </p>
 
                 <button
                     onClick={onNext}
                     className={`
-            h-8 w-8 flex items-center justify-center
-            transition-colors
-            ${showNext
-                            ? "hover:text-deep-blue"
-                            : "invisible"
-                        }
-        `}
+        h-8 w-8 flex items-center justify-center
+        transition-colors
+        ${showNext ? "hover:text-primary" : "invisible"}
+    `}
                 >
                     <ChevronRight size={16} />
                 </button>

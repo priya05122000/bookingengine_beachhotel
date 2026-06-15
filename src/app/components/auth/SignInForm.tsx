@@ -4,6 +4,7 @@ import { Eye, EyeOff, User } from "lucide-react";
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import InputField from "./InputField";
+import { useRouter } from "next/navigation";
 
 type Step = "email" | "password";
 
@@ -16,7 +17,7 @@ function EmailStep({
 }) {
   return (
     <>
-      <div className="mb-6">
+      <div className="mb-4">
         <InputField
           id="email"
           type="email"
@@ -26,13 +27,13 @@ function EmailStep({
           onChange={onEmailChange}
           required
           ariaLabel="Email"
-          rightSlot={<User size={18} className="text-gray-500" />}
+          rightSlot={<User size={18} className="text-dark-gray" />}
         />
       </div>
 
       <button
         type="submit"
-        className="mt-4 w-full bg-deep-blue h-10 text-sm tracking-wider text-white"
+        className="mt-4 w-full bg-primary h-10 text-sm tracking-wider text-white"
       >
         Continue
       </button>
@@ -47,6 +48,7 @@ function PasswordStep({
   onBack,
   showPassword,
   toggleShowPassword,
+  onSignInWithCode
 }: {
   email: string;
   password: string;
@@ -54,24 +56,26 @@ function PasswordStep({
   onBack: () => void;
   showPassword: boolean;
   toggleShowPassword: () => void;
+  onSignInWithCode: () => void; // added type
+
 }) {
   return (
     <>
-      <div className="mb-6">
-        <label className="mb-2 block text-sm text-deep-blue">Email</label>
+      <div className="mb-4">
+        <label className="mb-2 block text-sm text-primary font-arizona">Email</label>
 
         <div className="relative">
-          <div className="border-b border-deep-blue pb-3 pr-10 text-sm text-gray-400">
+          <div className="border-b border-primary pb-3 pr-10 text-sm text-dark-gray">
             {email}
           </div>
 
-          <User size={18} className="absolute right-1 top-0 text-gray-500" />
+          <User size={18} className="absolute right-1 top-0 text-dark-gray" />
         </div>
 
         <button
           type="button"
           onClick={onBack}
-          className="mt-2 w-full text-right text-xs text-deep-blue"
+          className="mt-2 w-full text-right text-xs text-primary"
         >
           Change
         </button>
@@ -91,7 +95,7 @@ function PasswordStep({
             <button
               type="button"
               onClick={toggleShowPassword}
-              className="text-gray-500"
+              className="text-dark-gray"
               aria-pressed={showPassword}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
@@ -101,17 +105,32 @@ function PasswordStep({
         />
       </div>
 
-      <button
-        type="submit"
-        className="w-full bg-deep-blue py-4 text-sm tracking-wider text-white"
-      >
-        Login
-      </button>
+      <div>
+        <button
+          type="submit"
+          className="w-full bg-primary h-10 text-sm tracking-wider text-white"
+        >
+          Login
+        </button>
+
+        <div className="my-5 flex items-center justify-center">
+          <span className="text-xs text-dark-gray uppercase">OR</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={onSignInWithCode}
+          className="w-full border border-primary h-10 text-sm tracking-wider text-primary hover:bg-gray-50 transition-colors"
+        >
+          Sign in with a code
+        </button>
+      </div>
     </>
   );
 }
 
 export default function SignInForm() {
+  const router = useRouter(); // added router
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
@@ -125,6 +144,12 @@ export default function SignInForm() {
     setStep("email");
     setPassword("");
   }, []);
+
+
+  const handleSignInWithCode = useCallback(() => {
+    // navigate to a code-based sign-in page (create this route or adjust as needed)
+    router.push("/signin/code");
+  }, [router]);
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
@@ -146,13 +171,13 @@ export default function SignInForm() {
 
   return (
     <div className="w-full max-w-125">
-      <h1 className="mb-12 hidden text-center text-2xl font-semibold uppercase tracking-[0.25em] text-deep-blue lg:block">
+      <h1 className="mb-12 hidden text-center text-2xl font-semibold uppercase tracking-[0.25em] text-primary lg:block">
         The Beach Hotel
       </h1>
 
-      <p className="mb-8 text-center text-xs uppercase tracking-[0.15em] text-gray-500 lg:hidden">
+      {/* <p className="mb-8 text-center text-xs uppercase tracking-[0.15em] text-dark-gray lg:hidden">
         Welcome Back
-      </p>
+      </p> */}
 
       <form onSubmit={handleSubmit}>
         {step === "email" ? (
@@ -165,13 +190,15 @@ export default function SignInForm() {
             onBack={handleBackToEmail}
             showPassword={showPassword}
             toggleShowPassword={toggleShowPassword}
+            onSignInWithCode={handleSignInWithCode} // pass handler
+
           />
         )}
       </form>
 
-      <p className="mt-6 text-center text-xs text-gray-500">
+      <p className="mt-6 text-center text-sm text-dark-gray">
         Don't Have An Account?{" "}
-        <Link href="/signup" className="text-deep-blue hover:underline">
+        <Link href="/signup" className="text-primary hover:underline">
           Register
         </Link>
       </p>

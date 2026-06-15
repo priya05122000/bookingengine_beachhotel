@@ -7,13 +7,13 @@ export default function NotFound() {
         Page Not Found
       </h2>
 
-      <p className="mt-3 max-w-md text-gray-500">
+      <p className="mt-3 max-w-md text-dark-gray">
         The page you are looking for doesn't exist or has been moved.
       </p>
 
       <a
         href="/"
-        className="mt-8 rounded-md bg-black px-6 py-3 text-white transition hover:opacity-90"
+        className="mt-8 rounded-xs  bg-black px-6 py-3 text-white transition hover:opacity-90"
       >
         Back to Home
       </a>

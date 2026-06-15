@@ -8,6 +8,8 @@ interface DatesOfStayProps {
     onPrev: () => void;
     onNext: () => void;
     onDayClick: (date: Date) => void;
+    selectingCheckOut?: boolean;
+    maxCheckoutDate?: Date | null;
 }
 
 // ================= CONSTANTS =================
@@ -41,6 +43,7 @@ export default function DatesOfStay({
     onNext,
     onDayClick,
 }: DatesOfStayProps) {
+
     const leftYear = calendarStart.getFullYear();
     const leftMonth = calendarStart.getMonth();
     const rightDate = new Date(leftYear, leftMonth + 1, 1);
@@ -56,23 +59,39 @@ export default function DatesOfStay({
     return (
         <div className=' h-full flex flex-col justify-between'>
             {/* Dual calendar with nav arrows */}
-            <div className="flex items-start gap-1 p-3 md:p-6">
+            <div className="flex  flex-col lg:flex-row  gap-1 p-3 md:p-6">
 
-                <MonthCalendar
-                    year={leftYear}
-                    month={leftMonth}
-                    checkIn={checkIn}
-                    checkOut={checkOut}
-                    today={today}
-                    onDayClick={onDayClick}
-                    showPrev
-                    onPrev={onPrev}
-                    prevDisabled={prevDisabled}
-                />
+                {/* Mobile & Tablet */}
+                <div className="block lg:hidden">
+                    <MonthCalendar
+                        year={leftYear}
+                        month={leftMonth}
+                        checkIn={checkIn}
+                        checkOut={checkOut}
+                        today={today}
+                        onDayClick={onDayClick}
+                        showPrev
+                        showNext
+                        onPrev={onPrev}
+                        onNext={onNext}
+                        prevDisabled={prevDisabled}
+                    />
+                </div>
 
-                <div className="hidden md:block w-px self-stretch mx-2" />
+                {/* Desktop */}
+                <div className="hidden lg:flex flex-1 gap-4">
+                    <MonthCalendar
+                        year={leftYear}
+                        month={leftMonth}
+                        checkIn={checkIn}
+                        checkOut={checkOut}
+                        today={today}
+                        onDayClick={onDayClick}
+                        showPrev
+                        onPrev={onPrev}
+                        prevDisabled={prevDisabled}
+                    />
 
-                <div className="hidden md:block flex-1">
                     <MonthCalendar
                         year={rightYear}
                         month={rightMonth}

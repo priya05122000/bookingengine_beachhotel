@@ -1,9 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+    ChevronDown,
+    ChevronUp,
+    ChevronLeft,
+    ChevronRight,
+} from 'lucide-react';
+import Section from '../../common/Section';
 
-type Props = { onClose: () => void };
+type Props = {
+    onClose: () => void;
+};
 
 const IMAGES = [
     '/images/Rectangle.png',
@@ -14,135 +22,208 @@ const IMAGES = [
 const SECTIONS = [
     {
         title: 'KEY FEATURES',
-        items: ['45 sqm on average', 'Walk-out balcony', 'Bespoke Armoire & cocktail bar'],
+        items: [
+            '45 sqm on average',
+            'Walk-out balcony',
+            'Bespoke Armoire & cocktail bar',
+        ],
     },
-    { title: 'ROOM FEATURES', items: [] },
-    { title: 'BATH AMENITIES', items: [] },
-    { title: 'EXCLUSIVE PRIVILEGES', items: [] },
+    {
+        title: 'ROOM FEATURES',
+        items: [],
+    },
+    {
+        title: 'BATH AMENITIES',
+        items: [],
+    },
+    {
+        title: 'EXCLUSIVE PRIVILEGES',
+        items: [],
+    },
 ];
 
 export default function RoomDetailsModal({ onClose }: Props) {
     const [activeImg, setActiveImg] = useState(0);
-    const [openSection, setOpenSection] = useState<string>('KEY FEATURES');
+    const [openSection, setOpenSection] = useState('KEY FEATURES');
 
-    function prev() {
+    const prev = () => {
         setActiveImg((i) => (i - 1 + IMAGES.length) % IMAGES.length);
-    }
-    function next() {
-        setActiveImg((i) => (i + 1) % IMAGES.length);
-    }
+    };
 
-    function toggleSection(title: string) {
+    const next = () => {
+        setActiveImg((i) => (i + 1) % IMAGES.length);
+    };
+
+    const toggleSection = (title: string) => {
         setOpenSection((s) => (s === title ? '' : title));
-    }
+    };
 
     return (
+
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+            className="fixed inset-0 z-9999 bg-black/60 flex items-center justify-center p-2 md:p-4"
             onClick={onClose}
         >
-            <div
-                className="flex w-[80vw] h-[80vh] shadow-2xl overflow-hidden"
-                onClick={(e) => e.stopPropagation()}
-            >
-                {/* Left: image gallery — 68% */}
-                <div className="flex flex-col w-[68%] h-full">
-                    {/* Main image area */}
-                    <div className="relative flex-1 overflow-hidden">
-                        <img
-                            src={IMAGES[activeImg]}
-                            alt="room"
-                            className="w-full h-full object-cover"
-                        />
+            <Section>
+                <div
+                    className="
+        bg-white
+        w-full
+        h-[95vh]
+        lg:h-[85vh]
+        flex
+        flex-col
+        shadow-2xl
+        overflow-y-auto
+        lg:overflow-hidden
+    "
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {/* TOP HEADER */}
+                    <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b bg-white shrink-0">
+                        <h2 className="text-sm md:text-base font-semibold uppercase tracking-[0.2em]">
+                            Room Details
+                        </h2>
 
-                        {/* Caption card — bottom-center of image */}
-                        <div className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-white/90 px-4 py-3 w-55">
-                            <p className="text-[11px] font-bold text-primary uppercase tracking-wide">BED ROOM</p>
-                            <p className="text-[10px] text-gray-600 mt-1 leading-snug">
-                                Dreaming of a luxury bedroom? Find 50+ bedroom interior design ideas and makeover tips to turn your space into an elegant, dreamy sanctuary.
-                            </p>
-                        </div>
-
-                        {/* Navigation arrows — bottom right of image */}
-                        <div className="absolute bottom-3 right-3 flex gap-1">
-                            <button
-                                onClick={prev}
-                                className="w-9 h-9 bg-primary flex items-center justify-center text-white hover:bg-primary/90"
-                            >
-                                <ChevronLeft size={18} strokeWidth={2} />
-                            </button>
-                            <button
-                                onClick={next}
-                                className="w-9 h-9 bg-primary flex items-center justify-center text-white hover:bg-primary/90"
-                            >
-                                <ChevronRight size={18} strokeWidth={2} />
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Thumbnails strip */}
-                    <div className="flex h-32.5 shrink-0">
-                        {IMAGES.map((src, i) => (
-                            <button
-                                key={i}
-                                onClick={() => setActiveImg(i)}
-                                className="flex-1 overflow-hidden relative"
-                            >
-                                <img src={src} alt="" className="w-full h-full object-cover" />
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Right: accordion panel — 32% */}
-                <div className="flex flex-col w-[32%] h-full bg-white overflow-y-auto">
-                    {/* Close button */}
-                    <div className="flex justify-end px-4 pt-4 pb-2">
                         <button
                             onClick={onClose}
-                            aria-label="Close"
-                            className="text-gray-500 hover:text-gray-800 text-base leading-none"
+                            className="text-xl text-dark-gray hover:text-black"
                         >
                             ✕
                         </button>
                     </div>
 
-                    {/* Accordion sections */}
-                    <div className="flex flex-col px-6">
-                        {SECTIONS.map((section) => {
-                            const isOpen = openSection === section.title;
-                            return (
-                                <div key={section.title} className="border-b border-gray-200">
+                    {/* CONTENT */}
+                    {/* CONTENT */}
+                    <div className="flex flex-col lg:flex-row flex-1">
+
+                        {/* LEFT IMAGE SECTION */}
+                        <div className="w-full lg:w-[68%] flex flex-col shrink-0">
+
+                            {/* Main Image */}
+                            <div className="relative h-[280px] sm:h-[400px] lg:flex-1 overflow-hidden">
+                                <img
+                                    src={IMAGES[activeImg]}
+                                    alt="room"
+                                    className="w-full h-full object-cover"
+                                />
+
+                                {/* Caption */}
+                                <div className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-white/95 p-4 w-[90%] max-w-[260px]">
+                                    <p className="text-[11px] font-bold uppercase tracking-wide text-primary">
+                                        BED ROOM
+                                    </p>
+
+                                    <p className="text-[11px] text-dark-gray mt-2 leading-relaxed">
+                                        Dreaming of a luxury bedroom? Find 50+ bedroom interior design
+                                        ideas and makeover tips to turn your space into an elegant
+                                        sanctuary.
+                                    </p>
+                                </div>
+
+                                {/* Navigation */}
+                                <div className="absolute bottom-3 right-3 flex gap-2">
                                     <button
-                                        className="w-full flex items-center justify-between py-4 text-left"
-                                        onClick={() => toggleSection(section.title)}
+                                        onClick={prev}
+                                        className="w-10 h-10 bg-primary text-white flex items-center justify-center"
                                     >
-                                        <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-800">
-                                            {section.title}
-                                        </span>
-                                        {isOpen ? (
-                                            <ChevronUp size={16} className="text-gray-500 shrink-0" />
-                                        ) : (
-                                            <ChevronDown size={16} className="text-gray-500 shrink-0" />
-                                        )}
+                                        <ChevronLeft size={18} />
                                     </button>
 
-                                    {isOpen && section.items.length > 0 && (
-                                        <ul className="pb-4 space-y-2">
-                                            {section.items.map((item) => (
-                                                <li key={item} className="flex items-start gap-2 text-[12px] text-gray-700 leading-snug">
-                                                    <span className="text-gray-500 shrink-0">•</span>
-                                                    {item}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
+                                    <button
+                                        onClick={next}
+                                        className="w-10 h-10 bg-primary text-white flex items-center justify-center"
+                                    >
+                                        <ChevronRight size={18} />
+                                    </button>
                                 </div>
-                            );
-                        })}
+                            </div>
+
+                            {/* Thumbnails */}
+                            <div className="h-20 md:h-24 lg:h-32 flex shrink-0">
+                                {IMAGES.map((src, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setActiveImg(index)}
+                                        className={`flex-1 overflow-hidden border-2 ${activeImg === index
+                                            ? 'border-primary'
+                                            : 'border-transparent'
+                                            }`}
+                                    >
+                                        <img
+                                            src={src}
+                                            alt=""
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* RIGHT DETAILS SECTION */}
+                        <div className="w-full lg:w-[32%] bg-white lg:border-l border-gray-200 lg:overflow-y-auto">
+
+                            <div className="px-5">
+                                {SECTIONS.map((section) => {
+                                    const isOpen = openSection === section.title;
+
+                                    return (
+                                        <div
+                                            key={section.title}
+                                            className="border-b border-gray-200"
+                                        >
+                                            <button
+                                                onClick={() => toggleSection(section.title)}
+                                                className="w-full flex items-center justify-between py-5 text-left"
+                                            >
+                                                <span className="text-xs font-semibold uppercase tracking-[0.15em]">
+                                                    {section.title}
+                                                </span>
+
+                                                {isOpen ? (
+                                                    <ChevronUp
+                                                        size={16}
+                                                        className="text-dark-gray"
+                                                    />
+                                                ) : (
+                                                    <ChevronDown
+                                                        size={16}
+                                                        className="text-dark-gray"
+                                                    />
+                                                )}
+                                            </button>
+
+                                            {isOpen && (
+                                                <div className="pb-5">
+                                                    {section.items.length > 0 ? (
+                                                        <ul className="space-y-3">
+                                                            {section.items.map((item) => (
+                                                                <li
+                                                                    key={item}
+                                                                    className="flex gap-2 text-sm text-dark-gray"
+                                                                >
+                                                                    <span>•</span>
+                                                                    <span>{item}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    ) : (
+                                                        <p className="text-sm text-dark-gray">
+                                                            No details available.
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Section>
+
         </div>
     );
 }

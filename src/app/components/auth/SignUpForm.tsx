@@ -41,13 +41,13 @@ export default function SignUpForm() {
 
     return (
         <div className="w-full max-w-125">
-            <h1 className="mb-8 text-center text-2xl font-semibold uppercase tracking-[0.25em] text-deep-blue">
+            <h1 className="mb-8 text-center text-2xl font-semibold uppercase tracking-[0.25em] text-primary">
                 The Beach Hotel
             </h1>
 
-            <p className="mb-4 text-center text-xl font-semibold uppercase text-silver">
+            {/* <p className="mb-4 text-center text-xl font-semibold uppercase text-silver">
                 Create Account
-            </p>
+            </p> */}
 
 
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
@@ -88,7 +88,7 @@ export default function SignUpForm() {
                     type="tel"
                     value={mobile}
                     onChange={setMobile}
-                    placeholder="+91 Enter your mobile number"
+                    placeholder="Enter your mobile number"
                     required
                     ariaLabel="Mobile number"
                 />
@@ -107,7 +107,7 @@ export default function SignUpForm() {
                         <button
                             type="button"
                             onClick={toggleShowPassword}
-                            className="text-gray-500"
+                            className="text-dark-gray"
                             aria-pressed={showPassword}
                             aria-label={showPassword ? "Hide password" : "Show password"}
                         >
@@ -130,15 +130,15 @@ export default function SignUpForm() {
 
                 <button
                     type="submit"
-                    className="mt-4 w-full bg-deep-blue h-10 text-sm tracking-wider text-white"
+                    className="mt-4 w-full bg-primary h-10 text-sm tracking-wider text-white"
                 >
                     Register
                 </button>
             </form>
 
-            <p className="mt-6 text-center text-xs text-gray-500">
+            <p className="mt-6 text-center text-sm text-dark-gray">
                 Already Have An Account?{" "}
-                <Link href="/signin" className="text-deep-blue hover:underline">
+                <Link href="/signin" className="text-primary hover:underline">
                     Login
                 </Link>
             </p>

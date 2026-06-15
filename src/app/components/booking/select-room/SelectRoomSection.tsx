@@ -2,19 +2,24 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { PackageItem } from '../../../lib/types';
+import { PackageItem } from './types';
 import PackageList from './PackageList';
 import PriceSidebar from './PriceSidebar';
 import RoomDetailsModal from './RoomDetailsModal';
-import { typography } from '@/src/app/lib/typography';
+import { typography } from '@/src/lib/typography';
 import { Flower2, Sofa, Sunset } from 'lucide-react';
 
 type Props = {
     showPackages: boolean;
     setShowPackages: (v: boolean) => void;
+    onEdit: () => void;
 };
 
-export default function SelectRoomSection({ showPackages, setShowPackages }: Props) {
+export default function SelectRoomSection({
+    showPackages,
+    setShowPackages,
+    onEdit,
+}: Props) {
     const [currentStep, setCurrentStep] = React.useState(1);
     const [showDetails, setShowDetails] = React.useState(false);
     const [selected, setSelected] = React.useState<PackageItem[]>([]);
@@ -58,20 +63,21 @@ export default function SelectRoomSection({ showPackages, setShowPackages }: Pro
     }
 
     return (
-        <div className="p-8  min-h-105">
+        <div className="  min-h-105">
             {showDetails && <RoomDetailsModal onClose={() => setShowDetails(false)} />}
             {/* Top bar */}
-            <div className="flex items-start justify-between mb-6">
-                <div className={`text-gray-700 ${typography.textBase}`}>
+            <div className="flex  flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between mb-6">
+                <div className={`text-dark-gray  w-full ${typography.textBase}`}>
                     Fri, 22 JUN, 2026 - Fri, 22 JUN, 2026
                 </div>
 
-                <div className="flex items-center gap-3">
-                    <div className={`text-gray-700 ${typography.textBase}`}>
+                <div className="flex items-center w-full justify-between  sm:justify-end gap-3">
+                    <div className={`text-dark-gray ${typography.textBase}`}>
                         1NIGHT · 1ROOM · 2 ADULT</div>
                     <button
-                        onClick={() => setShowPackages(false)}
-                        className="text-xs uppercase tracking-wide px-4 h-8 border border-primary text-primary rounded"
+                        // onClick={() => setShowPackages(false)}
+                        onClick={onEdit}
+                        className="text-xs uppercase tracking-wide px-4 h-8 border border-primary text-primary rounded-xs "
                     >
                         Edit
                     </button>
@@ -79,11 +85,11 @@ export default function SelectRoomSection({ showPackages, setShowPackages }: Pro
             </div>
 
             {/* Main layout */}
-            <div className="grid grid-cols-[1fr_360px] gap-20">
+            <div className="grid xl:grid-cols-[1fr_360px] gap-10 xl:gap-20">
                 {/* Left: room card + packages */}
                 <div className="flex flex-col gap-6">
-                    <div className="grid grid-cols-12 gap-4">
-                        <div className="relative lg:col-span-8  shrink-0 rounded overflow-hidden shadow-sm">
+                    <div className="grid sm:grid-cols-12 gap-6">
+                        <div className="relative md:col-span-8  shrink-0 rounded-xs overflow-hidden shadow-sm">
                             <img
                                 src="/images/Rectangle.png"
                                 alt="room"
@@ -97,12 +103,12 @@ export default function SelectRoomSection({ showPackages, setShowPackages }: Pro
                             </button>
                         </div>
 
-                        <div className="lg:col-span-4">
+                        <div className="md:col-span-4">
                             <div className="">
                                 <div className={`${typography.textLg} font-semibold mt-1`}>ECONOMY</div>
                                 <div className="text-xs text-dark-gray mt-1">SEA VIEW</div>
 
-                                <ul className="mt-4 mb-10 space-y-1 text-sm text-gray-600">
+                                <ul className="mt-4 mb-10 space-y-1 text-sm text-dark-gray">
                                     <li className="flex items-center gap-2">
                                         <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Flower2 size={22} strokeWidth={1.5} /></span>
                                         BALLCONY
@@ -119,13 +125,13 @@ export default function SelectRoomSection({ showPackages, setShowPackages }: Pro
                                     </li>
                                 </ul>
 
-                                <div className="text-sm text-gray-500 ">From</div>
-                                <div className={`${typography.textThXl} font-extrabold`}>INR 8,999<span className="text-sm font-medium text-gray-500">/Night</span></div>
-                                <div className="text-xs text-gray-400 mt-1">subject to GST and charges</div>
+                                <div className="text-sm text-dark-gray ">From</div>
+                                <div className={`${typography.textThXl} font-extrabold`}>INR 8,999<span className="text-sm font-medium text-dark-gray">/Night</span></div>
+                                <div className="text-xs text-dark-gray mt-1">subject to GST and charges</div>
 
                                 <button
                                     onClick={onSelectPackage}
-                                    className={`mt-2 bg-primary text-white px-4 h-10 rounded uppercase ${typography.textBase} tracking-wide`}
+                                    className={`mt-2 bg-primary text-white px-4 h-10 rounded-xs  uppercase ${typography.textBase} tracking-wide`}
                                 >
                                     Select Package
                                 </button>

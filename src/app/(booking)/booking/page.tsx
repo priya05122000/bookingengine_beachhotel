@@ -6,8 +6,8 @@ import FilterSection from '../../components/common/FilterSection'
 const BookingPage = () => {
     return (
         <Section>
-            <div className='my-20'>
-                
+            <div className='my-10 sm:my-20'>
+
                 <FilterSection />
 
             </div>
