@@ -1,28 +1,9 @@
 'use client';
 
 import { typography } from '@/src/lib/typography';
-import React, { useRef, useState } from 'react';
-import InvoicePreview from './InvoicePreview';
-import { downloadInvoice } from './invoicePdf';
-
+import React from 'react';
 
 export default function ConfirmationSection() {
-    const invoiceRef = useRef<HTMLDivElement | null>(null);
-
-    const [showInvoicePreview, setShowInvoicePreview] = useState(false);
-
-    async function handleDownloadInvoice() {
-        await downloadInvoice(invoiceRef);
-    }
-
-    // async function handleDownloadInvoice() {
-    //     if (!invoiceRef.current) {
-    //         console.warn('Invoice element not mounted. Ensure hidden preview is rendered.');
-    //         return;
-    //     }
-    //     await downloadInvoice(invoiceRef);
-    // }
-
     return (
         <div className="py-8">
             <div className=" mx-auto space-y-6">
@@ -170,34 +151,23 @@ export default function ConfirmationSection() {
 
                                     <div className="flex justify-between text-sm text-dark-gray">
                                         <span>Rooms &amp; offer</span>
-                                        <span>&#8377; 6,000</span>
+                                        <span>₹ 6,000</span>
                                     </div>
                                     <div className="flex justify-between text-sm text-dark-gray">
                                         <span>Extras</span>
-                                        <span>&#8377; 700</span>
+                                        <span>₹ 700</span>
                                     </div>
                                 </div>
                                 <div className="border-t border-gray-200 mt-4 pt-3 flex justify-between items-center">
                                     <span className="text-sm font-semibold text-primary">Total amount to paid</span>
-                                    <span className="text-sm font-bold text-primary">&#8377; 0000</span>
+                                    <span className="text-sm font-bold text-primary">₹ 0000</span>
                                 </div>
 
                             </div>
-                            <div className="mt-3 flex gap-3">
-                                <button
-                                    onClick={() => setShowInvoicePreview(true)}
-                                    className="flex-1 border border-primary text-primary h-10 rounded-xs text-xs font-bold uppercase tracking-widest"
-                                >
-                                    Preview Invoice
-                                </button>
 
-                                <button
-                                    onClick={handleDownloadInvoice}
-                                    className="flex-1 bg-primary text-white h-10 rounded-xs text-xs font-bold uppercase tracking-widest"
-                                >
-                                    Download Invoice
-                                </button>
-                            </div>
+                            <button className="mt-3 w-full bg-primary text-white h-10 rounded-xs  text-xs font-bold uppercase tracking-widest">
+                                Download Invoice
+                            </button>
                         </div>
 
 
@@ -228,31 +198,6 @@ export default function ConfirmationSection() {
                     </div>
                 </div>
 
-            </div>
-
-            {/* ── PREVIEW MODAL ── opens when user clicks "Preview Invoice" */}
-            {showInvoicePreview && (
-                <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 p-4">
-                    <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-sm shadow-lg">
-                        <button
-                            onClick={() => setShowInvoicePreview(false)}
-                            className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center border rounded-full bg-white"
-                        >
-                            ✕
-                        </button>
-                        {/* No ref here — visual preview only, not used for PDF capture */}
-                        <InvoicePreview />
-                    </div>
-                </div>
-            )}
-
-            {/* ── HIDDEN INVOICE ── always mounted off-screen so invoiceRef.current is never null */}
-            {/* html2canvas needs a real DOM node with layout; display:none won't work */}
-            <div
-                aria-hidden="true"
-                style={{ position: 'absolute', left: '-9999px', top: 0, width: '794px' /* ≈ A4 at 96 dpi */ }}
-            >
-                <InvoicePreview ref={invoiceRef} />
             </div>
         </div>
     );

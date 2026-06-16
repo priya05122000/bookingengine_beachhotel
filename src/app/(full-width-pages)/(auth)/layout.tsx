@@ -1,9 +1,9 @@
-// ...existing code...
+
 "use client";
 
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
-// ...existing code...
+
 
 interface AuthLayoutProps {
   children: React.ReactNode;

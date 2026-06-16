@@ -1,8 +1,8 @@
 import React from 'react';
-import { getMockPrice } from '../../../../lib/mockPrices';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { getMockPrice } from '@/src/lib/mockPrices';
 
-// ...existing code...
+
 
 interface MonthCalendarProps {
     year: number;
@@ -101,7 +101,7 @@ function DayCell({ date, state, price, onClick }: {
             <div className={`${base} bg-primary cursor-pointer `} onClick={onClick}>
                 <span className="text-white text-xs font-semibold">{date}</span>
                 {price !== null && (
-                    <span className=" text-white  text-[10px] leading-none mt-0.5">S${price}</span>
+                    <span className=" text-white  text-[10px] leading-none mt-0.5">{'\u20B9'}{price}</span>
                 )}
             </div>
         );
@@ -121,7 +121,7 @@ function DayCell({ date, state, price, onClick }: {
             <div className={`${base}  cursor-pointer `} onClick={onClick}>
                 <span className="text-dark-gray text-xs font-medium">{date}</span>
                 {price !== null && (
-                    <span className="text-[10px] text-primary/60 leading-none mt-0.5">S${price}</span>
+                    <span className="text-[10px] text-primary/60 leading-none mt-0.5">{'\u20B9'}{price}</span>
                 )}
             </div>
         );
@@ -131,7 +131,7 @@ function DayCell({ date, state, price, onClick }: {
         <div className={`${base} cursor-pointer hover:bg-gray transition-colors text-xs`} onClick={onClick}>
             <span className="text-dark-gray font-medium">{date}</span>
             {price !== null && (
-                <span className=" text-silver text-[10px] leading-none mt-0.5">S${price}</span>
+                <span className=" text-silver text-[10px] leading-none mt-0.5">{'\u20B9'}{price}</span>
             )}
         </div>
     );

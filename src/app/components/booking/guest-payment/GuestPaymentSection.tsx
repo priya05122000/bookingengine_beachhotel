@@ -171,13 +171,13 @@ export default function GuestPaymentSection() {
                             {/* Pricing */}
                             <div className="mt-3 pt-3 border-t border-gray-100">
                                 <div className="flex items-baseline gap-2">
-                                    <span className="text-sm text-dark-gray line-through">₹ 15,308</span>
+                                    <span className="text-sm text-dark-gray line-through">&#8377; 15,308</span>
                                     <span className="text-xs text-dark-gray uppercase tracking-wide">Per Night:</span>
                                 </div>
                                 <div className="flex items-baseline gap-1 mt-1">
-                                    <span className="text-sm font-semibold text-dark-gray">₹ 11,571</span>
+                                    <span className="text-sm font-semibold text-dark-gray">&#8377; 11,571</span>
                                     <span className="text-xs text-dark-gray">+</span>
-                                    <span className="text-xs text-dark-gray">₹ 2,417</span>
+                                    <span className="text-xs text-dark-gray">&#8377; 2,417</span>
                                     <span className="text-xs text-dark-gray uppercase tracking-wide">Taxes &amp; Fees</span>
                                 </div>
                                 <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-gray-100">

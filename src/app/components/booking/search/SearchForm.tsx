@@ -1,10 +1,11 @@
-// ...existing code...
+
 'use client';
 
 import React, { useMemo, useState } from 'react';
 import DatesOfStay from './DatesOfStay';
 import RoomsAndGuests, { Room } from './RoomsAndGuests';
 import { typography } from '@/src/lib/typography';
+import { IndianRupee } from 'lucide-react';
 
 const DATE_FORMAT: Intl.DateTimeFormatOptions = {
     weekday: 'short',
@@ -25,7 +26,7 @@ function calcDuration(checkIn: Date | null, checkOut: Date | null) {
         (checkOut.getTime() - checkIn.getTime()) / 86400000
     );
 
-    return `${nights + 1}D, ${nights}N`;
+    return `\u20B9 ${nights + 1}D, \u20B9 ${nights}N`;
 }
 
 export default function SearchForm() {
@@ -272,4 +273,3 @@ export default function SearchForm() {
         </div>
     );
 }
-// ...existing code...

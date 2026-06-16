@@ -1,4 +1,4 @@
-// ...existing code...
+
 import React from "react";
 import BookingStepBar from "./BookingStepBar";
 import { typography } from "@/src/lib/typography";
@@ -50,4 +50,3 @@ export default function BookingShell({
 
     );
 }
-// ...existing code...

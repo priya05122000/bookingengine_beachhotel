@@ -1,4 +1,4 @@
-// ...existing code...
+
 import localFont from "next/font/local";
 
 export const arizonaFlare = localFont({

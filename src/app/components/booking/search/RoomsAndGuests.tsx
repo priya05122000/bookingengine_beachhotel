@@ -92,6 +92,15 @@ export default function RoomsAndGuests({
     };
 
 
+    const handleCheckAvailability = () => {
+        onCheckAvailability();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
 
     // promo code state (fixes undefined `promo` used in the input)
     const [promo, setPromo] = useState<string>('');
@@ -187,7 +196,7 @@ export default function RoomsAndGuests({
 
             {/* Fixed CTA */}
             <div className="pt-4 mt-auto bg-white">
-                <button onClick={onCheckAvailability}
+                <button onClick={handleCheckAvailability}
                     className="w-full bg-primary text-white uppercase tracking-widest text-xs h-10 rounded-xs  hover:bg-primary transition-colors font-semibold">
                     Check Availability
                 </button>

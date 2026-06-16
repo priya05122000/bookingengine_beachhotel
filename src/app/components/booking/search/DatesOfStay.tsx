@@ -105,7 +105,7 @@ export default function DatesOfStay({
                 </div>
             </div>
 
-            <p className="mt-4 text-[10px] text-silver p-3  md:p-6 tracking-wider">Rates shown in S$</p>
+            <p className="mt-4 text-[10px] text-silver p-3  md:p-6 tracking-wider">Rates shown in {'\u20B9'}</p>
         </div>
     );
 }

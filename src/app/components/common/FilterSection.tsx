@@ -1,4 +1,3 @@
-// ...existing code...
 "use client";
 
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import SelectRoomSection from "../booking/select-room/SelectRoomSection";
 import GuestPaymentSection from "../booking/guest-payment/GuestPaymentSection";
 import ConfirmationSection from "../booking/confirmation/ConfirmationSection";
 import { X } from "lucide-react";
+import { flushSync } from "react-dom";
 
 const STEPS = [
     "Search",
@@ -24,50 +24,65 @@ export default function FilterSection() {
     useEffect(() => {
         const handler = (e: Event) => {
             const ce = e as CustomEvent;
-            const step = typeof ce.detail?.step === "number" ? ce.detail.step : 1;
 
-            // Update active step
-            setActiveStep(step);
+            // Ensure the popup DOM is removed immediately
+            flushSync(() => {
+                setShowSearchPopup(false);
+            });
 
-            // If event requests packages to be shown, ensure parent state is updated
+            const step =
+                typeof ce.detail?.step === "number"
+                    ? ce.detail.step
+                    : 1;
+
+            // Apply step change synchronously as well to avoid race conditions
+            flushSync(() => {
+                setActiveStep(step);
+            });
+
             if (ce.detail?.showPackages === true) {
                 setShowPackages(true);
             }
         };
 
-        window.addEventListener("search:check-availability", handler as EventListener);
-        return () =>
-            window.removeEventListener("search:check-availability", handler as EventListener);
+        window.addEventListener(
+            "search:check-availability",
+            handler as EventListener
+        );
+
+        return () => {
+            window.removeEventListener(
+                "search:check-availability",
+                handler as EventListener
+            );
+        };
     }, []);
 
-    // enable steps up to the current activeStep (initially only 0/Search enabled)
+    // Close popup whenever step changes
+    useEffect(() => {
+        if (activeStep > 0) {
+            setShowSearchPopup(false);
+        }
+    }, [activeStep]);
+
     const enabledUpTo = activeStep;
 
     return (
-
         <>
             {showSearchPopup && (
-                <div className="fixed inset-0 z-9999 flex items-center justify-center">
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center">
                     <div
                         className="absolute inset-0 bg-black/50"
                         onClick={() => setShowSearchPopup(false)}
                     />
 
-                    <div className="relative bg-white w-[95vw] h-[90vh] max-w-300  overflow-y-auto rounded-sm p-5">
-
-                        {/* Header */}
-                        {/* <div className=" z-10 flex items-center justify-between "> */}
-                        {/* <h2 className="text-2xl font-semibold tracking-wide uppercase">
-                                Edit Booking
-                            </h2> */}
-
+                    <div className="relative bg-white w-[95vw] h-[90vh] max-w-[1200px] overflow-y-auto rounded-sm p-5">
                         <button
                             onClick={() => setShowSearchPopup(false)}
-                            className="leading-none cursor-pointer absolute top-3 right-5 hover:opacity-70"
+                            className="absolute top-3 right-5 cursor-pointer hover:opacity-70"
                         >
-                            <X className="w-5 h-5"/>
+                            <X className="w-5 h-5" />
                         </button>
-                        {/* </div> */}
 
                         <div className="pt-5">
                             <SearchForm />
@@ -76,11 +91,13 @@ export default function FilterSection() {
                 </div>
             )}
 
+            <BookingShell
+                steps={STEPS}
+                activeStep={activeStep}
+                enabledUpTo={enabledUpTo}
+            >
+                {activeStep === 0 && <SearchForm />}
 
-            <BookingShell steps={STEPS} activeStep={activeStep} enabledUpTo={enabledUpTo}>
-                {activeStep === 0 && (
-                    <SearchForm />
-                )}
                 {activeStep === 1 && (
                     <SelectRoomSection
                         showPackages={showPackages}
@@ -89,17 +106,10 @@ export default function FilterSection() {
                     />
                 )}
 
-                {activeStep === 2 && (
-                    <GuestPaymentSection />
-                )}
+                {activeStep === 2 && <GuestPaymentSection />}
 
-                {activeStep === 3 && (
-                    <ConfirmationSection />
-                )}
+                {activeStep === 3 && <ConfirmationSection />}
             </BookingShell>
-
         </>
-
     );
 }
-// ...existing code...

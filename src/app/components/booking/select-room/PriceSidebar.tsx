@@ -1,9 +1,10 @@
-// ...existing code...
+
 'use client';
 
 import React from 'react';
 import { PackageItem } from './types';
 import { X } from 'lucide-react';
+import Link from 'next/link';
 
 type Props = {
     selected: PackageItem[];
@@ -49,7 +50,7 @@ function PriceLineItem({
                     </button>
 
                     <div className="text-sm">
-                        ₹ {formatINR(parsePrice(item.price))}
+                        &#8377; {formatINR(parsePrice(item.price))}
                     </div>
                 </div>
             </div>
@@ -77,7 +78,7 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
     return (
         <div className="space-y-3 bg-white p-3 shadow-[1px_4px_4px_0px_#00000040] rounded">
             <div className="bg-light-white rounded-xs shadow-[1px_4px_4px_0px_#00000040] p-4">
-                <h4 className="text-sm font-semibold text-dark-gray mb-4">PRICE BREAKUP</h4>
+                {/* <h4 className="text-sm font-semibold text-dark-gray mb-4">PRICE BREAKUP</h4> */}
 
                 {selected.length > 0 ? (
                     <div className="space-y-3 mb-3">
@@ -93,18 +94,18 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
                                 {roomCount} Room{roomCount !== 1 ? 's' : ''} x {nights} Nights
                             </div>
                         </div>
-                        <div>₹ {formatINR(basePrice)}</div>
+                        <div>&#8377; {formatINR(basePrice)}</div>
                     </div>
                 )}
 
                 <div className="text-sm border-t py-3 text-dark-gray flex items-center justify-between">
                     <div>Hotel Taxes</div>
-                    <div>₹ {formatINR(hotelTaxes)}</div>
+                    <div>&#8377; {formatINR(hotelTaxes)}</div>
                 </div>
 
                 <div className="border-t-3 border-black pt-2 flex items-center justify-between">
-                    <div className="text-sm font-medium text-[#1b2b7a]">Total amount to paid</div>
-                    <div className="text-lg font-bold text-[#1b2b7a]">₹ {formatINR(total)}</div>
+                    <div className="text-sm font-medium text-[#1b2b7a]">Total amount to be paid</div>
+                    <div className="text-lg font-bold text-[#1b2b7a]">&#8377; {formatINR(total)}</div>
                 </div>
 
                 {selected.length > 0 && (
@@ -134,7 +135,12 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
             </div>
 
             <div className="bg-light-white rounded-xs shadow-[1px_4px_4px_0px_#00000040] p-4">
-                <h4 className="text-sm font-semibold text-dark-gray mb-3">SIGN UP OR LOGIN</h4>
+                <Link
+                    href="/signin"
+                    className="text-sm font-semibold text-primary mb-3 block hover:text-primary transition-colors underline underline-offset-4"
+                >
+                    SIGN UP OR LOGIN
+                </Link>
                 <ul className="text-sm text-dark-gray space-y-2">
                     <li className="flex items-start gap-2">
                         <span className="text-accent font-bold">✓</span>
@@ -149,4 +155,3 @@ export default function PriceSidebar({ selected, removePackage, promo, setPromo 
         </div>
     );
 }
-// ...existing code...

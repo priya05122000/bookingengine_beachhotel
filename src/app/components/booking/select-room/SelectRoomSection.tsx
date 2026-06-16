@@ -1,4 +1,4 @@
-// ...existing code...
+
 'use client';
 
 import React, { useEffect } from 'react';
@@ -22,16 +22,21 @@ export default function SelectRoomSection({
 }: Props) {
     const [currentStep, setCurrentStep] = React.useState(1);
     const [showDetails, setShowDetails] = React.useState(false);
-    const [selected, setSelected] = React.useState<PackageItem[]>([]);
+    const [selected, setSelected] = React.useState<
+        (PackageItem & {
+            adults: number;
+            children: number;
+        })[]
+    >([]);
     const [openQtyFor, setOpenQtyFor] = React.useState<string | null>(null);
     const [qtyAdults, setQtyAdults] = React.useState(1);
     const [qtyChildren, setQtyChildren] = React.useState(0);
     const [promo, setPromo] = React.useState('');
 
     const packages: PackageItem[] = [
-        { id: 'p1', title: 'WITH FOOD', subtitle: 'SEA VIEW', price: 'INR 6,578', details: '1NIGHT 1ROOM 2 ADULT' },
-        { id: 'p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: '1NIGHT 1ROOM 2 ADULT' },
-        { id: 'p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: '1NIGHT 1ROOM 2 ADULT' },
+        { id: 'p1', title: 'Economy', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included' },
+        { id: 'p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: 'Breakfast Included' },
+        { id: 'p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: 'Breakfast Included' },
     ];
 
     function onSelectPackage() {
@@ -52,7 +57,14 @@ export default function SelectRoomSection({
     }, [showPackages]);
 
     function addPackage(pkg: PackageItem) {
-        setSelected((s) => [...s, pkg]);
+        setSelected((s) => [
+            ...s,
+            {
+                ...pkg,
+                adults: qtyAdults,
+                children: qtyChildren,
+            },
+        ]);
         setOpenQtyFor(null);
         setQtyAdults(1);
         setQtyChildren(0);
@@ -106,12 +118,12 @@ export default function SelectRoomSection({
                         <div className="md:col-span-4">
                             <div className="">
                                 <div className={`${typography.textLg} font-semibold mt-1`}>ECONOMY</div>
-                                <div className="text-xs text-dark-gray mt-1">SEA VIEW</div>
+                                <div className="text-xs text-dark-gray mt-1">SEA VIEW & SUNSET VIEW </div>
 
                                 <ul className="mt-4 mb-10 space-y-1 text-sm text-dark-gray">
                                     <li className="flex items-center gap-2">
                                         <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Flower2 size={22} strokeWidth={1.5} /></span>
-                                        BALLCONY
+                                        BALCONY
                                     </li>
                                     <li className="flex items-center gap-2">
                                         <span className="w-4 h-4 rounded-full flex items-center justify-center text-xs">    <Sofa size={22} strokeWidth={1.5} />
@@ -131,7 +143,7 @@ export default function SelectRoomSection({
 
                                 <button
                                     onClick={onSelectPackage}
-                                    className={`mt-2 bg-primary text-white px-4 h-10 rounded-xs  uppercase ${typography.textBase} tracking-wide`}
+                                    className={`mt-2 bg-primary text-white px-4 h-10 rounded-xs  uppercase text-sm tracking-wide`}
                                 >
                                     Select Package
                                 </button>
@@ -143,6 +155,7 @@ export default function SelectRoomSection({
                     {showPackages && (
                         <PackageList
                             packages={packages}
+                            selected={selected}
                             openQtyFor={openQtyFor}
                             setOpenQtyFor={setOpenQtyFor}
                             qtyAdults={qtyAdults}
@@ -162,4 +175,3 @@ export default function SelectRoomSection({
         </div>
     );
 }
-// ...existing code...

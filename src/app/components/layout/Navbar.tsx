@@ -17,7 +17,10 @@ export default function Navbar() {
             </div>
             <div className="bg-primary relative h-16 flex items-center justify-center">
                 {/* Center Logo Text */}
-                <Link href="/" className="text-center">
+                <Link href="https://thebeachhotel.in"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-center">
                     <h1 className="text-white uppercase tracking-[0.25em] text-2xl font-serif">
                         The Beach Hotel
                     </h1>

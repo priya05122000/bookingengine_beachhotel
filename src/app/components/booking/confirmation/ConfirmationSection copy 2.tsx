@@ -11,6 +11,7 @@ export default function ConfirmationSection() {
 
     const [showInvoicePreview, setShowInvoicePreview] = useState(false);
 
+    // removed inline handleDownloadInvoice; use separated utility
     async function handleDownloadInvoice() {
         await downloadInvoice(invoiceRef);
     }
@@ -230,7 +231,6 @@ export default function ConfirmationSection() {
 
             </div>
 
-            {/* ── PREVIEW MODAL ── opens when user clicks "Preview Invoice" */}
             {showInvoicePreview && (
                 <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 p-4">
                     <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-sm shadow-lg">
@@ -240,20 +240,15 @@ export default function ConfirmationSection() {
                         >
                             ✕
                         </button>
-                        {/* No ref here — visual preview only, not used for PDF capture */}
-                        <InvoicePreview />
+
+                        <InvoicePreview ref={invoiceRef} />
                     </div>
                 </div>
             )}
 
-            {/* ── HIDDEN INVOICE ── always mounted off-screen so invoiceRef.current is never null */}
-            {/* html2canvas needs a real DOM node with layout; display:none won't work */}
-            <div
-                aria-hidden="true"
-                style={{ position: 'absolute', left: '-9999px', top: 0, width: '794px' /* ≈ A4 at 96 dpi */ }}
-            >
+            {/* <div className='absolute -left-2499.75 top-0 w-[210mm]' aria-hidden>
                 <InvoicePreview ref={invoiceRef} />
-            </div>
+            </div> */}
         </div>
     );
 }
