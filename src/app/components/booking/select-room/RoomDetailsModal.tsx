@@ -109,7 +109,7 @@ export default function RoomDetailsModal({ onClose }: Props) {
                                 />
 
                                 {/* Caption */}
-                                <div className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-white/95 p-4 w-[90%] max-w-[260px]">
+                                <div className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-white/95 p-4 w-[90%] max-w-65">
                                     <p className="text-[11px] font-bold uppercase tracking-wide text-primary">
                                         BED ROOM
                                     </p>

@@ -178,7 +178,7 @@ export default function ConfirmationSection() {
                                     </div>
                                 </div>
                                 <div className="border-t border-gray-200 mt-4 pt-3 flex justify-between items-center">
-                                    <span className="text-sm font-semibold text-primary">Total amount to paid</span>
+                                    <span className="text-sm font-semibold text-primary">Total amount  paid</span>
                                     <span className="text-sm font-bold text-primary">&#8377; 0000</span>
                                 </div>
 

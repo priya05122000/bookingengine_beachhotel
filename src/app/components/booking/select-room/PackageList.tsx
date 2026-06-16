@@ -35,9 +35,6 @@ export default function PackageList({
 }: Props) {
 
 
-
-
-
     return (
         <div className=" rounded-xs  pt-6">
             <h4 className={`text-sm font-semibold text-primary mb-4 ${typography.textBase}`}>CHOOSE A PACKAGE</h4>
@@ -52,14 +49,16 @@ export default function PackageList({
                         </div>
                         <div className='space-y-1'>
                             <div className="relative inline-block group">
-                                <div className="text-xs text-dark-gray underline cursor-help">Details</div>
+                                <div className={`${typography.textBase} font-semibold`}>{pkg.price}</div>
 
+                                <div className="text-xs text-dark-gray underline cursor-help">Details</div>
                                 <div className="absolute top-full right-0 z-20 mt-2 w-64 bg-white border border-primary/32 rounded-xs px-3 py-2 text-sm shadow-[-1px_4px_4px_0px_#00000040] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity">
                                     <div className="font-semibold mb-1">{pkg.title}:</div>
                                     <div className="text-xs text-dark-gray">{pkg.subtitle}</div>
                                     <div className="mt-2 text-xs">{pkg.details}</div>
                                 </div>
-                            </div>  <div className="text-xs text-dark-gray">
+                            </div>
+                            <div className="text-xs text-dark-gray">
                                 {(() => {
                                     const selectedPkg = selected.find((p) => p.id === pkg.id);
 
@@ -81,12 +80,10 @@ export default function PackageList({
                             >
                                 Add Room
                             </button>
-
                             <div >
                                 {openQtyFor === pkg.id && (
                                     // popup UI replaced to match requested design
-                                    <div className="absolute top-full  right-0 z-20 w-48 bg-white border border-primary/32 rounded-xs   px-4 pb-4 pt-2 text-sm shadow-[-1px_4px_4px_0px_#00000040]
-">
+                                    <div className="absolute top-full  right-0 z-20 w-48 bg-white border border-primary/32 rounded-xs   px-4 pb-4 pt-2 text-sm shadow-[-1px_4px_4px_0px_#00000040]">
                                         <button
                                             aria-label="Close"
                                             className="text-dark-gray text-end w-full mb-3 hover:text-dark-gray text-lg leading-none"
@@ -94,6 +91,7 @@ export default function PackageList({
                                         >
                                             ×
                                         </button>
+
                                         <div className="flex items-start justify-between mb-2">
                                             <div className="text-xs font-semibold uppercase">Adults</div>
 
@@ -108,7 +106,6 @@ export default function PackageList({
                                                 <option value={4}>4</option>
                                             </select>
                                         </div>
-
 
                                         <div className="mb-3 flex items-start justify-between ">
                                             <div>
@@ -135,17 +132,16 @@ export default function PackageList({
                                                     setOpenQtyFor(null);
                                                 }}
                                             >
-                                                Add
+                                                Add Room
                                             </button>
                                         </div>
                                     </div>
                                 )}
                             </div>
                         </div>
-
-
                     </div>
                 ))}
+
             </div>
         </div >
     );
