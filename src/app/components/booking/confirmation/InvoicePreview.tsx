@@ -40,7 +40,7 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
                                     fontSize: '24px',
                                     fontWeight: 'bold',
                                     lineHeight: 1,
-                                    backgroundColor: 'pink',
+                                    // backgroundColor: 'pink',
                                 }}
                             >
                                 H

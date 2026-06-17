@@ -58,11 +58,12 @@ export default function FilterSection() {
         };
     }, []);
 
-    // Close popup whenever step changes
+    // Close popup and scroll to top whenever step changes
     useEffect(() => {
         if (activeStep > 0) {
             setShowSearchPopup(false);
         }
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }, [activeStep]);
 
     const enabledUpTo = activeStep;
@@ -70,13 +71,13 @@ export default function FilterSection() {
     return (
         <>
             {showSearchPopup && (
-                <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+                <div className="fixed inset-0 z-9999 flex items-center justify-center">
                     <div
                         className="absolute inset-0 bg-black/50"
                         onClick={() => setShowSearchPopup(false)}
                     />
 
-                    <div className="relative bg-white w-[95vw] h-[90vh] max-w-[1200px] overflow-y-auto rounded-sm p-5">
+                    <div className="relative bg-white w-[95vw] h-[90vh] max-w-300 overflow-y-auto rounded-sm p-5">
                         <button
                             onClick={() => setShowSearchPopup(false)}
                             className="absolute top-3 right-5 cursor-pointer hover:opacity-70"

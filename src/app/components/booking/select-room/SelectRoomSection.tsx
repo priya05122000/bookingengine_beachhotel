@@ -168,7 +168,7 @@ export default function SelectRoomSection({
                 </div>
 
                 {/* Right: sidebar */}
-                <div>
+                <div className="sticky top-32 self-start">
                     <PriceSidebar selected={selected} removePackage={removePackage} promo={promo} setPromo={setPromo} />
                 </div>
             </div>
