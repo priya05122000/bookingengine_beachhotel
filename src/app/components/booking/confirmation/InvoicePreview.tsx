@@ -11,7 +11,7 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
     return (
         <div
             ref={ref}
-            className="mt-10  p-6 font-sans max-w-3xl mx-auto"
+            className="p-6 font-sans"
             style={{
                 backgroundColor: '#ffffff',
                 color: '#1f2937',
@@ -23,43 +23,30 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
                     <div className='relative'>
                         <div
                             style={{
-                                width: '56px',
-                                height: '56px',
-                                borderRadius: '50%',
-                                backgroundColor: '#14B8A6',
+                                width: '100%',
+                                height: '100px',
                                 position: 'relative',
                             }}
                         >
-                            <span
-                                style={{
-                                    position: 'absolute',
-                                    left: '50%',
-                                    top: '50%',
-                                    transform: 'translate(-50%, -55%)',
-                                    color: '#fff',
-                                    fontSize: '24px',
-                                    fontWeight: 'bold',
-                                    lineHeight: 1,
-                                    // backgroundColor: 'pink',
-                                }}
-                            >
-                                H
-                            </span>
+                            <img
+                                src="/images/logo.png"
+                                alt="Hotel Logo"
+                                className="w-full h-full object-cover"
+                            />
                         </div>
-                        <div className="text-lg font-bold" style={{ color: '#14B8A6' /* text-teal-500 */ }}>
+                        <div className="text-lg font-bold mt-3 text-primary">
                             Hotel Name
                         </div>
                     </div>
 
                     <div
-                        className="inline-flex h-10 justify-center items-center px-4 font-bold rounded-xs"
-                        style={{ backgroundColor: '#14B8A6', color: '#ffffff' }} // bg-teal-500, text-white
+                        className="inline-flex h-10 justify-center items-center px-4 font-bold rounded-xs bg-primary text-white"
                     >
                         INVOICE
                     </div>
                 </div>
 
-                <div className="mt-6 grid grid-cols-2  items-end gap-6">
+                <div className="mt-2 grid grid-cols-2  items-end gap-6">
                     <div className="text-xs leading-snug" style={{ color: '#6b7280' /* text-gray-500 */ }}>
                         [Address] <br />
                         [Phone Number] <br />
@@ -75,7 +62,7 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
 
             {/* Guest & Room details */}
             <div className="mb-5 gap-6">
-                <div className="text-sm font-bold mb-1" style={{ color: '#14B8A6' /* text-teal-500 */ }}>
+                <div className="text-sm font-bold mb-1 text-primary">
                     Guest Details:
                 </div>
                 <div className='grid grid-cols-2 gap-6'>
@@ -150,7 +137,7 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
             {/* Charges table */}
             <table className="w-full border-collapse mb-3">
                 <thead>
-                    <tr style={{ backgroundColor: '#14B8A6', color: '#ffffff' }} className="text-left">
+                    <tr className="text-left bg-primary text-white">
                         <th className="px-2 py-2 text-sm text-center" >Date</th>
                         <th className="px-2 py-2 text-sm">Description</th>
                         <th className="px-2 py-2 text-sm text-center">No of Nights</th>
@@ -233,11 +220,11 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
                     <tr>
                         <td colSpan={3}></td>
 
-                        <td className="px-2 py-2  text-xs  " style={{ backgroundColor: '#99f6e4' /* bg-teal-200 */ }}>
+                        <td className="px-2 py-2 text-xs font-bold bg-primary text-white">
                             Total Due
                         </td>
 
-                        <td className="px-2 py-2 text-xs text-center" style={{ backgroundColor: '#99f6e4' /* bg-teal-200 */ }}>
+                        <td className="px-2 py-2 text-xs font-bold text-center bg-primary text-white">
                             $115.00
                         </td>
                     </tr>
@@ -247,9 +234,9 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
             </table>
 
             <div className="mt-6">
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-8">
+                <div className="flex flex-row justify-between gap-8">
 
-                    <div className="flex flex-col  sm:flex-row gap-4 sm:w-1/2">
+                    <div className="flex flex-row gap-4 w-1/2">
 
                         {/* Payment Info */}
                         <div className="flex-1 text-xs" style={{ color: '#374151' /* text-gray-700 */ }}>
@@ -265,7 +252,7 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
                         </div>
 
                         {/* Divider */}
-                        <div className="hidden sm:block w-px mx-2" style={{ backgroundColor: '#d1d5db' /* bg-gray-300 */ }}></div>
+                        <div className="block w-px mx-2" style={{ backgroundColor: '#d1d5db' /* bg-gray-300 */ }}></div>
 
                         {/* Terms & Condition */}
                         <div className="flex-1 text-xs" style={{ color: '#374151' /* text-gray-700 */ }}>
@@ -281,12 +268,12 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
                     </div>
 
                     {/* Account Manager */}
-                    <div className="sm:w-1/3 text-xs text-left sm:text-right" style={{ color: '#374151' /* text-gray-700 */ }}>
+                    <div className="w-1/3 text-xs text-right pr-8" style={{ color: '#374151' /* text-gray-700 */ }}>
                         <div className="uppercase text-[11px] tracking-widest" style={{ color: '#6b7280' /* text-gray-500 */ }}>
                             Account Manager
                         </div>
 
-                        <div className="mt-2 flex flex-col items-start sm:items-end">
+                        <div className="mt-2 flex flex-col items-end">
                             <div className="text-2xl italic font-medium" style={{ color: '#111827' /* text-gray-800 */ }}>
                                 John doe
                             </div>
