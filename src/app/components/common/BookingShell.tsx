@@ -32,7 +32,7 @@ export default function BookingShell({
 
             <div className=" bg-primary/4 p-4 md:p-10">
                 <h1
-                    className={`text-center text-primary uppercase font-arizona mb-8 md:mb-12 ${typography.textFoXl}`}
+                    className={`text-center tracking-[.08em] text-primary  uppercase font-arizona-regular mb-8 md:mb-12 ${typography.textFoXl}`}
                 >
                     Book Your Stay
                 </h1>

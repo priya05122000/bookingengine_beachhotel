@@ -32,9 +32,30 @@ export default function SelectRoomSection({
     const [promo, setPromo] = React.useState('');
 
     const packages: PackageItem[] = [
-        { id: 'p1', title: 'ECONOMY', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included' },
-        { id: 'p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: 'Breakfast Included' },
-        { id: 'p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: 'Breakfast Included' },
+        {
+            id: 'p1', title: 'ECONOMY', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included',
+            priceBreakdown: {
+                entries: [{ label: 'Jul 1', amount: 'INR 5,574.58' }],
+                tax: 'INR 1,003.42',
+                total: 'INR 6,578.00',
+            },
+        },
+        {
+            id: 'p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: 'Breakfast Included',
+            priceBreakdown: {
+                entries: [{ label: 'Jul 1', amount: 'INR 4,406.78' }],
+                tax: 'INR 793.22',
+                total: 'INR 5,200.00',
+            },
+        },
+        {
+            id: 'p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: 'Breakfast Included',
+            priceBreakdown: {
+                entries: [{ label: 'Jul 1', amount: 'INR 4,236.44' }],
+                tax: 'INR 762.56',
+                total: 'INR 4,999.00',
+            },
+        },
     ];
 
     function onSelectPackage() {
@@ -68,17 +89,17 @@ export default function SelectRoomSection({
             {showDetails && <RoomDetailsModal onClose={() => setShowDetails(false)} />}
             {/* Top bar */}
             <div className="flex  flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between mb-6">
-                <div className={`text-dark-gray  w-full ${typography.textBase}`}>
+                <div className={`text-dark-gray font-arizona-sans-regular tracking-widest w-full ${typography.textXl}`}>
                     Fri, 22 JUN, 2026 - Fri, 22 JUN, 2026
                 </div>
 
-                <div className="flex items-center w-full justify-between  sm:justify-end gap-3">
-                    <div className={`text-dark-gray ${typography.textBase}`}>
-                        1NIGHT · 1ROOM · 2 ADULT</div>
+                <div className="flex items-center w-full font-arizona-sans-regular justify-between  sm:justify-end gap-3">
+                    <div className={`text-dark-gray text-xs lg:text-sm tracking-[.15em] `}>
+                        1 NIGHT | 1 ROOM , 2 ADULT</div>
                     <button
                         // onClick={() => setShowPackages(false)}
                         onClick={onEdit}
-                        className="text-xs uppercase tracking-wide px-4 h-8 border border-primary text-primary rounded-xs cursor-pointer"
+                        className="text-xs lg:text-sm tracking-[.15em] uppercase  px-4 h-8 border border-primary text-primary rounded-xs cursor-pointer"
                     >
                         Edit
                     </button>
@@ -98,18 +119,18 @@ export default function SelectRoomSection({
                             />
                             <button
                                 onClick={() => setShowDetails(true)}
-                                className="absolute top-4 right-4 backdrop-blur-md bg-accent/51 text-white text-xs font-semibold px-3 py-1 rounded cursor-pointer"
+                                className={`absolute top-4 right-4 backdrop-blur-md bg-accent/51 text-white ${typography.textSm}  px-3 py-1 rounded cursor-pointer font-arizona-light`}
                             >
                                 View Details
                             </button>
                         </div>
 
                         <div className="md:col-span-4">
-                            <div className="">
-                                <div className={`${typography.textLg} font-semibold mt-1`}>ECONOMY</div>
-                                <div className="text-xs text-dark-gray mt-1">SEA VIEW & SUNSET VIEW </div>
+                            <div className=" font-arizona-sans-regular space-y-2">
+                                <div className={`${typography.textXl} tracking-widest mt-1 `}>ECONOMY</div>
+                                <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">SEA VIEW & SUNSET VIEW </div>
 
-                                <ul className="mt-4 mb-10 space-y-1 text-sm text-dark-gray">
+                                <ul className="mt-4 mb-10 tracking-[0.15em]  space-y-4 text-sm text-dark-gray text-[10px] lg:text-xs">
                                     <li className="flex items-center gap-2">
                                         <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Flower2 size={22} strokeWidth={1.5} /></span>
                                         BALCONY
@@ -125,18 +146,18 @@ export default function SelectRoomSection({
                                         FREE WIFI
                                     </li>
                                 </ul>
-
-                                <div className="text-sm text-dark-gray ">From</div>
-                                <div className={`${typography.textThXl} font-extrabold`}>INR 8,999<span className="text-sm font-medium text-dark-gray">/Night</span></div>
-                                <div className="text-xs text-dark-gray mt-1">subject to GST and charges</div>
-
-                                <button
-                                    onClick={onSelectPackage}
-                                    className={`mt-2 bg-primary text-white px-4 h-10 rounded-xs  uppercase text-sm tracking-wide cursor-pointer`}
-                                >
-                                    Select Package
-                                </button>
                             </div>
+                            <div className='tracking-[.04em]'>
+                                <div className="text-[13px] text-sm text-dark-gray font-arizona-light">From</div>
+                                <div className={`text-[36px] font-arizona-regular `}>INR 8,999<span className="text-[15px] lg:text-base font-arizona-light text-dark-gray ">/night</span></div>
+                                <div className="text-[11px] lg:text-xs font-arizona-light text-dark-gray   ">subject to GST and charges</div>
+                            </div>
+                            <button
+                                onClick={onSelectPackage}
+                                className={`mt-4 bg-primary text-white px-4 h-10 rounded-xs font-arizona-sans-regular uppercase text-xs lg:text-sm tracking-[0.15em] cursor-pointer`}
+                            >
+                                Select Packages
+                            </button>
                         </div>
                     </div>
 

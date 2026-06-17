@@ -11,10 +11,10 @@ export const typography = {
 
     // Body
     textXl: "text-lg lg:text-xl",
-    textLg: "text-lg",
-    textBase: "text-base",
+    textLg: "text-base lg:text-lg",
+    textBase: "text-[15px] lg:text-base",
 
     // // Small Text
-    // textSm: "text-sm",
+    textSm: "text-[13px] lg:text-sm",
     // textXs: "text-xs",
 };

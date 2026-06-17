@@ -136,30 +136,30 @@ export default function SearchForm() {
                 {/* Dates */}
                 <section>
                     <div className="border-b  px-4 py-6">
-                        <h3 className={`uppercase ${typography.textBase} font-medium mb-6 `}>
+                        <h3 className={`uppercase ${typography.textXl} font-arizona-sans-regular tracking-[.04em] font-medium mb-6 `}>
                             Dates Of Stay
                         </h3>
 
                         <div className="space-y-5 sm:space-y-0 xl:space-y-5 grid sm:grid-cols-3 ">
                             <div>
-                                <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
+                                <p className="text-xs uppercase  font-bold text-dark-gray mb-1" style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif' }}>
                                     Check-In
                                 </p>
-                                <p className="text-xs">{formatDate(checkIn)}</p>
+                                <p className="text-xs" style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif font-arizona-light' }}>{formatDate(checkIn)}</p>
                             </div>
 
                             <div>
-                                <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
+                                <p className="text-xs uppercase  font-bold text-dark-gray mb-1" style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif' }}>
                                     Check-Out
                                 </p>
-                                <p className="text-xs">{formatDate(checkOut)}</p>
+                                <p className="text-xs font-arizona-light">{formatDate(checkOut)}</p>
                             </div>
 
                             <div>
-                                <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
+                                <p className="text-xs uppercase  font-bold text-dark-gray mb-1" style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif' }}>
                                     Duration
                                 </p>
-                                <p className="text-xs">{calcDuration(checkIn, checkOut)}</p>
+                                <p className="text-xs font-arizona-light">{calcDuration(checkIn, checkOut)}</p>
                             </div>
                         </div>
                     </div>
@@ -180,9 +180,9 @@ export default function SearchForm() {
                 {/* Rooms */}
                 <section className="border-t border-[#ddd]">
                     <div className="px-4 py-6 border-b border-[#ddd]">
-                        <h3 className="uppercase tracking-[0.15em] text-lg font-medium">
+                        <div className={`uppercase tracking-widest ${typography.textXl} font-arizona-sans-regular`}>
                             Rooms & Guests
-                        </h3>
+                        </div>
                     </div>
 
                     <RoomsAndGuests
@@ -204,30 +204,30 @@ export default function SearchForm() {
                     {/* Dates Header */}
                     <div className="border-r border-primary px-4 py-6 ">
                         <div className="grid  grid-cols-[1fr_500px] items-center">
-                            <h3 className={`uppercase ${typography.textXl} font-medium  whitespace-nowrap`}>
+                            <h3 className={`uppercase ${typography.textXl} font-arizona-sans-regular font-medium  whitespace-nowrap`}>
                                 Dates Of Stay
                             </h3>
 
                             <div className="grid grid-cols-3 gap-12  w-full">
                                 <div>
-                                    <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
+                                    <p className="text-xs uppercase  font-bold text-dark-gray mb-1" style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif' }}>
                                         Check-In
                                     </p>
-                                    <p className="text-xs">{formatDate(checkIn)}</p>
+                                    <p className="text-xs" style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif font-arizona-light' }}>{formatDate(checkIn)}</p>
                                 </div>
 
                                 <div>
-                                    <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
+                                    <p className="text-xs uppercase  font-bold text-dark-gray mb-1" style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif' }}>
                                         Check-Out
                                     </p>
-                                    <p className="text-xs">{formatDate(checkOut)}</p>
+                                    <p className="text-xs font-arizona-light">{formatDate(checkOut)}</p>
                                 </div>
 
                                 <div>
-                                    <p className="text-xs uppercase tracking-[0.15em] text-dark-gray mb-1">
+                                    <p className="text-xs uppercase  font-bold text-dark-gray mb-1" style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif' }}>
                                         Duration
                                     </p>
-                                    <p className="text-xs">{calcDuration(checkIn, checkOut)}</p>
+                                    <p className="text-xs font-arizona-light">{calcDuration(checkIn, checkOut)}</p>
                                 </div>
                             </div>
                         </div>
@@ -235,9 +235,9 @@ export default function SearchForm() {
 
                     {/* Rooms Header */}
                     <div className="px-4 py-6 flex items-center">
-                        <h3 className={`uppercase ${typography.textXl} font-medium  whitespace-nowrap`}>
+                        <div className={`uppercase tracking-widest ${typography.textXl} font-arizona-sans-regular`}>
                             Rooms & Guests
-                        </h3>
+                        </div>
                     </div>
                 </div>
 

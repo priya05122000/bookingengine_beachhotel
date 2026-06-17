@@ -1,3 +1,4 @@
+import { typography } from '@/src/lib/typography';
 import MonthCalendar from './MonthCalendar';
 
 interface DatesOfStayProps {
@@ -105,7 +106,7 @@ export default function DatesOfStay({
                 </div>
             </div>
 
-            <p className="mt-4 text-[10px] text-silver p-3  md:p-6 tracking-wider">Rates shown in {'\u20B9'}</p>
+            <p className={`mt-4 text-[10px] text-silver p-3  md:p-6  ${typography.textBase} `} style={{ fontFamily: 'var(--font-lato), var(--font-josefin-sans), sans-serif' }}>Rates shown in {'\u20B9'}</p>
         </div>
     );
 }

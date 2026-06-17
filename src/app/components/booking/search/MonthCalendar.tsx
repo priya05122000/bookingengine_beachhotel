@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { getMockPrice } from '@/src/lib/mockPrices';
+import { typography } from '@/src/lib/typography';
 
 
 
@@ -82,26 +83,26 @@ function DayCell({ date, state, price, onClick }: {
 
     if (state === 'past') {
         return (
-            <div className={`${base} cursor-default`}>
-                <span className="text-sm text-silver/50">{date}</span>
+            <div className={`${base} cursor-default font-arizona-light`}>
+                <span className="text-[11px] lg:text-sm text-silver/50">{date}</span>
             </div>
         );
     }
 
     if (state === 'disabled') {
         return (
-            <div className={`${base} cursor-not-allowed opacity-60`}>
-                <span className="text-sm text-silver/40">{date}</span>
+            <div className={`${base} cursor-not-allowed opacity-60 font-arizona-light`}>
+                <span className="text-[11px] lg:text-sm text-silver/40">{date}</span>
             </div>
         );
     }
 
     if (state === 'checkIn') {
         return (
-            <div className={`${base} bg-primary cursor-pointer `} onClick={onClick}>
-                <span className="text-white text-xs font-semibold">{date}</span>
+            <div className={`${base} bg-primary cursor-pointer font-arizona-light`} onClick={onClick}>
+                <span className="text-white text-[11px] lg:text-sm ">{date}</span>
                 {price !== null && (
-                    <span className=" text-white  text-[10px] leading-none mt-0.5">{'\u20B9'}{price}</span>
+                    <span className=" text-white  text-[10px] lg:text-xs leading-none mt-0.5">{'\u20B9'}{price}</span>
                 )}
             </div>
         );
@@ -109,8 +110,8 @@ function DayCell({ date, state, price, onClick }: {
 
     if (state === 'checkOut') {
         return (
-            <div className={`${base} bg-primary cursor-pointer`} onClick={onClick}>
-                <span className="text-white text-xs font-semibold">{date}</span>
+            <div className={`${base} bg-primary cursor-pointer font-arizona-light`} onClick={onClick}>
+                <span className="text-white text-[11px] lg:text-sm ">{date}</span>
                 <span className="text-[10px] text-white/80 leading-none mt-0.5">Check out</span>
             </div>
         );
@@ -118,20 +119,20 @@ function DayCell({ date, state, price, onClick }: {
 
     if (state === 'inRange') {
         return (
-            <div className={`${base}  cursor-pointer `} onClick={onClick}>
-                <span className="text-dark-gray text-xs font-medium">{date}</span>
+            <div className={`${base}  cursor-pointer font-arizona-light`} onClick={onClick}>
+                <span className="text-dark-gray text-[11px] lg:text-sm ">{date}</span>
                 {price !== null && (
-                    <span className="text-[10px] text-primary/60 leading-none mt-0.5">{'\u20B9'}{price}</span>
+                    <span className="text-[10px] lg:text-xs text-primary/60 leading-none mt-0.5">{'\u20B9'}{price}</span>
                 )}
             </div>
         );
     }
 
     return (
-        <div className={`${base} cursor-pointer hover:bg-gray transition-colors text-xs`} onClick={onClick}>
-            <span className="text-dark-gray font-medium">{date}</span>
+        <div className={`${base} cursor-pointer hover:bg-gray transition-colors font-arizona-light `} onClick={onClick}>
+            <span className="text-dark-gray text-[11px] lg:text-sm  ">{date}</span>
             {price !== null && (
-                <span className=" text-silver text-[10px] leading-none mt-0.5">{'\u20B9'}{price}</span>
+                <span className=" text-silver text-[10px] lg:text-xs leading-none mt-0.5">{'\u20B9'}{price}</span>
             )}
         </div>
     );
@@ -182,7 +183,7 @@ export default function MonthCalendar({
                     <ChevronLeft size={16} />
                 </button>
 
-                <p className="flex-1 text-center text-primary uppercase tracking-widest text-sm font-semibold">
+                <p className={`flex-1 text-center font-arizona-light text-primary uppercase tracking-widest ${typography.textLg}`}>
                     {MONTH_NAMES[month]} {year}
                 </p>
 
@@ -200,7 +201,7 @@ export default function MonthCalendar({
 
             <div className="grid grid-cols-7 mb-1">
                 {DAY_HEADERS.map((d, i) => (
-                    <div key={i} className="text-center  text-sm text-dark-gray tracking-wider h-10">
+                    <div key={i} className={`text-center font-arizona-light  ${typography.textSm} text-dark-gray tracking-wider h-10`}>
                         {d}
                     </div>
                 ))}

@@ -35,21 +35,21 @@ function Counter({
     return (
         <div className="flex items-center justify-between py-2">
             <div>
-                <p className="text-sm uppercase tracking-widest text-dark-gray font-semibold">{label}</p>
-                {sublabel && <p className="text-[9px] text-silver tracking-wider">{sublabel}</p>}
+                <p className="text-xs lg:text-sm  font-arizona-sans-regular uppercase tracking-[.15em] text-dark-gray ">{label}</p>
+                {sublabel && <p className="text-[10px] lg:text-xs text-silver font-arizona-sans-regular tracking-[0.15em]">{sublabel}</p>}
             </div>
-            <div className="flex items-center gap-3 border border-primary" >
+            <div className="flex items-center gap-3 border border-primary font-arizona" >
                 <button
                     onClick={onDec}
                     disabled={value <= min}
-                    className="w-7 h-7 flex items-center justify-center text-primary cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors"
+                    className={`w-7 h-7 flex items-center ${typography.textLg}  justify-center text-primary cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors`}
                 >
                     <Minus size={12} />
                 </button>
-                <span className="text-sm text-primary w-4 text-center font-medium">{value}</span>
+                <span className={`text-sm text-primary w-4 text-center  ${typography.textLg}`}>{value}</span>
                 <button
                     onClick={onInc}
-                    className="w-7 h-7  flex items-center justify-center text-primary cursor-pointer hover:bg-gray transition-colors"
+                    className={`w-7 h-7  flex items-center justify-center text-primary cursor-pointer hover:bg-gray transition-colors ${typography.textLg} `}
                 >
                     <Plus size={12} />
                 </button>
@@ -113,7 +113,7 @@ export default function RoomsAndGuests({
                 {rooms.map((room, i) => (
                     <div key={i} className="mb-4">
                         <div className="flex items-center justify-between mb-1">
-                            <p className="uppercase tracking-widest text-sm text-dark-gray font-semibold">
+                            <p className={`${typography.textLg} uppercase tracking-[0.04em]  text-dark-gray font-arizona-light`}>
                                 Room {i + 1}
                             </p>
 
@@ -179,7 +179,7 @@ export default function RoomsAndGuests({
                         value={promo}
                         onChange={(e) => setPromo(e.target.value)}
                         placeholder="Promo Code"
-                        className="flex-1 w-full border-b border-black/35 py-2 text-sm  text-dark-gray focus:outline-0"
+                        className="flex-1 w-full border-b border-black/35 py-2 text-xs lg:text-sm  font-arizona-sans-regular   text-dark-gray focus:outline-0"
                     />
 
                     {iataOpen && (
@@ -197,7 +197,7 @@ export default function RoomsAndGuests({
             {/* Fixed CTA */}
             <div className="pt-4 mt-auto bg-white">
                 <button onClick={handleCheckAvailability}
-                    className="w-full bg-primary text-white uppercase tracking-widest text-xs h-10 rounded-xs  hover:bg-primary transition-colors font-semibold cursor-pointer">
+                    className={`w-full bg-primary text-white uppercase tracking-[0.15em]  h-10 rounded-xs  hover:bg-primary transition-colors font-arizona-sans-regular text-xs lg:text-sm cursor-pointer`}>
                     Check Availability
                 </button>
             </div>

@@ -31,7 +31,17 @@
   --color-pale-green: var(--pale-green);
   --color-off-white: var(--off-white);
   --font-arizona: var(--font-arizona);
+  --font-arizona-regular: var(--font-arizona-regular);
+  --font-arizona-sans-regular: var(--font-arizona-sans-regular);
+  --font-arizona-light: var(--font-arizona-light);
   --font-nobel: var(--font-nobel);
+  --font-josefin-sans: var(--font-josefin-sans);
+  --font-lato: var(--font-lato);
+  --font-noto-sans-jp: var(--font-noto-sans-jp);
+  --font-maven-pro: var(--font-maven-pro);
+  --font-nunito: var(--font-nunito);
+  --font-oxygen: var(--font-oxygen);
+  --font-roboto: var(--font-roboto);
 }
 
 
@@ -47,7 +57,47 @@ body {
     font-family: var(--font-arizona);
   }
 
+  .font-arizona-regular {
+    font-family: var(--font-arizona-regular);
+  }
+
+  .font-arizona-sans-regular {
+    font-family: var(--font-arizona-sans-regular);
+  }
+
+  .font-arizona-light{
+    font-family: var(--font-arizona-light);
+  }
+
   .font-nobel {
     font-family: var(--font-nobel);
+  }
+
+  .font-josefin-sans {
+    font-family: var(--font-josefin-sans);
+  }
+
+  .font-lato {
+    font-family: var(--font-lato);
+  }
+
+  .font-noto-sans-jp {
+    font-family: var(--font-noto-sans-jp);
+  }
+
+  .font-maven-pro {
+    font-family: var(--font-maven-pro);
+  }
+
+  .font-nunito {
+    font-family: var(--font-nunito);
+  }
+
+  .font-oxygen {
+    font-family: var(--font-oxygen);
+  }
+
+  .font-roboto {
+    font-family: var(--font-roboto);
   }
 }
