@@ -147,7 +147,7 @@ export default function GuestPaymentSection() {
         </div>
 
         {/* ── Right column: summary card ── */}
-        <aside className="w-full shadow-[-1px_4px_4px_0px_#00000040] sticky top-32 self-start">
+        <aside className="w-full shadow-[-1px_4px_4px_0px_#00000040] lg:sticky lg:top-32 lg:self-start">
           <div className="bg-white shadow-sm">
             {/* Room image */}
             <img

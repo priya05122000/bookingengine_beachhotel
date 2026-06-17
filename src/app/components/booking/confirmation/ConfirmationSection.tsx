@@ -4,6 +4,7 @@ import { typography } from "@/src/lib/typography";
 import { useRef, useState } from "react";
 import InvoicePreview from "./InvoicePreview";
 import { downloadInvoice } from "./invoicePdf";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export default function ConfirmationSection() {
@@ -297,44 +298,76 @@ export default function ConfirmationSection() {
 
         {/* ── Explore More ── */}
         <div className="bg-white px-6 py-8">
+          {/* <h3
+            className={`text-center ${typography.textThXl} font-bold text-primary mb-6`}
+          >
+            Explore More For Your Hotel Room
+          </h3> */}
+          {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="shadow-[-1px_4px_4px_0px_#00000040]">
+                <img
+                  src="/images/Rectangle.png"
+                  alt={`explore-${i}`}
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-3">
+                  <p className="text-sm font-bold text-dark-gray">
+                    SPA &amp; WELLNESS
+                  </p>
+                  <p className="text-sm text-dark-gray mt-0.5">
+                    relax &amp; rejuvenate
+                  </p>
+                  <button className="text-sm text-primary mt-2">
+                    Explore →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div> */}
 
-          <div className="grid grid-cols-5 gap-5">
-            <div className="shadow-[-1px_4px_4px_0px_#00000040] col-span-2">
-              <img
+          <div className="grid sm:grid-cols-5 gap-5">
+            <div className="shadow-[-1px_4px_4px_0px_#00000040] h-64 sm:col-span-2">
+              <Image
                 src="/images/Rectangle.png"
                 alt={`explore-1`}
+                width={400}
+                height={400}
                 className="w-full h-64 object-cover"
+                loading="eager"
+                priority
               />
             </div>
             <div className="p-3 col-span-3 font-arizona-sans-regular">
-              <div>
-                <p className={`${typography.textXl} tracking-widest text-dark-gray uppercase `}
-                >
-                  SPA &amp; WELLNESS
-                </p>
-                <p className="text-xs lg:text-sm text-dark-gray mb-2">
-                  relax &amp; rejuvenate
-                </p>
-                <p className="text-sm lg:text-base font-arizona-light">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Impedit illum nostrum animi illo repudiandae nulla error,
-                  delectus corrupti, voluptatibus minima reprehenderit nisi a
-                  omnis magnam mollitia optio ipsa provident. Pariatur aliquid
-                  doloremque fugiat ducimus laborum mollitia facilis,
-                  repellendus quaerat nostrum maxime omnis neque totam doloribus
-                  maiores laboriosam dolores dolorem sed!
-                </p>
-              </div>
+              <div className="sm:col-span-3">
+                <div>
+                  <p className={`${typography.textXl} tracking-widest text-dark-gray uppercase `}
+                  >
+                    SPA &amp; WELLNESS
+                  </p>
+                  <p className="text-xs lg:text-sm text-dark-gray mb-2">
+                    relax &amp; rejuvenate
+                  </p>
+                  <p className="text-sm lg:text-base font-arizona-light text-justify">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Impedit illum nostrum animi illo repudiandae nulla error,
+                    delectus corrupti, voluptatibus minima reprehenderit nisi a
+                    omnis magnam mollitia optio ipsa provident. Pariatur aliquid
+                    doloremque fugiat ducimus laborum mollitia facilis,
+                    repellendus quaerat nostrum maxime omnis neque totam doloribus
+                    maiores laboriosam dolores dolorem sed!
+                  </p>
+                </div>
 
-              <button className=" bg-primary text-white px-4 mt-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center"
-              >Explore <ArrowRight className="w-4 h-4" /></button>
+                <button className=" bg-primary text-white px-4 mt-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center"
+                >Explore <ArrowRight className="w-4 h-4" /></button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ── PREVIEW MODAL ── opens when user clicks "Preview Invoice" */}
-      {/* {showInvoicePreview && (
+        {/* ── PREVIEW MODAL ── opens when user clicks "Preview Invoice" */}
+        {/* {showInvoicePreview && (
         <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 p-4">
           <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-sm shadow-lg">
             <button
@@ -348,16 +381,17 @@ export default function ConfirmationSection() {
         </div>
       )} */}
 
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          left: "-9999px",
-          top: 0,
-          width: "794px",
-        }}
-      >
-        <InvoicePreview ref={invoiceRef} />
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            top: 0,
+            width: "794px",
+          }}
+        >
+          <InvoicePreview ref={invoiceRef} />
+        </div>
       </div>
     </div>
   );
