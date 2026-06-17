@@ -135,7 +135,7 @@ export default function PriceSidebar({
                     }),
                   )
                 }
-                className="w-full bg-[#1b2b7a] text-white px-4 h-10 rounded-xs text-sm font-semibold"
+                className="w-full bg-[#1b2b7a] text-white px-4 h-10 rounded-xs text-sm font-semibold cursor-pointer"
               >
                 PROCEED
               </button>
@@ -146,9 +146,9 @@ export default function PriceSidebar({
 
       <div className="bg-light-white rounded-xs shadow-[1px_4px_4px_0px_#00000040] p-4">
         <div className="text-sm font-semibold  mb-3 block">
-          <Link href="/signin" className="mr-1 underline underline-offset-4 text-primary hover:text-primary transition-colors">LOGIN</Link>
+          <Link href="/signin" className="mr-1 underline underline-offset-4 text-primary hover:text-primary transition-colors cursor-pointer">LOGIN</Link>
           or
-          <Link href="/signup" className="ml-1 underline underline-offset-4 text-primary hover:text-primary transition-colors">
+          <Link href="/signup" className="ml-1 underline underline-offset-4 text-primary hover:text-primary transition-colors cursor-pointer">
             SIGN UP
           </Link>
         </div>

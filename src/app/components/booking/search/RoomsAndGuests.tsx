@@ -42,14 +42,14 @@ function Counter({
                 <button
                     onClick={onDec}
                     disabled={value <= min}
-                    className="w-7 h-7 flex items-center justify-center text-primary disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors"
+                    className="w-7 h-7 flex items-center justify-center text-primary cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors"
                 >
                     <Minus size={12} />
                 </button>
                 <span className="text-sm text-primary w-4 text-center font-medium">{value}</span>
                 <button
                     onClick={onInc}
-                    className="w-7 h-7  flex items-center justify-center text-primary hover:bg-gray transition-colors"
+                    className="w-7 h-7  flex items-center justify-center text-primary cursor-pointer hover:bg-gray transition-colors"
                 >
                     <Plus size={12} />
                 </button>
@@ -122,7 +122,7 @@ export default function RoomsAndGuests({
                                     type="button"
                                     onClick={() => removeRoom(i)}
                                     aria-label={`Remove room ${i + 1}`}
-                                    className="flex h-6 w-6 items-center justify-center rounded-full text-silver hover:text-red-500 transition-colors"
+                                    className="flex h-6 w-6 items-center justify-center rounded-full text-silver hover:text-red-500 transition-colors cursor-pointer"
                                 >
                                     <X size={14} />
                                 </button>
@@ -197,7 +197,7 @@ export default function RoomsAndGuests({
             {/* Fixed CTA */}
             <div className="pt-4 mt-auto bg-white">
                 <button onClick={handleCheckAvailability}
-                    className="w-full bg-primary text-white uppercase tracking-widest text-xs h-10 rounded-xs  hover:bg-primary transition-colors font-semibold">
+                    className="w-full bg-primary text-white uppercase tracking-widest text-xs h-10 rounded-xs  hover:bg-primary transition-colors font-semibold cursor-pointer">
                     Check Availability
                 </button>
             </div>

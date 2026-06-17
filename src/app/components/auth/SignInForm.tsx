@@ -33,7 +33,7 @@ function EmailStep({
 
       <button
         type="submit"
-        className="mt-4 w-full bg-primary h-10 text-sm tracking-wider text-white"
+        className="mt-4 w-full bg-primary h-10 text-sm tracking-wider text-white cursor-pointer"
       >
         Continue
       </button>
@@ -75,7 +75,7 @@ function PasswordStep({
         <button
           type="button"
           onClick={onBack}
-          className="mt-2 w-full text-right text-xs text-primary"
+          className="mt-2 w-full text-right text-xs text-primary cursor-pointer"
         >
           Change
         </button>
@@ -95,7 +95,7 @@ function PasswordStep({
             <button
               type="button"
               onClick={toggleShowPassword}
-              className="text-dark-gray"
+              className="text-dark-gray cursor-pointer"
               aria-pressed={showPassword}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
@@ -108,7 +108,7 @@ function PasswordStep({
       <div>
         <button
           type="submit"
-          className="w-full bg-primary h-10 text-sm tracking-wider text-white"
+          className="w-full bg-primary h-10 text-sm tracking-wider text-white cursor-pointer"
         >
           Login
         </button>
@@ -120,7 +120,7 @@ function PasswordStep({
         <button
           type="button"
           onClick={onSignInWithCode}
-          className="w-full border border-primary h-10 text-sm tracking-wider text-primary hover:bg-gray-50 transition-colors"
+          className="w-full border border-primary h-10 text-sm tracking-wider text-primary hover:bg-gray-50 transition-colors cursor-pointer"
         >
           Sign in with a code
         </button>
@@ -198,7 +198,7 @@ export default function SignInForm() {
 
       <p className="mt-6 text-center text-sm text-dark-gray">
         Don't Have An Account?{" "}
-        <Link href="/signup" className="text-primary hover:underline">
+        <Link href="/signup" className="text-primary hover:underline cursor-pointer">
           Register
         </Link>
       </p>

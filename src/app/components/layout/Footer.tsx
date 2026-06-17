@@ -58,7 +58,7 @@ function FooterLinkList({ links }: { links: string[] }) {
                 <li key={link}>
                     <Link
                         href="#"
-                        className={`text-white transition-colors hover:text-accent text-sm`}
+                        className={`text-white transition-colors hover:text-accent text-sm cursor-pointer`}
                     >
                         {link}
                     </Link>
@@ -79,7 +79,7 @@ function SocialButton({
         <a
             href={href}
             aria-label="social"
-            className="flex items-center justify-center text-white transition hover:text-accent"
+            className="flex items-center justify-center text-white transition hover:text-accent cursor-pointer"
         >
             {children}
         </a>

@@ -23,7 +23,7 @@ export default function GuestPaymentSection() {
                 Guest Information
               </h3>
               <Link href="/sigin">
-                <button className="text-sm text-dark-gray border border-primary px-3 py-1 rounded-xs">
+                <button className="text-sm text-dark-gray border border-primary px-3 py-1 rounded-xs cursor-pointer">
                   Sign in
                 </button>
               </Link>
@@ -79,7 +79,7 @@ export default function GuestPaymentSection() {
                 >
                   By completing this reservation you are accepting our{" "}
                   <Link
-                    href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/terms-and-conditions`}
+                    href={`${process.env.NEXT_PUBLIC_SITE_URL}/terms-and-conditions`}
                     className="text-primary underline cursor-pointer"
                   >
                     Terms &amp; Conditions
@@ -253,7 +253,7 @@ export default function GuestPaymentSection() {
               }),
             )
           }
-          className="w-full sm:w-[320px] bg-primary text-white h-10 rounded-xs text-xs font-semibold tracking-wide"
+          className="w-full sm:w-[320px] bg-primary text-white h-10 rounded-xs text-xs font-semibold tracking-wide cursor-pointer"
         >
           BOOK NOW
         </button>

@@ -78,7 +78,7 @@ export default function SelectRoomSection({
                     <button
                         // onClick={() => setShowPackages(false)}
                         onClick={onEdit}
-                        className="text-xs uppercase tracking-wide px-4 h-8 border border-primary text-primary rounded-xs "
+                        className="text-xs uppercase tracking-wide px-4 h-8 border border-primary text-primary rounded-xs cursor-pointer"
                     >
                         Edit
                     </button>
@@ -98,7 +98,7 @@ export default function SelectRoomSection({
                             />
                             <button
                                 onClick={() => setShowDetails(true)}
-                                className="absolute top-4 right-4 backdrop-blur-md bg-accent/51 text-white text-xs font-semibold px-3 py-1 rounded"
+                                className="absolute top-4 right-4 backdrop-blur-md bg-accent/51 text-white text-xs font-semibold px-3 py-1 rounded cursor-pointer"
                             >
                                 View Details
                             </button>
@@ -132,7 +132,7 @@ export default function SelectRoomSection({
 
                                 <button
                                     onClick={onSelectPackage}
-                                    className={`mt-2 bg-primary text-white px-4 h-10 rounded-xs  uppercase text-sm tracking-wide`}
+                                    className={`mt-2 bg-primary text-white px-4 h-10 rounded-xs  uppercase text-sm tracking-wide cursor-pointer`}
                                 >
                                     Select Package
                                 </button>

@@ -27,7 +27,7 @@ export default function BookingStepBar({ steps, activeStep, enabledUpTo }: Booki
   ${isActive
                                 ? "text-primary border-b-4 border-primary"
                                 : isEnabled
-                                    ? "text-dark-gray border-b-4 border-black/54 hover:opacity-90"
+                                    ? "text-dark-gray border-b-4 border-black/54 hover:opacity-90 cursor-pointer"
                                     : "text-dark-gray/40 border-b-4 border-black/54 cursor-not-allowed"
                             }`}
                     >

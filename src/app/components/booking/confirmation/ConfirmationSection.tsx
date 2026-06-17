@@ -1,26 +1,24 @@
 "use client";
 
 import { typography } from "@/src/lib/typography";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import InvoicePreview from "./InvoicePreview";
 import { downloadInvoice } from "./invoicePdf";
 
 export default function ConfirmationSection() {
   const invoiceRef = useRef<HTMLDivElement | null>(null);
+  const [downloading, setDownloading] = useState(false);
 
-  const [showInvoicePreview, setShowInvoicePreview] = useState(false);
+  //   const [showInvoicePreview, setShowInvoicePreview] = useState(false);
 
   async function handleDownloadInvoice() {
-    await downloadInvoice(invoiceRef);
+    setDownloading(true);
+    try {
+      await downloadInvoice(invoiceRef);
+    } finally {
+      setDownloading(false);
+    }
   }
-
-  // async function handleDownloadInvoice() {
-  //     if (!invoiceRef.current) {
-  //         console.warn('Invoice element not mounted. Ensure hidden preview is rendered.');
-  //         return;
-  //     }
-  //     await downloadInvoice(invoiceRef);
-  // }
 
   return (
     <div className="py-8">
@@ -164,7 +162,7 @@ export default function ConfirmationSection() {
                     }),
                   );
                 }}
-                className="bg-primary rounded-xs text-white px-5 h-10 text-sm font-semibold uppercase tracking-wide shrink-0"
+                className="bg-primary rounded-xs text-white px-5 h-10 text-sm font-semibold uppercase tracking-wide shrink-0 cursor-pointer"
               >
                 Go To My Booking
               </button>
@@ -214,7 +212,7 @@ export default function ConfirmationSection() {
                   <p
                     className={`${typography.textBase} font-bold text-primary`}
                   >
-                    5
+                    5 Days
                   </p>
                 </div>
                 {/* You Selected */}
@@ -234,40 +232,55 @@ export default function ConfirmationSection() {
                   <h4
                     className={`${typography.textBase} font-bold text-primary mb-4`}
                   >
-                    Price Summery
+                    Price Summary
                   </h4>
 
-                  <div className="flex justify-between text-sm text-dark-gray">
-                    <span>Rooms &amp; offer</span>
+                  <div className="flex justify-between text-sm text-dark-gray mb-1">
+                    <div className="flex flex-col">
+                      <span>Rooms</span>
+                      <span className="text-xs text-dark-gray">
+                        (1 Day x 2 Nights)
+                      </span>
+                    </div>
+
                     <span>&#8377; 6,000</span>
                   </div>
+
+                  <div className="flex justify-between text-sm text-dark-gray mb-1">
+                    <div className="flex flex-col">
+                      <span>Offer</span>
+                      <span className="text-xs text-dark-gray">(10% off)</span>
+                    </div>
+
+                    <span>&#8377; 600</span>
+                  </div>
+
                   <div className="flex justify-between text-sm text-dark-gray">
                     <span>Extras</span>
                     <span>&#8377; 700</span>
                   </div>
+
+                  <div className="flex justify-between text-sm text-dark-gray mt-1">
+                    <span>Taxes & Fees</span>
+                    <span>&#8377; 1000</span>
+                  </div>
                 </div>
-                <div className="border-t border-gray-200 mt-4 pt-3 flex justify-between items-center">
-                  <span className="text-sm font-semibold text-primary">
+                <div className="border-t border-gray-400 mt-4 pt-3 flex justify-between items-center">
+                  <span className="text-base font-semibold text-primary">
                     Total amount paid
                   </span>
-                  <span className="text-sm font-bold text-primary">
-                    &#8377; 0000
+                  <span className="text-lg font-bold text-primary">
+                    &#8377; 8300
                   </span>
                 </div>
               </div>
               <div className="mt-3 flex gap-3">
                 <button
-                  onClick={() => setShowInvoicePreview(true)}
-                  className="flex-1 border border-primary text-primary h-10 rounded-xs text-xs font-bold uppercase tracking-widest"
-                >
-                  Preview Invoice
-                </button>
-
-                <button
                   onClick={handleDownloadInvoice}
-                  className="flex-1 bg-primary text-white h-10 rounded-xs text-xs font-bold uppercase tracking-widest"
+                  disabled={downloading}
+                  className="flex-1 bg-primary text-white h-10 rounded-xs text-xs font-bold uppercase tracking-widest cursor-pointer disabled:cursor-not-allowed"
                 >
-                  Download Invoice
+                  {downloading ? "Downloading Invoice..." : "Download Invoice"}
                 </button>
               </div>
             </div>
@@ -276,12 +289,12 @@ export default function ConfirmationSection() {
 
         {/* ── Explore More ── */}
         <div className="bg-white px-6 py-8">
-          <h3
+          {/* <h3
             className={`text-center ${typography.textThXl} font-bold text-primary mb-6`}
           >
             Explore More For Your Hotel Room
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          </h3> */}
+          {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {[1, 2, 3].map((i) => (
               <div key={i} className="shadow-[-1px_4px_4px_0px_#00000040]">
                 <img
@@ -302,12 +315,43 @@ export default function ConfirmationSection() {
                 </div>
               </div>
             ))}
+          </div> */}
+
+          <div className="grid grid-cols-5 gap-5">
+            <div className="shadow-[-1px_4px_4px_0px_#00000040] col-span-2">
+              <img
+                src="/images/Rectangle.png"
+                alt={`explore-1`}
+                className="w-full h-64 object-cover"
+              />
+            </div>
+            <div className="p-3 col-span-3">
+              <div>
+                <p className="text-lg font-bold text-dark-gray">
+                  SPA &amp; WELLNESS
+                </p>
+                <p className="text-sm text-dark-gray mb-2">
+                  relax &amp; rejuvenate
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Impedit illum nostrum animi illo repudiandae nulla error,
+                  delectus corrupti, voluptatibus minima reprehenderit nisi a
+                  omnis magnam mollitia optio ipsa provident. Pariatur aliquid
+                  doloremque fugiat ducimus laborum mollitia facilis,
+                  repellendus quaerat nostrum maxime omnis neque totam doloribus
+                  maiores laboriosam dolores dolorem sed!
+                </p>
+              </div>
+
+              <button className="text-sm bg-primary text-white mt-4 py-2 px-3 cursor-pointer">Explore →</button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* ── PREVIEW MODAL ── opens when user clicks "Preview Invoice" */}
-      {showInvoicePreview && (
+      {/* {showInvoicePreview && (
         <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 p-4">
           <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-sm shadow-lg">
             <button
@@ -316,21 +360,18 @@ export default function ConfirmationSection() {
             >
               ✕
             </button>
-            {/* No ref here — visual preview only, not used for PDF capture */}
             <InvoicePreview />
           </div>
         </div>
-      )}
+      )} */}
 
-      {/* ── HIDDEN INVOICE ── always mounted off-screen so invoiceRef.current is never null */}
-      {/* html2canvas needs a real DOM node with layout; display:none won't work */}
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
           left: "-9999px",
           top: 0,
-          width: "794px" /* ≈ A4 at 96 dpi */,
+          width: "794px",
         }}
       >
         <InvoicePreview ref={invoiceRef} />

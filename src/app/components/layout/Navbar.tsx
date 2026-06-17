@@ -10,7 +10,7 @@ export default function Navbar() {
             <div className="py-2 bg-white flex justify-end px-4 lg:px-12 ">
                 <Link
                     href="/signin"
-                    className="text-sm text-primary border flex items-center border-primary rounded-xs  px-4 h-10 hover:bg-primary  hover:text-white transition"
+                    className="text-sm text-primary border flex items-center border-primary rounded-xs  px-4 h-10 hover:bg-primary  hover:text-white transition cursor-pointer"
                 >
                     Login / Signup
                 </Link>
@@ -20,7 +20,7 @@ export default function Navbar() {
                 <Link href="https://thebeachhotel.in"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-center">
+                    className="text-center cursor-pointer">
                     <h1 className="text-white uppercase tracking-[0.25em] text-2xl font-serif">
                         The Beach Hotel
                     </h1>

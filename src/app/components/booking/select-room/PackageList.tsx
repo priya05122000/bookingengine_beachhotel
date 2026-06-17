@@ -83,7 +83,7 @@ export default function PackageList({
                             </div>
                             <div className='space-y-1 relative '>
                                 <button
-                                    className="bg-primary border  text-white px-3 py-1 rounded-xs text-sm"
+                                    className="bg-primary border  text-white px-3 py-1 rounded-xs text-sm cursor-pointer"
                                     onClick={() => setOpenQtyFor(pkg.id)}
                                 >
                                     Add Room
@@ -93,7 +93,7 @@ export default function PackageList({
                                         <div className="absolute top-full  right-0 z-20 w-48 bg-white border border-primary/32 rounded-xs   px-4 pb-4 pt-2 text-sm shadow-[-1px_4px_4px_0px_#00000040]">
                                             <button
                                                 aria-label="Close"
-                                                className="text-dark-gray text-end w-full mb-3 hover:text-dark-gray text-lg leading-none"
+                                                className="text-dark-gray text-end w-full mb-3 hover:text-dark-gray text-lg leading-none cursor-pointer"
                                                 onClick={() => setOpenQtyFor(null)}
                                             >
                                                 ×
@@ -133,7 +133,7 @@ export default function PackageList({
 
                                             <div className="flex justify-start">
                                                 <button
-                                                    className="px-4 py-1 bg-primary text-white rounded-xs text-sm"
+                                                    className="px-4 py-1 bg-primary text-white rounded-xs text-sm cursor-pointer"
                                                     onClick={() => {
                                                         addPackage(pkg, liveQty.adults, liveQty.children);
                                                         setOpenQtyFor(null);

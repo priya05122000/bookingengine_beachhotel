@@ -86,7 +86,7 @@ export default function RoomDetailsModal({ onClose }: Props) {
 
             <button
               onClick={onClose}
-              className="text-xl text-dark-gray hover:text-black"
+              className="text-xl text-dark-gray hover:text-black cursor-pointer"
             >
               ✕
             </button>
@@ -142,7 +142,7 @@ export default function RoomDetailsModal({ onClose }: Props) {
                   <button
                     key={index}
                     onClick={() => setActiveImg(index)}
-                    className={`overflow-hidden transition-all duration-300 ${
+                    className={`overflow-hidden transition-all duration-300 cursor-pointer ${
                       activeImg === index
                         ? "opacity-50"
                         : "opacity-100"
@@ -171,7 +171,7 @@ export default function RoomDetailsModal({ onClose }: Props) {
                     >
                       <button
                         onClick={() => toggleSection(section.title)}
-                        className="w-full flex items-center justify-between py-5 text-left"
+                        className="w-full flex items-center justify-between py-5 text-left cursor-pointer"
                       >
                         <span className="text-xs font-semibold uppercase tracking-[0.15em]">
                           {section.title}

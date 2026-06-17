@@ -68,7 +68,7 @@ export default function CountryDropdown({
               return !prev;
             });
           }}
-          className="shrink-0 mr-3 focus:outline-none"
+          className="shrink-0 mr-3 focus:outline-none cursor-pointer"
         >
           <ChevronDown
             size={14}

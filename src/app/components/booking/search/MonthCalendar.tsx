@@ -174,7 +174,7 @@ export default function MonthCalendar({
             ${showPrev
                             ? prevDisabled
                                 ? "opacity-40 cursor-not-allowed"
-                                : "hover:text-primary"
+                                : "hover:text-primary cursor-pointer"
                             : "invisible"
                         }
         `}
@@ -191,7 +191,7 @@ export default function MonthCalendar({
                     className={`
         h-8 w-8 flex items-center justify-center
         transition-colors
-        ${showNext ? "hover:text-primary" : "invisible"}
+        ${showNext ? "hover:text-primary cursor-pointer" : "invisible"}
     `}
                 >
                     <ChevronRight size={16} />
