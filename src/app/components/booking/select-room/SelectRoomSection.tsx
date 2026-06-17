@@ -7,7 +7,7 @@ import PackageList from './PackageList';
 import PriceSidebar from './PriceSidebar';
 import RoomDetailsModal from './RoomDetailsModal';
 import { typography } from '@/src/lib/typography';
-import { Flower2, Sofa, Sunset } from 'lucide-react';
+import { Flower2, Sofa, Wifi } from 'lucide-react';
 
 type Props = {
     showPackages: boolean;
@@ -29,12 +29,10 @@ export default function SelectRoomSection({
         })[]
     >([]);
     const [openQtyFor, setOpenQtyFor] = React.useState<string | null>(null);
-    const [qtyAdults, setQtyAdults] = React.useState(1);
-    const [qtyChildren, setQtyChildren] = React.useState(0);
     const [promo, setPromo] = React.useState('');
 
     const packages: PackageItem[] = [
-        { id: 'p1', title: 'Economy', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included' },
+        { id: 'p1', title: 'ECONOMY', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included' },
         { id: 'p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: 'Breakfast Included' },
         { id: 'p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: 'Breakfast Included' },
     ];
@@ -56,18 +54,9 @@ export default function SelectRoomSection({
         }
     }, [showPackages]);
 
-    function addPackage(pkg: PackageItem) {
-        setSelected((s) => [
-            ...s,
-            {
-                ...pkg,
-                adults: qtyAdults,
-                children: qtyChildren,
-            },
-        ]);
+    function addPackage(pkg: PackageItem, adults: number, children: number) {
+        setSelected((s) => [...s, { ...pkg, adults, children }]);
         setOpenQtyFor(null);
-        setQtyAdults(1);
-        setQtyChildren(0);
     }
 
     function removePackage(id: string) {
@@ -131,9 +120,9 @@ export default function SelectRoomSection({
                                         WALKOUT SPACE
                                     </li>
                                     <li className="flex items-center gap-2">
-                                        <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Sunset size={22} strokeWidth={1.5} />
+                                        <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Wifi size={22} strokeWidth={1.5} />
                                         </span>
-                                        SUNSET VIEW POINT
+                                        FREE WIFI
                                     </li>
                                 </ul>
 
@@ -158,10 +147,6 @@ export default function SelectRoomSection({
                             selected={selected}
                             openQtyFor={openQtyFor}
                             setOpenQtyFor={setOpenQtyFor}
-                            qtyAdults={qtyAdults}
-                            setQtyAdults={setQtyAdults}
-                            qtyChildren={qtyChildren}
-                            setQtyChildren={setQtyChildren}
                             addPackage={addPackage}
                         />
                     )}
