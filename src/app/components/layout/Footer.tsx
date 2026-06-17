@@ -110,6 +110,7 @@ export default function Footer() {
                     alt={item.label}
                     width={28}
                     height={28}
+                    className="w-7 h-7"
                   />
                 </Link>
               ))}

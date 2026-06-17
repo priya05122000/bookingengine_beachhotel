@@ -4,6 +4,7 @@ import { typography } from "@/src/lib/typography";
 import { useRef, useState } from "react";
 import InvoicePreview from "./InvoicePreview";
 import { downloadInvoice } from "./invoicePdf";
+import Image from "next/image";
 
 export default function ConfirmationSection() {
   const invoiceRef = useRef<HTMLDivElement | null>(null);
@@ -317,15 +318,19 @@ export default function ConfirmationSection() {
             ))}
           </div> */}
 
-          <div className="grid grid-cols-5 gap-5">
-            <div className="shadow-[-1px_4px_4px_0px_#00000040] col-span-2">
-              <img
+          <div className="grid sm:grid-cols-5 gap-5">
+            <div className="shadow-[-1px_4px_4px_0px_#00000040] h-64 sm:col-span-2">
+              <Image
                 src="/images/Rectangle.png"
                 alt={`explore-1`}
+                width={400}
+                height={400}
                 className="w-full h-64 object-cover"
+                loading="eager"
+                priority
               />
             </div>
-            <div className="p-3 col-span-3">
+            <div className="sm:col-span-3">
               <div>
                 <p className="text-lg font-bold text-dark-gray">
                   SPA &amp; WELLNESS
@@ -333,7 +338,7 @@ export default function ConfirmationSection() {
                 <p className="text-sm text-dark-gray mb-2">
                   relax &amp; rejuvenate
                 </p>
-                <p>
+                <p className="text-justify">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Impedit illum nostrum animi illo repudiandae nulla error,
                   delectus corrupti, voluptatibus minima reprehenderit nisi a
