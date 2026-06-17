@@ -4,6 +4,7 @@ import { typography } from "@/src/lib/typography";
 import { useRef, useState } from "react";
 import InvoicePreview from "./InvoicePreview";
 import { downloadInvoice } from "./invoicePdf";
+import { ArrowRight } from "lucide-react";
 
 export default function ConfirmationSection() {
   const invoiceRef = useRef<HTMLDivElement | null>(null);
@@ -40,11 +41,11 @@ export default function ConfirmationSection() {
             </div>
             <div>
               <h2
-                className={`${typography.textThXl} font-bold text-primary leading-snug`}
+                className={`${typography.textThXl} font-arizona-sans-regular text-primary leading-snug`}
               >
                 Your Booking Is Confirmed
               </h2>
-              <p className="text-xs text-dark-gray mt-1">
+              <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
                 Thank you for choosing the beach hotel
                 <br />
                 we look forward to hosting you
@@ -57,13 +58,13 @@ export default function ConfirmationSection() {
 
           {/* Right: booking reference */}
           <div className="sm:pl-6 ">
-            <p className="text-xs text-dark-gray tracking-wide">
+            <p className="text-xs font-arizona-light text-dark-gray tracking-wide">
               Booking reference
             </p>
-            <p className="text-2xl font-bold text-primary leading-tight mt-0.5">
+            <p className={` font-arizona-regular tracking-wider font-bold text-primary leading-tight mt-0.5 ${typography.textTwoXl}`}>
               LB4567854
             </p>
-            <p className="text-xs text-dark-gray mt-1">
+            <p className="text-xs font-arizona-light text-dark-gray mt-1">
               A confirmation email has been sent to
               <br />
               thebeachhotel@gmail.com
@@ -77,65 +78,65 @@ export default function ConfirmationSection() {
           <div className="w-full overflow-hidden">
             <div className="px-8 pt-8 pb-6 border border-primary bg-white">
               <h3
-                className={`${typography.textThXl} font-bold text-dark-gray mb-8`}
+                className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase mb-8`}
               >
                 Booking Details
               </h3>
               <div className="w-2/3">
                 {/* Row 1: GUEST | CHECK-IN | CHECK-OUT */}
-                <div className="grid grid-cols-3 gap-6 mb-8">
+                <div className="grid grid-cols-3 gap-6 mb-8 font-arizona-sans-regular text-xs lg:text-sm">
                   <div>
-                    <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">
+                    <p className=" text-dark-gray uppercase tracking-widest mb-2">
                       Guest
                     </p>
-                    <p className="text-sm font-semibold text-primary">
+                    <p className="  text-primary">
                       Nuva rey
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">
+                    <p className=" text-dark-gray uppercase tracking-widest mb-2">
                       Check - In
                     </p>
-                    <p className="text-sm font-semibold text-primary">
+                    <p className="  text-primary">
                       Sun, 22 May 2026
                     </p>
-                    <p className="text-xs text-dark-gray mt-1">From 6:00 pm</p>
+                    <p className=" text-dark-gray mt-1">From 6:00 pm</p>
                   </div>
                   <div>
-                    <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">
+                    <p className="text-dark-gray uppercase tracking-widest mb-2">
                       Check - Out
                     </p>
-                    <p className="text-sm font-semibold text-primary">
+                    <p className=" text-primary">
                       Mon, 23 May 2026
                     </p>
-                    <p className="text-xs text-dark-gray mt-1">by 6:00 pm</p>
+                    <p className="text-dark-gray mt-1">by 6:00 pm</p>
                   </div>
                 </div>
 
                 {/* Row 2: YOUR RESERVATION | PHONE | EMAIL */}
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-3 gap-6 mb-8 font-arizona-sans-regular text-xs lg:text-sm">
                   <div>
-                    <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">
+                    <p className="text-dark-gray uppercase tracking-widest mb-2">
                       Your Reservation
                     </p>
-                    <p className="text-sm font-semibold text-primary">
+                    <p className=" text-primary">
                       3 nights, 1<br />
                       apartment
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">
+                    <p className="text-dark-gray uppercase tracking-widest mb-2">
                       Phone
                     </p>
-                    <p className="text-sm font-semibold text-primary">
+                    <p className=" text-primary">
                       +91 65478 98756
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-dark-gray uppercase tracking-widest mb-2">
+                    <p className=" text-dark-gray uppercase tracking-widest mb-2">
                       Email
                     </p>
-                    <p className="text-sm text-primary">nuvaray26@gmail.com</p>
+                    <p className="text-primary">nuvaray26@gmail.com</p>
                   </div>
                 </div>
               </div>
@@ -144,10 +145,11 @@ export default function ConfirmationSection() {
             {/* Bottom strip */}
             <div className="bg-white border border-primary px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-2">
               <div>
-                <p className="text-sm font-bold text-dark-gray uppercase tracking-wide">
+                <p className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
+                >
                   Manage Your Booking N The Go
                 </p>
-                <p className="text-sm text-dark-gray mt-0.5">
+                <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
                   View modify or cancel your booking anytime
                 </p>
               </div>
@@ -162,7 +164,7 @@ export default function ConfirmationSection() {
                     }),
                   );
                 }}
-                className="bg-primary rounded-xs text-white px-5 h-10 text-sm font-semibold uppercase tracking-wide shrink-0 cursor-pointer"
+                className=" bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer"
               >
                 Go To My Booking
               </button>
@@ -170,43 +172,43 @@ export default function ConfirmationSection() {
           </div>
 
           {/* Right: Reservation & Price summary */}
-          <aside className="space-y-4 w-full bg-white shadow-[-1px_4px_4px_0px_#00000040]">
+          <aside className="space-y-4 w-full bg-white shadow-[-1px_4px_4px_0px_#00000040] ">
             {/* Reservation Summery */}
-            <div className="p-2">
+            <div className="p-3">
               <h4
-                className={`${typography.textBase} font-bold text-primary mb-4`}
+                className={`${typography.textBase} font-bold text-primary mb-4 font-arizona-light tracking-wider`}
               >
                 Reservation Summery
               </h4>
-              <div className="bg-light-white shadow-[-1px_4px_4px_0px_#00000040] p-4 space-y-4">
+              <div className="bg-light-white font-arizona-sans-regular shadow-[-1px_4px_4px_0px_#00000040]  p-4 space-y-4">
                 {/* Check-in / Check-out */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-[10px] text-dark-gray uppercase tracking-widest mb-1">
+                <div className="grid grid-cols-2 gap-4  ">
+                  <div className="space-y-1">
+                    <p className="text-dark-gray uppercase tracking-widest text-xs lg:text-sm">
                       Check - In
                     </p>
-                    <p className="text-sm font-semibold text-primary">
+                    <p className="text-xs text-primary">
                       Mon, 23 May 2026
                     </p>
-                    <p className="text-[10px] text-dark-gray mt-0.5">
+                    <p className="text-dark-gray mt-0.5 text-xs">
                       From 6:00 pm
                     </p>
                   </div>
-                  <div>
-                    <p className="text-[10px] text-dark-gray uppercase tracking-widest mb-1">
+                  <div className="space-y-1">
+                    <p className="text-dark-gray uppercase tracking-widest  text-xs lg:text-sm">
                       Check - Out
                     </p>
-                    <p className="text-sm font-semibold text-primary">
+                    <p className="text-primary text-xs">
                       Mon, 23 May 2026
                     </p>
-                    <p className="text-[10px] text-dark-gray mt-0.5">
+                    <p className="text-dark-gray mt-0.5 text-xs">
                       by 6:00 pm
                     </p>
                   </div>
                 </div>
                 {/* Total Length of Stay */}
-                <div>
-                  <p className="text-[10px] text-dark-gray uppercase tracking-widest mb-1">
+                <div className="space-y-1">
+                  <p className="text-dark-gray uppercase tracking-widest  text-xs lg:text-sm">
                     Total Length Of Stay
                   </p>
                   <p
@@ -216,29 +218,34 @@ export default function ConfirmationSection() {
                   </p>
                 </div>
                 {/* You Selected */}
-                <div>
-                  <p className="text-[10px] text-dark-gray uppercase tracking-widest mb-1">
+                <div className="space-y-1">
+                  <p className="text-dark-gray uppercase tracking-widest text-xs lg:text-sm">
                     You Selected
                   </p>
-                  <p className="text-sm font-semibold text-primary">
-                    king bed economy
+                  <p
+                    className={`${typography.textBase} font-bold text-primary`}
+                  >
+                    Sands Premier Room - Sea View
+                  </p>
+                  <p className="text-xs bg-accent/51 p-1 inline-block text-primary">
+                    Breakfast Included
                   </p>
                 </div>
               </div>
 
               {/* Price Summery */}
               <div className="bg-light-white shadow-[-1px_4px_4px_0px_#00000040] p-4 space-y-4 mt-3 ">
-                <div className="">
-                  <h4
-                    className={`${typography.textBase} font-bold text-primary mb-4`}
-                  >
-                    Price Summary
-                  </h4>
+                <h4
+                  className={`${typography.textBase} font-bold text-primary mb-4 font-arizona-light tracking-wider`}
+                >
+                  Price Summary
+                </h4>
 
-                  <div className="flex justify-between text-sm text-dark-gray mb-1">
+                <div className="space-y-4 text-xs lg:text-sm">
+                  <div className="flex justify-between  text-dark-gray">
                     <div className="flex flex-col">
                       <span>Rooms</span>
-                      <span className="text-xs text-dark-gray">
+                      <span className="text-dark-gray">
                         (1 Day x 2 Nights)
                       </span>
                     </div>
@@ -246,30 +253,31 @@ export default function ConfirmationSection() {
                     <span>&#8377; 6,000</span>
                   </div>
 
-                  <div className="flex justify-between text-sm text-dark-gray mb-1">
+                  <div className="flex justify-between text-dark-gray ">
                     <div className="flex flex-col">
                       <span>Offer</span>
-                      <span className="text-xs text-dark-gray">(10% off)</span>
+                      <span className="text-dark-gray">(10% off)</span>
                     </div>
 
                     <span>&#8377; 600</span>
                   </div>
 
-                  <div className="flex justify-between text-sm text-dark-gray">
+                  <div className="flex justify-between text-dark-gray">
                     <span>Extras</span>
                     <span>&#8377; 700</span>
                   </div>
 
-                  <div className="flex justify-between text-sm text-dark-gray mt-1">
+                  <div className="flex justify-between  text-dark-gray ">
                     <span>Taxes & Fees</span>
                     <span>&#8377; 1000</span>
                   </div>
                 </div>
-                <div className="border-t border-gray-400 mt-4 pt-3 flex justify-between items-center">
-                  <span className="text-base font-semibold text-primary">
-                    Total amount paid
+
+                <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-gray-700 text-base lg:text-lg font-arizona-light tracking-[0.04em] text-primary">
+                  <span>
+                    Total Amount Paid
                   </span>
-                  <span className="text-lg font-bold text-primary">
+                  <span >
                     &#8377; 8300
                   </span>
                 </div>
@@ -278,7 +286,7 @@ export default function ConfirmationSection() {
                 <button
                   onClick={handleDownloadInvoice}
                   disabled={downloading}
-                  className="flex-1 bg-primary text-white h-10 rounded-xs text-xs font-bold uppercase tracking-widest cursor-pointer disabled:cursor-not-allowed"
+                  className="w-full bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
                 >
                   {downloading ? "Downloading Invoice..." : "Download Invoice"}
                 </button>
@@ -289,33 +297,6 @@ export default function ConfirmationSection() {
 
         {/* ── Explore More ── */}
         <div className="bg-white px-6 py-8">
-          {/* <h3
-            className={`text-center ${typography.textThXl} font-bold text-primary mb-6`}
-          >
-            Explore More For Your Hotel Room
-          </h3> */}
-          {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="shadow-[-1px_4px_4px_0px_#00000040]">
-                <img
-                  src="/images/Rectangle.png"
-                  alt={`explore-${i}`}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-3">
-                  <p className="text-sm font-bold text-dark-gray">
-                    SPA &amp; WELLNESS
-                  </p>
-                  <p className="text-sm text-dark-gray mt-0.5">
-                    relax &amp; rejuvenate
-                  </p>
-                  <button className="text-sm text-primary mt-2">
-                    Explore →
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div> */}
 
           <div className="grid grid-cols-5 gap-5">
             <div className="shadow-[-1px_4px_4px_0px_#00000040] col-span-2">
@@ -325,15 +306,16 @@ export default function ConfirmationSection() {
                 className="w-full h-64 object-cover"
               />
             </div>
-            <div className="p-3 col-span-3">
+            <div className="p-3 col-span-3 font-arizona-sans-regular">
               <div>
-                <p className="text-lg font-bold text-dark-gray">
+                <p className={`${typography.textXl} tracking-widest text-dark-gray uppercase `}
+                >
                   SPA &amp; WELLNESS
                 </p>
-                <p className="text-sm text-dark-gray mb-2">
+                <p className="text-xs lg:text-sm text-dark-gray mb-2">
                   relax &amp; rejuvenate
                 </p>
-                <p>
+                <p className="text-sm lg:text-base font-arizona-light">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Impedit illum nostrum animi illo repudiandae nulla error,
                   delectus corrupti, voluptatibus minima reprehenderit nisi a
@@ -344,7 +326,8 @@ export default function ConfirmationSection() {
                 </p>
               </div>
 
-              <button className="text-sm bg-primary text-white mt-4 py-2 px-3 cursor-pointer">Explore →</button>
+              <button className=" bg-primary text-white px-4 mt-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center"
+              >Explore <ArrowRight className="w-4 h-4" /></button>
             </div>
           </div>
         </div>

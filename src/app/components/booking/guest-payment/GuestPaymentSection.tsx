@@ -178,7 +178,7 @@ export default function GuestPaymentSection() {
                       }),
                     );
                   }}
-                  className="text-xs lg:text-sm font-arizona-sans-regular text-primary cursor-pointer hover:border-b border-primary underline underline-offset-2 py-0.5 shrink-0"
+                  className="text-xs lg:text-sm font-arizona-sans-regular text-primary cursor-pointer  underline underline-offset-2 py-0.5 shrink-0"
                 >
                   EDIT
                 </button>
@@ -202,7 +202,7 @@ export default function GuestPaymentSection() {
                       }),
                     );
                   }}
-                  className="text-xs lg:text-sm font-arizona-sans-regular text-primary cursor-pointer hover:border-b border-primary underline underline-offset-2 py-0.5 shrink-0"
+                  className="text-xs lg:text-sm font-arizona-sans-regular text-primary cursor-pointer  underline underline-offset-2 py-0.5 shrink-0"
                 >
                   EDIT
                 </button>
@@ -236,10 +236,10 @@ export default function GuestPaymentSection() {
                   </span>
                 </div>
                 <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-gray-700 text-base lg:text-lg font-arizona-light tracking-[0.04em]">
-                  <span className=" font-semibold text-primary uppercase tracking-wide">
+                  <span className="  text-primary uppercase tracking-wide">
                     Total
                   </span>
-                  <span className=" font-extrabold text-primary">
+                  <span className=" text-primary">
                     INR <span className="text-lg">82,45,678</span>
                   </span>
                 </div>

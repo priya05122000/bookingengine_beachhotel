@@ -6,8 +6,10 @@ import {
   ChevronUp,
   ChevronLeft,
   ChevronRight,
+  Dot,
 } from "lucide-react";
 import Section from "../../common/Section";
+import { typography } from "@/src/lib/typography";
 
 type Props = {
   onClose: () => void;
@@ -80,7 +82,8 @@ export default function RoomDetailsModal({ onClose }: Props) {
         >
           {/* TOP HEADER */}
           <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b bg-white shrink-0">
-            <h2 className="text-sm md:text-base font-semibold uppercase tracking-[0.2em]">
+            <h2 className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
+            >
               Room Details
             </h2>
 
@@ -105,18 +108,7 @@ export default function RoomDetailsModal({ onClose }: Props) {
                   className="w-full h-full object-cover"
                 />
 
-                {/* Caption */}
-                {/* <div className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-white/95 p-4 w-[90%] max-w-65">
-                                    <p className="text-[11px] font-bold uppercase tracking-wide text-primary">
-                                        BED ROOM
-                                    </p>
 
-                                    <p className="text-[11px] text-dark-gray mt-2 leading-relaxed">
-                                        Dreaming of a luxury bedroom? Find 50+ bedroom interior design
-                                        ideas and makeover tips to turn your space into an elegant
-                                        sanctuary.
-                                    </p>
-                                </div> */}
 
                 {/* Navigation */}
                 <div className="absolute bottom-3 right-3 flex gap-2">
@@ -142,11 +134,10 @@ export default function RoomDetailsModal({ onClose }: Props) {
                   <button
                     key={index}
                     onClick={() => setActiveImg(index)}
-                    className={`overflow-hidden transition-all duration-300 cursor-pointer ${
-                      activeImg === index
-                        ? "opacity-50"
-                        : "opacity-100"
-                    }`}
+                    className={`overflow-hidden transition-all duration-300 cursor-pointer ${activeImg === index
+                      ? "opacity-50"
+                      : "opacity-100"
+                      }`}
                   >
                     <img
                       src={src}
@@ -167,13 +158,13 @@ export default function RoomDetailsModal({ onClose }: Props) {
                   return (
                     <div
                       key={section.title}
-                      className="border-b border-gray-200"
+                      className="border-b border-gray-200 font-arizona- text-xs lg:text-sm tracking-wider"
                     >
                       <button
                         onClick={() => toggleSection(section.title)}
                         className="w-full flex items-center justify-between py-5 text-left cursor-pointer"
                       >
-                        <span className="text-xs font-semibold uppercase tracking-[0.15em]">
+                        <span className=" font-semibold uppercase tracking-[0.15em]">
                           {section.title}
                         </span>
 
@@ -187,19 +178,19 @@ export default function RoomDetailsModal({ onClose }: Props) {
                       {isOpen && (
                         <div className="pb-5">
                           {section.items.length > 0 ? (
-                            <ul className="space-y-3">
+                            <ul className="space-y-1">
                               {section.items.map((item) => (
                                 <li
                                   key={item}
-                                  className="flex gap-2 text-sm text-dark-gray"
+                                  className="flex gap-2  text-dark-gray"
                                 >
-                                  <span>•</span>
+                                  <span><Dot /></span>
                                   <span>{item}</span>
                                 </li>
                               ))}
                             </ul>
                           ) : (
-                            <p className="text-sm text-dark-gray">
+                            <p className=" text-dark-gray">
                               No details available.
                             </p>
                           )}
