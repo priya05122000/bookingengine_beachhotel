@@ -1,9 +1,8 @@
+// ...existing code...
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { getMockPrice } from '@/src/lib/mockPrices';
 import { typography } from '@/src/lib/typography';
-
-
 
 interface MonthCalendarProps {
     year: number;
@@ -18,9 +17,12 @@ interface MonthCalendarProps {
     onPrev?: () => void;
     onNext?: () => void;
     prevDisabled?: boolean;
-    isDesktopSecondMonth?: boolean;
-}
 
+    // reusable options
+    selectingCheckOut?: boolean;
+    maxCheckoutDate?: Date | null;
+    className?: string;
+}
 
 // ================= CONSTANTS =================
 const MONTH_NAMES = [
@@ -72,37 +74,52 @@ function getCellState(
     return 'normal';
 }
 
-// ================= PRESENTATIONAL: DayCell =================
-function DayCell({ date, state, price, onClick }: {
+// ================= STYLES (reusable pieces) =================
+const styles = {
+    dayBase: 'flex flex-col items-center justify-center h-14 w-full select-none font-arizona-light text-center',
+    interactive: 'cursor-pointer hover:bg-gray transition-colors',
+    primaryBg: 'bg-primary hover:bg-primary',
+    primaryText: 'text-white ',
+    dateDefault: 'text-dark-gray text-[11px] lg:text-sm ',
+    datePast: 'text-[11px] lg:text-sm  text-silver/50',
+    dateDisabled: 'text-[11px] lg:text-sm  text-silver/40',
+    priceSmall: 'text-[11px]   leading-none mt-0.5',
+    priceMuted: 'text-silver',
+    pricePrimaryMuted: 'text-primary/60',
+};
+
+// ================= PRESENTATIONAL: DayCell (kept in-file) =================
+function DayCell({ date, state, price, onClick, ariaLabel }: {
     date: number;
     state: CellState;
     price: number | null;
     onClick: () => void;
+    ariaLabel?: string;
 }) {
-    const base = 'flex flex-col items-center justify-center h-14 w-full select-none';
+    const base = styles.dayBase;
 
     if (state === 'past') {
         return (
-            <div className={`${base} cursor-default font-arizona-light`}>
-                <span className="text-[11px] lg:text-sm text-silver/50">{date}</span>
+            <div className={`${base} cursor-default`} aria-label={ariaLabel}>
+                <span className={styles.datePast}>{date}</span>
             </div>
         );
     }
 
     if (state === 'disabled') {
         return (
-            <div className={`${base} cursor-not-allowed opacity-60 font-arizona-light`}>
-                <span className="text-[11px] lg:text-sm text-silver/40">{date}</span>
+            <div className={`${base} cursor-not-allowed opacity-60`} aria-label={ariaLabel}>
+                <span className={styles.dateDisabled}>{date}</span>
             </div>
         );
     }
 
     if (state === 'checkIn') {
         return (
-            <div className={`${base} bg-primary cursor-pointer font-arizona-light`} onClick={onClick}>
-                <span className="text-white text-[11px] lg:text-sm ">{date}</span>
+            <div className={`${base} ${styles.primaryBg} ${styles.interactive}`} onClick={onClick} aria-label={ariaLabel}>
+                <span className={styles.primaryText + ' text-[11px] lg:text-sm'}>{date}</span>
                 {price !== null && (
-                    <span className=" text-white  text-[10px] lg:text-xs leading-none mt-0.5">{'\u20B9'}{price}</span>
+                    <span className={styles.primaryText + ' ' + styles.priceSmall}>{'\u20B9'}{price}</span>
                 )}
             </div>
         );
@@ -110,29 +127,30 @@ function DayCell({ date, state, price, onClick }: {
 
     if (state === 'checkOut') {
         return (
-            <div className={`${base} bg-primary cursor-pointer font-arizona-light`} onClick={onClick}>
-                <span className="text-white text-[11px] lg:text-sm ">{date}</span>
-                <span className="text-[10px] text-white/80 leading-none mt-0.5">Check out</span>
+            <div className={`${base} ${styles.primaryBg} ${styles.interactive}`} onClick={onClick} aria-label={ariaLabel}>
+                <span className={styles.primaryText + ' text-[11px] lg:text-sm'}>{date}</span>
+                <span className={styles.primaryText + ' ' + styles.priceSmall}>Check out</span>
             </div>
         );
     }
 
     if (state === 'inRange') {
         return (
-            <div className={`${base}  cursor-pointer font-arizona-light`} onClick={onClick}>
-                <span className="text-dark-gray text-[11px] lg:text-sm ">{date}</span>
+            <div className={`${base} ${styles.interactive}`} onClick={onClick} aria-label={ariaLabel}>
+                <span className={styles.dateDefault}>{date}</span>
                 {price !== null && (
-                    <span className="text-[10px] lg:text-xs text-primary/60 leading-none mt-0.5">{'\u20B9'}{price}</span>
+                    <span className={styles.pricePrimaryMuted + ' ' + styles.priceSmall}>{'\u20B9'}{price}</span>
                 )}
             </div>
         );
     }
 
+    // normal
     return (
-        <div className={`${base} cursor-pointer hover:bg-gray transition-colors font-arizona-light `} onClick={onClick}>
-            <span className="text-dark-gray text-[11px] lg:text-sm  ">{date}</span>
+        <div className={`${base} ${styles.interactive}`} onClick={onClick} aria-label={ariaLabel}>
+            <span className={styles.dateDefault}>{date}</span>
             {price !== null && (
-                <span className=" text-silver text-[10px] lg:text-xs leading-none mt-0.5">{'\u20B9'}{price}</span>
+                <span className={styles.priceMuted + ' ' + styles.priceSmall}>{'\u20B9'}{price}</span>
             )}
         </div>
     );
@@ -152,6 +170,9 @@ export default function MonthCalendar({
     onPrev,
     onNext,
     prevDisabled,
+    selectingCheckOut,
+    maxCheckoutDate,
+    className,
 }: MonthCalendarProps) {
     // hide months before the current month (including earlier months in same year)
     if (
@@ -164,21 +185,18 @@ export default function MonthCalendar({
     const days = getCalendarDays(year, month);
 
     return (
-        <div className="flex-1 min-w-0">
+        <div className={`flex-1 min-w-0 ${className ?? ''}`}>
             <div className="flex items-center justify-between mb-6 px-2">
                 <button
                     onClick={onPrev}
                     disabled={prevDisabled}
-                    className={`
-            h-8 w-8 flex items-center justify-center
-            transition-colors
-            ${showPrev
-                            ? prevDisabled
-                                ? "opacity-40 cursor-not-allowed"
-                                : "hover:text-primary cursor-pointer"
-                            : "invisible"
-                        }
-        `}
+                    aria-label="previous-month"
+                    className={`h-8 w-8 flex items-center justify-center transition-colors ${showPrev
+                        ? prevDisabled
+                            ? "opacity-40 cursor-not-allowed"
+                            : "hover:text-primary cursor-pointer"
+                        : "invisible"
+                        }`}
                 >
                     <ChevronLeft size={16} />
                 </button>
@@ -189,11 +207,8 @@ export default function MonthCalendar({
 
                 <button
                     onClick={onNext}
-                    className={`
-        h-8 w-8 flex items-center justify-center
-        transition-colors
-        ${showNext ? "hover:text-primary cursor-pointer" : "invisible"}
-    `}
+                    aria-label="next-month"
+                    className={`h-8 w-8 flex items-center justify-center transition-colors ${showNext ? "hover:text-primary cursor-pointer" : "invisible"}`}
                 >
                     <ChevronRight size={16} />
                 </button>
@@ -201,7 +216,7 @@ export default function MonthCalendar({
 
             <div className="grid grid-cols-7 mb-1">
                 {DAY_HEADERS.map((d, i) => (
-                    <div key={i} className={`text-center font-arizona-light  ${typography.textSm} text-dark-gray tracking-wider h-10`}>
+                    <div key={i} className={`text-center font-arizona-light ${typography.textSm} text-dark-gray tracking-wider h-10`}>
                         {d}
                     </div>
                 ))}
@@ -210,7 +225,7 @@ export default function MonthCalendar({
             <div className="grid grid-cols-7">
                 {days.map((date, i) => {
                     if (!date) return <div key={i} className="h-10" />;
-                    const state = getCellState(date, today, checkIn, checkOut);
+                    const state = getCellState(date, today, checkIn, checkOut, selectingCheckOut, maxCheckoutDate);
                     const price = getMockPrice(date);
                     return (
                         <DayCell
@@ -218,7 +233,8 @@ export default function MonthCalendar({
                             date={date.getDate()}
                             state={state}
                             price={price}
-                            onClick={() => state !== 'past' && onDayClick(date)}
+                            onClick={() => state !== 'past' && state !== 'disabled' && onDayClick(date)}
+                            ariaLabel={`${MONTH_NAMES[month]} ${date.getDate()} ${year}`}
                         />
                     );
                 })}
@@ -226,3 +242,4 @@ export default function MonthCalendar({
         </div>
     );
 }
+// ...existing code...

@@ -23,7 +23,7 @@ export default function GuestPaymentSection() {
                 Guest Information
               </h3>
               <Link href="/sigin">
-                <button className="text-xs lg:text-sm text-dark-gray border border-primary px-3 py-1 font-arizona-sans-regular rounded-xs cursor-pointer">
+                <button className="text-xs lg:text-sm text-dark-gray border border-primary px-3 text-nowrap py-1 font-arizona-sans-regular rounded-xs cursor-pointer">
                   Sign in
                 </button>
               </Link>
@@ -75,7 +75,7 @@ export default function GuestPaymentSection() {
               </p>
 
               {/* Terms */}
-              <div className="flex items-center text-xs lg:text-sm font-arizona-light  justify-center gap-2">
+              <div className="flex items-start text-xs lg:text-sm font-arizona-light  justify-center gap-2">
                 <input type="checkbox" id="terms" className="mt-0.5 shrink-0" />
                 <label
                   htmlFor="terms"

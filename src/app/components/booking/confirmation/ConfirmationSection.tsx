@@ -77,15 +77,15 @@ export default function ConfirmationSection() {
         <div className="flex  flex-col lg:grid lg:grid-cols-[1fr_300px] gap-5 items-start">
           {/* Left: Booking Details */}
           <div className="w-full overflow-hidden">
-            <div className="px-8 pt-8 pb-6 border border-primary bg-white">
+            <div className="px-8 py-8 border border-primary bg-white">
               <h3
                 className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase mb-8`}
               >
                 Booking Details
               </h3>
-              <div className="w-2/3">
+              <div className="w-full xl:w-2/3">
                 {/* Row 1: GUEST | CHECK-IN | CHECK-OUT */}
-                <div className="grid grid-cols-3 gap-6 mb-8 font-arizona-sans-regular text-xs lg:text-sm">
+                <div className="grid sm:grid-cols-3 gap-6 font-arizona-sans-regular text-xs lg:text-sm">
                   <div>
                     <p className=" text-dark-gray uppercase tracking-widest mb-2">
                       Guest
@@ -112,10 +112,7 @@ export default function ConfirmationSection() {
                     </p>
                     <p className="text-dark-gray mt-1">by 6:00 pm</p>
                   </div>
-                </div>
 
-                {/* Row 2: YOUR RESERVATION | PHONE | EMAIL */}
-                <div className="grid grid-cols-3 gap-6 mb-8 font-arizona-sans-regular text-xs lg:text-sm">
                   <div>
                     <p className="text-dark-gray uppercase tracking-widest mb-2">
                       Your Reservation
@@ -326,23 +323,22 @@ export default function ConfirmationSection() {
             ))}
           </div> */}
 
-          <div className="grid sm:grid-cols-5 gap-5">
-            <div className="shadow-[-1px_4px_4px_0px_#00000040] h-64 sm:col-span-2">
+          <div className="grid grid-cols-1 sm:grid-cols-5 sm:gap-5 gap-4 items-stretch">
+            <div className="shadow-[-1px_4px_4px_0px_#00000040] sm:col-span-2 h-full">
               <Image
                 src="/images/Rectangle.png"
                 alt={`explore-1`}
                 width={400}
                 height={400}
-                className="w-full h-64 object-cover"
+                className="w-full h-full object-cover"
                 loading="eager"
                 priority
               />
             </div>
-            <div className="p-3 col-span-3 font-arizona-sans-regular">
-              <div className="sm:col-span-3">
+            <div className="col-span-3 font-arizona-sans-regular h-full flex">
+              <div className="sm:col-span-3 w-full flex flex-col justify-between sm:p-4">
                 <div>
-                  <p className={`${typography.textXl} tracking-widest text-dark-gray uppercase `}
-                  >
+                  <p className={`${typography.textXl} tracking-widest text-dark-gray uppercase `}>
                     SPA &amp; WELLNESS
                   </p>
                   <p className="text-xs lg:text-sm text-dark-gray mb-2">
@@ -359,8 +355,11 @@ export default function ConfirmationSection() {
                   </p>
                 </div>
 
-                <button className=" bg-primary text-white px-4 mt-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center"
-                >Explore <ArrowRight className="w-4 h-4" /></button>
+                <div className="mt-4">
+                  <button className=" bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center">
+                    Explore <ArrowRight className="w-4 h-4 ml-2" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

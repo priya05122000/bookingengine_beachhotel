@@ -115,7 +115,7 @@ export default function SelectRoomSection({
                             <img
                                 src="/images/Rectangle.png"
                                 alt="room"
-                                className="w-full h-full object-cover"
+                                className="w-full h-40 sm:h-full object-cover"
                             />
                             <button
                                 onClick={() => setShowDetails(true)}
