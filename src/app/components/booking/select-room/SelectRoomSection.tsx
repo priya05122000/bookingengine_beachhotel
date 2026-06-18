@@ -23,6 +23,7 @@ export default function SelectRoomSection({
     const [showDetails, setShowDetails] = React.useState(false);
     const [selected, setSelected] = React.useState<
         (PackageItem & {
+            rooms: number;
             adults: number;
             children: number;
         })[]
@@ -37,6 +38,7 @@ export default function SelectRoomSection({
             image: '/images/Rectangle.png',
             name: 'ECONOMY',
             subtitle: 'SEA VIEW & SUNSET VIEW',
+            availableRooms: 3,
             amenities: [
                 { icon: 'Flower2', label: 'BALCONY' },
                 { icon: 'Sofa', label: 'WALKOUT SPACE' },
@@ -45,7 +47,7 @@ export default function SelectRoomSection({
             price: 'INR 8,999',
             packages: [
                 {
-                    id: 'r1-p1', title: 'ECONOMY', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included',
+                    id: 'r1-p1', title: 'ECONOMY', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included', availableRooms: 2,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 5,574.58' }],
                         tax: 'INR 1,003.42',
@@ -53,7 +55,7 @@ export default function SelectRoomSection({
                     },
                 },
                 {
-                    id: 'r1-p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: 'No Meals',
+                    id: 'r1-p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: 'No Meals', availableRooms: 1,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 4,406.78' }],
                         tax: 'INR 793.22',
@@ -61,7 +63,7 @@ export default function SelectRoomSection({
                     },
                 },
                 {
-                    id: 'r1-p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: 'Breakfast Included',
+                    id: 'r1-p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: 'Breakfast Included', availableRooms: 0,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 4,236.44' }],
                         tax: 'INR 762.56',
@@ -75,6 +77,7 @@ export default function SelectRoomSection({
             image: '/images/Rectangle.png',
             name: 'DELUXE',
             subtitle: 'OCEAN VIEW & GARDEN VIEW',
+            availableRooms: 0,
             amenities: [
                 { icon: 'Flower2', label: 'PRIVATE TERRACE' },
                 { icon: 'Sofa', label: 'LIVING AREA' },
@@ -83,7 +86,7 @@ export default function SelectRoomSection({
             price: 'INR 12,999',
             packages: [
                 {
-                    id: 'r2-p1', title: 'DELUXE B&B', subtitle: 'OCEAN VIEW', price: 'INR 10,578', details: 'Breakfast Included',
+                    id: 'r2-p1', title: 'DELUXE B&B', subtitle: 'OCEAN VIEW', price: 'INR 10,578', details: 'Breakfast Included', availableRooms: 0,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 8,964.41' }],
                         tax: 'INR 1,613.59',
@@ -91,7 +94,7 @@ export default function SelectRoomSection({
                     },
                 },
                 {
-                    id: 'r2-p2', title: 'ROOM ONLY', subtitle: 'OCEAN VIEW', price: 'INR 9,200', details: 'No Meals',
+                    id: 'r2-p2', title: 'ROOM ONLY', subtitle: 'OCEAN VIEW', price: 'INR 9,200', details: 'No Meals', availableRooms: 0,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 7,796.61' }],
                         tax: 'INR 1,403.39',
@@ -99,7 +102,7 @@ export default function SelectRoomSection({
                     },
                 },
                 {
-                    id: 'r2-p3', title: 'NON REFUNDABLE', subtitle: 'OCEAN VIEW', price: 'INR 8,500', details: 'Breakfast Included',
+                    id: 'r2-p3', title: 'NON REFUNDABLE', subtitle: 'OCEAN VIEW', price: 'INR 8,500', details: 'Breakfast Included', availableRooms: 0,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 7,203.39' }],
                         tax: 'INR 1,296.61',
@@ -113,6 +116,7 @@ export default function SelectRoomSection({
             image: '/images/Rectangle.png',
             name: 'SUITE',
             subtitle: 'PANORAMIC SEA VIEW',
+            availableRooms: 1,
             amenities: [
                 { icon: 'Flower2', label: 'PRIVATE POOL' },
                 { icon: 'Sofa', label: 'LOUNGE SPACE' },
@@ -121,7 +125,7 @@ export default function SelectRoomSection({
             price: 'INR 18,999',
             packages: [
                 {
-                    id: 'r3-p1', title: 'SUITE FULL BOARD', subtitle: 'PANORAMIC VIEW', price: 'INR 16,578', details: 'All Meals Included',
+                    id: 'r3-p1', title: 'SUITE FULL BOARD', subtitle: 'PANORAMIC VIEW', price: 'INR 16,578', details: 'All Meals Included', availableRooms: 1,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 14,049.15' }],
                         tax: 'INR 2,528.85',
@@ -129,7 +133,7 @@ export default function SelectRoomSection({
                     },
                 },
                 {
-                    id: 'r3-p2', title: 'ROOM ONLY', subtitle: 'PANORAMIC VIEW', price: 'INR 14,500', details: 'No Meals',
+                    id: 'r3-p2', title: 'ROOM ONLY', subtitle: 'PANORAMIC VIEW', price: 'INR 14,500', details: 'No Meals', availableRooms: 0,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 12,288.14' }],
                         tax: 'INR 2,211.86',
@@ -137,7 +141,7 @@ export default function SelectRoomSection({
                     },
                 },
                 {
-                    id: 'r3-p3', title: 'NON REFUNDABLE', subtitle: 'PANORAMIC VIEW', price: 'INR 13,200', details: 'Breakfast Included',
+                    id: 'r3-p3', title: 'NON REFUNDABLE', subtitle: 'PANORAMIC VIEW', price: 'INR 13,200', details: 'Breakfast Included', availableRooms: 0,
                     priceBreakdown: {
                         entries: [{ label: 'Jul 1', amount: 'INR 11,186.44' }],
                         tax: 'INR 2,013.56',
@@ -163,8 +167,12 @@ export default function SelectRoomSection({
     //     }
     // }, [showPackages]);
 
-    function addPackage(pkg: PackageItem, adults: number, children: number) {
-        setSelected((s) => [...s, { ...pkg, adults, children }]);
+    function addPackage(pkg: PackageItem, rooms: number, adults: number, children: number) {
+        setSelected((s) => {
+            const exists = s.some((p) => p.id === pkg.id);
+            const entry = { ...pkg, rooms, adults, children };
+            return exists ? s.map((p) => (p.id === pkg.id ? entry : p)) : [...s, entry];
+        });
         setOpenQtyFor(null);
     }
 
@@ -195,7 +203,7 @@ export default function SelectRoomSection({
             </div>
 
             {/* Main layout */}
-            <div className="grid xl:grid-cols-[1fr_360px] gap-10 xl:gap-20">
+            <div className="grid xl:grid-cols-[1fr_360px] gap-10 ">
                 {/* Left: room cards + packages */}
                 <div className="flex flex-col gap-6">
                     {rooms.map((room) => {
@@ -206,7 +214,7 @@ export default function SelectRoomSection({
                         };
 
                         return (
-                            <div key={room.id} className="flex flex-col gap-6">
+                            <div key={room.id} className="flex flex-col gap-6 bg-white p-3 shadow-[-1px_4px_4px_0px_#00000040]">
                                 <div className="grid sm:grid-cols-12 gap-6">
                                     <div className="relative md:col-span-8 shrink-0 rounded-xs overflow-hidden shadow-sm">
                                         <img
@@ -224,10 +232,13 @@ export default function SelectRoomSection({
 
                                     <div className="md:col-span-4">
                                         <div className="font-arizona-sans-regular space-y-2">
-                                            <div className={`${typography.textXl} tracking-widest mt-1`}>{room.name}</div>
+                                            <div className={`${typography.textXl} tracking-widest mt-1`}>
+                                                {room.name}
+
+                                            </div>
                                             <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">{room.subtitle}</div>
 
-                                            <ul className="mt-4 mb-10 tracking-[0.15em] space-y-4 text-sm text-dark-gray text-[10px] lg:text-xs">
+                                            <ul className="mt-4 mb-10 tracking-[0.15em] space-y-4  text-dark-gray text-[10px] lg:text-xs">
                                                 {room.amenities.map((amenity) => (
                                                     <li key={amenity.label} className="flex items-center gap-2">
                                                         <span className="w-4 h-4 rounded-full flex items-center justify-center text-xs">
@@ -242,13 +253,26 @@ export default function SelectRoomSection({
                                             <div className="text-[13px] text-sm text-dark-gray font-arizona-light">From</div>
                                             <div className={`text-[36px] font-arizona-regular`}>{room.price}<span className="text-[15px] lg:text-base font-arizona-light text-dark-gray">/night</span></div>
                                             <div className="text-[11px] lg:text-xs font-arizona-light text-dark-gray">subject to GST and charges</div>
+
                                         </div>
-                                        <button
-                                            onClick={() => togglePackages(room.id)}
-                                            className={`mt-4 bg-primary text-white px-4 h-10 rounded-xs font-arizona-sans-regular uppercase text-xs lg:text-sm tracking-[0.15em] cursor-pointer`}
-                                        >
-                                            Select Packages
-                                        </button>
+                                        <div className="mt-4 text-[11px] lg:text-xs font-arizona-light text-dark-gray">
+                                           ( Only {room.availableRooms} room{room.availableRooms !== 1 ? "s" : ""} available in this category. )
+                                        </div>
+                                        {room.availableRooms === 0 ? (
+                                            <button
+                                                disabled
+                                                className="mt-4 bg-gray-200 text-gray-400 px-4 h-10 rounded-xs font-arizona-sans-regular uppercase text-xs lg:text-sm tracking-[0.15em] cursor-not-allowed"
+                                            >
+                                                Rooms Unavailable
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={() => togglePackages(room.id)}
+                                                className="mt-4 bg-primary text-white px-4 h-10 rounded-xs font-arizona-sans-regular uppercase text-xs lg:text-sm tracking-[0.15em] cursor-pointer"
+                                            >
+                                                Select Packages
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
 

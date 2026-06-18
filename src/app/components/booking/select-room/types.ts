@@ -9,6 +9,7 @@ export type PackageItem = {
     subtitle?: string;
     price: string;
     details?: string;
+    availableRooms?: number;
     priceBreakdown?: {
         entries: PriceBreakdownEntry[];
         tax: string;
