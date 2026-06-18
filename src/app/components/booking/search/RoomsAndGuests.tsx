@@ -1,8 +1,9 @@
 import { typography } from '@/src/lib/typography';
-import {  Minus, Plus, X } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
 import { useState } from 'react';
 
 export interface Room {
+    rooms: number;
     adults: number;
     children: number;
 }
@@ -112,7 +113,7 @@ export default function RoomsAndGuests({
             <div className="flex-1 overflow-y-auto pr-2">
                 {rooms.map((room, i) => (
                     <div key={i} className="mb-4">
-                        <div className="flex items-center justify-between mb-1">
+                        {/* <div className="flex items-center justify-between mb-1">
                             <p className={`${typography.textLg} uppercase tracking-[0.04em]  text-dark-gray font-arizona-light`}>
                                 Room {i + 1}
                             </p>
@@ -127,7 +128,15 @@ export default function RoomsAndGuests({
                                     <X size={14} />
                                 </button>
                             )}
-                        </div>
+                        </div> */}
+
+                        <Counter
+                            label="Rooms"
+                            value={room.rooms}
+                            min={1}
+                            onInc={() => updateRoom(i, 'rooms', 1)}
+                            onDec={() => updateRoom(i, 'rooms', -1)}
+                        />
 
                         <Counter
                             label="Adults"
