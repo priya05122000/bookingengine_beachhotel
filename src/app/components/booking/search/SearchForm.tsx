@@ -61,6 +61,7 @@ export default function SearchForm() {
 
     const [rooms, setRooms] = useState<Room[]>([
         {
+            rooms: 1,
             adults: 1,
             children: 0,
         },

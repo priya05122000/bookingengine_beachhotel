@@ -23,6 +23,7 @@ function Counter({
     sublabel,
     value,
     min,
+    incDisabled,
     onInc,
     onDec,
 }: {
@@ -30,6 +31,7 @@ function Counter({
     sublabel?: string;
     value: number;
     min: number;
+    incDisabled?: boolean;
     onInc: () => void;
     onDec: () => void;
 }) {
@@ -50,7 +52,8 @@ function Counter({
                 <span className={`text-sm text-primary w-4 text-center  ${typography.textLg}`}>{value}</span>
                 <button
                     onClick={onInc}
-                    className={`w-7 h-7  flex items-center justify-center text-primary cursor-pointer hover:bg-gray transition-colors ${typography.textLg} `}
+                    disabled={incDisabled}
+                    className={`w-7 h-7  flex items-center justify-center text-primary cursor-pointer hover:bg-gray transition-colors ${typography.textLg} disabled:opacity-30 disabled:cursor-not-allowed`}
                 >
                     <Plus size={12} />
                 </button>
@@ -58,6 +61,9 @@ function Counter({
         </div>
     );
 }
+
+const GUESTS_PER_ROOM = 4;
+const MAX_ROOMS = 4;
 
 export default function RoomsAndGuests({
     rooms,
@@ -74,17 +80,33 @@ export default function RoomsAndGuests({
         delta: number
     ) => {
         setRooms((prev) =>
-            prev.map((r, i) =>
-                i === index
-                    ? {
-                        ...r,
-                        [field]: Math.max(
-                            field === "adults" ? 1 : 0,
-                            r[field] + delta
-                        ),
+            prev.map((r, i) => {
+                if (i !== index) return r;
+                const newValue = r[field] + delta;
+                const minValue = field === "adults" ? 1 : 0;
+                if (newValue < minValue) return r;
+
+                if (field === "rooms") {
+                    const newMax = newValue * GUESTS_PER_ROOM;
+                    const currentTotal = r.adults + r.children;
+                    if (currentTotal > newMax) {
+                        const newChildren = Math.max(0, newMax - r.adults);
+                        const newAdults = Math.max(1, newMax - newChildren);
+                        return { ...r, rooms: newValue, adults: newAdults, children: newChildren };
                     }
-                    : r
-            )
+                    return { ...r, rooms: newValue };
+                }
+
+                if ((field === "adults" || field === "children") && delta > 0) {
+                    const maxGuests = r.rooms * GUESTS_PER_ROOM;
+                    const newTotal =
+                        (field === "adults" ? newValue : r.adults) +
+                        (field === "children" ? newValue : r.children);
+                    if (newTotal > maxGuests) return r;
+                }
+
+                return { ...r, [field]: newValue };
+            })
         );
     };
 
@@ -130,30 +152,55 @@ export default function RoomsAndGuests({
                             )}
                         </div> */}
 
-                        <Counter
-                            label="Rooms"
-                            value={room.rooms}
-                            min={1}
-                            onInc={() => updateRoom(i, 'rooms', 1)}
-                            onDec={() => updateRoom(i, 'rooms', -1)}
-                        />
+                        {(() => {
+                            const maxGuests = room.rooms * GUESTS_PER_ROOM;
+                            const totalGuests = room.adults + room.children;
+                            const atGuestLimit = totalGuests >= maxGuests;
+                            const atRoomLimit = room.rooms >= MAX_ROOMS;
+                            return (
+                                <>
+                                    <Counter
+                                        label="Rooms"
+                                        value={room.rooms}
+                                        min={1}
+                                        incDisabled={atRoomLimit}
+                                        onInc={() => updateRoom(i, 'rooms', 1)}
+                                        onDec={() => updateRoom(i, 'rooms', -1)}
+                                    />
 
-                        <Counter
-                            label="Adults"
-                            value={room.adults}
-                            min={1}
-                            onInc={() => updateRoom(i, 'adults', 1)}
-                            onDec={() => updateRoom(i, 'adults', -1)}
-                        />
+                                    {atRoomLimit && (
+                                        <p className="text-[10px]  text-red-500 font-arizona-sans-regular tracking-widest mb-1">
+                                            Secure your stay soon — only {MAX_ROOMS} rooms are still available.
+                                        </p>
+                                    )}
 
-                        <Counter
-                            label="Children"
-                            sublabel="0-12 Years"
-                            value={room.children}
-                            min={0}
-                            onInc={() => updateRoom(i, 'children', 1)}
-                            onDec={() => updateRoom(i, 'children', -1)}
-                        />
+                                    <Counter
+                                        label="Adults"
+                                        value={room.adults}
+                                        min={1}
+                                        incDisabled={atGuestLimit}
+                                        onInc={() => updateRoom(i, 'adults', 1)}
+                                        onDec={() => updateRoom(i, 'adults', -1)}
+                                    />
+
+                                    <Counter
+                                        label="Children"
+                                        sublabel="0-12 Years"
+                                        value={room.children}
+                                        min={0}
+                                        incDisabled={atGuestLimit}
+                                        onInc={() => updateRoom(i, 'children', 1)}
+                                        onDec={() => updateRoom(i, 'children', -1)}
+                                    />
+
+                                    {atGuestLimit && (
+                                        <p className="mt-1 text-[10px] font-arizona-sans-regular tracking-widest text-red-500">
+                                            No additional guests can be accommodated ({room.rooms} room{room.rooms > 1 ? "s" : ""} × {GUESTS_PER_ROOM} persons per room).
+                                        </p>
+                                    )}
+                                </>
+                            );
+                        })()}
                     </div>
                 ))}
 
