@@ -113,7 +113,7 @@ export default function PriceSidebar({
           <div>&#8377; {formatINR(hotelTaxes)}</div>
         </div>
 
-        <div className={`${typography.textLg} font-arizona-sans-regular border-t-3  border-black pt-2 flex items-center justify-between `}>
+        <div className={`${typography.textLg} font-arizona-light uppercase border-t-3  border-black pt-2 flex items-center justify-between `}>
           <div className={` text-primary`}>Total</div>
           <div className="tracking-widest text-primary">
             &#8377; {formatINR(total)}

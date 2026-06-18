@@ -74,9 +74,9 @@ export default function ConfirmationSection() {
         </div>
 
         {/* ── Main grid ── */}
-        <div className="flex  flex-col lg:grid lg:grid-cols-[1fr_300px] gap-5 items-start">
+        <div className="flex  flex-col lg:grid lg:grid-cols-[1fr_300px] gap-5">
           {/* Left: Booking Details */}
-          <div className="w-full overflow-hidden">
+          <div className="w-full min-w-0">
             <div className="px-8 py-8 border border-primary bg-white">
               <h3
                 className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase mb-8`}
@@ -170,7 +170,7 @@ export default function ConfirmationSection() {
           </div>
 
           {/* Right: Reservation & Price summary */}
-          <aside className="space-y-4 w-full bg-white shadow-[-1px_4px_4px_0px_#00000040] ">
+          <aside className="space-y-4 w-full bg-white shadow-[-1px_4px_4px_0px_#00000040] lg:sticky lg:top-32 lg:self-start">
             {/* Reservation Summery */}
             <div className="p-3">
               <h4
@@ -226,7 +226,7 @@ export default function ConfirmationSection() {
                     >
                       Premier Room - Sea View
                     </p>
-                    <p className="text-xs bg-accent/51 p-1 inline-block text-primary">
+                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
                       Breakfast Included
                     </p>
                     <p
@@ -234,7 +234,7 @@ export default function ConfirmationSection() {
                     >
                       Bay Suite - Sea View
                     </p>
-                    <p className="text-xs bg-accent/51 p-1 inline-block text-primary">
+                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
                       Breakfast Included
                     </p>
                   </div>
