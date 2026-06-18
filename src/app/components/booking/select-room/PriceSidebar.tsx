@@ -3,11 +3,11 @@
 
 import React, { useMemo } from "react";
 import { PackageItem } from "./types";
-import { Check, CheckCheck, X } from "lucide-react";
+import { CheckCheck, X } from "lucide-react";
 import Link from "next/link";
 import { typography } from "@/src/lib/typography";
 
-type SelectedPackage = PackageItem & { adults: number; children: number };
+type SelectedPackage = PackageItem & { rooms: number; adults: number; children: number };
 
 type Props = {
   selected: SelectedPackage[];
@@ -40,17 +40,16 @@ function PriceLineItem({
   item: SelectedPackage;
   onRemove: (id: string) => void;
 }) {
-  const guestLabel = `${item.adults} Adult${item.adults > 1 ? "s" : ""}${item.children > 0 ? ` · ${item.children} Child${item.children > 1 ? "ren" : ""}` : ""
-    }`;
-
   return (
     <div key={item.id} className="border-b last:border-b-0 pb-2">
       <div className="flex items-stretch justify-between">
         <div className="flex-1 space-y-1">
           <div className={`${FONT}`}>{item.title}</div>
           <div className={`${FONT} text-primary`}>{item.subtitle}</div>
-          <div className={`${FONT} text-black mt-1 bg-silver/30 inline-block p-1  `}>{item.details}</div>
-          <div className={`${FONT} text-dark-gray mt-1`}>{guestLabel}</div>
+          <div className={`${FONT} text-black mt-1 bg-silver/30 inline-block p-1`}>{item.details}</div>
+          <div className={`${FONT} text-dark-gray mt-1`}>
+            {item.rooms} Room{item.rooms > 1 ? "s" : ""} · {item.adults} Adult{item.adults > 1 ? "s" : ""}{item.children > 0 ? ` · ${item.children} Child${item.children > 1 ? "ren" : ""}` : ""}
+          </div>
         </div>
 
         <div className="flex flex-col text-end justify-between">

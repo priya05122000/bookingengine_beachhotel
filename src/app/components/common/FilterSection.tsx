@@ -12,7 +12,7 @@ import { flushSync } from "react-dom";
 const STEPS = [
     "Search",
     "Select Room",
-    "Guest & Credit Card Information",
+    "Guest Information",
     "Confirmation",
 ];
 
