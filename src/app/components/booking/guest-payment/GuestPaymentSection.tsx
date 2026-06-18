@@ -31,7 +31,6 @@ export default function GuestPaymentSection() {
             <hr className="border-primary " />
 
             <form className=" p-5 text-xs lg:text-sm">
-
               <div className="space-y-4">
                 {/* Row 1 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -67,7 +66,6 @@ export default function GuestPaymentSection() {
                   />
                 </div>
               </div>
-
 
               {/* Promo line */}
               <p className="text-center text-xs  text-green-500 font-arizona-light mt-8  tracking-wider mb-2">
@@ -163,7 +161,9 @@ export default function GuestPaymentSection() {
                   <p className="text-lg lg:text-xl font-arizona-sans-regular  text-dark-gray tracking-wide">
                     ECONOMY
                   </p>
-                  <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">SEA VIEW</div>
+                  <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">
+                    SEA VIEW
+                  </div>
                 </div>
                 <button
                   type="button"
@@ -185,10 +185,25 @@ export default function GuestPaymentSection() {
               </div>
 
               {/* Dates */}
-              <div className="flex items-start justify-between mt-3 ">
-                <p className="text-xs lg:text-sm text-primary font-medium font-arizona-sans-regular">
-                  22 JUN, 2026 – 22 JUN, 2026
-                </p>
+              <div className="flex items-start justify-between my-3 ">
+                <div className="grid grid-cols-2 gap-4 ">
+                  <div className="space-y-1">
+                    <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
+                      Check - In
+                    </p>
+                    <p className="text-xs text-primary">Mon, 23 May 2026</p>
+                    <p className="text-dark-gray mt-0.5 text-xs">
+                      From 6:00 pm
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest  text-xs lg:text-sm">
+                      Check - Out
+                    </p>
+                    <p className="text-primary text-xs">Mon, 23 May 2026</p>
+                    <p className="text-dark-gray mt-0.5 text-xs">by 6:00 pm</p>
+                  </div>
+                </div>
                 <button
                   type="button"
                   onClick={() => {
@@ -207,36 +222,98 @@ export default function GuestPaymentSection() {
                   EDIT
                 </button>
               </div>
-              <div className="text-xs lg:text-sm font-arizona-sans-regular text-dark-gray mt-1 flex gap-1.5">
-                <span>1 NIGHT </span>
+
+              <div className="space-y-1 mt-3 pt-3 border-t border-gray-100">
+                <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
+                  You Selected
+                </p>
+                <div className="space-y-1">
+                  <p
+                    className={`${typography.textBase} font-bold text-primary`}
+                  >
+                    Premier Room - Sea View
+                  </p>
+                  <p className="text-xs bg-silver/30 p-1 inline-block text-black">
+                    Breakfast Included
+                  </p>
+                  <p
+                    className={`${typography.textBase} font-bold text-primary`}
+                  >
+                    Bay Suite - Sea View
+                  </p>
+                  <p className="text-xs bg-silver/30 p-1 inline-block text-black">
+                    Breakfast Included
+                  </p>
+                </div>
+              </div>
+
+              <div className="text-xs lg:text-sm border-t border-gray-100 font-arizona-sans-regular text-dark-gray mt-3 flex flex-wrap gap-1.5 pt-3">
+                <span>1 NIGHT x 1 DAY </span>
                 <span>|</span>
                 <span> 1 ROOM </span>
                 <span>|</span>
                 <span> 2 ADULT</span>
+                <span>|</span>
+                <span> 2 CHILDREN</span>
               </div>
 
               {/* Pricing */}
               <div className="mt-3 pt-3 border-t border-gray-100 font-arizona-light">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-sm text-dark-gray line-through">
-                    &#8377; 15,308
-                  </span>
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="text-sm text-dark-gray">&#8377; 15,308</span>
                   <span className="text-xs text-dark-gray uppercase tracking-wide">
-                    Per Night:
+                    Room Charges
                   </span>
                 </div>
-                <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-sm font-semibold text-dark-gray">
-                    &#8377; 11,571
+                <div className="flex items-baseline justify-between gap-1 mt-1">
+                  <span className="text-sm text-dark-gray">&#8377; 3,571</span>
+                  <span className="text-xs text-dark-gray uppercase tracking-wide">
+                    Others
                   </span>
-                  <span className="text-xs text-dark-gray">+</span>
-                  <span className="text-xs text-dark-gray">&#8377; 2,417</span>
+                </div>
+
+                <div className="flex items-baseline justify-between gap-1 mt-1">
+                  <span className="text-sm text-dark-gray">&#8377; 11,571</span>
                   <span className="text-xs text-dark-gray uppercase tracking-wide">
                     Taxes &amp; Fees
                   </span>
                 </div>
+
+                <div className="mt-3 pt-3 border-t border-gray-300 font-arizona-light">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="text-sm text-dark-gray line-through font-semibold">
+                      &#8377; 15,308
+                    </span>
+                    <span className="text-xs text-dark-gray uppercase tracking-wide">
+                      Total Charges
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-2 pt-1">
+                    <p className="text-sm text-dark-gray">- &#8377; 1407</p>
+                    <div className="flex flex-col items-end">
+                      <p className="text-xs text-dark-gray uppercase tracking-wide">
+                        Promo code (csrs10)
+                      </p>
+                      <p className="text-[10px] text-left text-dark-gray">
+                        10% off on total charges
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-2 pt-1">
+                    <p className="text-sm text-dark-gray">- &#8377; 907</p>
+                    <div className="flex flex-col items-end">
+                      <p className="text-xs text-dark-gray uppercase tracking-wide">
+                        Other Offers and Discounts
+                      </p>
+                      <p className="text-[10px] text-left text-dark-gray">
+                        3% off on total charges
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-gray-700 text-base lg:text-lg font-arizona-light tracking-[0.04em]">
-                  <span className="  text-primary uppercase tracking-wide">
+                  <span className="text-primary uppercase tracking-wide">
                     Total
                   </span>
                   <span className=" text-primary">

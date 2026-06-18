@@ -66,7 +66,7 @@ export default function FilterSection() {
         if (activeStep !== 1) {
             setShowPackages(false);
         }
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: "instant" });
     }, [activeStep]);
 
     const enabledUpTo = activeStep;
