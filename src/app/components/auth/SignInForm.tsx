@@ -5,15 +5,18 @@ import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import InputField from "./InputField";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 type Step = "email" | "password";
 
 function EmailStep({
   email,
   onEmailChange,
+  onSignInWithCode,
 }: {
   email: string;
   onEmailChange: (v: string) => void;
+  onSignInWithCode: () => void;
 }) {
   return (
     <>
@@ -37,6 +40,8 @@ function EmailStep({
       >
         Continue
       </button>
+
+
     </>
   );
 }
@@ -61,7 +66,7 @@ function PasswordStep({
 }) {
   return (
     <>
-      <div className="mb-4">
+      <div >
         <label className="mb-2 block text-sm text-primary font-arizona">Email</label>
 
         <div className="relative">
@@ -81,7 +86,7 @@ function PasswordStep({
         </button>
       </div>
 
-      <div className="mb-6">
+      <div>
         <InputField
           id="password"
           type={showPassword ? "text" : "password"}
@@ -106,12 +111,13 @@ function PasswordStep({
       </div>
 
       <div>
-        <button
-          type="submit"
-          className="w-full bg-primary h-10 text-sm tracking-wider text-white cursor-pointer"
+        <Link
+          href="/booking"
+          className="w-full bg-primary h-10 text-sm tracking-wider text-white cursor-pointer inline-flex items-center justify-center"
+          aria-label="Login"
         >
           Login
-        </button>
+        </Link>
 
         <div className="my-5 flex items-center justify-center">
           <span className="text-xs text-dark-gray uppercase">OR</span>
@@ -145,11 +151,18 @@ export default function SignInForm() {
     setPassword("");
   }, []);
 
+  const handleSignInWithCode = useCallback(async () => {
+    if (!email.trim()) {
+      alert("Please enter your email");
+      return;
+    }
 
-  const handleSignInWithCode = useCallback(() => {
-    // navigate to a code-based sign-in page (create this route or adjust as needed)
-    router.push("/signin/code");
-  }, [router]);
+    localStorage.setItem("demoOtp", "52010");
+
+    router.push(
+      `/signin/code?email=${encodeURIComponent(email)}`
+    );
+  }, [email, router]);
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
@@ -170,18 +183,27 @@ export default function SignInForm() {
   );
 
   return (
-    <div className="w-full max-w-125">
-      <h1 className="mb-12 hidden text-center text-2xl font-semibold uppercase tracking-[0.25em] text-primary lg:block">
-        The Beach Hotel
-      </h1>
+    // add `import Image from "next/image"` at the top of the file
+
+    <div className="w-full max-w-sm">
+      <Link href="https://thebeachhotel.in/">
+        <Image
+          src="/images/logo.png"
+          alt="The Beach Hotel"
+          width={200}
+          height={40}
+          className="mb-8 mx-auto h-20 xl:h-full  object-contain"
+        />
+      </Link>
+
 
       {/* <p className="mb-8 text-center text-xs uppercase tracking-[0.15em] text-dark-gray lg:hidden">
         Welcome Back
       </p> */}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6">
         {step === "email" ? (
-          <EmailStep email={email} onEmailChange={setEmail} />
+          <EmailStep email={email} onEmailChange={setEmail} onSignInWithCode={handleSignInWithCode} />
         ) : (
           <PasswordStep
             email={email}
@@ -191,7 +213,6 @@ export default function SignInForm() {
             showPassword={showPassword}
             toggleShowPassword={toggleShowPassword}
             onSignInWithCode={handleSignInWithCode} // pass handler
-
           />
         )}
       </form>

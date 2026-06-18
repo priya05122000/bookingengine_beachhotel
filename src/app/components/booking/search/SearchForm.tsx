@@ -26,7 +26,7 @@ function calcDuration(checkIn: Date | null, checkOut: Date | null) {
         (checkOut.getTime() - checkIn.getTime()) / 86400000
     );
 
-    return `\u20B9 ${nights + 1}D, \u20B9 ${nights}N`;
+    return `${nights + 1}D, ${nights}N`;
 }
 
 export default function SearchForm() {
@@ -58,10 +58,6 @@ export default function SearchForm() {
     });
 
     const [selectingCheckOut, setSelectingCheckOut] = useState(false);
-
-
-
-
 
     const [rooms, setRooms] = useState<Room[]>([
         {

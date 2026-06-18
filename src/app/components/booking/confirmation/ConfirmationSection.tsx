@@ -220,14 +220,25 @@ export default function ConfirmationSection() {
                   <p className="text-dark-gray uppercase tracking-widest text-xs lg:text-sm">
                     You Selected
                   </p>
-                  <p
-                    className={`${typography.textBase} font-bold text-primary`}
-                  >
-                    Sands Premier Room - Sea View
-                  </p>
-                  <p className="text-xs bg-accent/51 p-1 inline-block text-primary">
-                    Breakfast Included
-                  </p>
+                  <div className="space-y-1">
+                    <p
+                      className={`${typography.textBase} font-bold text-primary`}
+                    >
+                      Premier Room - Sea View
+                    </p>
+                    <p className="text-xs bg-accent/51 p-1 inline-block text-primary">
+                      Breakfast Included
+                    </p>
+                    <p
+                      className={`${typography.textBase} font-bold text-primary`}
+                    >
+                      Bay Suite - Sea View
+                    </p>
+                    <p className="text-xs bg-accent/51 p-1 inline-block text-primary">
+                      Breakfast Included
+                    </p>
+                  </div>
+
                 </div>
               </div>
 

@@ -64,7 +64,7 @@ export default function PackageList({
                             <div className='space-y-1 font-arizona-sans-regular'>
                                 <div className={`text-xs lg:text-sm  tracking-widest uppercase`}>{pkg.title}</div>
                                 <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">{pkg.subtitle}</div>
-                                <div className="text-[13px] lg:text-sm backdrop-blur-md bg-accent/51 p-1 text-primary inline-block font-arizona-light">{pkg.details}</div>
+                                <div className="text-[13px] lg:text-sm backdrop-blur-md bg-silver/30 p-1 text-black inline-block font-arizona-light">{pkg.details}</div>
                             </div>
                             <div className='space-y-1'>
                                 <div className="relative inline-block group font-arizona-regular">

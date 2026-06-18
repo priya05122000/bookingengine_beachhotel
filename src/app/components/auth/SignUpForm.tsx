@@ -4,6 +4,7 @@ import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import InputField from "./InputField";
+import Image from "next/image";
 
 export default function SignUpForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -40,17 +41,23 @@ export default function SignUpForm() {
     );
 
     return (
-        <div className="w-full max-w-125">
-            <h1 className="mb-8 text-center text-2xl font-semibold uppercase tracking-[0.25em] text-primary">
-                The Beach Hotel
-            </h1>
+        <div className="w-full max-w-sm ">
+            <Link href="https://thebeachhotel.in/">
+                <Image
+                    src="/images/logo.png"
+                    alt="The Beach Hotel"
+                    width={200}
+                    height={40}
+                    className="mb-8 mx-auto h-20 xl:h-full  object-contain"
+                />
+            </Link>
 
             {/* <p className="mb-4 text-center text-xl font-semibold uppercase text-silver">
                 Create Account
             </p> */}
 
 
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6" noValidate>
                 {error && (
                     <p className="text-sm text-red-600" role="alert" aria-live="polite">
                         {error}

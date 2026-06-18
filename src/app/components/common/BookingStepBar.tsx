@@ -25,10 +25,10 @@ export default function BookingStepBar({ steps, activeStep, enabledUpTo }: Booki
                         aria-current={isActive ? "step" : undefined}
                         className={`flex-none md:flex-1 min-w-30 text-center pb-3 px-4 uppercase tracking-[.08em] text-sm font-semibold text-wrap -mb-px transition-colors font-arizona-light
   ${isActive
-                                ? "text-primary border-b-4 border-primary"
+                                ? "text-primary border-b-4 border-accent"
                                 : isEnabled
                                     ? "text-dark-gray border-b-4 border-black/54 hover:opacity-90 cursor-pointer"
-                                    : "text-dark-gray/40 border-b-4 border-black/54 cursor-not-allowed"
+                                    : "text-dark-gray/40 border-b-4 border-black/40 cursor-not-allowed"
                             }`}
                     >
                         {step}

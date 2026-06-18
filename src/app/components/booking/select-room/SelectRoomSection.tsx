@@ -90,7 +90,7 @@ export default function SelectRoomSection({
             {/* Top bar */}
             <div className="flex  flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between mb-6">
                 <div className={`text-dark-gray font-arizona-sans-regular tracking-widest w-full ${typography.textXl}`}>
-                    Fri, 22 JUN, 2026 - Fri, 22 JUN, 2026
+                    22 JUN, 2026 - 22 JUN, 2026
                 </div>
 
                 <div className="flex items-center w-full font-arizona-sans-regular justify-between  sm:justify-end gap-3">

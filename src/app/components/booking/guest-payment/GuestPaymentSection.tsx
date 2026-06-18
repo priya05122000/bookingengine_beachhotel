@@ -22,7 +22,7 @@ export default function GuestPaymentSection() {
               >
                 Guest Information
               </h3>
-              <Link href="/sigin">
+              <Link href="/signin">
                 <button className="text-xs lg:text-sm text-dark-gray border border-primary px-3 text-nowrap py-1 font-arizona-sans-regular rounded-xs cursor-pointer">
                   Sign in
                 </button>
@@ -37,7 +37,7 @@ export default function GuestPaymentSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     className="w-full border border-primary px-3 py-2 text-sm text-dark-gray placeholder-gray-400 focus:outline-none"
-                    placeholder="First name"
+                    placeholder="Name"
                   />
                   <input
                     className="w-full border border-primary px-3 py-2 text-sm text-dark-gray placeholder-gray-400 focus:outline-none"
@@ -70,7 +70,7 @@ export default function GuestPaymentSection() {
 
 
               {/* Promo line */}
-              <p className="text-center text-xs  text-light-green font-arizona-light mt-8  tracking-wider mb-2">
+              <p className="text-center text-xs  text-green-500 font-arizona-light mt-8  tracking-wider mb-2">
                 Book your stay before the prices go up!
               </p>
 
@@ -187,7 +187,7 @@ export default function GuestPaymentSection() {
               {/* Dates */}
               <div className="flex items-start justify-between mt-3 ">
                 <p className="text-xs lg:text-sm text-primary font-medium font-arizona-sans-regular">
-                  Fri, 22 JUN, 2026 – Fri, 22 JUN, 2026
+                  22 JUN, 2026 – 22 JUN, 2026
                 </p>
                 <button
                   type="button"

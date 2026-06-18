@@ -173,14 +173,14 @@ export default function Footer() {
               <div className="flex items-center gap-2 text-sm text-white">
                 <Link
                   href={`${process.env.NEXT_PUBLIC_SITE_URL}/terms-and-conditions`}
-                  className="hover:text-white transition-colors underline underline-offset-4"
+                  className="transition-colors underline underline-offset-4 decoration-white/50  hover:text-white"
                 >
                   Terms &amp; Condition
                 </Link>
                 <span>|</span>
                 <Link
                   href={`${process.env.NEXT_PUBLIC_SITE_URL}/privacy-policy`}
-                  className="hover:text-white transition-colors underline underline-offset-4"
+                  className="transition-colors underline underline-offset-4 decoration-white/50  hover:text-white"
                 >
                   Privacy Policy
                 </Link>

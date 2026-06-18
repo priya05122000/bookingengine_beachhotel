@@ -1,5 +1,5 @@
 import { typography } from '@/src/lib/typography';
-import { ChevronDown, Minus, Plus, X } from "lucide-react";
+import {  Minus, Plus, X } from "lucide-react";
 import { useState } from 'react';
 
 export interface Room {
