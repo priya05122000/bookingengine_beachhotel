@@ -49,7 +49,7 @@ function PriceLineItem({
         <div className="flex-1 space-y-1">
           <div className={`${FONT}`}>{item.title}</div>
           <div className={`${FONT} text-primary`}>{item.subtitle}</div>
-          <div className={`${FONT} text-dark-gray mt-1 bg-accent/51 inline-block p-1  `}>{item.details}</div>
+          <div className={`${FONT} text-black mt-1 bg-silver/30 inline-block p-1  `}>{item.details}</div>
           <div className={`${FONT} text-dark-gray mt-1`}>{guestLabel}</div>
         </div>
 
@@ -163,12 +163,12 @@ export default function PriceSidebar({
         </div>
 
         <ul className={`text-xs lg:text-sm tracking-wide text-dark-gray space-y-2`}>
-          <li className="flex items-start gap-2">
-            <span className="text-accent"><CheckCheck /></span>
+          <li className="flex items-center gap-2">
+            <span className="text-accent"><CheckCheck className="w-4 h-4" /></span>
             Get access to Secret Deals
           </li>
-          <li className="flex items-start gap-2">
-            <span className="text-accent"><CheckCheck /></span>
+          <li className="flex items-center gap-2">
+            <span className="text-accent"><CheckCheck className="w-4 h-4" /></span>
             Earn member benefits
           </li>
         </ul>

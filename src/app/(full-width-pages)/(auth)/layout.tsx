@@ -3,6 +3,8 @@
 
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
+import { typography } from "@/src/lib/typography";
 
 
 interface AuthLayoutProps {
@@ -31,35 +33,51 @@ export default function AuthLayout({
           </div>
 
           <div className="h-42 shrink-0 px-8 py-8 font-arizona">
-            <p className="mb-3 text-xs uppercase tracking-[0.15em] text-dark-gray">
-              Exclusive Offers
-            </p>
+            <Link href="https://thebeachhotel.in/" className=" text-xs uppercase tracking-[0.15em] text-dark-gray hover:underline underline-offset-2" aria-label="Go to homepage">
+              The Beach Hotel
+            </Link>
 
-            <h3 className="max-w-md text-lg leading-normal text-dark-gray">
+            <h3 className={`max-w-md ${typography.textLg} mt-3 leading-normal text-dark-gray`}>
               Hotel Facilities Are Designated Spaces And Services Designed To
               Enhance The Guest Experience
             </h3>
+
+            <div className="mt-4 flex flex-col gap-3 text-xs text-dark-gray">
+              <div className="flex items-center gap-2">
+                <Link href={`${process.env.NEXT_PUBLIC_SITE_URL}/privacy-policy`}
+                  className="hover:underline" aria-label="Privacy Policy">
+                  Privacy Policy
+                </Link>
+                <span className="text-dark-gray">|</span>
+                <Link href={`${process.env.NEXT_PUBLIC_SITE_URL}/terms-and-conditions`}
+                  className="hover:underline" aria-label="Terms and Conditions">
+                  Terms &amp; Conditions
+                </Link>
+              </div>
+
+            </div>
           </div>
+
         </div>
 
         {/* Form Area */}
-        <div className="relative flex flex-1 items-center justify-center px-6 pt-24 pb-10">
+        <div className="relative flex flex-1 items-center justify-center px-6  ">
           {/* Top controls */}
           <div className="absolute top-4 right-4 z-50 font-arizona flex items-center gap-3">
             <button
               type="button"
               onClick={() => router.back()}
-              className="rounded-md px-3 py-2 text-sm text-dark-gray hover:bg-gray/10"
+              className="rounded-md cursor-pointer px-3 py-2 text-sm text-dark-gray hover:underline underline-offset-2"
             >
               Back
             </button>
 
-            <button
+            {/* <button
               type="button"
               className="flex h-10 items-center border border-primary px-4 text-sm text-primary transition hover:bg-primary hover:text-white"
             >
               {isSignup ? "Register" : "Sign in"}
-            </button>
+            </button> */}
           </div>
 
           {children}
