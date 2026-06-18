@@ -63,6 +63,9 @@ export default function FilterSection() {
         if (activeStep > 0) {
             setShowSearchPopup(false);
         }
+        if (activeStep !== 1) {
+            setShowPackages(false);
+        }
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, [activeStep]);
 

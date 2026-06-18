@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { PackageItem } from './types';
 import PackageList from './PackageList';
 import PriceSidebar from './PriceSidebar';
@@ -16,11 +16,10 @@ type Props = {
 };
 
 export default function SelectRoomSection({
-    showPackages,
-    setShowPackages,
+    showPackages: _showPackages,
+    setShowPackages: _setShowPackages,
     onEdit,
 }: Props) {
-    const [currentStep, setCurrentStep] = React.useState(1);
     const [showDetails, setShowDetails] = React.useState(false);
     const [selected, setSelected] = React.useState<
         (PackageItem & {
@@ -29,51 +28,140 @@ export default function SelectRoomSection({
         })[]
     >([]);
     const [openQtyFor, setOpenQtyFor] = React.useState<string | null>(null);
+    const [openPackagesFor, setOpenPackagesFor] = React.useState<string | null>(null);
     const [promo, setPromo] = React.useState('');
 
-    const packages: PackageItem[] = [
+    const rooms = [
         {
-            id: 'p1', title: 'ECONOMY', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included',
-            priceBreakdown: {
-                entries: [{ label: 'Jul 1', amount: 'INR 5,574.58' }],
-                tax: 'INR 1,003.42',
-                total: 'INR 6,578.00',
-            },
+            id: 'r1',
+            image: '/images/Rectangle.png',
+            name: 'ECONOMY',
+            subtitle: 'SEA VIEW & SUNSET VIEW',
+            amenities: [
+                { icon: 'Flower2', label: 'BALCONY' },
+                { icon: 'Sofa', label: 'WALKOUT SPACE' },
+                { icon: 'Wifi', label: 'FREE WIFI' },
+            ],
+            price: 'INR 8,999',
+            packages: [
+                {
+                    id: 'r1-p1', title: 'ECONOMY', subtitle: 'SEA VIEW', price: 'INR 6,578', details: 'Breakfast Included',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 5,574.58' }],
+                        tax: 'INR 1,003.42',
+                        total: 'INR 6,578.00',
+                    },
+                },
+                {
+                    id: 'r1-p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: 'No Meals',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 4,406.78' }],
+                        tax: 'INR 793.22',
+                        total: 'INR 5,200.00',
+                    },
+                },
+                {
+                    id: 'r1-p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: 'Breakfast Included',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 4,236.44' }],
+                        tax: 'INR 762.56',
+                        total: 'INR 4,999.00',
+                    },
+                },
+            ] as PackageItem[],
         },
         {
-            id: 'p2', title: 'ROOM ONLY', subtitle: 'SEA VIEW', price: 'INR 5,200', details: 'Breakfast Included',
-            priceBreakdown: {
-                entries: [{ label: 'Jul 1', amount: 'INR 4,406.78' }],
-                tax: 'INR 793.22',
-                total: 'INR 5,200.00',
-            },
+            id: 'r2',
+            image: '/images/Rectangle.png',
+            name: 'DELUXE',
+            subtitle: 'OCEAN VIEW & GARDEN VIEW',
+            amenities: [
+                { icon: 'Flower2', label: 'PRIVATE TERRACE' },
+                { icon: 'Sofa', label: 'LIVING AREA' },
+                { icon: 'Wifi', label: 'FREE WIFI' },
+            ],
+            price: 'INR 12,999',
+            packages: [
+                {
+                    id: 'r2-p1', title: 'DELUXE B&B', subtitle: 'OCEAN VIEW', price: 'INR 10,578', details: 'Breakfast Included',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 8,964.41' }],
+                        tax: 'INR 1,613.59',
+                        total: 'INR 10,578.00',
+                    },
+                },
+                {
+                    id: 'r2-p2', title: 'ROOM ONLY', subtitle: 'OCEAN VIEW', price: 'INR 9,200', details: 'No Meals',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 7,796.61' }],
+                        tax: 'INR 1,403.39',
+                        total: 'INR 9,200.00',
+                    },
+                },
+                {
+                    id: 'r2-p3', title: 'NON REFUNDABLE', subtitle: 'OCEAN VIEW', price: 'INR 8,500', details: 'Breakfast Included',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 7,203.39' }],
+                        tax: 'INR 1,296.61',
+                        total: 'INR 8,500.00',
+                    },
+                },
+            ] as PackageItem[],
         },
         {
-            id: 'p3', title: 'NON REFUNDABLE', subtitle: 'SEA VIEW', price: 'INR 4,999', details: 'Breakfast Included',
-            priceBreakdown: {
-                entries: [{ label: 'Jul 1', amount: 'INR 4,236.44' }],
-                tax: 'INR 762.56',
-                total: 'INR 4,999.00',
-            },
+            id: 'r3',
+            image: '/images/Rectangle.png',
+            name: 'SUITE',
+            subtitle: 'PANORAMIC SEA VIEW',
+            amenities: [
+                { icon: 'Flower2', label: 'PRIVATE POOL' },
+                { icon: 'Sofa', label: 'LOUNGE SPACE' },
+                { icon: 'Wifi', label: 'FREE WIFI' },
+            ],
+            price: 'INR 18,999',
+            packages: [
+                {
+                    id: 'r3-p1', title: 'SUITE FULL BOARD', subtitle: 'PANORAMIC VIEW', price: 'INR 16,578', details: 'All Meals Included',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 14,049.15' }],
+                        tax: 'INR 2,528.85',
+                        total: 'INR 16,578.00',
+                    },
+                },
+                {
+                    id: 'r3-p2', title: 'ROOM ONLY', subtitle: 'PANORAMIC VIEW', price: 'INR 14,500', details: 'No Meals',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 12,288.14' }],
+                        tax: 'INR 2,211.86',
+                        total: 'INR 14,500.00',
+                    },
+                },
+                {
+                    id: 'r3-p3', title: 'NON REFUNDABLE', subtitle: 'PANORAMIC VIEW', price: 'INR 13,200', details: 'Breakfast Included',
+                    priceBreakdown: {
+                        entries: [{ label: 'Jul 1', amount: 'INR 11,186.44' }],
+                        tax: 'INR 2,013.56',
+                        total: 'INR 13,200.00',
+                    },
+                },
+            ] as PackageItem[],
         },
     ];
 
-    function onSelectPackage() {
-        setShowPackages(true);
-        window.scrollTo({ top: 400, behavior: 'smooth' });
+    function togglePackages(roomId: string) {
+        setOpenPackagesFor((prev) => (prev === roomId ? null : roomId));
     }
 
-    useEffect(() => {
-        // When showPackages becomes true (e.g. via EDIT), ensure UI scrolls into view
-        if (showPackages) {
-            setTimeout(() => {
-                window.scrollTo({
-                    top: 400,
-                    behavior: "smooth",
-                });
-            }, 100);
-        }
-    }, [showPackages]);
+    // useEffect(() => {
+    //     if (showPackages) {
+    //         setTimeout(() => {
+    //             window.scrollTo({
+    //                 top: 400,
+    //                 behavior: "smooth",
+    //             });
+    //         }, 100);
+    //     }
+    // }, [showPackages]);
 
     function addPackage(pkg: PackageItem, adults: number, children: number) {
         setSelected((s) => [...s, { ...pkg, adults, children }]);
@@ -108,69 +196,74 @@ export default function SelectRoomSection({
 
             {/* Main layout */}
             <div className="grid xl:grid-cols-[1fr_360px] gap-10 xl:gap-20">
-                {/* Left: room card + packages */}
+                {/* Left: room cards + packages */}
                 <div className="flex flex-col gap-6">
-                    <div className="grid sm:grid-cols-12 gap-6">
-                        <div className="relative md:col-span-8  shrink-0 rounded-xs overflow-hidden shadow-sm">
-                            <img
-                                src="/images/Rectangle.png"
-                                alt="room"
-                                className="w-full h-40 sm:h-full object-cover"
-                            />
-                            <button
-                                onClick={() => setShowDetails(true)}
-                                className={`absolute top-4 right-4 backdrop-blur-md bg-accent/51 text-white ${typography.textSm}  px-3 py-1 rounded cursor-pointer font-arizona-light`}
-                            >
-                                View Details
-                            </button>
-                        </div>
+                    {rooms.map((room) => {
+                        const amenityIcons: Record<string, React.ReactNode> = {
+                            Flower2: <Flower2 size={22} strokeWidth={1.5} />,
+                            Sofa: <Sofa size={22} strokeWidth={1.5} />,
+                            Wifi: <Wifi size={22} strokeWidth={1.5} />,
+                        };
 
-                        <div className="md:col-span-4">
-                            <div className=" font-arizona-sans-regular space-y-2">
-                                <div className={`${typography.textXl} tracking-widest mt-1 `}>ECONOMY</div>
-                                <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">SEA VIEW & SUNSET VIEW </div>
+                        return (
+                            <div key={room.id} className="flex flex-col gap-6">
+                                <div className="grid sm:grid-cols-12 gap-6">
+                                    <div className="relative md:col-span-8 shrink-0 rounded-xs overflow-hidden shadow-sm">
+                                        <img
+                                            src={room.image}
+                                            alt={room.name}
+                                            className="w-full h-40 sm:h-full object-cover"
+                                        />
+                                        <button
+                                            onClick={() => setShowDetails(true)}
+                                            className={`absolute top-4 right-4 backdrop-blur-md bg-accent/51 text-white ${typography.textSm} px-3 py-1 rounded cursor-pointer font-arizona-light`}
+                                        >
+                                            View Details
+                                        </button>
+                                    </div>
 
-                                <ul className="mt-4 mb-10 tracking-[0.15em]  space-y-4 text-sm text-dark-gray text-[10px] lg:text-xs">
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Flower2 size={22} strokeWidth={1.5} /></span>
-                                        BALCONY
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-4 h-4 rounded-full flex items-center justify-center text-xs">    <Sofa size={22} strokeWidth={1.5} />
-                                        </span>
-                                        WALKOUT SPACE
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-4 h-4  rounded-full flex items-center justify-center text-xs"><Wifi size={22} strokeWidth={1.5} />
-                                        </span>
-                                        FREE WIFI
-                                    </li>
-                                </ul>
+                                    <div className="md:col-span-4">
+                                        <div className="font-arizona-sans-regular space-y-2">
+                                            <div className={`${typography.textXl} tracking-widest mt-1`}>{room.name}</div>
+                                            <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">{room.subtitle}</div>
+
+                                            <ul className="mt-4 mb-10 tracking-[0.15em] space-y-4 text-sm text-dark-gray text-[10px] lg:text-xs">
+                                                {room.amenities.map((amenity) => (
+                                                    <li key={amenity.label} className="flex items-center gap-2">
+                                                        <span className="w-4 h-4 rounded-full flex items-center justify-center text-xs">
+                                                            {amenityIcons[amenity.icon]}
+                                                        </span>
+                                                        {amenity.label}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="tracking-[.04em]">
+                                            <div className="text-[13px] text-sm text-dark-gray font-arizona-light">From</div>
+                                            <div className={`text-[36px] font-arizona-regular`}>{room.price}<span className="text-[15px] lg:text-base font-arizona-light text-dark-gray">/night</span></div>
+                                            <div className="text-[11px] lg:text-xs font-arizona-light text-dark-gray">subject to GST and charges</div>
+                                        </div>
+                                        <button
+                                            onClick={() => togglePackages(room.id)}
+                                            className={`mt-4 bg-primary text-white px-4 h-10 rounded-xs font-arizona-sans-regular uppercase text-xs lg:text-sm tracking-[0.15em] cursor-pointer`}
+                                        >
+                                            Select Packages
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {openPackagesFor === room.id && (
+                                    <PackageList
+                                        packages={room.packages}
+                                        selected={selected}
+                                        openQtyFor={openQtyFor}
+                                        setOpenQtyFor={setOpenQtyFor}
+                                        addPackage={addPackage}
+                                    />
+                                )}
                             </div>
-                            <div className='tracking-[.04em]'>
-                                <div className="text-[13px] text-sm text-dark-gray font-arizona-light">From</div>
-                                <div className={`text-[36px] font-arizona-regular `}>INR 8,999<span className="text-[15px] lg:text-base font-arizona-light text-dark-gray ">/night</span></div>
-                                <div className="text-[11px] lg:text-xs font-arizona-light text-dark-gray   ">subject to GST and charges</div>
-                            </div>
-                            <button
-                                onClick={onSelectPackage}
-                                className={`mt-4 bg-primary text-white px-4 h-10 rounded-xs font-arizona-sans-regular uppercase text-xs lg:text-sm tracking-[0.15em] cursor-pointer`}
-                            >
-                                Select Packages
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Choose package list (shown after clicking Select Package) */}
-                    {showPackages && (
-                        <PackageList
-                            packages={packages}
-                            selected={selected}
-                            openQtyFor={openQtyFor}
-                            setOpenQtyFor={setOpenQtyFor}
-                            addPackage={addPackage}
-                        />
-                    )}
+                        );
+                    })}
                 </div>
 
                 {/* Right: sidebar */}
