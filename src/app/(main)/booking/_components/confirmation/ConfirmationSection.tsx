@@ -11,8 +11,6 @@ export default function ConfirmationSection() {
   const invoiceRef = useRef<HTMLDivElement | null>(null);
   const [downloading, setDownloading] = useState(false);
 
-  //   const [showInvoicePreview, setShowInvoicePreview] = useState(false);
-
   async function handleDownloadInvoice() {
     setDownloading(true);
     try {
@@ -306,34 +304,6 @@ export default function ConfirmationSection() {
 
         {/* ── Explore More ── */}
         <div className="bg-white px-6 py-8">
-          {/* <h3
-            className={`text-center ${typography.textThXl} font-bold text-primary mb-6`}
-          >
-            Explore More For Your Hotel Room
-          </h3> */}
-          {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="shadow-[-1px_4px_4px_0px_#00000040]">
-                <img
-                  src="/images/Rectangle.png"
-                  alt={`explore-${i}`}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-3">
-                  <p className="text-sm font-bold text-dark-gray">
-                    SPA &amp; WELLNESS
-                  </p>
-                  <p className="text-sm text-dark-gray mt-0.5">
-                    relax &amp; rejuvenate
-                  </p>
-                  <button className="text-sm text-primary mt-2">
-                    Explore →
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div> */}
-
           <div className="grid grid-cols-1 sm:grid-cols-5 sm:gap-5 gap-4 items-stretch">
             <div className="shadow-[-1px_4px_4px_0px_#00000040] sm:col-span-2 h-full">
               <Image
@@ -375,21 +345,6 @@ export default function ConfirmationSection() {
             </div>
           </div>
         </div>
-
-        {/* ── PREVIEW MODAL ── opens when user clicks "Preview Invoice" */}
-        {/* {showInvoicePreview && (
-        <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 p-4">
-          <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-sm shadow-lg">
-            <button
-              onClick={() => setShowInvoicePreview(false)}
-              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center border rounded-full bg-white"
-            >
-              ✕
-            </button>
-            <InvoicePreview />
-          </div>
-        </div>
-      )} */}
 
         <div
           aria-hidden="true"

@@ -1,5 +1,5 @@
 import { typography } from '@/src/lib/typography';
-import { Minus, Plus, X } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { useState } from 'react';
 
 export interface Room {
@@ -110,11 +110,6 @@ export default function RoomsAndGuests({
         );
     };
 
-    const removeRoom = (index: number) => {
-        setRooms((prev) => prev.filter((_, i) => i !== index));
-    };
-
-
     const handleCheckAvailability = () => {
         onCheckAvailability();
 
@@ -125,7 +120,6 @@ export default function RoomsAndGuests({
     };
 
 
-    // promo code state (fixes undefined `promo` used in the input)
     const [promo, setPromo] = useState<string>('');
 
 
@@ -135,23 +129,6 @@ export default function RoomsAndGuests({
             <div className="flex-1 overflow-y-auto pr-2">
                 {rooms.map((room, i) => (
                     <div key={i} className="mb-4">
-                        {/* <div className="flex items-center justify-between mb-1">
-                            <p className={`${typography.textLg} uppercase tracking-[0.04em]  text-dark-gray font-arizona-light`}>
-                                Room {i + 1}
-                            </p>
-
-                            {rooms.length > 1 && (
-                                <button
-                                    type="button"
-                                    onClick={() => removeRoom(i)}
-                                    aria-label={`Remove room ${i + 1}`}
-                                    className="flex h-6 w-6 items-center justify-center rounded-full text-silver hover:text-red-500 transition-colors cursor-pointer"
-                                >
-                                    <X size={14} />
-                                </button>
-                            )}
-                        </div> */}
-
                         {(() => {
                             const maxGuests = room.rooms * GUESTS_PER_ROOM;
                             const totalGuests = room.adults + room.children;
@@ -204,33 +181,8 @@ export default function RoomsAndGuests({
                     </div>
                 ))}
 
-                {/* Add Room */}
-                {/* <button
-                    onClick={() =>
-                        setRooms(prev => [...prev, { adults: 1, children: 0 }])
-                    }
-                    className="text-sm uppercase tracking-widest text-dark-gray font-semibold  mt-3"
-                >
-                    Add Another Room +
-                </button> */}
-
                 {/* IATA Code */}
                 <div className="mt-4 pt-3">
-                    {/* <button
-                        onClick={() => setIataOpen(o => !o)}
-                        className="flex items-center justify-between w-full text-sm uppercase tracking-widest text-dark-gray font-semibold"
-                    >
-                        <span>IATA Code</span>
-
-                        <span
-                            className={`transition-transform duration-200 ${iataOpen ? 'rotate-180' : ''
-                                }`}
-                        >
-                            <ChevronDown size={14} />
-                        </span>
-                    </button> */}
-
-                    {/* <label className="text-sm text-dark-gray mb-1 block">Promo Code</label> */}
                     <input
                         value={promo}
                         onChange={(e) => setPromo(e.target.value)}

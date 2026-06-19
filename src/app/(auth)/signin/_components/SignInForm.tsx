@@ -61,7 +61,7 @@ function PasswordStep({
   onBack: () => void;
   showPassword: boolean;
   toggleShowPassword: () => void;
-  onSignInWithCode: () => void; // added type
+  onSignInWithCode: () => void;
 
 }) {
   return (
@@ -136,7 +136,7 @@ function PasswordStep({
 }
 
 export default function SignInForm() {
-  const router = useRouter(); // added router
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
@@ -174,17 +174,11 @@ export default function SignInForm() {
         }
         return;
       }
-
-      // step === "password" -> call login API
-      // TODO: replace with real login call
-      console.log("Logging in with", { email, password });
     },
     [step, email, password]
   );
 
   return (
-    // add `import Image from "next/image"` at the top of the file
-
     <div className="w-full max-w-sm">
       <Link href="https://thebeachhotel.in/">
         <Image
@@ -197,11 +191,6 @@ export default function SignInForm() {
         />
       </Link>
 
-
-      {/* <p className="mb-8 text-center text-xs uppercase tracking-[0.15em] text-dark-gray lg:hidden">
-        Welcome Back
-      </p> */}
-
       <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6">
         {step === "email" ? (
           <EmailStep email={email} onEmailChange={setEmail} onSignInWithCode={handleSignInWithCode} />
@@ -213,7 +202,7 @@ export default function SignInForm() {
             onBack={handleBackToEmail}
             showPassword={showPassword}
             toggleShowPassword={toggleShowPassword}
-            onSignInWithCode={handleSignInWithCode} // pass handler
+            onSignInWithCode={handleSignInWithCode}
           />
         )}
       </form>

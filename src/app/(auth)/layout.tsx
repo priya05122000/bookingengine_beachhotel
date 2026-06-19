@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { typography } from "@/src/lib/typography";
 
@@ -14,10 +14,7 @@ interface AuthLayoutProps {
 export default function AuthLayout({
   children,
 }: AuthLayoutProps) {
-  const pathname = usePathname();
   const router = useRouter();
-  const isSignin = pathname?.toLowerCase().includes("signin");
-  const isSignup = pathname?.toLowerCase().includes("signup");
 
   return (
     <div className="min-h-screen bg-gray">
@@ -72,12 +69,6 @@ export default function AuthLayout({
               Back
             </button>
 
-            {/* <button
-              type="button"
-              className="flex h-10 items-center border border-primary px-4 text-sm text-primary transition hover:bg-primary hover:text-white"
-            >
-              {isSignup ? "Register" : "Sign in"}
-            </button> */}
           </div>
 
           {children}

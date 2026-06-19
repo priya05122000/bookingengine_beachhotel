@@ -156,17 +156,6 @@ export default function SelectRoomSection({
         setOpenPackagesFor((prev) => (prev === roomId ? null : roomId));
     }
 
-    // useEffect(() => {
-    //     if (showPackages) {
-    //         setTimeout(() => {
-    //             window.scrollTo({
-    //                 top: 400,
-    //                 behavior: "smooth",
-    //             });
-    //         }, 100);
-    //     }
-    // }, [showPackages]);
-
     function addPackage(pkg: PackageItem, rooms: number, adults: number, children: number) {
         setSelected((s) => {
             const exists = s.some((p) => p.id === pkg.id);
@@ -193,7 +182,6 @@ export default function SelectRoomSection({
                     <div className={`text-dark-gray text-xs lg:text-sm tracking-[.15em] `}>
                         1 NIGHT | 1 ROOM , 2 ADULT</div>
                     <button
-                        // onClick={() => setShowPackages(false)}
                         onClick={onEdit}
                         className="text-xs lg:text-sm tracking-[.15em] uppercase  px-4 h-8 border border-primary text-primary rounded-xs cursor-pointer"
                     >

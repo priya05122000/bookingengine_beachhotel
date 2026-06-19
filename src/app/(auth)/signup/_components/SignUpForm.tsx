@@ -33,9 +33,6 @@ export default function SignUpForm() {
                 setError("Passwords do not match.");
                 return;
             }
-
-            // TODO: replace with real signup API call
-            console.log("Registering user", { fullName, email, mobile, password });
         },
         [fullName, email, mobile, password, confirmPassword]
     );
@@ -52,11 +49,6 @@ export default function SignUpForm() {
                     style={{ width: "auto" }}
                 />
             </Link>
-
-            {/* <p className="mb-4 text-center text-xl font-semibold uppercase text-silver">
-                Create Account
-            </p> */}
-
 
             <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6" noValidate>
                 {error && (
