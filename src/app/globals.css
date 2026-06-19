@@ -55,6 +55,14 @@ body {
 }
 
 @layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   .font-arizona {
     font-family: var(--font-arizona);
   }

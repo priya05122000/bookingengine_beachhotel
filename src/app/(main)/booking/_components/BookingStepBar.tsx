@@ -11,7 +11,7 @@ export default function BookingStepBar({ steps, activeStep, enabledUpTo }: Booki
     };
 
     return (
-        <nav className="flex overflow-x-auto overflow-y-hidden -mx-4 px-4 border-b border-gray mb-8 whitespace-nowrap">
+        <nav className="flex overflow-x-auto overflow-y-hidden scrollbar-hide -mx-4 px-4 border-b border-gray mb-8 whitespace-nowrap">
             {steps.map((step, i) => {
                 const isEnabled = i <= enabledUpTo;
                 const isActive = i === activeStep;
