@@ -2,10 +2,26 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+    const [hidden, setHidden] = useState(false);
+
+    useEffect(() => {
+        const footer = document.querySelector("footer");
+        if (!footer) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => setHidden(entry.isIntersecting),
+            { threshold: 0.7 }
+        );
+
+        observer.observe(footer);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <header className="fixed top-0 left-0 z-50 w-full">
+        <header className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-in-out ${hidden ? " opacity-0 pointer-events-none" : "opacity-100"}`}>
             <div className="py-2 bg-white flex justify-end px-4 lg:px-12">
                 <Link
                     href="/signin"

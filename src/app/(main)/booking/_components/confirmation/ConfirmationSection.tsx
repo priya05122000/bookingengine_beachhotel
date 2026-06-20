@@ -45,9 +45,7 @@ export default function ConfirmationSection() {
                 Your Booking Is Confirmed
               </h2>
               <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
-                Thank you for choosing the beach hotel
-                <br />
-                we look forward to hosting you
+                Let the charm of the coastline and luxurious comforts set the stage for an unforgettable stay.
               </p>
             </div>
           </div>
@@ -60,7 +58,9 @@ export default function ConfirmationSection() {
             <p className="text-xs font-arizona-light text-dark-gray tracking-wide">
               Booking reference
             </p>
-            <p className={` font-arizona-regular tracking-wider font-bold text-primary leading-tight mt-0.5 ${typography.textTwoXl}`}>
+            <p
+              className={` font-arizona-regular tracking-wider font-bold text-primary leading-tight mt-0.5 ${typography.textTwoXl}`}
+            >
               LB4567854
             </p>
             <p className="text-xs font-arizona-light text-dark-gray mt-1">
@@ -88,26 +88,20 @@ export default function ConfirmationSection() {
                     <p className=" text-dark-gray uppercase tracking-widest mb-2">
                       Guest
                     </p>
-                    <p className="  text-primary">
-                      Nuva rey
-                    </p>
+                    <p className="  text-primary">Nuva rey</p>
                   </div>
                   <div>
                     <p className=" text-dark-gray uppercase tracking-widest mb-2">
                       Check - In
                     </p>
-                    <p className="  text-primary">
-                      Sun, 22 May 2026
-                    </p>
+                    <p className="  text-primary">Sun, 22 May 2026</p>
                     <p className=" text-dark-gray mt-1">From 6:00 pm</p>
                   </div>
                   <div>
                     <p className="text-dark-gray uppercase tracking-widest mb-2">
                       Check - Out
                     </p>
-                    <p className=" text-primary">
-                      Mon, 23 May 2026
-                    </p>
+                    <p className=" text-primary">Mon, 23 May 2026</p>
                     <p className="text-dark-gray mt-1">by 6:00 pm</p>
                   </div>
 
@@ -124,9 +118,7 @@ export default function ConfirmationSection() {
                     <p className="text-dark-gray uppercase tracking-widest mb-2">
                       Phone
                     </p>
-                    <p className=" text-primary">
-                      +91 65478 98756
-                    </p>
+                    <p className=" text-primary">+91 65478 98756</p>
                   </div>
                   <div>
                     <p className=" text-dark-gray uppercase tracking-widest mb-2">
@@ -141,12 +133,13 @@ export default function ConfirmationSection() {
             {/* Bottom strip */}
             <div className="bg-white border border-primary px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-2">
               <div>
-                <p className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
+                <p
+                  className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
                 >
-                  Manage Your Booking N The Go
+                  Manage Your Reservation 
                 </p>
                 <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
-                  View modify or cancel your booking anytime
+                  Access your booking details and make changes anytime.
                 </p>
               </div>
               <button
@@ -183,9 +176,7 @@ export default function ConfirmationSection() {
                     <p className="text-dark-gray uppercase tracking-widest text-xs lg:text-sm">
                       Check - In
                     </p>
-                    <p className="text-xs text-primary">
-                      Mon, 23 May 2026
-                    </p>
+                    <p className="text-xs text-primary">Mon, 23 May 2026</p>
                     <p className="text-dark-gray mt-0.5 text-xs">
                       From 6:00 pm
                     </p>
@@ -194,12 +185,8 @@ export default function ConfirmationSection() {
                     <p className="text-dark-gray uppercase tracking-widest  text-xs lg:text-sm">
                       Check - Out
                     </p>
-                    <p className="text-primary text-xs">
-                      Mon, 23 May 2026
-                    </p>
-                    <p className="text-dark-gray mt-0.5 text-xs">
-                      by 6:00 pm
-                    </p>
+                    <p className="text-primary text-xs">Mon, 23 May 2026</p>
+                    <p className="text-dark-gray mt-0.5 text-xs">by 6:00 pm</p>
                   </div>
                 </div>
                 {/* Total Length of Stay */}
@@ -236,7 +223,6 @@ export default function ConfirmationSection() {
                       Breakfast Included
                     </p>
                   </div>
-
                 </div>
               </div>
 
@@ -252,9 +238,7 @@ export default function ConfirmationSection() {
                   <div className="flex justify-between  text-dark-gray">
                     <div className="flex flex-col">
                       <span>Rooms</span>
-                      <span className="text-dark-gray">
-                        (1 Day x 2 Nights)
-                      </span>
+                      <span className="text-dark-gray">(1 Day x 2 Nights)</span>
                     </div>
 
                     <span>&#8377; 6,000</span>
@@ -281,12 +265,8 @@ export default function ConfirmationSection() {
                 </div>
 
                 <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-gray-700 text-base lg:text-lg font-arizona-light tracking-[0.04em] text-primary">
-                  <span>
-                    Total Amount Paid
-                  </span>
-                  <span >
-                    &#8377; 8300
-                  </span>
+                  <span>Total Amount Paid</span>
+                  <span>&#8377; 8300</span>
                 </div>
               </div>
               <div className="mt-3 flex gap-3">
@@ -319,20 +299,18 @@ export default function ConfirmationSection() {
             <div className="col-span-3 font-arizona-sans-regular h-full flex">
               <div className="sm:col-span-3 w-full flex flex-col justify-between sm:p-4">
                 <div>
-                  <p className={`${typography.textXl} tracking-widest text-dark-gray uppercase `}>
-                    SPA &amp; WELLNESS
+                  <p
+                    className={`${typography.textLg} tracking-widest text-dark-gray uppercase font-semibold`}
+                  >
+                    An Invitation to Stay
                   </p>
-                  <p className="text-xs lg:text-sm text-dark-gray mb-2">
-                    relax &amp; rejuvenate
-                  </p>
-                  <p className="text-sm lg:text-base font-arizona-light text-justify">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Impedit illum nostrum animi illo repudiandae nulla error,
-                    delectus corrupti, voluptatibus minima reprehenderit nisi a
-                    omnis magnam mollitia optio ipsa provident. Pariatur aliquid
-                    doloremque fugiat ducimus laborum mollitia facilis,
-                    repellendus quaerat nostrum maxime omnis neque totam doloribus
-                    maiores laboriosam dolores dolorem sed!
+                  <p className="text-sm lg:text-base font-arizona-light text-justify mt-2">
+                    At the southernmost tip of India, in the timeless coastal
+                    setting of Kanniyakumari, discover a stay unlike any other.
+                    Where three oceans converge and endless blue waters frame
+                    every moment, refined comforts, exceptional hospitality and
+                    a profound sense of place come together to create a stay
+                    that lingers long after you leave.
                   </p>
                 </div>
 

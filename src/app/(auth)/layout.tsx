@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -6,14 +5,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { typography } from "@/src/lib/typography";
 
-
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
-export default function AuthLayout({
-  children,
-}: AuthLayoutProps) {
+export default function AuthLayout({ children }: AuthLayoutProps) {
   const router = useRouter();
 
   return (
@@ -30,31 +26,40 @@ export default function AuthLayout({
           </div>
 
           <div className="h-42 shrink-0 px-8 py-8 font-arizona">
-            <Link href="https://thebeachhotel.in/" className=" text-xs uppercase tracking-[0.15em] text-dark-gray hover:underline underline-offset-2" aria-label="Go to homepage">
+            <Link
+              href="https://thebeachhotel.in/"
+              className=" text-xs uppercase tracking-[0.15em] text-dark-gray hover:underline underline-offset-2"
+              aria-label="Go to homepage"
+            >
               The Beach Hotel
             </Link>
 
-            <h3 className={`max-w-md ${typography.textLg} mt-3 leading-normal text-dark-gray`}>
-              Hotel Facilities Are Designated Spaces And Services Designed To
-              Enhance The Guest Experience
+            <h3
+              className={`max-w-md ${typography.textLg} mt-3 leading-normal capitalize text-dark-gray`}
+            >
+              More than a destination, a place to pause, connect and belong.
             </h3>
 
             <div className="mt-4 flex flex-col gap-3 text-xs text-dark-gray">
               <div className="flex items-center gap-2">
-                <Link href={`${process.env.NEXT_PUBLIC_SITE_URL}/privacy-policy`}
-                  className="hover:underline" aria-label="Privacy Policy">
+                <Link
+                  href={`${process.env.NEXT_PUBLIC_SITE_URL}/privacy-policy`}
+                  className="hover:underline"
+                  aria-label="Privacy Policy"
+                >
                   Privacy Policy
                 </Link>
                 <span className="text-dark-gray">|</span>
-                <Link href={`${process.env.NEXT_PUBLIC_SITE_URL}/terms-and-conditions`}
-                  className="hover:underline" aria-label="Terms and Conditions">
+                <Link
+                  href={`${process.env.NEXT_PUBLIC_SITE_URL}/terms-and-conditions`}
+                  className="hover:underline"
+                  aria-label="Terms and Conditions"
+                >
                   Terms &amp; Conditions
                 </Link>
               </div>
-
             </div>
           </div>
-
         </div>
 
         {/* Form Area */}
@@ -68,7 +73,6 @@ export default function AuthLayout({
             >
               Back
             </button>
-
           </div>
 
           {children}
