@@ -10,7 +10,7 @@ export default function GuestPaymentSection() {
   const [country, setCountry] = useState("");
 
   return (
-    <div className=" py-8">
+    <div className="py-8">
       <div className="  flex flex-col lg:grid lg:grid-cols-[1fr_300px] gap-6 items-start">
         {/* ── Left column ── */}
         <div className="space-y-5 w-full">
