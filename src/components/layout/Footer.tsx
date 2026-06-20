@@ -12,12 +12,12 @@ const navLinks = [
 ];
 
 const spaLinks = [
-  { label: "SPA", href: "/spa" },
-  { label: "ABOUT US", href: "/about" },
-  { label: "HOTEL FACILITIES", href: "/facilities" },
-  { label: "GALLERY", href: "/gallery" },
-  { label: "NEARBY DESTINATION", href: "/nearby" },
-  { label: "CONTACT US", href: "/contact" },
+  { label: "Rooms & Suites", href: "/rooms" },
+  { label: "Dining", href: "/dining" },
+  { label: "Spa", href: "/spa" },
+  { label: "Infinity Pool", href: "/infinity-pool" },
+  { label: "Executive Lounge", href: "/executive-lounge" },
+  { label: "Transportation", href: "/transportation" },
 ];
 
 const socialIcons: { href: string; label: string; path: string }[] = [
@@ -45,6 +45,7 @@ const socialIcons: { href: string; label: string; path: string }[] = [
 
 export default function Footer() {
   return (
+    <footer>
     <Section className="bg-primary w-full relative text-white overflow-hidden z-10 pt-10 lg:pt-20">
       <div className="h-full flex flex-col justify-between font-arizona-light space-y-10">
 
@@ -202,5 +203,6 @@ export default function Footer() {
       </div>
 
     </Section>
+    </footer>
   );
 }
