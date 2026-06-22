@@ -122,14 +122,14 @@ export default function Footer() {
                         key={item.label}
                         href={item.href}
                         aria-label={item.label}
-                        className="border border-gray-700 p-1.5"
+                        className="border border-gray-700 p-1.5 rounded-xs hover:border-gray-500 transition-colors"
                       >
                         <Image
                           src={item.path}
                           alt={item.label}
                           width={28}
                           height={28}
-                          className="w-6 h-6"
+                          className="w-4 h-4"
                         />
                       </Link>
                     ))}
