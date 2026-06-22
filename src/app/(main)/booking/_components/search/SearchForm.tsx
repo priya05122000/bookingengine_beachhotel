@@ -132,7 +132,7 @@ export default function SearchForm() {
             <div className="xl:hidden">
                 {/* Dates */}
                 <section>
-                    <div className="border-b  px-4 py-6">
+                    <div className="border-b px-4 py-6">
                         <h3 className={`uppercase ${typography.textXl} font-arizona-sans-regular tracking-[.04em] font-medium mb-6 `}>
                             Dates Of Stay
                         </h3>
