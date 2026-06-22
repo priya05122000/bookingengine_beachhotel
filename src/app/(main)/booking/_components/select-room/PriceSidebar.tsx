@@ -30,7 +30,7 @@ function formatINR(n: number) {
 /* Class constants to reduce repetition */
 const FONT = "text-xs lg:text-sm font-arizona-light tracking-widest";
 const CARD =
-  "bg-light-white rounded-xs shadow-[1px_4px_4px_0px_#00000040] p-4";
+  "bg-primary/4 rounded-xs shadow-[1px_4px_4px_0px_#00000040] p-4";
 
 /* Small presentational component for each line item */
 function PriceLineItem({

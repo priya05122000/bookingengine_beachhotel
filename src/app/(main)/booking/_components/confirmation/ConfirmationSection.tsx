@@ -169,7 +169,7 @@ export default function ConfirmationSection() {
               >
                 Reservation Summery
               </h4>
-              <div className="bg-light-white font-arizona-sans-regular shadow-[-1px_4px_4px_0px_#00000040]  p-4 space-y-4">
+              <div className="bg-primary/4 font-arizona-sans-regular shadow-[-1px_4px_4px_0px_#00000040]  p-4 space-y-4">
                 {/* Check-in / Check-out */}
                 <div className="grid grid-cols-2 gap-4  ">
                   <div className="space-y-1">
@@ -227,7 +227,7 @@ export default function ConfirmationSection() {
               </div>
 
               {/* Price Summery */}
-              <div className="bg-light-white shadow-[-1px_4px_4px_0px_#00000040] p-4 space-y-4 mt-3 ">
+              <div className="bg-primary/4 shadow-[-1px_4px_4px_0px_#00000040] p-4 space-y-4 mt-3 ">
                 <h4
                   className={`${typography.textBase} font-bold text-primary mb-4 font-arizona-light tracking-wider`}
                 >
