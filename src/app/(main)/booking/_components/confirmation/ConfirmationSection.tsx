@@ -304,19 +304,17 @@ export default function ConfirmationSection() {
                   >
                     An Invitation to Stay
                   </p>
-                  <p className={`${typography.textFoXl} font-arizona-light font-semibold text-justify mt-2`}>
+                  <p className={`${typography.textFoXl} font-arizona-light text-primary font-semibold text-justify mt-2`}>
                     At the southernmost tip of India, in the timeless coastal
                     setting of Kanniyakumari, discover a stay unlike any other.
                     Where three oceans converge and endless blue waters frame
-                    every moment, refined comforts, exceptional hospitality and
-                    a profound sense of place come together to create a stay
-                    that lingers long after you leave.
+                    every moment
                   </p>
                 </div>
 
                 <div className="mt-4">
-                  <button className=" bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center">
-                    Explore <ArrowRight className="w-4 h-4 ml-2" />
+                  <button className=" text-primary border-b border-primary    text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center">
+                    Explore <ArrowRight className="w-3 h-4 ml-1" />
                   </button>
                 </div>
               </div>
