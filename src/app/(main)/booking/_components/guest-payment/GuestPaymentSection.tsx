@@ -157,12 +157,29 @@ export default function GuestPaymentSection() {
             <div className="p-4">
               {/* Title row */}
               <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-lg lg:text-xl font-arizona-sans-regular  text-dark-gray tracking-wide">
-                    ECONOMY
+                <div className="space-y-1">
+                  <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
+                    Rooms Selected
                   </p>
-                  <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">
-                    SEA VIEW
+                  <div className="space-y-1">
+                    <p
+                      className={`${typography.textBase} font-bold text-primary`}
+                    >
+                      Premier Room - Sea View
+                      <span className="text-[10px] block">( 2 Rooms | 2 Adults & 2 Children )</span>
+                    </p>
+                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
+                      Breakfast Included
+                    </p>
+                    <p
+                      className={`${typography.textBase} font-bold text-primary`}
+                    >
+                      Bay Suite - Sea View
+                      <span className="text-[10px] block">( 1 Room | 2 Adults )</span>
+                    </p>
+                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
+                      Breakfast Included
+                    </p>
                   </div>
                 </div>
                 <button
@@ -185,7 +202,7 @@ export default function GuestPaymentSection() {
               </div>
 
               {/* Dates */}
-              <div className="flex items-start justify-between my-3 ">
+              <div className="flex items-start justify-between my-3 border-t border-gray-100 pt-3">
                 <div className="grid grid-cols-2 gap-4 ">
                   <div className="space-y-1">
                     <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
@@ -223,36 +240,12 @@ export default function GuestPaymentSection() {
                 </button>
               </div>
 
-              <div className="space-y-1 mt-3 pt-3 border-t border-gray-100">
-                <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
-                  You Selected
-                </p>
-                <div className="space-y-1">
-                  <p
-                    className={`${typography.textBase} font-bold text-primary`}
-                  >
-                    Premier Room - Sea View
-                  </p>
-                  <p className="text-xs bg-silver/30 p-1 inline-block text-black">
-                    Breakfast Included
-                  </p>
-                  <p
-                    className={`${typography.textBase} font-bold text-primary`}
-                  >
-                    Bay Suite - Sea View
-                  </p>
-                  <p className="text-xs bg-silver/30 p-1 inline-block text-black">
-                    Breakfast Included
-                  </p>
-                </div>
-              </div>
-
               <div className="text-xs lg:text-sm border-t border-gray-100 font-arizona-sans-regular text-dark-gray mt-3 flex flex-wrap gap-1.5 pt-3">
                 <span>1 NIGHT x 1 DAY </span>
                 <span>|</span>
-                <span> 1 ROOM </span>
+                <span> 3 ROOM </span>
                 <span>|</span>
-                <span> 2 ADULT</span>
+                <span> 4 ADULT</span>
                 <span>|</span>
                 <span> 2 CHILDREN</span>
               </div>

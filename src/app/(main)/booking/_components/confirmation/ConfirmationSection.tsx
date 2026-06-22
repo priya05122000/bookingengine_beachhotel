@@ -45,7 +45,8 @@ export default function ConfirmationSection() {
                 Your Booking Is Confirmed
               </h2>
               <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
-                Let the charm of the coastline and luxurious comforts set the stage for an unforgettable stay.
+                Let the charm of the coastline and luxurious comforts set the
+                stage for an unforgettable stay.
               </p>
             </div>
           </div>
@@ -109,10 +110,7 @@ export default function ConfirmationSection() {
                     <p className="text-dark-gray uppercase tracking-widest mb-2">
                       Your Reservation
                     </p>
-                    <p className=" text-primary">
-                      3 nights, 1<br />
-                      apartment
-                    </p>
+                    <p className=" text-primary">3 Nights, 2 Days | 1 Room</p>
                   </div>
                   <div>
                     <p className="text-dark-gray uppercase tracking-widest mb-2">
@@ -136,7 +134,7 @@ export default function ConfirmationSection() {
                 <p
                   className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
                 >
-                  Manage Your Reservation 
+                  Manage Your Reservation
                 </p>
                 <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
                   Access your booking details and make changes anytime.
@@ -197,7 +195,7 @@ export default function ConfirmationSection() {
                   <p
                     className={`${typography.textBase} font-bold text-primary`}
                   >
-                    5 Days
+                    3 Nights, 2 Days
                   </p>
                 </div>
                 {/* You Selected */}
