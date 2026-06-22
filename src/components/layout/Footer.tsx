@@ -177,7 +177,7 @@ export default function Footer() {
 
               {/* Bottom bar */}
               <div className="sm:mb-4">
-                <div className="flex items-center gap-2 text-sm text-white">
+                <div className="flex items-center gap-2 text-xs text-white uppercase">
                   <Link
                     href={`${process.env.NEXT_PUBLIC_SITE_URL}/terms-and-conditions`}
                     className="transition-colors hover:underline underline-offset-4 decoration-white/50  hover:text-white"
