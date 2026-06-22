@@ -9,6 +9,9 @@ import CountryDropdown from "./CountryDropdown";
 export default function GuestPaymentSection() {
   const [country, setCountry] = useState("");
 
+  const [promo, setPromo] = useState<string>('');
+
+
   return (
     <div className="py-8">
       <div className="  flex flex-col lg:grid lg:grid-cols-[1fr_300px] gap-6 items-start">
@@ -16,17 +19,24 @@ export default function GuestPaymentSection() {
         <div className="space-y-5 w-full">
           {/* Guest Information */}
           <div className="border border-primary bg-white ">
-            <div className="flex items-center justify-between  p-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-10  p-5">
               <h3
                 className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
               >
                 Guest Information
               </h3>
-              <Link href="/signin">
-                <button className="text-xs lg:text-sm text-dark-gray border border-primary px-3 text-nowrap py-1 font-arizona-sans-regular rounded-xs cursor-pointer">
-                  Sign in
-                </button>
-              </Link>
+
+              <div className="flex gap-4 items-center">
+                <p className="text-xs lg:text-sm tracking-[0.04em] text-dark-gray  ">
+                  Login to prefill traveller details and get access to secret deals
+                </p>
+                <Link href="/signin">
+                  <button className="text-xs lg:text-sm text-dark-gray border border-primary px-3 text-nowrap py-1 font-arizona-sans-regular rounded-xs cursor-pointer">
+                    Sign in
+                  </button>
+                </Link>
+              </div>
+
             </div>
             <hr className="border-primary " />
 
@@ -231,7 +241,7 @@ export default function GuestPaymentSection() {
                   <p
                     className={`${typography.textBase} font-bold text-primary`}
                   >
-                    Premier Room - Sea View
+                    Premier Room - Sea View  ( 2 )
                   </p>
                   <p className="text-xs bg-silver/30 p-1 inline-block text-black">
                     Breakfast Included
@@ -247,8 +257,8 @@ export default function GuestPaymentSection() {
                 </div>
               </div>
 
-              <div className="text-xs lg:text-sm border-t border-gray-100 font-arizona-sans-regular text-dark-gray mt-3 flex flex-wrap gap-1.5 pt-3">
-                <span>1 NIGHT x 1 DAY </span>
+              <div className="text-xs  border-t border-gray-100 font-arizona-sans-regular text-dark-gray mt-3 flex flex-wrap gap-1.5 pt-3">
+                <span>2 NIGHT </span>
                 <span>|</span>
                 <span> 1 ROOM </span>
                 <span>|</span>
@@ -288,8 +298,8 @@ export default function GuestPaymentSection() {
                       Total Charges
                     </span>
                   </div>
-                  <div className="flex items-baseline justify-between gap-2 pt-1">
-                    <p className="text-sm text-dark-gray">- &#8377; 1407</p>
+                  <div className="flex items-baseline justify-between gap-2 py-4">
+                    {/* <p className="text-sm text-dark-gray">- &#8377; 1407</p>
                     <div className="flex flex-col items-end">
                       <p className="text-xs text-dark-gray uppercase tracking-wide">
                         Promo code (csrs10)
@@ -297,7 +307,23 @@ export default function GuestPaymentSection() {
                       <p className="text-[10px] text-left text-dark-gray">
                         10% off on total charges
                       </p>
-                    </div>
+                    </div> */}
+
+                    <input
+                      value={promo}
+                      onChange={(e) => setPromo(e.target.value)}
+                      placeholder="Promo Code"
+                      className="flex-1 w-full border-b border-black/35  h-8 text-xs lg:text-sm  font-arizona-sans-regular   text-dark-gray focus:outline-0"
+                    />
+
+                    <button
+
+                      className=" bg-primary text-white h-8 rounded-xs text-xs px-4 font-arizona-sans-regular tracking-widest cursor-pointer"
+                    >
+                      Apply
+                    </button>
+
+
                   </div>
                   <div className="flex items-baseline justify-between gap-2 pt-1">
                     <p className="text-sm text-dark-gray">- &#8377; 907</p>

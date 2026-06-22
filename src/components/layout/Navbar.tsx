@@ -22,7 +22,7 @@ export default function Navbar() {
 
     return (
         <header className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-in-out ${hidden ? " opacity-0 pointer-events-none" : "opacity-100"}`}>
-            <div className="py-2 bg-white flex justify-end px-4 lg:px-12">
+            <div className="py-2 bg-white shadow-[-1px_3px_4px_0px_#00000040] flex justify-end px-4 lg:px-12">
                 <Link
                     href="/signin"
                     className="text-sm text-primary border flex items-center border-primary rounded-xs px-2 h-10 hover:bg-primary hover:text-white transition cursor-pointer"
@@ -30,7 +30,7 @@ export default function Navbar() {
                     Login / Signup
                 </Link>
             </div>
-            <div className="bg-primary relative h-10">
+            {/* <div className="bg-primary relative h-10">
                 <Link
                     href="https://thebeachhotel.in"
                     target="_blank"
@@ -46,7 +46,7 @@ export default function Navbar() {
                         // style={{ width: "auto" }}
                     />
                 </Link>
-            </div>
+            </div> */}
         </header>
     );
 }

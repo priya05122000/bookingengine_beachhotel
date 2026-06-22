@@ -136,10 +136,10 @@ export default function ConfirmationSection() {
                 <p
                   className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
                 >
-                  Manage Your Reservation 
+                  Planning another reservation?
                 </p>
                 <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
-                  Access your booking details and make changes anytime.
+                  Start your booking today.
                 </p>
               </div>
               <button
@@ -155,7 +155,7 @@ export default function ConfirmationSection() {
                 }}
                 className=" bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer"
               >
-                Go To My Booking
+                Reserve Now
               </button>
             </div>
           </div>
@@ -209,7 +209,7 @@ export default function ConfirmationSection() {
                     <p
                       className={`${typography.textBase} font-bold text-primary`}
                     >
-                      Premier Room - Sea View
+                      Premier Room - Sea View  ( 2 )
                     </p>
                     <p className="text-xs bg-silver/30 p-1 inline-block text-black">
                       Breakfast Included
@@ -285,9 +285,9 @@ export default function ConfirmationSection() {
         {/* ── Explore More ── */}
         <div className="bg-white px-6 py-8">
           <div className="grid grid-cols-1 sm:grid-cols-5 sm:gap-5 gap-4 items-stretch">
-            <div className="shadow-[-1px_4px_4px_0px_#00000040] sm:col-span-2 h-full">
+            <div className="shadow-[-1px_4px_4px_0px_#00000040] sm:col-span-2 ">
               <Image
-                src="/images/Rectangle.png"
+                src="/images/invitationstay.jpg"
                 alt={`explore-1`}
                 width={400}
                 height={400}
@@ -300,11 +300,11 @@ export default function ConfirmationSection() {
               <div className="sm:col-span-3 w-full flex flex-col justify-between sm:p-4">
                 <div>
                   <p
-                    className={`${typography.textLg} tracking-widest text-dark-gray uppercase font-semibold`}
+                    className={`${typography.textXl} font-arizona-sans-regular text-primary leading-snug`}
                   >
                     An Invitation to Stay
                   </p>
-                  <p className="text-sm lg:text-base font-arizona-light text-justify mt-2">
+                  <p className={`${typography.textFoXl} font-arizona-light font-semibold text-justify mt-2`}>
                     At the southernmost tip of India, in the timeless coastal
                     setting of Kanniyakumari, discover a stay unlike any other.
                     Where three oceans converge and endless blue waters frame

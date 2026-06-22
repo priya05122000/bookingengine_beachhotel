@@ -21,16 +21,31 @@ export default function BookingShell({
 
         <>
             {activeStep === 0 && (
-                <Image
-                    src="/images/Rectangle.png"
-                    alt='banner'
-                    width={1600}
-                    height={900}
-                    className='w-full h-64 object-cover mb-10 sm:mb-20'
-                />
+                <>
+
+                    <div className=" flex justify-center">
+                        <Image
+                            src="/images/logo.png"
+                            alt='banner'
+                            width={300}
+                            height={150}
+                            className='w-auto h-full object-cover  mb-10 '
+                        />
+                    </div>
+
+
+                    <Image
+                        src="/images/Rectangle.png"
+                        alt='banner'
+                        width={1600}
+                        height={900}
+                        className='w-full h-64 object-cover '
+                    />
+                </>
+
             )}
 
-            <div className=" bg-primary/4 p-4 md:p-10">
+            <div className=" bg-primary/4 p-4 md:p-10 mt-10 sm:mt-20">
                 <h1
                     className={`text-center tracking-[.08em] text-primary  uppercase font-arizona-regular mb-8 md:mb-12 ${typography.textFoXl}`}
                 >

@@ -8,6 +8,7 @@
   --dark-gray: #323131;
   --deep-blue: #172983;
   --primary: #012644;
+  --light-primary:#E5E9EC;
   --accent: #FFC13B;
   --light-white: #EBEBF0;
   --light-green: #53BE90;
@@ -25,6 +26,7 @@
   --color-dark-gray: var(--dark-gray);
   --color-deep-blue: var(--deep-blue);
   --color-primary: var(--primary);
+  --color-light-primary: var(--light-primary);
   --color-accent: var(--accent);
   --color-light-white: var(--light-white);
   --color-light-green: var(--light-green);
@@ -109,5 +111,30 @@ body {
 
   .font-roboto {
     font-family: var(--font-roboto);
+  }
+}
+
+.animated-border {
+  padding: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    #012644,
+    #FFC13BC2,
+    #012644,
+    #012644,
+    #FFC13BC2,
+    #012644
+  );
+  background-size: 250% 250%;
+  animation: gradientMove 4s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 250% 50%;
   }
 }
