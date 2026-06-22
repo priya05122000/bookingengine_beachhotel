@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
 interface BookingStepBarProps {
     steps: string[];
     activeStep: number;
@@ -5,13 +9,27 @@ interface BookingStepBarProps {
 }
 
 export default function BookingStepBar({ steps, activeStep, enabledUpTo }: BookingStepBarProps) {
+    const navRef = useRef<HTMLElement>(null);
+    const activeRef = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+        const nav = navRef.current;
+        const active = activeRef.current;
+        if (!nav || !active) return;
+
+        const navWidth = nav.offsetWidth;
+        const activeLeft = active.offsetLeft;
+        const activeWidth = active.offsetWidth;
+        nav.scrollTo({ left: (activeLeft - navWidth / 2 + activeWidth / 2)-25, behavior: "smooth" });
+    }, [activeStep]);
+
     const goToStep = (step: number) => {
         if (step > enabledUpTo) return;
         window.dispatchEvent(new CustomEvent('search:check-availability', { detail: { step } }));
     };
 
     return (
-        <nav className="flex overflow-x-auto overflow-y-hidden scrollbar-hide -mx-4 px-4 border-b border-gray mb-8 whitespace-nowrap">
+        <nav ref={navRef} className="flex overflow-x-auto overflow-y-hidden scrollbar-hide -mx-4 px-4 border-b border-gray mb-8 whitespace-nowrap">
             {steps.map((step, i) => {
                 const isEnabled = i <= enabledUpTo;
                 const isActive = i === activeStep;
@@ -19,6 +37,7 @@ export default function BookingStepBar({ steps, activeStep, enabledUpTo }: Booki
                 return (
                     <button
                         key={i}
+                        ref={isActive ? activeRef : undefined}
                         type="button"
                         onClick={() => goToStep(i)}
                         disabled={!isEnabled}
