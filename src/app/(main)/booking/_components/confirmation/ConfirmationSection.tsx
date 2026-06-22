@@ -155,7 +155,7 @@ export default function ConfirmationSection() {
                 }}
                 className=" bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer"
               >
-                Reserve Now
+                Book Now
               </button>
             </div>
           </div>
@@ -311,7 +311,7 @@ export default function ConfirmationSection() {
                   </p>
                 </div>
 
-                <p className={`${typography.textXl} font-arizona-light text-primary leading-snug`}
+                <p className={`text-sm lg:text-base font-arizona-light text-primary leading-snug`}
                 >
 
                   The three oceans converge and endless blue waters frame

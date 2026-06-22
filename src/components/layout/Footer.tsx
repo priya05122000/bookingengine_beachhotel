@@ -65,8 +65,8 @@ export default function Footer() {
                 </Link> */}
 
                 <div className="animated-border inline-block w-auto relative overflow-hidden">
-                  <div className="inline-flex items-center gap-3 px-4 h-10 bg-accent rounded-xs ">
-                    <p className="text-sm font-medium text-primary ">
+                  <div className="inline-flex items-center gap-3 px-4 h-10 bg-primary rounded-xs ">
+                    <p className="text-sm font-medium text-white ">
                       Book My Stay
                     </p>
                   </div>
@@ -180,14 +180,14 @@ export default function Footer() {
                 <div className="flex items-center gap-2 text-sm text-white">
                   <Link
                     href={`${process.env.NEXT_PUBLIC_SITE_URL}/terms-and-conditions`}
-                    className="transition-colors underline underline-offset-4 decoration-white/50  hover:text-white"
+                    className="transition-colors hover:underline underline-offset-4 decoration-white/50  hover:text-white"
                   >
                     Terms &amp; Condition
                   </Link>
                   <span>|</span>
                   <Link
                     href={`${process.env.NEXT_PUBLIC_SITE_URL}/privacy-policy`}
-                    className="transition-colors underline underline-offset-4 decoration-white/50  hover:text-white"
+                    className="transition-colors hover:underline underline-offset-4 decoration-white/50  hover:text-white"
                   >
                     Privacy Policy
                   </Link>

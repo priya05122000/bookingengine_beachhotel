@@ -25,7 +25,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             />
           </div>
 
-          <div className="h-42 shrink-0 px-8 py-8 font-arizona">
+          <div className="h-42 shrink-0 px-8 py-8 font-arizona bg-primary/4">
             <Link
               href="https://thebeachhotel.in/"
               className=" text-xs uppercase tracking-[0.15em] text-dark-gray hover:underline underline-offset-2"
