@@ -297,24 +297,32 @@ export default function ConfirmationSection() {
               />
             </div>
             <div className="col-span-3 font-arizona-sans-regular h-full flex">
-              <div className="sm:col-span-3 w-full flex flex-col justify-between sm:p-4">
+              <div className="sm:col-span-3 w-full flex flex-col justify-between sm:p-4 space-y-6">
                 <div>
                   <p
-                    className={`${typography.textXl} font-arizona-sans-regular text-primary leading-snug`}
+                    className={`text-xs lg:text-sm uppercase font-arizona-sans-regular tracking-widest text-primary leading-snug`}
                   >
                     An Invitation to Stay
                   </p>
-                  <p className={`${typography.textFoXl} font-arizona-light text-primary font-semibold text-justify mt-2`}>
+                  <p className={`${typography.textFoXl} font-arizona-light uppercase  font-semibold tracking-wide mt-4`}>
                     At the southernmost tip of India, in the timeless coastal
                     setting of Kanniyakumari, discover a stay unlike any other.
-                    Where three oceans converge and endless blue waters frame
-                    every moment
+
                   </p>
                 </div>
 
+                <p className={`${typography.textXl} font-arizona-light text-primary leading-snug`}
+                >
+
+                  The three oceans converge and endless blue waters frame
+                  every moment, refined comforts, exceptional hospitality and
+                  a profound sense of place come together to create a stay
+                  that lingers long after you leave.
+                </p>
+
                 <div className="mt-4">
-                  <button className=" text-primary border-b border-primary    text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center">
-                    Explore <ArrowRight className="w-3 h-4 ml-1" />
+                  <button className=" text-primary border-b border-primary uppercase   text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center px-4 py-1">
+                    Explore
                   </button>
                 </div>
               </div>
