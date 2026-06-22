@@ -75,7 +75,7 @@ export default function ConfirmationSection() {
         {/* ── Main grid ── */}
         <div className="flex  flex-col lg:grid lg:grid-cols-[1fr_300px] gap-5 items-start">
           {/* Left: Booking Details */}
-          <div className="w-full overflow-hidden lg:sticky lg:top-32 lg:self-start">
+          <div className="w-full overflow-hidden lg:sticky lg:top-20 lg:self-start">
             <div className="px-8 py-8 border border-primary bg-white">
               <h3
                 className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase mb-8`}
