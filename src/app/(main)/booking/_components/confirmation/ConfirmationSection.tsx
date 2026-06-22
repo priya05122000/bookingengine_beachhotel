@@ -45,7 +45,8 @@ export default function ConfirmationSection() {
                 Your Booking Is Confirmed
               </h2>
               <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
-                Let the charm of the coastline and luxurious comforts set the stage for an unforgettable stay.
+                Let the charm of the coastline and luxurious comforts set the
+                stage for an unforgettable stay.
               </p>
             </div>
           </div>
@@ -109,10 +110,7 @@ export default function ConfirmationSection() {
                     <p className="text-dark-gray uppercase tracking-widest mb-2">
                       Your Reservation
                     </p>
-                    <p className=" text-primary">
-                      3 nights, 1<br />
-                      apartment
-                    </p>
+                    <p className=" text-primary">3 Nights, 2 Days | 1 Room</p>
                   </div>
                   <div>
                     <p className="text-dark-gray uppercase tracking-widest mb-2">
@@ -136,6 +134,7 @@ export default function ConfirmationSection() {
                 <p
                   className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
                 >
+                  Manage Your Reservation
                   Planning another reservation?
                 </p>
                 <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
@@ -169,9 +168,35 @@ export default function ConfirmationSection() {
               >
                 Reservation Summery
               </h4>
-              <div className="bg-primary/4 font-arizona-sans-regular shadow-[-1px_4px_4px_0px_#00000040]  p-4 space-y-4">
+              <div className="bg-primary/4  shadow-[-1px_4px_4px_0px_#00000040]  p-4 space-y-4">
                 {/* Check-in / Check-out */}
-                <div className="grid grid-cols-2 gap-4  ">
+
+                <div className="space-y-1">
+                  <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
+                    Rooms Selected
+                  </p>
+                  <div className="space-y-1 tracking-wider">
+                    <p
+                      className={`${typography.textBase} font-semibold text-primary`}
+                    >
+                      Premier Room - Sea View
+                      <span className="text-[10px] block">( 2 Rooms | 2 Adults & 2 Children )</span>
+                    </p>
+                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
+                      Breakfast Included
+                    </p>
+                    <p
+                      className={`${typography.textBase} font-semibold text-primary`}
+                    >
+                      Bay Suite - Sea View
+                      <span className="text-[10px] block">( 1 Room | 2 Adults )</span>
+                    </p>
+                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
+                      Breakfast Included
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 font-arizona-sans-regular ">
                   <div className="space-y-1">
                     <p className="text-dark-gray uppercase tracking-widest text-xs lg:text-sm">
                       Check - In
@@ -190,40 +215,18 @@ export default function ConfirmationSection() {
                   </div>
                 </div>
                 {/* Total Length of Stay */}
-                <div className="space-y-1">
+                <div className="space-y-1 font-arizona-sans-regular">
                   <p className="text-dark-gray uppercase tracking-widest  text-xs lg:text-sm">
                     Total Length Of Stay
                   </p>
                   <p
-                    className={`${typography.textBase} font-bold text-primary`}
+                    className={`${typography.textBase} font-medium text-primary`}
                   >
-                    5 Days
+                    3 Nights, 2 Days
                   </p>
                 </div>
                 {/* You Selected */}
-                <div className="space-y-1">
-                  <p className="text-dark-gray uppercase tracking-widest text-xs lg:text-sm">
-                    You Selected
-                  </p>
-                  <div className="space-y-1">
-                    <p
-                      className={`${typography.textBase} font-bold text-primary`}
-                    >
-                      Premier Room - Sea View  ( 2 )
-                    </p>
-                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
-                      Breakfast Included
-                    </p>
-                    <p
-                      className={`${typography.textBase} font-bold text-primary`}
-                    >
-                      Bay Suite - Sea View
-                    </p>
-                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
-                      Breakfast Included
-                    </p>
-                  </div>
-                </div>
+
               </div>
 
               {/* Price Summery */}

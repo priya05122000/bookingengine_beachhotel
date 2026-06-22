@@ -78,7 +78,7 @@ export default function PackageList({
     const [qty, setQty] = useState<Record<string, QtyState>>({});
 
     function getQty(id: string): QtyState {
-        return qty[id] ?? { rooms: 1, adults: 1, children: 0 };
+        return qty[id] ?? { rooms: 0, adults: 0, children: 0 };
     }
 
     function setRoomsCount(id: string, n: number) {
@@ -94,6 +94,7 @@ export default function PackageList({
     }
 
     function guestLabel(rooms: number, adults: number, children: number) {
+        if (rooms === 0 && adults === 0) return '';
         return `${rooms} Room${rooms > 1 ? 's' : ''} · ${adults} Adult${adults > 1 ? 's' : ''}${children > 0 ? ` · ${children} Child${children > 1 ? 'ren' : ''}` : ''}`;
     }
 
@@ -168,7 +169,12 @@ export default function PackageList({
                                 ) : (
                                     <button
                                         className="bg-primary uppercase border tracking-[.15em] text-white px-3 py-1 rounded-xs text-xs lg:text-sm cursor-pointer"
-                                        onClick={() => setOpenQtyFor(pkg.id)}
+                                        onClick={() => {
+                                            if (!qty[pkg.id]) {
+                                                setQty((prev) => ({ ...prev, [pkg.id]: { rooms: 1, adults: 1, children: 0 } }));
+                                            }
+                                            setOpenQtyFor(pkg.id);
+                                        }}
                                     >
                                         Add Room
                                     </button>
