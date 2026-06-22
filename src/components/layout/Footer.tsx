@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Section from "@/src/components/common/Section";
+import { MapPin } from "lucide-react";
 
 const navLinks = [
   { label: "HOME", href: "/" },
@@ -48,12 +49,13 @@ export default function Footer() {
     <footer>
       <Section className="bg-primary w-full relative text-white overflow-hidden z-10 pt-10 lg:pt-20">
         <div className="h-full flex flex-col justify-between font-arizona-light space-y-10">
-
           <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-10 lg:gap-6">
             {/* Left: description + CTA + socials + contact */}
             <div className="flex flex-col gap-5">
               <p className="text-lg lg:text-xl leading-relaxed uppercase tracking-wide sm:max-w-sm xl:max-w-lg ">
-                Let the charm of the coastline and luxurious comforts set the stage for an unforgettable stay amidst breathtaking views and refined comfort.
+                Let the charm of the coastline and luxurious comforts set the
+                stage for an unforgettable stay amidst breathtaking views and
+                refined comfort.
               </p>
 
               <div>
@@ -108,14 +110,20 @@ export default function Footer() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_2.5fr] gap-10 lg:gap-6 ">
-
             <div className=" flex flex-col justify-between gap-5">
               <div>
                 <div className="mt-6 lg:mt-4 xl:mt-2">
-                  <p className="text-base lg:text-lg tracking-wider mb-3">Follow Us</p>
+                  <p className="text-base lg:text-lg tracking-wider mb-3">
+                    Follow Us
+                  </p>
                   <div className="flex items-center gap-3">
                     {socialIcons.map((item) => (
-                      <Link key={item.label} href={item.href} aria-label={item.label}>
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        aria-label={item.label}
+                        className="border border-gray-700 p-1.5"
+                      >
                         <Image
                           src={item.path}
                           alt={item.label}
@@ -172,6 +180,11 @@ export default function Footer() {
                     </svg>
                     support@thebeachhotel.in
                   </a>
+
+                  <div className="flex gap-2 text-base hover:text-accent transition-colors">
+                    <MapPin size={16} className="mt-0.5" />
+                    123 Beach Road, Goa, India
+                  </div>
                 </div>
               </div>
 
@@ -203,11 +216,8 @@ export default function Footer() {
                 className="h-full w-full  opacity-40 pointer-events-none select-none"
               />
             </div>
-
           </div>
-
         </div>
-
       </Section>
     </footer>
   );

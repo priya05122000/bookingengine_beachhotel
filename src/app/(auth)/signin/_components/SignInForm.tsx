@@ -40,8 +40,6 @@ function EmailStep({
       >
         Continue
       </button>
-
-
     </>
   );
 }
@@ -53,7 +51,8 @@ function PasswordStep({
   onBack,
   showPassword,
   toggleShowPassword,
-  onSignInWithCode
+  onSignInWithCode,
+  onForgetPassword,
 }: {
   email: string;
   password: string;
@@ -62,12 +61,14 @@ function PasswordStep({
   showPassword: boolean;
   toggleShowPassword: () => void;
   onSignInWithCode: () => void;
-
+  onForgetPassword: () => void;
 }) {
   return (
     <>
-      <div >
-        <label className="mb-2 block text-sm text-primary font-arizona">Email</label>
+      <div>
+        <label className="mb-2 block text-sm text-primary font-arizona">
+          Email
+        </label>
 
         <div className="relative">
           <div className="border-b border-primary pb-3 pr-10 text-sm text-dark-gray">
@@ -108,6 +109,13 @@ function PasswordStep({
             </button>
           }
         />
+        <button
+          type="button"
+          onClick={onForgetPassword}
+          className="mt-2 w-full text-right text-xs text-primary cursor-pointer hover:underline"
+        >
+          Forget Password?  
+        </button>
       </div>
 
       <div>
@@ -151,6 +159,10 @@ export default function SignInForm() {
     setPassword("");
   }, []);
 
+  const handleForgetPassword = useCallback(() => {
+    router.push("/forgotpassword");
+  }, []);
+
   const handleSignInWithCode = useCallback(async () => {
     if (!email.trim()) {
       alert("Please enter your email");
@@ -159,9 +171,7 @@ export default function SignInForm() {
 
     localStorage.setItem("demoOtp", "52010");
 
-    router.push(
-      `/signin/code?email=${encodeURIComponent(email)}`
-    );
+    router.push(`/signin/code?email=${encodeURIComponent(email)}`);
   }, [email, router]);
 
   const handleSubmit = useCallback(
@@ -175,7 +185,7 @@ export default function SignInForm() {
         return;
       }
     },
-    [step, email, password]
+    [step, email, password],
   );
 
   return (
@@ -193,7 +203,11 @@ export default function SignInForm() {
 
       <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6">
         {step === "email" ? (
-          <EmailStep email={email} onEmailChange={setEmail} onSignInWithCode={handleSignInWithCode} />
+          <EmailStep
+            email={email}
+            onEmailChange={setEmail}
+            onSignInWithCode={handleSignInWithCode}
+          />
         ) : (
           <PasswordStep
             email={email}
@@ -203,13 +217,17 @@ export default function SignInForm() {
             showPassword={showPassword}
             toggleShowPassword={toggleShowPassword}
             onSignInWithCode={handleSignInWithCode}
+            onForgetPassword={handleForgetPassword}
           />
         )}
       </form>
 
       <p className="mt-6 text-center text-sm text-dark-gray">
         Don't Have An Account?{" "}
-        <Link href="/signup" className="text-primary hover:underline cursor-pointer">
+        <Link
+          href="/signup"
+          className="text-primary hover:underline cursor-pointer"
+        >
           Register
         </Link>
       </p>
