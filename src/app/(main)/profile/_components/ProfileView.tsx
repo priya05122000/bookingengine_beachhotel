@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { typography } from "@/src/lib/typography";
 import { useRouter } from "next/navigation";
+import ChangePasswordForm from "../../profile/edit/_components/ChangePasswordForm";
+
+type View = "profile" | "changePassword";
 
 const dummyUser = {
   name: "Roshima",
@@ -43,11 +47,15 @@ function ProfileField({ label, value }: { label: string; value: string }) {
 }
 
 export default function ProfileView() {
-
+  const [view, setView] = useState<View>("profile");
   const router = useRouter();
 
+  if (view === "changePassword") {
+    return <ChangePasswordForm onBack={() => setView("profile")} />;
+  }
+
   return (
-    <div className="w-full max-w-xl py-8 px-4 space-y-8">
+    <div className="w-full max-w-xl py-8 px-4 space-y-8 bg-primary/4 mx-auto  shadow-[-1px_4px_4px_0px_#00000040] rounded-md">
       {/* <Link href="https://thebeachhotel.in/">
         <Image
           src="/images/logo.png"
@@ -64,11 +72,20 @@ export default function ProfileView() {
         <SectionHeading title="Personal Information" />
         <Link
           href="/profile/edit"
-          className="inline-flex items-center justify-center h-8 px-5 bg-primary text-white text-xs tracking-[0.12em] font-arizona uppercase cursor-pointer hover:bg-primary/90 transition-colors rounded-sm"
+          className="inline-flex items-center justify-center   text-primary text-xs tracking-[0.12em] font-arizona uppercase cursor-pointer  transition-colors underline underline-offset-2"
         >
           Edit
         </Link>
+        {/* <Link
+          href="/profile/edit"
+          className="inline-flex items-center justify-center h-8 px-5 bg-primary text-white text-xs tracking-[0.12em] font-arizona uppercase cursor-pointer hover:bg-primary/90 transition-colors rounded-sm"
+        >
+          Edit
+        </Link> */}
+
       </div>
+
+      <hr className="opacity-10" />
 
       {/* Personal Information */}
       {/* <div >
@@ -109,6 +126,28 @@ export default function ProfileView() {
           Save Changes
         </button>
       </div> */}
+
+      <hr className="opacity-10" />
+
+      <div>
+        <div className="flex justify-between items-center">
+          <div>
+            <p className="text-xs uppercase tracking-[0.15em] text-primary font-arizona-regular font-semibold mb-1">
+              Password
+            </p>
+            <p className="text-sm text-dark-gray font-arizona-light">**********</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setView("changePassword")}
+            className="inline-flex items-center justify-center text-primary text-xs tracking-[0.12em] font-arizona uppercase cursor-pointer transition-colors underline underline-offset-2"
+          >
+            Change
+          </button>
+        </div>
+
+      </div>
+
     </div>
   );
 }

@@ -3,10 +3,12 @@ import { Eye, EyeOff } from "lucide-react";
 import InputField from "@/src/app/(auth)/_components/InputField";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type Props = { onBack: () => void };
 
 export default function ChangePasswordForm({ onBack }: Props) {
+  const router = useRouter();
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -60,7 +62,7 @@ export default function ChangePasswordForm({ onBack }: Props) {
   }
 
   return (
-    <div className="w-full max-w-md py-8">
+    <div className="w-full max-w-md mx-auto py-8">
       <Link href="https://thebeachhotel.in/">
         <Image
           src="/images/logo.png"
@@ -84,7 +86,7 @@ export default function ChangePasswordForm({ onBack }: Props) {
           </p>
         )}
 
-        <InputField
+        {/* <InputField
           id="current-password"
           name="currentPassword"
           label="Current Password"
@@ -102,7 +104,36 @@ export default function ChangePasswordForm({ onBack }: Props) {
               }
             />
           }
-        />
+        /> */}
+
+        <div>
+          <InputField
+            id="password"
+            type={showCurrent ? "text" : "password"}
+            label="Password"
+            placeholder="Password"
+            value={currentPassword}
+            onChange={setCurrentPassword}
+            required
+            ariaLabel="Password"
+            rightSlot={
+              <EyeToggle
+                show={showCurrent}
+                onToggle={() => setShowCurrent((s) => !s)}
+                label={
+                  showCurrent ? "Hide current password" : "Show current password"
+                }
+              />
+            }
+          />
+          <button
+            type="button"
+            onClick={() => router.push("/forgotpassword")}
+            className="mt-2 w-full text-right text-xs text-primary cursor-pointer hover:underline"
+          >
+            Forget Password?
+          </button>
+        </div>
 
         <InputField
           id="new-password"

@@ -6,6 +6,7 @@ import Image from "next/image";
 import InputField from "@/src/app/(auth)/_components/InputField";
 import ChangePasswordForm from "./ChangePasswordForm";
 import { useRouter } from "next/navigation";
+import { typography } from "@/src/lib/typography";
 
 type View = "edit" | "changePassword";
 
@@ -62,8 +63,8 @@ export default function ProfileEditForm() {
   }
 
   return (
-    <div className="w-full max-w-md py-8">
-      <Link href="https://thebeachhotel.in/">
+    <div className="w-full max-w-md mx-auto ">
+      {/* <Link href="https://thebeachhotel.in/">
         <Image
           src="/images/logo.png"
           alt="The Beach Hotel"
@@ -72,18 +73,18 @@ export default function ProfileEditForm() {
           className="mb-6 mx-auto h-15 xl:h-30  object-contain"
           style={{ width: "auto" }}
         />
-      </Link>
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-base font-arizona-sans-regular tracking-widest text-dark-gray uppercase">
+      </Link> */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className={`uppercase  ${typography.textXl} font-arizona-sans-regular font-medium  tracking-widest text-dark-gray uppercase truncate `}>
           Edit Profile
         </h2>
-        <button
+        {/* <button
           type="button"
           onClick={() => setView("changePassword")}
           className="ml-2 text-primary font-arizona-sans-regular text-sm hover:underline cursor-pointer"
         >
           Change Password
-        </button>
+        </button> */}
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
