@@ -283,12 +283,12 @@ export default function ConfirmationSection() {
                 </div>
               </div>
               <div className="mt-3 flex gap-3">
-                <button
+                {/* <button
                   onClick={() => setShowPreview(true)}
                   className="w-full border border-primary text-primary px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
                 >
                   Preview Invoice
-                </button>
+                </button> */}
                 <button
                   onClick={handleDownloadInvoice}
                   disabled={downloading}
