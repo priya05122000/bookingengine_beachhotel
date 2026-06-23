@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [arrowHighlight, setArrowHighlight] = useState(false);
 
   useEffect(() => {
     const footer = document.querySelector("footer");
@@ -47,38 +46,36 @@ export default function Navbar() {
         >
           <div className="flex items-center gap-1 text-sm text-primary font-semibold h-10 cursor-pointer select-none">
             <User className="w-5 h-5" />
-            Hi, Roshima
+            Roshima
           </div>
-            {dropdownOpen && (
+          {dropdownOpen && (
             /* pt-2 creates invisible bridge so mouse can travel from trigger to menu */
             <div className="absolute right-0 top-full pt-2 w-44 z-50">
               {/* caret arrow pointing up */}
-              <div className={`absolute right-4 top-0.5 w-3 h-3 border-l border-t rotate-45 z-10 transition-colors ${arrowHighlight ? "bg-primary border-primary" : "bg-white border-gray-200"}`} />
+              <div className="absolute right-4 top-0.5 w-3 h-3 border-l border-t rotate-45 z-10 bg-white border-gray-200" />
               <div className="relative bg-white border border-gray-200 rounded-sm shadow-md overflow-hidden">
-              {/* top welcome with username */}
-              <div className="px-4 py-3 border-b border-gray-100 bg-gray-50">
-                <p className="text-sm text-gray-500">Welcome, Roshima</p>
-              </div>
+                {/* top welcome with username */}
+                <div className="px-4 py-3 border-b border-gray-100 bg-gray-50">
+                  <p className="text-sm text-gray-500">Welcome, Roshima</p>
+                </div>
 
-              <Link
-                href="/profile"
-                onMouseEnter={() => setArrowHighlight(true)}
-                onMouseLeave={() => setArrowHighlight(false)}
-                className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors"
-              >
-                <User className="w-4 h-4" />
-                My Profile
-              </Link>
-              <button
-                onClick={() => { }}
-                className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors"
-              >
-                <LogOut className="w-4 h-4" />
-                Logout
-              </button>
+                <Link
+                  href="/profile"
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <User className="w-4 h-4" />
+                  My Profile
+                </Link>
+                <button
+                  onClick={() => { }}
+                  className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Logout
+                </button>
               </div>
             </div>
-            )}
+          )}
         </div>
       </div>
     </header >

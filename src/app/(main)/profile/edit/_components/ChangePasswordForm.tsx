@@ -62,8 +62,8 @@ export default function ChangePasswordForm({ onBack }: Props) {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto py-8">
-      <Link href="https://thebeachhotel.in/">
+    <div className="w-full max-w-md mx-auto ">
+      {/* <Link href="https://thebeachhotel.in/">
         <Image
           src="/images/logo.png"
           alt="The Beach Hotel"
@@ -72,7 +72,7 @@ export default function ChangePasswordForm({ onBack }: Props) {
           className="mb-8 mx-auto h-20 xl:h-full  object-contain"
           style={{ width: "auto" }}
         />
-      </Link>
+      </Link> */}
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
         {error && (
@@ -110,7 +110,7 @@ export default function ChangePasswordForm({ onBack }: Props) {
           <InputField
             id="password"
             type={showCurrent ? "text" : "password"}
-            label="Password"
+            label="Current Password"
             placeholder="Password"
             value={currentPassword}
             onChange={setCurrentPassword}

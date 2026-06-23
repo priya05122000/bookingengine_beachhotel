@@ -183,7 +183,7 @@ export default function Footer() {
 
                   <div className="flex gap-2 text-base hover:text-accent transition-colors">
                     <MapPin size={16} className="mt-0.5" />
-                    123 Beach Road, Goa, India
+                    Beach Rd, Kanniyakumari, Tamil Nadu 629702, India
                   </div>
                 </div>
               </div>
