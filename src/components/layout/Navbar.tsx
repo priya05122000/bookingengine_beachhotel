@@ -57,11 +57,11 @@ export default function Navbar() {
         </a>
 
         <div
-          className="relative mr-4"
+          className="relative mr-4 "
           onMouseEnter={() => setDropdownOpen(true)}
           onMouseLeave={() => setDropdownOpen(false)}
         >
-          <div className="flex items-center gap-1 text-sm text-primary font-semibold h-10 cursor-pointer select-none">
+          <div className="flex items-center gap-1 text-sm text-primary font-semibold h-full cursor-pointer select-none">
             <User className="w-5 h-5" />
             Roshima
           </div>

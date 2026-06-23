@@ -12,7 +12,7 @@ export default function BookingLayout({
         <>
             <Navbar />
 
-            <main className="pt-12 ">
+            <main className="pt-14 ">
                 {children}
             </main>
 
