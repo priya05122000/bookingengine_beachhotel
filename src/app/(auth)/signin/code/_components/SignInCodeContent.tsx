@@ -89,7 +89,7 @@ export default function SignInCodeContent() {
                     </p>
                 </div>
 
-                <div className="mt-10">
+                <div className="mt-14">
                     <label className="mb-4 block text-base font-medium text-primary">
                         Code Verification
                     </label>

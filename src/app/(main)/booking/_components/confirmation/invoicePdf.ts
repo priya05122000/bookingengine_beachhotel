@@ -14,7 +14,7 @@ export async function downloadInvoice(
 
     // Capture at the element's natural rendered width (794px container, p-6 padding inside)
     // pixelRatio:2 gives 2× resolution for crisp PDF output.
-    // style overrides remove the mt-10 top margin so the PDF starts flush at the top.
+    // style overrides remove the mt-14 top margin so the PDF starts flush at the top.
     const dataUrl = await toPng(el, {
         pixelRatio: 2,
         backgroundColor: '#ffffff',

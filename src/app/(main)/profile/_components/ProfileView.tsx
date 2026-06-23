@@ -138,7 +138,6 @@ export default function ProfileView() {
             <p className="text-sm text-dark-gray font-arizona-light">**********</p>
           </div>
           <button
-            type="button"
             onClick={() => setView("changePassword")}
             className="inline-flex items-center justify-center text-primary text-xs tracking-[0.12em] font-arizona uppercase cursor-pointer transition-colors underline underline-offset-2"
           >
