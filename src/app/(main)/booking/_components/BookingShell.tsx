@@ -45,7 +45,7 @@ export default function BookingShell({
 
             )}
 
-            <div className=" bg-primary/4 p-4 md:p-10 mt-10 sm:mt-20">
+            <div className=" bg-primary/4 p-6 md:p-10 mt-10 sm:mt-20">
                 <h1
                     className={`text-center tracking-[.08em] text-primary  uppercase font-arizona-regular mb-8 md:mb-12 ${typography.textFoXl}`}
                 >

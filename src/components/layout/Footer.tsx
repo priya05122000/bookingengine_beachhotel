@@ -47,7 +47,7 @@ const socialIcons: { href: string; label: string; path: string }[] = [
 export default function Footer() {
   return (
     <footer>
-      <Section className="bg-primary w-full relative text-white overflow-hidden z-10 pt-10 lg:pt-20">
+      <Section className="bg-primary w-full relative text-white overflow-hidden z-10 pt-10 lg:pt-20 px-6 sm:px-0">
         <div className="h-full flex flex-col justify-between font-arizona-light space-y-10">
           <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-10 lg:gap-6">
             {/* Left: description + CTA + socials + contact */}

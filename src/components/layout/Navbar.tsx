@@ -34,7 +34,7 @@ export default function Navbar() {
         >
           <div className="flex items-center gap-1 text-sm text-primary font-semibold h-10 cursor-pointer select-none">
             <User className="w-5 h-5" />
-            Welcome, Guest
+            Hi, Roshima
           </div>
           {dropdownOpen && (
             /* pt-2 creates invisible bridge so mouse can travel from trigger to menu */
@@ -62,12 +62,12 @@ export default function Navbar() {
             </div>
           )}
         </div>
-        <Link
+        {/* <Link
           href="/signin"
           className="text-sm text-primary border flex items-center border-primary rounded-xs px-2 h-10 hover:bg-primary hover:text-white transition cursor-pointer"
         >
           Login / Signup
-        </Link>
+        </Link> */}
       </div>
     </header>
   );

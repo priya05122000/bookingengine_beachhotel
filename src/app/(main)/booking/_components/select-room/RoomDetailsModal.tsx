@@ -65,7 +65,7 @@ export default function RoomDetailsModal({ onClose }: Props) {
       className="fixed inset-0 z-9999 bg-black/60 flex items-center justify-center p-2 md:p-4"
       onClick={onClose}
     >
-      <Section>
+      <Section className="px-6 sm:px-0">
         <div
           className="
         bg-white

@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const BookingPage = () => {
     return (
-        <Section>
+        <Section className='px-6 sm:px-0'>
             <div className='my-10 sm:my-20 relative'>
                 <Image
                     src="/images/Rectangle.png"

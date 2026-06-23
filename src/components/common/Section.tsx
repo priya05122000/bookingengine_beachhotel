@@ -11,7 +11,7 @@ const Section = forwardRef<HTMLDivElement | null, SectionProps>(
     ({ children, className = '', id, style }, ref) => {
         return (
             <section
-                className={`relative px-6 sm:px-4 ${className}`}
+                className={`relative px-0 sm:px-4 ${className}`}
                 id={id}
                 style={style}
             >
