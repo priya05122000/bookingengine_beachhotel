@@ -1,6 +1,7 @@
 
 'use client';
 
+import { Globe, MapPin, Phone } from 'lucide-react';
 import React, { forwardRef } from 'react';
 
 type Props = {
@@ -9,124 +10,95 @@ type Props = {
 
 const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
     return (
-        <div
-            ref={ref}
-            className="p-6 font-sans"
-            style={{
-                backgroundColor: '#ffffff',
-                color: '#1f2937',
-            }}
-        >
-            {/* Header */}
-            <div className=" mb-5">
-                <div className="flex items-start justify-between gap-4">
-                    <div className='relative'>
-                        <div
-                            style={{
-                                width: '100%',
-                                height: '100px',
-                                position: 'relative',
-                            }}
-                        >
-                            <img
-                                src="/images/logo.png"
-                                alt="Hotel Logo"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        <div className="text-lg font-bold mt-3 text-primary">
-                            Hotel Name
-                        </div>
-                    </div>
+        <div ref={ref} className="p-6 font-sans space-y-8 bg-white text-gray-800">
 
-                    <div
-                        className="inline-flex h-10 justify-center items-center px-4 font-bold rounded-xs bg-primary text-white"
-                    >
-                        INVOICE
+            {/* Header */}
+
+            <div className="flex items-start justify-between gap-4 ">
+                <div className="relative">
+                    <div className="w-full h-25 relative">
+                        <img
+                            src="/images/logo.png"
+                            alt="Hotel Logo"
+                            className="w-full h-full object-cover"
+                        />
                     </div>
                 </div>
 
-                <div className="mt-2 grid grid-cols-2  items-end gap-6">
-                    <div className="text-xs leading-snug" style={{ color: '#6b7280' /* text-gray-500 */ }}>
-                        [Address] <br />
-                        [Phone Number] <br />
-                        [Website Address]
-                    </div>
-
-                    <div className=" text-sm" style={{ color: '#374151' /* text-gray-700 */ }}>
-                        <div><strong>Invoice No:</strong> 45145</div>
-                        <div><strong>Invoice Date:</strong> 31-03-2019</div>
-                    </div>
+                <div className="inline-flex h-10 justify-center items-center px-4 font-bold rounded-xs bg-primary font-arizona-sans-regular tracking-widest text-xs text-white">
+                    INVOICE
                 </div>
             </div>
 
+            <div className=" text-sm font-arizona-light  grid grid-cols-2 items-end gap-10 tracking-wide  ">
+                <div className="space-y-2">
+                    <p className="flex items-start gap-2">
+                        <MapPin className="w-4 h-4" /> Beach Rd, Kanniyakumari,<br/> Tamil Nadu 629702, India
+                    </p>
+                    <p className="flex items-center gap-2">
+                        <Phone className="w-4 h-4" /> +91 54678 98765
+                    </p>
+                    <p className="flex items-center gap-2">
+                        <Globe className="w-4 h-4" /> https://thebeachhotel.in/
+                    </p>
+                </div>
+
+                <div className=" space-y-1 ">
+                    <div><strong>Invoice No :</strong> 45145</div>
+                    <div><strong>Invoice Date :</strong> 31-03-2019</div>
+                </div>
+            </div>
+
+
             {/* Guest & Room details */}
-            <div className="mb-5 gap-6">
-                <div className="text-sm font-bold mb-1 text-primary">
+            <div className=" gap-6 ">
+                <div className="text-base mb-4 uppercase font-bold text-primary font-arizona-sans-regular tracking-wider">
                     Guest Details:
                 </div>
-                <div className='grid grid-cols-2 gap-6'>
-                    <div className="text-xs leading-relaxed" style={{ color: '#374151' /* text-gray-700 */ }}>
-                        <div>Name: Nuva rey</div>
-                        <div>Address: [Address]</div>
-                        <div>Phone: +91 65478 98756</div>
-                        <div>Email: nuvaray26@gmail.com</div>
+                <div className="grid grid-cols-2 gap-10 font-arizona-light tracking-wide text-sm" >
+                    <div className='space-y-1'>
+                        <div><strong>Name :</strong> Nuva Rey</div>
+                        <div><strong>Address :</strong> 123 Ocean View St., Beachville, CA 90210</div>
+                        <div><strong>Phone : </strong> +91 65478 98756</div>
+                        <div><strong>Email : </strong>nuvaray26@gmail.com</div>
                     </div>
-                    <div className="w-1/3 text-xs" style={{ color: '#374151' /* text-gray-700 */ }}>
-                        <div><strong>Room No:</strong> [Room No]</div>
-                        <div><strong>Room Type:</strong> king bed economy</div>
-                        <div><strong>Room Rate:</strong> &#8377; 6,000</div>
+                    <div className="space-y-1 ">
+                        <div><strong>Room No :</strong> 121</div>
+                        <div><strong>Room Type :</strong> king bed economy</div>
+                        <div><strong>Room Rate :</strong> &#8377; 6,000</div>
                     </div>
                 </div>
+            </div>
+            <div className="gap-6 ">
 
-                <table className="w-1/2 border-collapse text-sm mt-4">
+                <table className="w-1/2 border-collapse text-sm ">
                     <thead>
                         <tr>
-                            <th className=" py-2"></th>
-                            <th className="px-2 py-2 text-center">Date</th>
-                            <th className="px-2 py-2 text-center">Time</th>
+                            <th className="py-2"></th>
+                            <th className="px-2 py-2 font-arizona-sans-regular text-center">Date</th>
+                            <th className="px-2 py-2 text-center font-arizona-sans-regular ">Time</th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        <tr className=''>
-                            <th
-                                scope="row"
-                                className=" py-2 text-left font-medium"
-                            >
+                        <tr>
+                            <th scope="row" className="py-2 text-left font-arizona-sans-regular ">
                                 Check-in
                             </th>
-                            <td
-                                className="border-b  px-2  py-2 text-center"
-                                style={{ borderColor: '#d1d5db' /* border-gray-300 */ }}
-                            >
+                            <td className="border-b border-gray-300 px-2 py-2 text-center text-xs">
                                 29-03-2019
                             </td>
-                            <td
-                                className="border-b text-center px-2  py-2"
-                                style={{ borderColor: '#d1d5db' /* border-gray-300 */ }}
-                            >
+                            <td className="border-b border-gray-300 text-center px-2 py-2 text-xs">
                                 09:00 a.m
                             </td>
                         </tr>
-
                         <tr>
-                            <th
-                                scope="row"
-                                className=" py-2 text-left font-medium"
-                            >
+                            <th scope="row" className="py-2 text-left font-arizona-sans-regular ">
                                 Check-Out
                             </th>
-                            <td
-                                className="border-b px-2  py-2 text-center"
-                                style={{ borderColor: '#d1d5db' /* border-gray-300 */ }}
-                            >
+                            <td className="border-b border-gray-300 px-2 py-2 text-center text-xs">
                                 29-03-2019
                             </td>
-                            <td
-                                className="border-b text-center px-2 py-2"
-                                style={{ borderColor: '#d1d5db' /* border-gray-300 */ }}
-                            >
+                            <td className="border-b border-gray-300 text-center px-2 py-2 text-xs">
                                 09:00 a.m
                             </td>
                         </tr>
@@ -135,132 +107,97 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
             </div>
 
             {/* Charges table */}
-            <table className="w-full border-collapse mb-3">
+            <table className="w-full border-collapse  ">
                 <thead>
-                    <tr className="text-left bg-primary text-white">
-                        <th className="px-2 py-2 text-sm text-center" >Date</th>
-                        <th className="px-2 py-2 text-sm">Description</th>
-                        <th className="px-2 py-2 text-sm text-center">No of Nights</th>
-                        <th className="px-2 py-2 text-sm text-center">Price</th>
-                        <th className="px-2 py-2 text-sm text-center">Total</th>
+                    <tr className="text-center bg-primary text-white font-arizona-sans-regular tracking-wider text-xs  uppercase">
+                        <th className="px-2 py-2  ">Date</th>
+                        <th className="px-2 py-2 ">Description</th>
+                        <th className="px-2 py-2 ">No of Nights</th>
+                        <th className="px-2 py-2  ">Price</th>
+                        <th className="px-2 py-2  ">Total</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td className="px-2 py-2 text-center border-b text-xs" style={{ borderColor: '#e5e7eb' /* border-gray-200 */ }}>
+                <tbody className='font-arizona-light tracking-wide'>
+                    <tr className='text-xs'>
+                        <td className="px-2 py-2 text-center border-b border-gray-200 ">
                             30-03-2019
                         </td>
-
-                        <td className="px-2 py-2 text-xs border-b" style={{ backgroundColor: '#f3f4f6', borderColor: '#e5e7eb' /* bg-gray-100, border-gray-200 */ }}>
+                        <td className="px-2 py-2  border-b border-gray-200 bg-gray-100">
                             Room Charges
                         </td>
-
-                        <td className="px-2 py-2 text-center text-xs border-b" style={{ borderColor: '#e5e7eb' /* border-gray-200 */ }}>
+                        <td className="px-2 py-2 text-center  border-b border-gray-200">
                             2
                         </td>
-
-                        <td className="px-2 py-2 text-xs border-b text-center" style={{ backgroundColor: '#f3f4f6', borderColor: '#e5e7eb' /* bg-gray-100, border-gray-200 */ }}>
+                        <td className="px-2 py-2  border-b border-gray-200 text-center bg-gray-100">
                             $150.00
                         </td>
-
-                        <td className="px-2 py-2 text-xs border-b text-center" style={{ borderColor: '#e5e7eb' /* border-gray-200 */ }}>
+                        <td className="px-2 py-2  border-b border-gray-200 text-center">
                             $300.00
                         </td>
                     </tr>
 
                     {Array.from({ length: 4 }).map((_, index) => (
                         <tr key={index}>
-                            <td className="h-8 border-b" style={{ borderColor: '#e5e7eb' /* border-gray-200 */ }}></td>
-
-                            <td className='border-b' style={{ borderColor: '#e5e7eb', backgroundColor: '#f3f4f6' /* border-gray-200, bg-gray-100 */ }}></td>
-
-                            <td className='border-b' style={{ borderColor: '#e5e7eb' /* border-gray-200 */ }}></td>
-
-                            <td className='border-b' style={{ borderColor: '#e5e7eb', backgroundColor: '#f3f4f6' /* border-gray-200, bg-gray-100 */ }}></td>
-
-                            <td className='border-b' style={{ borderColor: '#e5e7eb' /* border-gray-200 */ }}></td>
+                            <td className="h-8 border-b border-gray-200"></td>
+                            <td className="border-b border-gray-200 bg-gray-100"></td>
+                            <td className="border-b border-gray-200"></td>
+                            <td className="border-b border-gray-200 bg-gray-100"></td>
+                            <td className="border-b border-gray-200"></td>
                         </tr>
                     ))}
 
-                    <tr>
+                    <tr className='text-xs'>
                         <td colSpan={3}></td>
-
-                        <td className="px-2 py-2 text-xs  ">
-                            Sub Total
-                        </td>
-
-                        <td className="px-2 py-2  text-xs text-center ">
-                            $300.00
-                        </td>
+                        <td className="px-2 py-2 text-sm">Sub Total</td>
+                        <td className="px-2 py-2  text-center">$300.00</td>
+                    </tr>
+                    <tr className='text-xs'>
+                        <td colSpan={3}></td>
+                        <td className="px-2 py-2 text-sm">Tax</td>
+                        <td className="px-2 py-2  text-center">$300.00</td>
+                    </tr>
+                    <tr className='text-xs'>
+                        <td colSpan={3}></td>
+                        <td className="px-2 py-2 text-sm">Advance Paid</td>
+                        <td className="px-2 py-2  text-center">$300.00</td>
                     </tr>
                     <tr>
                         <td colSpan={3}></td>
-
-
-                        <td className="px-2 py-2 text-xs  ">
-                            Tax
+                        <td className="px-2 py-2 text-xs font-bold bg-primary uppercase tracking-widest text-white ">
+                            Total
                         </td>
-
-                        <td className="px-2 py-2   text-xs text-center ">
-                            $300.00
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan={3}></td>
-
-
-                        <td className="px-2 py-2  text-xs  ">
-                            Advance Paid
-                        </td>
-
-                        <td className="px-2 py-2 text-xs text-center">
-                            $300.00
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan={3}></td>
-
-                        <td className="px-2 py-2 text-xs font-bold bg-primary text-white">
-                            Total Due
-                        </td>
-
                         <td className="px-2 py-2 text-xs font-bold text-center bg-primary text-white">
                             $115.00
                         </td>
                     </tr>
-
-
                 </tbody>
             </table>
 
-            <div className="mt-6">
                 <div className="flex flex-row justify-between gap-8">
 
-                    <div className="flex flex-row gap-4 w-1/2">
+                    <div className="flex flex-row gap-2  w-2/3">
 
                         {/* Payment Info */}
-                        <div className="flex-1 text-xs" style={{ color: '#374151' /* text-gray-700 */ }}>
-                            <h5 className="font-semibold text-sm mb-2" style={{ color: '#111827' /* text-gray-800 */ }}>
-                                Payment Info:
-                            </h5>
-
-                            <div className="text-xs leading-relaxed" style={{ color: '#4b5563' /* text-gray-600 */ }}>
-                                <div>Account: Jhone Doe</div>
-                                <div>A/C Name: Jhon</div>
-                                <div>Bank Details: Bank Jhone</div>
+                        <div className="flex-1 ">
+                            <div className="text-sm mb-4 uppercase font-bold text-primary font-arizona-sans-regular tracking-wider">
+                                Payment Info
+                            </div>
+                            <div className="text-sm space-y-1 font-arizona-light  tracking-wide ">
+                                <div><b>Account :</b> Jhone Doe</div>
+                                <div><b>A/C Name :</b> Jhon</div>
+                                <div><b>Bank Details :</b> Bank Jhone</div>
                             </div>
                         </div>
 
                         {/* Divider */}
-                        <div className="block w-px mx-2" style={{ backgroundColor: '#d1d5db' /* bg-gray-300 */ }}></div>
+                        <div className="block w-px mx-2 bg-gray-300"></div>
 
                         {/* Terms & Condition */}
-                        <div className="flex-1 text-xs" style={{ color: '#374151' /* text-gray-700 */ }}>
-                            <h5 className="font-semibold text-sm mb-2" style={{ color: '#111827' /* text-gray-800 */ }}>
+                        <div className="flex-1  ">
+                            <div className="text-sm mb-4 uppercase font-bold text-primary font-arizona-sans-regular tracking-wider">
                                 Terms &amp; Condition
-                            </h5>
-
-                            <p className="text-xs leading-relaxed" style={{ color: '#4b5563' /* text-gray-600 */ }}>
+                            </div>
+                            <p className="text-sm font-arizona-light tracking-wide">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                 sed diam nonummy.
                             </p>
@@ -268,17 +205,15 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
                     </div>
 
                     {/* Account Manager */}
-                    <div className="w-1/3 text-xs text-right pr-8" style={{ color: '#374151' /* text-gray-700 */ }}>
-                        <div className="uppercase text-[11px] tracking-widest" style={{ color: '#6b7280' /* text-gray-500 */ }}>
+                    <div className="w-1/3 text-xs text-right ">
+                        <div className="uppercase font-arizona-sans-regular text-xs tracking-widest mb-4">
                             Account Manager
                         </div>
-
-                        <div className="mt-2 flex flex-col items-end">
-                            <div className="text-2xl italic font-medium" style={{ color: '#111827' /* text-gray-800 */ }}>
+                        <div className=" flex flex-col items-end font-arizona-light">
+                            <div className="text-2xl italic  ">
                                 John doe
                             </div>
-
-                            <div className="mt-1 uppercase text-xs font-semibold" style={{ color: '#4b5563' /* text-gray-600 */ }}>
+                            <div className="mt-1 uppercase text-xs font-semibold ">
                                 JHON DOE
                             </div>
                         </div>
@@ -286,15 +221,20 @@ const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
 
                 </div>
 
-                {/* Questions / contact */}
-                <div className="mt-6  pt-4">
-                    <h6 className="text-sm font-semibold mb-1">Questions?</h6>
-                    <p className="text-xs" style={{ color: '#4b5563' /* text-gray-600 */ }}>
-                        Email us at <a style={{ color: '#3b82f6' /* text-primary -> blue-500 */ }} href="mailto:info@yourwebsite.com">info@yourwebsite.com</a>
-                        <br />
-                        or call us at <span className="font-medium">1-234-567-890</span>
-                    </p>
-                </div>
+
+
+
+            {/* Questions / contact */}
+            <div className="pt-10 space-y-1  text-sm font-arizona-light tracking-wide   ">
+                <div className="font-bold ">Questions?</div>
+                <p className=" ">
+                    Email us at{' '}
+                    <a className="text-blue-500" href="mailto:info@yourwebsite.com">
+                        info@yourwebsite.com
+                    </a>
+                    <br />
+                    or call us at <span className="font-medium">1-234-567-890</span>
+                </p>
             </div>
         </div>
     );

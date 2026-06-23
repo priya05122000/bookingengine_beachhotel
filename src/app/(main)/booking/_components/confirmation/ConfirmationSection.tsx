@@ -1,15 +1,25 @@
 "use client";
 
 import { typography } from "@/src/lib/typography";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import InvoicePreview from "./InvoicePreview";
 import { downloadInvoice } from "./invoicePdf";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { X } from "lucide-react";
 
 export default function ConfirmationSection() {
   const invoiceRef = useRef<HTMLDivElement | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+
+  useEffect(() => {
+    if (showPreview) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [showPreview]);
 
   async function handleDownloadInvoice() {
     setDownloading(true);
@@ -274,11 +284,17 @@ export default function ConfirmationSection() {
               </div>
               <div className="mt-3 flex gap-3">
                 <button
+                  onClick={() => setShowPreview(true)}
+                  className="w-full border border-primary text-primary px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
+                >
+                  Preview Invoice
+                </button>
+                <button
                   onClick={handleDownloadInvoice}
                   disabled={downloading}
                   className="w-full bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
                 >
-                  {downloading ? "Downloading Invoice..." : "Download Invoice"}
+                  {downloading ? "Downloading..." : "Download Invoice"}
                 </button>
               </div>
             </div>
@@ -333,6 +349,51 @@ export default function ConfirmationSection() {
           </div>
         </div>
 
+        {/* ── Invoice Preview Modal ── */}
+        {showPreview && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+            onClick={() => setShowPreview(false)}
+          >
+            <div
+              className="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="sticky top-0 z-10 bg-white border-b border-gray-200 flex items-center justify-between px-6 py-3">
+                <span className="font-arizona-sans-regular tracking-widest text-sm uppercase text-primary">
+                  Invoice Preview
+                </span>
+                <button
+                  onClick={() => setShowPreview(false)}
+                  className="text-dark-gray hover:text-primary transition-colors cursor-pointer"
+                  aria-label="Close preview"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="p-4">
+                <InvoicePreview />
+              </div>
+              <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-3 flex justify-end gap-3">
+                <button
+                  onClick={() => setShowPreview(false)}
+                  className="border border-primary text-primary px-6 h-10 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={async () => { await handleDownloadInvoice(); setShowPreview(false); }}
+                  disabled={downloading}
+                  className="bg-primary text-white px-6 h-10 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
+                >
+                  {downloading ? "Downloading..." : "Download Invoice"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Hidden invoice for PDF generation */}
         <div
           aria-hidden="true"
           style={{
