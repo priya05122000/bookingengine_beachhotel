@@ -1,6 +1,7 @@
 "use client";
 
 import { LogOut, User } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -29,15 +30,31 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-in-out ${hidden ? " opacity-0 pointer-events-none" : "opacity-100"}`}
     >
-      <div className="py-2 bg-white shadow-[-1px_3px_4px_0px_#00000040] flex justify-between px-4 lg:px-12">
+      <div className="py-2  bg-white shadow-[-1px_3px_4px_0px_#00000040] flex justify-between px-4 lg:px-12">
 
         <button
           type="button"
           onClick={() => router.back()}
-          className="rounded-md cursor-pointer px-3 py-2 text-sm text-dark-gray hover:underline underline-offset-2"
+          className="rounded-md cursor-pointer px-3 py-2 text-sm text-dark-gray hover:underline underline-offset-2 "
         >
           Back
         </button>
+
+        <a
+          href="https://thebeachhotel.in/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center"
+        >
+          <Image
+            src="/images/toplogo.svg"
+            alt="The Beach Hotel"
+            width={200}
+            height={40}
+            priority
+            className="mx-auto h-12 w-50 object-contain"
+          />
+        </a>
 
         <div
           className="relative mr-4"
