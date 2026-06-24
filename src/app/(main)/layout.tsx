@@ -11,7 +11,7 @@ export default function BookingLayout({
     <>
       <Navbar />
 
-      <main className="md:py-8 lg:py-12">{children}</main>
+      <main className="md:pt-8 lg:pt-12">{children}</main>
 
       <Footer />
     </>

@@ -144,9 +144,33 @@ body {
   to   { transform: translateY(0%);   }
 }
 
+@keyframes slideDown {
+  from { transform: translateY(0%);   }
+  to   { transform: translateY(100%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
 @layer utilities {
   .animate-slide-up {
-    animation: slideUp 0.28s cubic-bezier(0.32, 0.72, 0, 1) both;
+    animation: slideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-slide-down {
+    animation: slideDown 0.4s cubic-bezier(0.32, 0, 0.67, 0) both;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.35s ease both;
+  }
+  .animate-fade-out {
+    animation: fadeOut 0.38s ease both;
   }
 }
 

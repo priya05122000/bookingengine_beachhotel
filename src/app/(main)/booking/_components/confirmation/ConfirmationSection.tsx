@@ -11,6 +11,7 @@ export default function ConfirmationSection() {
   const invoiceRef = useRef<HTMLDivElement | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [closingPreview, setClosingPreview] = useState(false);
 
   useEffect(() => {
     if (showPreview) {
@@ -20,6 +21,11 @@ export default function ConfirmationSection() {
     }
     return () => { document.body.style.overflow = ""; };
   }, [showPreview]);
+
+  function closePreview() {
+    setClosingPreview(true);
+    setTimeout(() => { setClosingPreview(false); setShowPreview(false); }, 380);
+  }
 
   async function handleDownloadInvoice() {
     setDownloading(true);
@@ -352,8 +358,8 @@ export default function ConfirmationSection() {
         {/* ── Invoice Preview Modal ── */}
         {showPreview && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-            onClick={() => setShowPreview(false)}
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 ${closingPreview ? "animate-fade-out" : "animate-fade-in"}`}
+            onClick={closePreview}
           >
             <div
               className="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
@@ -364,7 +370,7 @@ export default function ConfirmationSection() {
                   Invoice Preview
                 </span>
                 <button
-                  onClick={() => setShowPreview(false)}
+                  onClick={closePreview}
                   className="text-dark-gray hover:text-primary transition-colors cursor-pointer"
                   aria-label="Close preview"
                 >
@@ -376,13 +382,13 @@ export default function ConfirmationSection() {
               </div>
               <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-3 flex justify-end gap-3">
                 <button
-                  onClick={() => setShowPreview(false)}
+                  onClick={closePreview}
                   className="border border-primary text-primary px-6 h-10 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
                 >
                   Close
                 </button>
                 <button
-                  onClick={async () => { await handleDownloadInvoice(); setShowPreview(false); }}
+                  onClick={async () => { await handleDownloadInvoice(); closePreview(); }}
                   disabled={downloading}
                   className="bg-primary text-white px-6 h-10 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
                 >

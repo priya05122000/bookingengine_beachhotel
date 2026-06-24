@@ -20,6 +20,12 @@ export default function FilterSection() {
     const [activeStep, setActiveStep] = useState(0);
     const [showPackages, setShowPackages] = useState(false);
     const [showSearchPopup, setShowSearchPopup] = useState(false);
+    const [closingSearchPopup, setClosingSearchPopup] = useState(false);
+
+    function closeSearchPopup() {
+        setClosingSearchPopup(true);
+        setTimeout(() => { setClosingSearchPopup(false); setShowSearchPopup(false); }, 380);
+    }
 
     useEffect(() => {
         const handler = (e: Event) => {
@@ -76,13 +82,13 @@ export default function FilterSection() {
             {showSearchPopup && (
                 <div className="fixed inset-0 z-9999 flex items-center justify-center">
                     <div
-                        className="absolute inset-0 bg-black/50"
-                        onClick={() => setShowSearchPopup(false)}
+                        className={`absolute inset-0 bg-black/50 ${closingSearchPopup ? "animate-fade-out" : "animate-fade-in"}`}
+                        onClick={closeSearchPopup}
                     />
 
                     <div className="relative bg-white w-[95vw] h-[90vh] max-w-300 overflow-y-auto rounded-sm p-5">
                         <button
-                            onClick={() => setShowSearchPopup(false)}
+                            onClick={closeSearchPopup}
                             className="absolute top-3 right-5 cursor-pointer hover:opacity-70"
                         >
                             <X className="w-5 h-5" />

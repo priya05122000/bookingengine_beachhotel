@@ -10,6 +10,12 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [closingLogoutModal, setClosingLogoutModal] = useState(false);
+
+  function closeLogoutModal() {
+    setClosingLogoutModal(true);
+    setTimeout(() => { setClosingLogoutModal(false); closeLogoutModal(); }, 380);
+  }
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,7 +49,7 @@ export default function Navbar() {
   const router = useRouter();
 
   function handleLogout() {
-    setShowLogoutModal(false);
+    closeLogoutModal();
     router.push("/signin");
   }
 
@@ -134,15 +140,15 @@ export default function Navbar() {
 
       {showLogoutModal && (
         <div
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/70 px-4"
-          onClick={() => setShowLogoutModal(false)}
+          className={`fixed inset-0 z-9999 flex items-center justify-center bg-black/70 px-4 ${closingLogoutModal ? "animate-fade-out" : "animate-fade-in"}`}
+          onClick={closeLogoutModal}
         >
           <div
             className="relative bg-white rounded-md shadow-lg px-6 py-6 sm:px-8 sm:py-8 w-full max-w-75 sm:max-w-sm text-center"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setShowLogoutModal(false)}
+              onClick={closeLogoutModal}
               className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-500"
               aria-label="Close cursor-pointer"
             >
@@ -156,7 +162,7 @@ export default function Navbar() {
 
             <div className="flex gap-3 mt-6 justify-center">
               <button
-                onClick={() => setShowLogoutModal(false)}
+                onClick={() => closeLogoutModal()}
                 className="px-6 sm:px-8 py-2 rounded-sm border border-dark-gray text-dark-gray text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer"
               >
                 Cancel

@@ -1,9 +1,8 @@
-// ...existing code...
 "use client";
 
 import React, { useMemo } from "react";
 import { PackageItem } from "./types";
-import { CheckCheck, X } from "lucide-react";
+import { CheckCheck, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { typography } from "@/src/lib/typography";
 
@@ -70,7 +69,7 @@ function PriceLineItem({
             onClick={() => onRemove(item.id)}
             aria-label={`Remove ${item.title}`}
           >
-            <X className="w-4 h-4" />
+            <Trash2 className="w-3 h-3" />
           </button>
 
           <div className={`${FONT}`}>

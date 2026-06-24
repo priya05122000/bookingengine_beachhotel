@@ -15,6 +15,8 @@ type Props = {
   onClose: () => void;
 };
 
+const FADE_MS = 380;
+
 const IMAGES = [
   "/images/Rectangle.png",
   "/images/Rectangle.png",
@@ -47,6 +49,12 @@ const SECTIONS = [
 export default function RoomDetailsModal({ onClose }: Props) {
   const [activeImg, setActiveImg] = useState(0);
   const [openSection, setOpenSection] = useState("KEY FEATURES");
+  const [closing, setClosing] = useState(false);
+
+  function handleClose() {
+    setClosing(true);
+    setTimeout(() => { setClosing(false); onClose(); }, FADE_MS);
+  }
 
   const prev = () => {
     setActiveImg((i) => (i - 1 + IMAGES.length) % IMAGES.length);
@@ -62,8 +70,8 @@ export default function RoomDetailsModal({ onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-9999 bg-black/60 flex items-center justify-center p-2 md:p-4"
-      onClick={onClose}
+      className={`fixed inset-0 z-9999 bg-black/60 flex items-center justify-center p-2 md:p-4 ${closing ? "animate-fade-out" : "animate-fade-in"}`}
+      onClick={handleClose}
     >
       <Section className="px-6 sm:px-0">
         <div
@@ -88,7 +96,7 @@ export default function RoomDetailsModal({ onClose }: Props) {
             </h2>
 
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="text-xl text-dark-gray hover:text-black cursor-pointer"
             >
               ✕

@@ -44,6 +44,20 @@ export default function SelectRoomSection({
   );
   const [promo, setPromo] = React.useState("");
   const [showPriceSheet, setShowPriceSheet] = React.useState(false);
+  const [closingSheet, setClosingSheet] = React.useState(false);
+
+  function openPriceSheet() {
+    setShowPriceSheet(true);
+    setClosingSheet(false);
+  }
+
+  function closePriceSheet() {
+    setClosingSheet(true);
+    setTimeout(() => {
+      setShowPriceSheet(false);
+      setClosingSheet(false);
+    }, 380);
+  }
 
   const totalAmount = React.useMemo(
     () => selected.reduce((sum, s) => sum + parsePrice(s.price), 0),
@@ -247,7 +261,7 @@ export default function SelectRoomSection({
   }
 
   return (
-    <div className="min-h-105 pb-20 xl:pb-0">
+    <div className="min-h-105 pb-3 md:pb-0">
       {showDetails && (
         <RoomDetailsModal onClose={() => setShowDetails(false)} />
       )}
@@ -334,7 +348,9 @@ export default function SelectRoomSection({
                       <div className="text-[13px] text-sm text-dark-gray font-arizona-light">
                         From
                       </div>
-                      <div className={`text-[28px] md:text-[36px] font-arizona-regular`}>
+                      <div
+                        className={`text-[28px] md:text-[36px] font-arizona-regular`}
+                      >
                         {room.price}
                         <span className="text-[15px] lg:text-base font-arizona-light text-dark-gray">
                           /night
@@ -431,10 +447,10 @@ export default function SelectRoomSection({
       {showPriceSheet && (
         <>
           <div
-            className="fixed inset-0 z-40 bg-black/50 xl:hidden cursor-pointer"
-            onClick={() => setShowPriceSheet(false)}
+            className={`fixed inset-0 z-40 bg-black/50 xl:hidden cursor-pointer ${closingSheet ? "animate-fade-out" : "animate-fade-in"}`}
+            onClick={closePriceSheet}
           />
-          <div className="fixed bottom-0 left-0 right-0 z-50 xl:hidden bg-white rounded-t-2xl shadow-[0_-4px_24px_0_rgba(0,0,0,0.18)] flex flex-col max-h-[80vh] animate-slide-up">
+          <div className={`fixed bottom-0 left-0 right-0 z-50 xl:hidden bg-white rounded-t-2xl shadow-[0_-4px_24px_0_rgba(0,0,0,0.18)] flex flex-col max-h-[80vh] ${closingSheet ? "animate-slide-down" : "animate-slide-up"}`}>
             <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100 shrink-0">
               <div className="flex flex-col">
                 <span className="text-[10px] font-arizona-sans-regular tracking-widest text-dark-gray uppercase">
@@ -445,7 +461,7 @@ export default function SelectRoomSection({
                 </span>
               </div>
               <button
-                onClick={() => setShowPriceSheet(false)}
+                onClick={closePriceSheet}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 cursor-pointer"
                 aria-label="Close price details"
               >
@@ -467,22 +483,22 @@ export default function SelectRoomSection({
 
       {/* Mobile bottom bar */}
       <div className="fixed bottom-0 left-0 right-0 z-40 xl:hidden bg-white border-t border-gray-200 shadow-[0_-2px_8px_0_rgba(0,0,0,0.12)]">
-        <div className="flex items-center justify-between px-4 py-3 gap-3">
+        <div className="flex items-center justify-between px-4 py-2 gap-3">
           <button
             type="button"
-            onClick={() => setShowPriceSheet(true)}
-            className="flex items-center gap-2 cursor-pointer min-w-0"
+            onClick={openPriceSheet}
+            className="flex items-center gap-2 cursor-pointer min-w-50"
             aria-label="View price details"
           >
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-baseline">
               <span className="text-[10px] font-arizona-sans-regular tracking-widest text-dark-gray uppercase">
                 Total
               </span>
-              <span className="text-lg font-arizona-regular text-primary tracking-widest">
-                &#8377; {formatINR(totalAmount)}
-              </span>
+              <div className="text-lg font-arizona-regular text-primary tracking-widest flex items-center gap-1">
+                <span>&#8377; {formatINR(totalAmount)}</span>
+                <ChevronUp className="w-4 h-4 text-primary shrink-0" />
+              </div>
             </div>
-            <ChevronUp className="w-4 h-4 text-primary shrink-0" />
           </button>
           <button
             type="button"
@@ -494,7 +510,7 @@ export default function SelectRoomSection({
                 }),
               )
             }
-            className={`h-10 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase ${selected.length > 0 ? "bg-primary text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+            className={`h-8 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase ${selected.length > 0 ? "bg-primary text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
           >
             PROCEED
           </button>

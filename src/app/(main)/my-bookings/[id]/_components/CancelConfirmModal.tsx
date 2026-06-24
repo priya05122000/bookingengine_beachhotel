@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AlertTriangle } from "lucide-react";
 
 interface CancelConfirmModalProps {
@@ -9,16 +9,25 @@ interface CancelConfirmModalProps {
   onConfirm: () => void;
 }
 
+const FADE_MS = 380;
+
 export default function CancelConfirmModal({ reason, onClose, onConfirm }: CancelConfirmModalProps) {
+  const [closing, setClosing] = useState(false);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = ""; };
   }, []);
 
+  function handleClose() {
+    setClosing(true);
+    setTimeout(() => { setClosing(false); onClose(); }, FADE_MS);
+  }
+
   return (
     <div
-      className="fixed inset-0 z-9999 bg-black/60 flex items-center justify-center"
-      onClick={onClose}
+      className={`fixed inset-0 z-9999 bg-black/60 flex items-center justify-center ${closing ? "animate-fade-out" : "animate-fade-in"}`}
+      onClick={handleClose}
     >
       <div
         className="bg-white max-w-xs sm:max-w-sm mx-4 rounded-xs shadow-2xl p-6 space-y-5"
@@ -49,7 +58,7 @@ export default function CancelConfirmModal({ reason, onClose, onConfirm }: Cance
         {/* Actions */}
         <div className="flex gap-3">
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="flex-1 border border-primary text-primary h-9 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer hover:bg-primary/4 transition-colors"
           >
             Go Back

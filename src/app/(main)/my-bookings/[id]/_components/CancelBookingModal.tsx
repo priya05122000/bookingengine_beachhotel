@@ -16,22 +16,30 @@ interface CancelBookingModalProps {
   onSubmit: (reason: string) => void;
 }
 
+const FADE_MS = 380;
+
 export default function CancelBookingModal({ onClose, onSubmit }: CancelBookingModalProps) {
   const [selected, setSelected] = useState("");
   const [otherText, setOtherText] = useState("");
+  const [closing, setClosing] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = ""; };
   }, []);
 
+  function handleClose() {
+    setClosing(true);
+    setTimeout(() => { setClosing(false); onClose(); }, FADE_MS);
+  }
+
   const finalReason = selected === "Other" ? otherText.trim() : selected;
   const canSubmit = selected !== "" && (selected !== "Other" || otherText.trim() !== "");
 
   return (
     <div
-      className="fixed inset-0 z-9999 bg-black/60 flex items-center justify-center"
-      onClick={onClose}
+      className={`fixed inset-0 z-9999 bg-black/60 flex items-center justify-center ${closing ? "animate-fade-out" : "animate-fade-in"}`}
+      onClick={handleClose}
     >
       <div
         className="bg-white max-w-xs sm:max-w-md mx-4 rounded-xs shadow-2xl"
@@ -43,7 +51,7 @@ export default function CancelBookingModal({ onClose, onSubmit }: CancelBookingM
             Cancel Booking
           </h2>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="text-dark-gray hover:text-primary transition-colors cursor-pointer"
             aria-label="Close"
           >
@@ -92,7 +100,7 @@ export default function CancelBookingModal({ onClose, onSubmit }: CancelBookingM
         {/* Footer */}
         <div className="px-6 py-4 border-t border-gray-200 flex justify-end gap-3">
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="border border-primary text-primary px-5 h-9 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer hover:bg-primary/4 transition-colors"
           >
             Go Back
