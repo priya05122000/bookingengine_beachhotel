@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, User, X } from "lucide-react";
+import { CalendarDays, LogOut, User, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -109,6 +109,14 @@ export default function Navbar() {
                   >
                     <User className="w-4 h-4" />
                     My Profile
+                  </Link>
+                  <Link
+                    href="/my-bookings"
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <CalendarDays className="w-4 h-4" />
+                    My Bookings
                   </Link>
                   <button
                     onClick={() => { setDropdownOpen(false); setShowLogoutModal(true); }}

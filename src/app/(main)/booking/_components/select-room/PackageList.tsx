@@ -114,7 +114,7 @@ export default function PackageList({
                     const displayChildren = isOpen ? liveQty.children : (committedPkg?.children ?? liveQty.children);
 
                     return (
-                        <div key={pkg.id} className="border-b last:border-b-0 pb-4 grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-5 items-center relative">
+                        <div key={pkg.id} className="border-b last:border-b-0 pb-4 grid grid-cols-1 md:grid-cols-[1fr_1fr_0.7fr] gap-5 items-center relative">
                             <div className='space-y-1 font-arizona-sans-regular'>
                                 <div className={`text-xs lg:text-sm  tracking-widest uppercase`}>{pkg.title}</div>
                                 <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">{pkg.subtitle}</div>
@@ -158,7 +158,7 @@ export default function PackageList({
                                     {guestLabel(displayRooms, displayAdults, displayChildren)}
                                 </div>
                             </div>
-                            <div className='space-y-1 relative font-arizona-sans-regular'>
+                            <div className='space-y-1 relative font-arizona-sans-regular flex justify-end'>
                                 {pkg.availableRooms === 0 ? (
                                     <button
                                         disabled
