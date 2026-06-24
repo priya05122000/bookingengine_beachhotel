@@ -19,12 +19,17 @@ export default function ConfirmationSection() {
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [showPreview]);
 
   function closePreview() {
     setClosingPreview(true);
-    setTimeout(() => { setClosingPreview(false); setShowPreview(false); }, 380);
+    setTimeout(() => {
+      setClosingPreview(false);
+      setShowPreview(false);
+    }, 380);
   }
 
   async function handleDownloadInvoice() {
@@ -37,380 +42,411 @@ export default function ConfirmationSection() {
   }
 
   return (
-    <div className="py-8">
-      <div className=" mx-auto space-y-6">
-        {/* ── Top confirmation banner ── */}
-        <div className="bg-pale-green border border-light-green px-6 py-6 flex flex-col sm:flex-row sm:items-center gap-6">
-          {/* Left: checkmark + message */}
-          <div className="flex items-center gap-4 flex-1">
-            <div className="w-12 h-12 rounded-full bg-light-green flex items-center justify-center shrink-0">
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17l-5-5"
-                  stroke="white"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <div>
-              <h2
-                className={`${typography.textThXl} font-arizona-sans-regular text-primary leading-snug`}
-              >
-                Your Booking Is Confirmed
-              </h2>
-              <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
-                Let the charm of the coastline and luxurious comforts set the
-                stage for an unforgettable stay.
-              </p>
-            </div>
+    <div className="mx-auto space-y-6">
+      {/* ── Top confirmation banner ── */}
+      <div className="bg-pale-green border border-light-green px-6 py-6 flex flex-col sm:flex-row sm:items-center gap-6">
+        {/* Left: checkmark + message */}
+        <div className="flex items-center gap-4 flex-1">
+          <div className="w-12 h-12 rounded-full bg-light-green flex items-center justify-center shrink-0">
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M20 6L9 17l-5-5"
+                stroke="white"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
-
-          {/* Vertical divider */}
-          <div className="hidden sm:block w-px self-stretch bg-light-green" />
-
-          {/* Right: booking reference */}
-          <div className="sm:pl-6 ">
-            <p className="text-xs font-arizona-light text-dark-gray tracking-wide">
-              Booking reference
-            </p>
-            <p
-              className={` font-arizona-regular tracking-wider font-bold text-primary leading-tight mt-0.5 ${typography.textTwoXl}`}
+          <div>
+            <h2
+              className={`${typography.textThXl} font-arizona-sans-regular text-primary leading-snug`}
             >
-              LB4567854
-            </p>
-            <p className="text-xs font-arizona-light text-dark-gray mt-1">
-              A confirmation email has been sent to
-              <br />
-              thebeachhotel@gmail.com
+              Your Booking Is Confirmed
+            </h2>
+            <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
+              Let the charm of the coastline and luxurious comforts set the
+              stage for an unforgettable stay.
             </p>
           </div>
         </div>
 
-        {/* ── Main grid ── */}
-        <div className="flex  flex-col lg:grid lg:grid-cols-[1fr_300px] gap-5 items-start">
-          {/* Left: Booking Details */}
-          <div className="w-full overflow-hidden lg:sticky lg:top-20 lg:self-start">
-            <div className="px-8 py-8 border border-primary bg-white">
-              <h3
-                className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase mb-8`}
-              >
-                Booking Details
-              </h3>
-              <div className="w-full xl:w-2/3">
-                {/* Row 1: GUEST | CHECK-IN | CHECK-OUT */}
-                <div className="grid sm:grid-cols-3 gap-6 font-arizona-sans-regular text-xs lg:text-sm">
-                  <div>
-                    <p className=" text-dark-gray uppercase tracking-widest mb-2">
-                      Guest
-                    </p>
-                    <p className="  text-primary">Nuva rey</p>
-                  </div>
-                  <div>
-                    <p className=" text-dark-gray uppercase tracking-widest mb-2">
-                      Check - In
-                    </p>
-                    <p className="  text-primary">Sun, 22 May 2026</p>
-                    <p className=" text-dark-gray mt-1">From 6:00 pm</p>
-                  </div>
-                  <div>
-                    <p className="text-dark-gray uppercase tracking-widest mb-2">
-                      Check - Out
-                    </p>
-                    <p className=" text-primary">Mon, 23 May 2026</p>
-                    <p className="text-dark-gray mt-1">by 6:00 pm</p>
-                  </div>
+        {/* Vertical divider */}
+        <div className="hidden sm:block w-px self-stretch bg-light-green" />
 
-                  <div>
-                    <p className="text-dark-gray uppercase tracking-widest mb-2">
-                      Your Reservation
-                    </p>
-                    <p className=" text-primary">3 Nights, 2 Days | 1 Room</p>
-                  </div>
-                  <div>
-                    <p className="text-dark-gray uppercase tracking-widest mb-2">
-                      Phone
-                    </p>
-                    <p className=" text-primary">+91 65478 98756</p>
-                  </div>
-                  <div>
-                    <p className=" text-dark-gray uppercase tracking-widest mb-2">
-                      Email
-                    </p>
-                    <p className="text-primary">nuvaray26@gmail.com</p>
-                  </div>
+        {/* Right: booking reference */}
+        <div className="sm:pl-6 ">
+          <p className="text-xs font-arizona-light text-dark-gray tracking-wide">
+            Booking reference
+          </p>
+          <p
+            className={` font-arizona-regular tracking-wider font-bold text-primary leading-tight mt-0.5 ${typography.textTwoXl}`}
+          >
+            LB4567854
+          </p>
+          <p className="text-xs font-arizona-light text-dark-gray mt-1">
+            A confirmation email has been sent to
+            <br />
+            thebeachhotel@gmail.com
+          </p>
+        </div>
+      </div>
+
+      {/* ── Main grid ── */}
+      <div className="flex  flex-col lg:grid lg:grid-cols-[1fr_300px] gap-5 items-start">
+        {/* Left: Booking Details */}
+        <div className="w-full overflow-hidden lg:sticky lg:top-20 lg:self-start">
+          <div className="px-8 py-8 border border-primary bg-white">
+            <h3
+              className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase mb-8`}
+            >
+              Booking Details
+            </h3>
+            <div className="w-full xl:w-2/3">
+              {/* Row 1: GUEST | CHECK-IN | CHECK-OUT */}
+              <div className="grid sm:grid-cols-3 gap-6 font-arizona-sans-regular text-xs lg:text-sm">
+                <div>
+                  <p className=" text-dark-gray uppercase tracking-widest mb-2">
+                    Guest
+                  </p>
+                  <p className="  text-primary">Nuva rey</p>
+                </div>
+                <div>
+                  <p className=" text-dark-gray uppercase tracking-widest mb-2">
+                    Check - In
+                  </p>
+                  <p className="  text-primary">Sun, 22 May 2026</p>
+                  <p className=" text-dark-gray mt-1">From 6:00 pm</p>
+                </div>
+                <div>
+                  <p className="text-dark-gray uppercase tracking-widest mb-2">
+                    Check - Out
+                  </p>
+                  <p className=" text-primary">Mon, 23 May 2026</p>
+                  <p className="text-dark-gray mt-1">by 6:00 pm</p>
+                </div>
+
+                <div>
+                  <p className="text-dark-gray uppercase tracking-widest mb-2">
+                    Your Reservation
+                  </p>
+                  <p className=" text-primary">3 Nights, 2 Days | 1 Room</p>
+                </div>
+                <div>
+                  <p className="text-dark-gray uppercase tracking-widest mb-2">
+                    Phone
+                  </p>
+                  <p className=" text-primary">+91 65478 98756</p>
+                </div>
+                <div>
+                  <p className=" text-dark-gray uppercase tracking-widest mb-2">
+                    Email
+                  </p>
+                  <p className="text-primary">nuvaray26@gmail.com</p>
                 </div>
               </div>
-            </div>
-
-            {/* Bottom strip */}
-            <div className="bg-white border border-primary px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-2">
-              <div>
-                <p
-                  className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
-                >
-                  Manage Your Reservation
-                  Planning another reservation?
-                </p>
-                <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
-                  Start your booking today.
-                </p>
-              </div>
-              <button
-                onClick={() => {
-                  window.dispatchEvent(
-                    new CustomEvent("search:check-availability", {
-                      detail: {
-                        step: 0,
-                        showPackages: false,
-                      },
-                    }),
-                  );
-                }}
-                className=" bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer"
-              >
-                Book Now
-              </button>
             </div>
           </div>
 
-          {/* Right: Reservation & Price summary */}
-          <aside className="space-y-4 w-full bg-white shadow-[-1px_4px_4px_0px_#00000040] ">
-            {/* Reservation Summery */}
-            <div className="p-3">
+          {/* Bottom strip — desktop only (shown below booking details) */}
+          <div className="hidden lg:flex bg-white border border-primary px-6 py-4 flex-row items-center justify-between gap-3 mt-2">
+            <div>
+              <p
+                className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
+              >
+                Manage Your Reservation Planning another reservation?
+              </p>
+              <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
+                Start your booking today.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                window.dispatchEvent(
+                  new CustomEvent("search:check-availability", {
+                    detail: {
+                      step: 0,
+                      showPackages: false,
+                    },
+                  }),
+                );
+              }}
+              className="w-50 xl:w-fit bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer"
+            >
+              Book Now
+            </button>
+          </div>
+        </div>
+
+        {/* Right: Reservation & Price summary */}
+        <aside className="space-y-4 w-full bg-white shadow-[-1px_4px_4px_0px_#00000040] ">
+          {/* Reservation Summery */}
+          <div className="p-3">
+            <h4
+              className={`${typography.textBase} font-bold text-primary mb-4 font-arizona-light tracking-wider`}
+            >
+              Reservation Summery
+            </h4>
+            <div className="bg-primary/4  shadow-[-1px_4px_4px_0px_#00000040]  p-4 space-y-4">
+              {/* Check-in / Check-out */}
+
+              <div className="space-y-1">
+                <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
+                  Rooms Selected
+                </p>
+                <div className="space-y-1 tracking-wider">
+                  <p
+                    className={`${typography.textBase} font-semibold text-primary`}
+                  >
+                    Premier Room - Sea View
+                    <span className="text-[10px] block">
+                      ( 2 Rooms | 2 Adults & 2 Children )
+                    </span>
+                  </p>
+                  <p className="text-xs bg-silver/30 p-1 inline-block text-black">
+                    Breakfast Included
+                  </p>
+                  <p
+                    className={`${typography.textBase} font-semibold text-primary`}
+                  >
+                    Bay Suite - Sea View
+                    <span className="text-[10px] block">
+                      ( 1 Room | 2 Adults )
+                    </span>
+                  </p>
+                  <p className="text-xs bg-silver/30 p-1 inline-block text-black">
+                    Breakfast Included
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4 font-arizona-sans-regular ">
+                <div className="space-y-1">
+                  <p className="text-dark-gray uppercase tracking-widest text-xs lg:text-sm">
+                    Check - In
+                  </p>
+                  <p className="text-xs text-primary">Mon, 23 May 2026</p>
+                  <p className="text-dark-gray mt-0.5 text-xs">From 6:00 pm</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-dark-gray uppercase tracking-widest  text-xs lg:text-sm">
+                    Check - Out
+                  </p>
+                  <p className="text-primary text-xs">Mon, 23 May 2026</p>
+                  <p className="text-dark-gray mt-0.5 text-xs">by 6:00 pm</p>
+                </div>
+              </div>
+              {/* Total Length of Stay */}
+              <div className="space-y-1 font-arizona-sans-regular">
+                <p className="text-dark-gray uppercase tracking-widest  text-xs lg:text-sm">
+                  Total Length Of Stay
+                </p>
+                <p
+                  className={`${typography.textBase} font-medium text-primary`}
+                >
+                  3 Nights, 2 Days
+                </p>
+              </div>
+              {/* You Selected */}
+            </div>
+
+            {/* Price Summery */}
+            <div className="bg-primary/4 shadow-[-1px_4px_4px_0px_#00000040] p-4 space-y-4 mt-3 ">
               <h4
                 className={`${typography.textBase} font-bold text-primary mb-4 font-arizona-light tracking-wider`}
               >
-                Reservation Summery
+                Price Summary
               </h4>
-              <div className="bg-primary/4  shadow-[-1px_4px_4px_0px_#00000040]  p-4 space-y-4">
-                {/* Check-in / Check-out */}
 
-                <div className="space-y-1">
-                  <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
-                    Rooms Selected
-                  </p>
-                  <div className="space-y-1 tracking-wider">
-                    <p
-                      className={`${typography.textBase} font-semibold text-primary`}
-                    >
-                      Premier Room - Sea View
-                      <span className="text-[10px] block">( 2 Rooms | 2 Adults & 2 Children )</span>
-                    </p>
-                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
-                      Breakfast Included
-                    </p>
-                    <p
-                      className={`${typography.textBase} font-semibold text-primary`}
-                    >
-                      Bay Suite - Sea View
-                      <span className="text-[10px] block">( 1 Room | 2 Adults )</span>
-                    </p>
-                    <p className="text-xs bg-silver/30 p-1 inline-block text-black">
-                      Breakfast Included
-                    </p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4 font-arizona-sans-regular ">
-                  <div className="space-y-1">
-                    <p className="text-dark-gray uppercase tracking-widest text-xs lg:text-sm">
-                      Check - In
-                    </p>
-                    <p className="text-xs text-primary">Mon, 23 May 2026</p>
-                    <p className="text-dark-gray mt-0.5 text-xs">
-                      From 6:00 pm
-                    </p>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-dark-gray uppercase tracking-widest  text-xs lg:text-sm">
-                      Check - Out
-                    </p>
-                    <p className="text-primary text-xs">Mon, 23 May 2026</p>
-                    <p className="text-dark-gray mt-0.5 text-xs">by 6:00 pm</p>
-                  </div>
-                </div>
-                {/* Total Length of Stay */}
-                <div className="space-y-1 font-arizona-sans-regular">
-                  <p className="text-dark-gray uppercase tracking-widest  text-xs lg:text-sm">
-                    Total Length Of Stay
-                  </p>
-                  <p
-                    className={`${typography.textBase} font-medium text-primary`}
-                  >
-                    3 Nights, 2 Days
-                  </p>
-                </div>
-                {/* You Selected */}
-
-              </div>
-
-              {/* Price Summery */}
-              <div className="bg-primary/4 shadow-[-1px_4px_4px_0px_#00000040] p-4 space-y-4 mt-3 ">
-                <h4
-                  className={`${typography.textBase} font-bold text-primary mb-4 font-arizona-light tracking-wider`}
-                >
-                  Price Summary
-                </h4>
-
-                <div className="space-y-4 text-xs lg:text-sm">
-                  <div className="flex justify-between  text-dark-gray">
-                    <div className="flex flex-col">
-                      <span>Rooms</span>
-                      <span className="text-dark-gray">(1 Day x 2 Nights)</span>
-                    </div>
-
-                    <span>&#8377; 6,000</span>
+              <div className="space-y-4 text-xs lg:text-sm">
+                <div className="flex justify-between  text-dark-gray">
+                  <div className="flex flex-col">
+                    <span>Rooms</span>
+                    <span className="text-dark-gray">(1 Day x 2 Nights)</span>
                   </div>
 
-                  <div className="flex justify-between text-dark-gray ">
-                    <div className="flex flex-col">
-                      <span>Offer</span>
-                      <span className="text-dark-gray">(10% off)</span>
-                    </div>
-
-                    <span>&#8377; 600</span>
-                  </div>
-
-                  <div className="flex justify-between text-dark-gray">
-                    <span>Extras</span>
-                    <span>&#8377; 700</span>
-                  </div>
-
-                  <div className="flex justify-between  text-dark-gray ">
-                    <span>Taxes & Fees</span>
-                    <span>&#8377; 1000</span>
-                  </div>
+                  <span>&#8377; 6,000</span>
                 </div>
 
-                <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-gray-700 text-base lg:text-lg font-arizona-light tracking-[0.04em] text-primary">
-                  <span>Total Amount Paid</span>
-                  <span>&#8377; 8300</span>
+                <div className="flex justify-between text-dark-gray ">
+                  <div className="flex flex-col">
+                    <span>Offer</span>
+                    <span className="text-dark-gray">(10% off)</span>
+                  </div>
+
+                  <span>&#8377; 600</span>
+                </div>
+
+                <div className="flex justify-between text-dark-gray">
+                  <span>Extras</span>
+                  <span>&#8377; 700</span>
+                </div>
+
+                <div className="flex justify-between  text-dark-gray ">
+                  <span>Taxes & Fees</span>
+                  <span>&#8377; 1000</span>
                 </div>
               </div>
-              <div className="mt-3 flex gap-3">
-                {/* <button
+
+              <div className="flex items-baseline justify-between mt-2 pt-2 border-t border-gray-700 text-base lg:text-lg font-arizona-light tracking-[0.04em] text-primary">
+                <span>Total Amount Paid</span>
+                <span>&#8377; 8300</span>
+              </div>
+            </div>
+            <div className="mt-3 flex gap-3">
+              {/* <button
                   onClick={() => setShowPreview(true)}
                   className="w-full border border-primary text-primary px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
                 >
                   Preview Invoice
                 </button> */}
-                <button
-                  onClick={handleDownloadInvoice}
-                  disabled={downloading}
-                  className="w-full bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
-                >
-                  {downloading ? "Downloading..." : "Download Invoice"}
-                </button>
-              </div>
-            </div>
-          </aside>
-        </div>
-
-        {/* ── Explore More ── */}
-        <div className="bg-white px-6 py-8">
-          <div className="grid grid-cols-1 sm:grid-cols-5 sm:gap-5 gap-4 items-stretch">
-            <div className="shadow-[-1px_4px_4px_0px_#00000040] sm:col-span-2 ">
-              <Image
-                src="/images/invitationstay.jpg"
-                alt={`explore-1`}
-                width={400}
-                height={400}
-                className="w-full h-full object-cover"
-                loading="eager"
-                priority
-              />
-            </div>
-            <div className="col-span-3 font-arizona-sans-regular h-full flex">
-              <div className="sm:col-span-3 w-full flex flex-col justify-between sm:p-4 space-y-6">
-                <div>
-                  <p
-                    className={`text-xs lg:text-sm uppercase font-arizona-sans-regular tracking-widest text-primary leading-snug`}
-                  >
-                    An Invitation to Stay
-                  </p>
-                  <p className={`${typography.textFoXl} font-arizona-light uppercase  font-semibold tracking-wide mt-4`}>
-                    At the southernmost tip of India, in the timeless coastal
-                    setting of Kanniyakumari, discover a stay unlike any other.
-
-                  </p>
-                </div>
-
-                <p className={`text-sm lg:text-base font-arizona-light text-primary leading-snug`}
-                >
-
-                  The three oceans converge and endless blue waters frame
-                  every moment, refined comforts, exceptional hospitality and
-                  a profound sense of place come together to create a stay
-                  that lingers long after you leave.
-                </p>
-
-                <div className="mt-4">
-                  <button className=" text-primary border-b border-primary uppercase   text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center px-4 py-1">
-                    Explore
-                  </button>
-                </div>
-              </div>
+              <button
+                onClick={handleDownloadInvoice}
+                disabled={downloading}
+                className="w-full bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
+              >
+                {downloading ? "Downloading..." : "Download Invoice"}
+              </button>
             </div>
           </div>
-        </div>
+        </aside>
 
-        {/* ── Invoice Preview Modal ── */}
-        {showPreview && (
-          <div
-            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 ${closingPreview ? "animate-fade-out" : "animate-fade-in"}`}
-            onClick={closePreview}
-          >
-            <div
-              className="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
+        {/* Bottom strip — mobile/tablet only (shown after reservation & summary) */}
+        <div className="lg:hidden col-span-full bg-white border border-primary px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <p
+              className={`${typography.textBase} font-arizona-sans-regular tracking-widest text-dark-gray uppercase `}
             >
-              <div className="sticky top-0 z-10 bg-white border-b border-gray-200 flex items-center justify-between px-6 py-3">
-                <span className="font-arizona-sans-regular tracking-widest text-sm uppercase text-primary">
-                  Invoice Preview
-                </span>
-                <button
-                  onClick={closePreview}
-                  className="text-dark-gray hover:text-primary transition-colors cursor-pointer"
-                  aria-label="Close preview"
+              Manage Your Reservation Planning another reservation?
+            </p>
+            <p className="text-xs lg:text-sm font-arizona-light text-dark-gray mt-1">
+              Start your booking today.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              window.dispatchEvent(
+                new CustomEvent("search:check-availability", {
+                  detail: {
+                    step: 0,
+                    showPackages: false,
+                  },
+                }),
+              );
+            }}
+            className="w-30 bg-primary text-white px-4 h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer"
+          >
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      {/* ── Explore More ── */}
+      <div className="bg-white px-6 py-8 md:mt-10 mb-0">
+        <div className="grid grid-cols-1 sm:grid-cols-5 sm:gap-5 gap-4 items-stretch">
+          <div className="shadow-[-1px_4px_4px_0px_#00000040] sm:col-span-2 ">
+            <Image
+              src="/images/invitationstay.jpg"
+              alt={`explore-1`}
+              width={400}
+              height={400}
+              className="w-full h-full object-cover"
+              loading="eager"
+              priority
+            />
+          </div>
+          <div className="col-span-3 font-arizona-sans-regular h-full flex">
+            <div className="sm:col-span-3 w-full flex flex-col justify-between sm:p-4 space-y-6">
+              <div>
+                <p
+                  className={`text-xs lg:text-sm uppercase font-arizona-sans-regular tracking-widest text-primary leading-snug`}
                 >
-                  <X size={20} />
-                </button>
+                  An Invitation to Stay
+                </p>
+                <p
+                  className={`${typography.textFoXl} font-arizona-light uppercase  font-semibold tracking-wide mt-4`}
+                >
+                  At the southernmost tip of India, in the timeless coastal
+                  setting of Kanniyakumari, discover a stay unlike any other.
+                </p>
               </div>
-              <div className="p-4">
-                <InvoicePreview />
-              </div>
-              <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-3 flex justify-end gap-3">
-                <button
-                  onClick={closePreview}
-                  className="border border-primary text-primary px-6 h-10 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
-                >
-                  Close
-                </button>
-                <button
-                  onClick={async () => { await handleDownloadInvoice(); closePreview(); }}
-                  disabled={downloading}
-                  className="bg-primary text-white px-6 h-10 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
-                >
-                  {downloading ? "Downloading..." : "Download Invoice"}
+
+              <p
+                className={`text-sm lg:text-base font-arizona-light text-primary leading-snug`}
+              >
+                The three oceans converge and endless blue waters frame every
+                moment, refined comforts, exceptional hospitality and a profound
+                sense of place come together to create a stay that lingers long
+                after you leave.
+              </p>
+
+              <div className="mt-4">
+                <button className=" text-primary border-b border-primary uppercase   text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer flex items-center px-4 py-1">
+                  Explore
                 </button>
               </div>
             </div>
           </div>
-        )}
-
-        {/* Hidden invoice for PDF generation */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            left: "-9999px",
-            top: 0,
-            width: "794px",
-          }}
-        >
-          <InvoicePreview ref={invoiceRef} />
         </div>
+      </div>
+
+      {/* ── Invoice Preview Modal ── */}
+      {showPreview && (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 ${closingPreview ? "animate-fade-out" : "animate-fade-in"}`}
+          onClick={closePreview}
+        >
+          <div
+            className="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 z-10 bg-white border-b border-gray-200 flex items-center justify-between px-6 py-3">
+              <span className="font-arizona-sans-regular tracking-widest text-sm uppercase text-primary">
+                Invoice Preview
+              </span>
+              <button
+                onClick={closePreview}
+                className="text-dark-gray hover:text-primary transition-colors cursor-pointer"
+                aria-label="Close preview"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="p-4">
+              <InvoicePreview />
+            </div>
+            <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-3 flex justify-end gap-3">
+              <button
+                onClick={closePreview}
+                className="border border-primary text-primary px-6 h-10 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
+              >
+                Close
+              </button>
+              <button
+                onClick={async () => {
+                  await handleDownloadInvoice();
+                  closePreview();
+                }}
+                disabled={downloading}
+                className="bg-primary text-white px-6 h-10 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer"
+              >
+                {downloading ? "Downloading..." : "Download Invoice"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Hidden invoice for PDF generation */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          top: 0,
+          width: "794px",
+        }}
+      >
+        <InvoicePreview ref={invoiceRef} />
       </div>
     </div>
   );

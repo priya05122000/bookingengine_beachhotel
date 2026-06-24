@@ -20,7 +20,7 @@ export default function BookingStepBar({ steps, activeStep, enabledUpTo }: Booki
         const navWidth = nav.offsetWidth;
         const activeLeft = active.offsetLeft;
         const activeWidth = active.offsetWidth;
-        nav.scrollTo({ left: (activeLeft - navWidth / 2 + activeWidth / 2)-25, behavior: "smooth" });
+        nav.scrollTo({ left: activeLeft - navWidth / 2 + activeWidth / 2, behavior: "smooth" });
     }, [activeStep]);
 
     const goToStep = (step: number) => {

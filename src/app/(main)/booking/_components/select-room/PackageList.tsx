@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { createPortal } from "react-dom";
+import { Minus, Plus, X } from "lucide-react";
 import { PackageItem } from "./types";
 import { typography } from "@/src/lib/typography";
 
@@ -229,25 +230,123 @@ export default function PackageList({
                       Add Room
                     </button>
                   )}
-                  <div className="tracking-[.15em] text-xs lg:text-sm">
-                    {isOpen && (
-                      <div className="absolute top-full right-0 z-20 w-56 bg-white border border-primary/32 rounded-xs px-4 pb-4 pt-2 text-sm shadow-[-1px_4px_4px_0px_#00000040]">
-                        <button
-                          aria-label="Close"
-                          className="text-dark-gray text-end w-full mb-1 hover:text-dark-gray text-lg leading-none cursor-pointer"
-                          onClick={() => setOpenQtyFor(null)}
-                        >
-                          ×
-                        </button>
 
-                        {(() => {
-                          const maxRooms = pkg.availableRooms ?? 1;
-                          const maxGuests = liveQty.rooms * 4;
-                          const atRoomLimit = liveQty.rooms >= maxRooms;
-                          const atGuestLimit =
-                            liveQty.adults + liveQty.children >= maxGuests;
-                          return (
-                            <>
+                  {/* Desktop dropdown */}
+                  {isOpen &&
+                    (() => {
+                      const maxRooms = pkg.availableRooms ?? 1;
+                      const maxGuests = liveQty.rooms * 4;
+                      const atRoomLimit = liveQty.rooms >= maxRooms;
+                      const atGuestLimit =
+                        liveQty.adults + liveQty.children >= maxGuests;
+                      return (
+                        <div className="hidden md:block absolute top-full right-0 z-20 w-56 bg-white border border-primary/32 rounded-xs px-4 pb-4 pt-2 text-sm shadow-[-1px_4px_4px_0px_#00000040] tracking-[.15em]">
+                          <button
+                            aria-label="Close"
+                            className="text-dark-gray text-end w-full mb-1 hover:text-dark-gray text-lg leading-none cursor-pointer"
+                            onClick={() => setOpenQtyFor(null)}
+                          >
+                            ×
+                          </button>
+                          <Counter
+                            label="Rooms"
+                            value={liveQty.rooms}
+                            min={1}
+                            max={maxRooms}
+                            onInc={() =>
+                              setRoomsCount(pkg.id, liveQty.rooms + 1)
+                            }
+                            onDec={() =>
+                              setRoomsCount(pkg.id, liveQty.rooms - 1)
+                            }
+                          />
+                          {atRoomLimit && (
+                            <p className="text-[10px] text-red-500 font-arizona-sans-regular tracking-widest mb-1">
+                              Only {maxRooms} room{maxRooms > 1 ? "s" : ""}{" "}
+                              available for this package.
+                            </p>
+                          )}
+                          <Counter
+                            label="Adults"
+                            value={liveQty.adults}
+                            min={1}
+                            max={liveQty.rooms * 4}
+                            incDisabled={atGuestLimit}
+                            onInc={() => setAdults(pkg.id, liveQty.adults + 1)}
+                            onDec={() => setAdults(pkg.id, liveQty.adults - 1)}
+                          />
+                          <Counter
+                            label="Children"
+                            sublabel="0 - 8 yrs"
+                            value={liveQty.children}
+                            min={0}
+                            max={liveQty.rooms * 4}
+                            incDisabled={atGuestLimit}
+                            onInc={() =>
+                              setChildren(pkg.id, liveQty.children + 1)
+                            }
+                            onDec={() =>
+                              setChildren(pkg.id, liveQty.children - 1)
+                            }
+                          />
+                          {atGuestLimit && (
+                            <p className="text-[10px] text-red-500 font-arizona-sans-regular tracking-widest mt-1">
+                              Max {maxGuests} guest{maxGuests > 1 ? "s" : ""}{" "}
+                              for {liveQty.rooms} room
+                              {liveQty.rooms > 1 ? "s" : ""} (4 per room).
+                            </p>
+                          )}
+                          <div className="flex justify-start mt-2">
+                            <button
+                              className="px-4 py-1 bg-primary text-white rounded-xs text-sm cursor-pointer uppercase tracking-[.15em] font-arizona-sans-regular"
+                              onClick={() => {
+                                addPackage(
+                                  pkg,
+                                  liveQty.rooms,
+                                  liveQty.adults,
+                                  liveQty.children,
+                                );
+                                setOpenQtyFor(null);
+                              }}
+                            >
+                              Add Room
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })()}
+
+                  {/* Mobile slide-up sheet */}
+                  {isOpen &&
+                    typeof document !== "undefined" &&
+                    createPortal(
+                      (() => {
+                        const maxRooms = pkg.availableRooms ?? 1;
+                        const maxGuests = liveQty.rooms * 4;
+                        const atRoomLimit = liveQty.rooms >= maxRooms;
+                        const atGuestLimit =
+                          liveQty.adults + liveQty.children >= maxGuests;
+                        return (
+                          <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end">
+                            {/* backdrop */}
+                            <div
+                              className="absolute inset-0 bg-black/40"
+                              onClick={() => setOpenQtyFor(null)}
+                            />
+                            {/* sheet */}
+                            <div className="relative bg-white rounded-t-2xl px-6 pt-4 pb-8 font-arizona-sans-regular animate-slide-up">
+                              <div className="flex items-center justify-between mb-2 border-b border-gray-200 pb-2">
+                                <span className="text-sm font-semibold uppercase tracking-widest text-primary">
+                                  {pkg.title}
+                                </span>
+                                <button
+                                  aria-label="Close"
+                                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 cursor-pointer mb-1"
+                                  onClick={() => setOpenQtyFor(null)}
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
                               <Counter
                                 label="Rooms"
                                 value={liveQty.rooms}
@@ -261,12 +360,11 @@ export default function PackageList({
                                 }
                               />
                               {atRoomLimit && (
-                                <p className="text-[10px] text-red-500 font-arizona-sans-regular tracking-widest mb-1">
+                                <p className="text-[10px] text-red-500 tracking-widest mb-1">
                                   Only {maxRooms} room{maxRooms > 1 ? "s" : ""}{" "}
                                   available for this package.
                                 </p>
                               )}
-
                               <Counter
                                 label="Adults"
                                 value={liveQty.adults}
@@ -280,7 +378,6 @@ export default function PackageList({
                                   setAdults(pkg.id, liveQty.adults - 1)
                                 }
                               />
-
                               <Counter
                                 label="Children"
                                 sublabel="0 - 8 yrs"
@@ -296,36 +393,33 @@ export default function PackageList({
                                 }
                               />
                               {atGuestLimit && (
-                                <p className="text-[10px] text-red-500 font-arizona-sans-regular tracking-widest mt-1">
+                                <p className="text-[10px] text-red-500 tracking-widest mt-1">
                                   Max {maxGuests} guest
                                   {maxGuests > 1 ? "s" : ""} for {liveQty.rooms}{" "}
                                   room{liveQty.rooms > 1 ? "s" : ""} (4 per
                                   room).
                                 </p>
                               )}
-                            </>
-                          );
-                        })()}
-
-                        <div className="flex justify-start mt-2">
-                          <button
-                            className="px-4 py-1 bg-primary text-white rounded-xs text-sm cursor-pointer uppercase tracking-[.15em] font-arizona-sans-regular"
-                            onClick={() => {
-                              addPackage(
-                                pkg,
-                                liveQty.rooms,
-                                liveQty.adults,
-                                liveQty.children,
-                              );
-                              setOpenQtyFor(null);
-                            }}
-                          >
-                            Add Room
-                          </button>
-                        </div>
-                      </div>
+                              <button
+                                className="mt-4 w-full py-3 bg-primary text-white uppercase tracking-[.15em] text-sm cursor-pointer font-arizona-sans-regular"
+                                onClick={() => {
+                                  addPackage(
+                                    pkg,
+                                    liveQty.rooms,
+                                    liveQty.adults,
+                                    liveQty.children,
+                                  );
+                                  setOpenQtyFor(null);
+                                }}
+                              >
+                                Add Room
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })(),
+                      document.body,
                     )}
-                  </div>
                 </div>
               </div>
             </div>
