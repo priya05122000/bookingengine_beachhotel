@@ -99,7 +99,7 @@ export default function PackageList({
     }
 
     return (
-        <div className=" rounded-xs  pt-6">
+        <div className=" rounded-xs">
             <h4 className={`text-base lg:text-xl font-arizona-sans-regular tracking-widest  text-primary mb-4 ${typography.textBase}`}>CHOOSE A PACKAGE</h4>
 
             <div className="space-y-6">
@@ -114,7 +114,7 @@ export default function PackageList({
                     const displayChildren = isOpen ? liveQty.children : (committedPkg?.children ?? liveQty.children);
 
                     return (
-                        <div key={pkg.id} className="border-b last:border-b-0 pb-4 grid grid-cols-1 md:grid-cols-[1fr_1fr_0.7fr] gap-5 items-center relative">
+                        <div key={pkg.id} className="border-b last:border-b-0 pb-4 grid grid-cols-1 md:grid-cols-[1fr_1fr_0.7fr] gap-1 md:gap-5 items-center relative">
                             <div className='space-y-1 font-arizona-sans-regular'>
                                 <div className={`text-xs lg:text-sm  tracking-widest uppercase`}>{pkg.title}</div>
                                 <div className="tracking-[0.15em] text-dark-gray mt-1 text-[10px] lg:text-xs">{pkg.subtitle}</div>
@@ -125,7 +125,7 @@ export default function PackageList({
                             </div>
                             <div className='space-y-1'>
                                 <div className="relative inline-block group font-arizona-regular">
-                                    <div className={`text-[36px]`}>{pkg.price}</div>
+                                    <div className={`text-[26px] md:text-[36px]`}>{pkg.price}</div>
                                     <div className="text-xs text-dark-gray underline cursor-help">Details</div>
                                     <div className="absolute top-full right-0 z-20 mt-2 w-64 bg-white border border-primary/32 rounded-xs p-2 text-xs lg:text-sm shadow-[-1px_4px_4px_0px_#00000040] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity  text-dark-gray space-y-1">
                                         {pkg.priceBreakdown ? (

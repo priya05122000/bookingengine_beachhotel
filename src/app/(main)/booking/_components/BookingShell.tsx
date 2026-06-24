@@ -21,7 +21,7 @@ export default function BookingShell({
 
         <>
             {activeStep === 0 && (
-                <>
+                <div className="hidden md:block">
 
                     <div className=" flex justify-center">
                         <Image
@@ -29,7 +29,7 @@ export default function BookingShell({
                             alt='banner'
                             width={300}
                             height={150}
-                            className='w-auto h-full object-cover  mb-10 '
+                            className='w-auto h-full object-cover mb-10 '
                         />
                     </div>
 
@@ -41,11 +41,11 @@ export default function BookingShell({
                         height={900}
                         className='w-full h-64 object-cover '
                     />
-                </>
+                </div>
 
             )}
 
-            <div className=" bg-primary/4 p-6 md:p-10 mt-14 sm:mt-20">
+            <div className=" bg-primary/4 px-6 py-10 md:p-10">
                 <h1
                     className={`text-center tracking-[.08em] text-primary  uppercase font-arizona-regular mb-8 md:mb-12 ${typography.textFoXl}`}
                 >

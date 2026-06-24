@@ -2,21 +2,18 @@ import React from "react";
 import Navbar from "@/src/components/layout/Navbar";
 import Footer from "@/src/components/layout/Footer";
 
-
 export default function BookingLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <>
-            <Navbar />
+  return (
+    <>
+      <Navbar />
 
-            <main className="py-14 ">
-                {children}
-            </main>
+      <main className="md:py-8 lg:py-12">{children}</main>
 
-            <Footer />
-        </>
-    );
+      <Footer />
+    </>
+  );
 }
