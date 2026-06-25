@@ -495,7 +495,7 @@ export default function SelectRoomSection({
                 }),
               )
             }
-            className={`h-8 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase ${selected.length > 0 ? "bg-primary text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+            className={`h-10 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase ${selected.length > 0 ? "bg-primary text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
           >
             PROCEED
           </button>

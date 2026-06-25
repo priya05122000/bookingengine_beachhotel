@@ -33,7 +33,7 @@ export default function CancelBookingModal({ onClose, onSubmit }: CancelBookingM
 
   return (
     <div
-      className={`fixed inset-0 z-9999 bg-black/60 flex items-center justify-center ${closing ? "animate-fade-out" : "animate-fade-in"}`}
+      className={`fixed inset-0 z-9999 bg-black/60 flex items-center justify-center mb-0 ${closing ? "animate-fade-out" : "animate-fade-in"}`}
       onClick={handleClose}
     >
       <div
