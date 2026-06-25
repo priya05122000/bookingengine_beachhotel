@@ -6,28 +6,8 @@ import DatesOfStay from './DatesOfStay';
 import RoomsAndGuests, { Room } from './RoomsAndGuests';
 import { typography } from '@/src/lib/typography';
 import { IndianRupee } from 'lucide-react';
-
-const DATE_FORMAT: Intl.DateTimeFormatOptions = {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-};
-
-function formatDate(date: Date | null) {
-    if (!date) return '—';
-    return date.toLocaleDateString('en-GB', DATE_FORMAT);
-}
-
-function calcDuration(checkIn: Date | null, checkOut: Date | null) {
-    if (!checkIn || !checkOut) return '—';
-
-    const nights = Math.round(
-        (checkOut.getTime() - checkIn.getTime()) / 86400000
-    );
-
-    return `${nights + 1}D, ${nights}N`;
-}
+import { formatDate, calcDuration, isSameDay } from '@/src/lib/dateUtils';
+import { MAX_STAY_NIGHTS } from '@/src/lib/constants';
 
 export default function SearchForm() {
     const today = useMemo(() => {
@@ -70,14 +50,6 @@ export default function SearchForm() {
     const [iataOpen, setIataOpen] = useState(false);
     const [iataCode, setIataCode] = useState("");
 
-    function isSameDay(a: Date, b: Date) {
-        return (
-            a.getFullYear() === b.getFullYear() &&
-            a.getMonth() === b.getMonth() &&
-            a.getDate() === b.getDate()
-        );
-    }
-
     const handleDayClick = (date: Date) => {
         if (
             !selectingCheckOut ||
@@ -95,7 +67,7 @@ export default function SearchForm() {
     const maxCheckoutDate = useMemo(() => {
         if (!selectingCheckOut || !checkIn) return null;
         const m = new Date(checkIn);
-        m.setDate(m.getDate() + 7); // allow up to 7 days after check-in (inclusive)
+        m.setDate(m.getDate() + MAX_STAY_NIGHTS);
         return m;
     }, [selectingCheckOut, checkIn]);
 

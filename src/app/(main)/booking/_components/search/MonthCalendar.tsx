@@ -3,6 +3,7 @@ import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { getMockPrice } from '@/src/lib/mockPrices';
 import { typography } from '@/src/lib/typography';
+import { isSameDay } from '@/src/lib/dateUtils';
 
 interface MonthCalendarProps {
     year: number;
@@ -32,12 +33,6 @@ const MONTH_NAMES = [
 const DAY_HEADERS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
 // ================= HELPERS =================
-function isSameDay(a: Date, b: Date) {
-    return a.getFullYear() === b.getFullYear() &&
-        a.getMonth() === b.getMonth() &&
-        a.getDate() === b.getDate();
-}
-
 function getCalendarDays(year: number, month: number): (Date | null)[] {
     const firstDay = new Date(year, month, 1);
     // align Monday as first column

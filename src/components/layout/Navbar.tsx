@@ -5,17 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useModalClose } from "@/src/hooks/useModalClose";
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [closingLogoutModal, setClosingLogoutModal] = useState(false);
-
-  function closeLogoutModal() {
-    setClosingLogoutModal(true);
-    setTimeout(() => { setClosingLogoutModal(false); closeLogoutModal(); }, 380);
-  }
+  const { closing: closingLogoutModal, triggerClose: closeLogoutModal } = useModalClose({
+    onClose: () => setShowLogoutModal(false),
+  });
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

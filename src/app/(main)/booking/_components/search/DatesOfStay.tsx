@@ -13,26 +13,6 @@ interface DatesOfStayProps {
     maxCheckoutDate?: Date | null;
 }
 
-// ================= CONSTANTS =================
-const DATE_FORMAT: Intl.DateTimeFormatOptions = {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-};
-
-// ================= HELPERS =================
-function formatDate(date: Date | null): string {
-    if (!date) return '—';
-    return date.toLocaleDateString('en-GB', DATE_FORMAT);
-}
-
-function calcDuration(checkIn: Date | null, checkOut: Date | null): string {
-    if (!checkIn || !checkOut) return '—';
-    const nights = Math.round((checkOut.getTime() - checkIn.getTime()) / 86400000);
-    return `${nights + 1}D, ${nights}N`;
-}
-
 // ================= COMPONENT =================
 
 export default function DatesOfStay({

@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { PackageItem } from "./types";
 import { CheckCheck, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { typography } from "@/src/lib/typography";
+import { parsePrice, formatINR } from "@/src/lib/priceUtils";
 
 type SelectedPackage = PackageItem & {
   rooms: number;
@@ -19,17 +20,6 @@ type Props = {
   setPromo: (s: string) => void;
   hideLoginCard?: boolean;
 };
-
-/* Helpers */
-function parsePrice(priceStr: string) {
-  const digits = (priceStr || "").replace(/[^\d]/g, "");
-  const n = Number(digits || 0);
-  return isNaN(n) ? 0 : n;
-}
-
-function formatINR(n: number) {
-  return n.toLocaleString("en-IN");
-}
 
 /* Class constants to reduce repetition */
 const FONT = "text-xs lg:text-sm font-arizona-light tracking-widest";

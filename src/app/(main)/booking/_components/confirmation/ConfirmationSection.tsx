@@ -6,12 +6,15 @@ import InvoicePreview from "./InvoicePreview";
 import { downloadInvoice } from "./invoicePdf";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { useModalClose } from "@/src/hooks/useModalClose";
 
 export default function ConfirmationSection() {
   const invoiceRef = useRef<HTMLDivElement | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
-  const [closingPreview, setClosingPreview] = useState(false);
+  const { closing: closingPreview, triggerClose: closePreview } = useModalClose({
+    onClose: () => setShowPreview(false),
+  });
 
   useEffect(() => {
     if (showPreview) {
@@ -23,14 +26,6 @@ export default function ConfirmationSection() {
       document.body.style.overflow = "";
     };
   }, [showPreview]);
-
-  function closePreview() {
-    setClosingPreview(true);
-    setTimeout(() => {
-      setClosingPreview(false);
-      setShowPreview(false);
-    }, 380);
-  }
 
   async function handleDownloadInvoice() {
     setDownloading(true);

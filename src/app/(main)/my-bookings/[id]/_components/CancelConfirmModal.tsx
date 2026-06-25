@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AlertTriangle } from "lucide-react";
+import { useModalClose } from "@/src/hooks/useModalClose";
 
 interface CancelConfirmModalProps {
   reason: string;
@@ -9,20 +10,13 @@ interface CancelConfirmModalProps {
   onConfirm: () => void;
 }
 
-const FADE_MS = 380;
-
 export default function CancelConfirmModal({ reason, onClose, onConfirm }: CancelConfirmModalProps) {
-  const [closing, setClosing] = useState(false);
+  const { closing, triggerClose: handleClose } = useModalClose({ onClose });
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = ""; };
   }, []);
-
-  function handleClose() {
-    setClosing(true);
-    setTimeout(() => { setClosing(false); onClose(); }, FADE_MS);
-  }
 
   return (
     <div

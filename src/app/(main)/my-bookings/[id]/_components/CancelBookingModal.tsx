@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { X } from "lucide-react";
+import { useModalClose } from "@/src/hooks/useModalClose";
+import { useState } from "react";
 
 const REASONS = [
   "Change of plans",
@@ -16,22 +18,15 @@ interface CancelBookingModalProps {
   onSubmit: (reason: string) => void;
 }
 
-const FADE_MS = 380;
-
 export default function CancelBookingModal({ onClose, onSubmit }: CancelBookingModalProps) {
   const [selected, setSelected] = useState("");
   const [otherText, setOtherText] = useState("");
-  const [closing, setClosing] = useState(false);
+  const { closing, triggerClose: handleClose } = useModalClose({ onClose });
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = ""; };
   }, []);
-
-  function handleClose() {
-    setClosing(true);
-    setTimeout(() => { setClosing(false); onClose(); }, FADE_MS);
-  }
 
   const finalReason = selected === "Other" ? otherText.trim() : selected;
   const canSubmit = selected !== "" && (selected !== "Other" || otherText.trim() !== "");

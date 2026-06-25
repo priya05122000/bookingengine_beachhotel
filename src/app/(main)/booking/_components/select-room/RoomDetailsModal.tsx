@@ -10,12 +10,11 @@ import {
 } from "lucide-react";
 import Section from "@/src/components/common/Section";
 import { typography } from "@/src/lib/typography";
+import { useModalClose } from "@/src/hooks/useModalClose";
 
 type Props = {
   onClose: () => void;
 };
-
-const FADE_MS = 380;
 
 const IMAGES = [
   "/images/Rectangle.png",
@@ -49,12 +48,7 @@ const SECTIONS = [
 export default function RoomDetailsModal({ onClose }: Props) {
   const [activeImg, setActiveImg] = useState(0);
   const [openSection, setOpenSection] = useState("KEY FEATURES");
-  const [closing, setClosing] = useState(false);
-
-  function handleClose() {
-    setClosing(true);
-    setTimeout(() => { setClosing(false); onClose(); }, FADE_MS);
-  }
+  const { closing, triggerClose: handleClose } = useModalClose({ onClose });
 
   const prev = () => {
     setActiveImg((i) => (i - 1 + IMAGES.length) % IMAGES.length);

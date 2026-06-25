@@ -1,23 +1,20 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 interface ForgotPassFormProps {
   email: string;
 }
 import { Eye, EyeOff, User } from "lucide-react";
 import InputField from "../../_components/InputField";
+import { usePasswordVisibility } from "@/src/hooks/usePasswordVisibility";
 
 export const ForgotPassForm = ({ email }: ForgotPassFormProps) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const { showPassword, toggle: toggleShowPassword } = usePasswordVisibility();
   const [error, setError] = useState<string | null>(null);
-
-  const toggleShowPassword = useCallback(() => {
-    setShowPassword((s) => !s);
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
