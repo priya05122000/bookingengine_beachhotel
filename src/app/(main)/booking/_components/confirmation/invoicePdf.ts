@@ -28,10 +28,10 @@ export async function downloadInvoice(
     img.src = dataUrl;
     await new Promise<void>((res) => { img.onload = () => res(); });
 
-    const pdf = new jsPDF('p', 'pt', 'a4');
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (img.height * pdfWidth) / img.width;
+    const a4Width = 595.28; // A4 width in pt
+    const pdfHeight = (img.height * a4Width) / img.width;
 
-    pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    const pdf = new jsPDF({ orientation: 'p', unit: 'pt', format: [a4Width, pdfHeight] });
+    pdf.addImage(dataUrl, 'PNG', 0, 0, a4Width, pdfHeight);
     pdf.save(`invoice-${Date.now()}.pdf`);
 }
