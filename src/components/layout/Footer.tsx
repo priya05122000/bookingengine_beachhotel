@@ -49,7 +49,7 @@ export default function Footer() {
     <footer>
       <Section className="bg-primary w-full relative text-white overflow-hidden z-10 pt-10 lg:pt-20 px-6 sm:px-0">
         <div className="h-full flex flex-col justify-between font-arizona-light space-y-10">
-          <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-10 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-8 lg:gap-6">
             {/* Left: description + CTA + socials + contact */}
             <div className="flex flex-col gap-5">
               <p className="text-lg lg:text-xl leading-relaxed uppercase tracking-wide sm:max-w-sm xl:max-w-lg ">
@@ -109,10 +109,10 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_2.5fr] gap-10 lg:gap-6 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_2.5fr] gap-8 lg:gap-6 ">
             <div className=" flex flex-col justify-between gap-5">
               <div>
-                <div className="mt-6 lg:mt-4 xl:mt-2">
+                <div className="mt-4 xl:mt-2">
                   <p className="text-base lg:text-lg tracking-wider mb-3">
                     Follow Us
                   </p>
