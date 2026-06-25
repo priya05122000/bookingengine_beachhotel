@@ -8,6 +8,7 @@ import GuestPaymentSection from "./guest-payment/GuestPaymentSection";
 import ConfirmationSection from "./confirmation/ConfirmationSection";
 import { X } from "lucide-react";
 import { flushSync } from "react-dom";
+import { useModalClose } from "@/src/hooks/useModalClose";
 
 const STEPS = [
     "Search",
@@ -20,12 +21,9 @@ export default function FilterSection() {
     const [activeStep, setActiveStep] = useState(0);
     const [showPackages, setShowPackages] = useState(false);
     const [showSearchPopup, setShowSearchPopup] = useState(false);
-    const [closingSearchPopup, setClosingSearchPopup] = useState(false);
-
-    function closeSearchPopup() {
-        setClosingSearchPopup(true);
-        setTimeout(() => { setClosingSearchPopup(false); setShowSearchPopup(false); }, 380);
-    }
+    const { closing: closingSearchPopup, triggerClose: closeSearchPopup } = useModalClose({
+        onClose: () => setShowSearchPopup(false),
+    });
 
     useEffect(() => {
         const handler = (e: Event) => {

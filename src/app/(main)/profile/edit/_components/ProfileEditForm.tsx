@@ -59,32 +59,17 @@ export default function ProfileEditForm() {
     }
 
     setSaveSuccess(true);
-    setTimeout(() => setSaveSuccess(false), 3000);
+    setTimeout(() => router.push("/profile"), 800);
   }
 
   return (
     <div className="w-full max-w-md mx-auto ">
-      {/* <Link href="https://thebeachhotel.in/">
-        <Image
-          src="/images/logo.png"
-          alt="The Beach Hotel"
-          width={200}
-          height={40}
-          className="mb-6 mx-auto h-15 xl:h-30  object-contain"
-          style={{ width: "auto" }}
-        />
-      </Link> */}
       <div className="flex items-center justify-between mb-6">
-        <h2 className={`uppercase  ${typography.textXl} font-arizona-sans-regular font-medium  tracking-widest text-dark-gray uppercase truncate `}>
+        <h2
+          className={`uppercase  ${typography.textXl} font-arizona-sans-regular font-medium  tracking-widest text-dark-gray uppercase truncate `}
+        >
           Edit Profile
         </h2>
-        {/* <button
-          type="button"
-          onClick={() => setView("changePassword")}
-          className="ml-2 text-primary font-arizona-sans-regular text-sm hover:underline cursor-pointer"
-        >
-          Change Password
-        </button> */}
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">

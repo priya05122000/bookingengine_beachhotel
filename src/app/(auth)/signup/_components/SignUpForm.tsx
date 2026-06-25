@@ -5,19 +5,16 @@ import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import InputField from "../../_components/InputField";
 import Image from "next/image";
+import { usePasswordVisibility } from "@/src/hooks/usePasswordVisibility";
 
 export default function SignUpForm() {
-  const [showPassword, setShowPassword] = useState(false);
+  const { showPassword, toggle: toggleShowPassword } = usePasswordVisibility();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-
-  const toggleShowPassword = useCallback(() => {
-    setShowPassword((s) => !s);
-  }, []);
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {

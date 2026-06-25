@@ -319,7 +319,7 @@ export default function GuestPaymentSection() {
                 }),
               )
             }
-            className="h-8 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase bg-primary text-white cursor-pointer"
+            className="h-10 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase bg-primary text-white cursor-pointer"
           >
             BOOK NOW
           </button>

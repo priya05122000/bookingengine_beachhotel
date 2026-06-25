@@ -87,6 +87,7 @@ export default function PackageList({
   addPackage,
 }: Props) {
   const [qty, setQty] = useState<Record<string, QtyState>>({});
+  const [openDetailsFor, setOpenDetailsFor] = useState<string | null>(null);
 
   function getQty(id: string): QtyState {
     return qty[id] ?? { rooms: 0, adults: 0, children: 0 };
@@ -138,6 +139,7 @@ export default function PackageList({
             <div
               key={pkg.id}
               className="border-b last:border-b-0 pb-4 grid grid-cols-1 md:grid-cols-[0.5fr_1fr] gap-1 md:gap-5 items-center relative"
+              onClick={() => setOpenDetailsFor(null)}
             >
               <div className="space-y-1 font-arizona-sans-regular">
                 <div
@@ -162,10 +164,16 @@ export default function PackageList({
                     <div className={`text-[26px] md:text-[36px]`}>
                       {pkg.price}
                     </div>
-                    <div className="text-xs text-dark-gray underline cursor-help">
+                    <div
+                      className="text-xs text-dark-gray underline cursor-help"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setOpenDetailsFor(openDetailsFor === pkg.id ? null : pkg.id);
+                      }}
+                    >
                       Details
                     </div>
-                    <div className="absolute top-full right-0 z-20 mt-2 w-64 bg-white border border-primary/32 rounded-xs p-2 text-xs lg:text-sm shadow-[-1px_4px_4px_0px_#00000040] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity  text-dark-gray space-y-1">
+                    <div className={`absolute top-full sm:right-0 z-20 mt-2 w-64 bg-white border border-primary/32 rounded-xs p-2 text-xs lg:text-sm shadow-[-1px_4px_4px_0px_#00000040] transition-opacity text-dark-gray space-y-1 ${openDetailsFor === pkg.id ? "opacity-100 visible" : "opacity-0 invisible group-hover:opacity-100 group-hover:visible"}`}>
                       {pkg.priceBreakdown ? (
                         <>
                           {pkg.priceBreakdown.entries.map((entry, i) => (

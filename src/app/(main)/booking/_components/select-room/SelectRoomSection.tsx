@@ -8,16 +8,8 @@ import RoomDetailsModal from "./RoomDetailsModal";
 import { typography } from "@/src/lib/typography";
 import { Flower2, Sofa, Wifi, ChevronUp, X, CheckCheck } from "lucide-react";
 import Link from "next/link";
-
-function parsePrice(priceStr: string) {
-  const digits = (priceStr || "").replace(/[^\d]/g, "");
-  const n = Number(digits || 0);
-  return isNaN(n) ? 0 : n;
-}
-
-function formatINR(n: number) {
-  return n.toLocaleString("en-IN");
-}
+import { parsePrice, formatINR } from "@/src/lib/priceUtils";
+import { useModalClose } from "@/src/hooks/useModalClose";
 
 type Props = {
   showPackages: boolean;
@@ -44,19 +36,12 @@ export default function SelectRoomSection({
   );
   const [promo, setPromo] = React.useState("");
   const [showPriceSheet, setShowPriceSheet] = React.useState(false);
-  const [closingSheet, setClosingSheet] = React.useState(false);
+  const { closing: closingSheet, triggerClose: closePriceSheet } = useModalClose({
+    onClose: () => setShowPriceSheet(false),
+  });
 
   function openPriceSheet() {
     setShowPriceSheet(true);
-    setClosingSheet(false);
-  }
-
-  function closePriceSheet() {
-    setClosingSheet(true);
-    setTimeout(() => {
-      setShowPriceSheet(false);
-      setClosingSheet(false);
-    }, 380);
   }
 
   const totalAmount = React.useMemo(
@@ -510,7 +495,7 @@ export default function SelectRoomSection({
                 }),
               )
             }
-            className={`h-8 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase ${selected.length > 0 ? "bg-primary text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+            className={`h-10 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase ${selected.length > 0 ? "bg-primary text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
           >
             PROCEED
           </button>

@@ -2,10 +2,12 @@
 
 import { Eye, EyeOff, User } from "lucide-react";
 import Link from "next/link";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import InputField from "../../_components/InputField";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { usePasswordVisibility } from "@/src/hooks/usePasswordVisibility";
+import { DEMO_OTP } from "@/src/lib/constants";
 
 type Step = "email" | "password";
 
@@ -145,14 +147,10 @@ function PasswordStep({
 
 export default function SignInForm() {
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-  const [step, setStep] = useState<Step>("email");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const toggleShowPassword = useCallback(() => {
-    setShowPassword((s) => !s);
-  }, []);
+  const { showPassword, toggle: toggleShowPassword } = usePasswordVisibility();
+  const [step, setStep] = React.useState<Step>("email");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const handleBackToEmail = useCallback(() => {
     setStep("email");
@@ -169,7 +167,7 @@ export default function SignInForm() {
       return;
     }
 
-    localStorage.setItem("demoOtp", "52010");
+    localStorage.setItem("demoOtp", DEMO_OTP);
 
     router.push(`/signin/code?email=${encodeURIComponent(email)}`);
   }, [email, router]);

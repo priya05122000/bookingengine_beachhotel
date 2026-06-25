@@ -59,20 +59,16 @@ export default function Footer() {
               </p>
 
               <div>
-                {/* <Link
+                <Link
                   href="/booking"
-                  className=" items-center text-white px-4 h-10 rounded-xs text-sm font-arizona-sans-regular tracking-widest cursor-pointer bg-accent"
+                  className="animated-border inline-block w-auto relative overflow-hidden"
                 >
-                  Book My Stay
-                </Link> */}
-
-                <div className="animated-border inline-block w-auto relative overflow-hidden">
                   <div className="inline-flex items-center gap-3 px-4 h-10 bg-primary rounded-xs ">
                     <p className="text-sm font-medium text-white ">
                       Book My Stay
                     </p>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
 

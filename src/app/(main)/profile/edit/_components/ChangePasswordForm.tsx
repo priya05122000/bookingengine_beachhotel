@@ -4,6 +4,7 @@ import InputField from "@/src/app/(auth)/_components/InputField";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { usePasswordVisibility } from "@/src/hooks/usePasswordVisibility";
 
 type Props = { onBack: () => void };
 
@@ -12,9 +13,9 @@ export default function ChangePasswordForm({ onBack }: Props) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showCurrent, setShowCurrent] = useState(false);
-  const [showNew, setShowNew] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
+  const { showPassword: showCurrent, toggle: toggleCurrent } = usePasswordVisibility();
+  const { showPassword: showNew, toggle: toggleNew } = usePasswordVisibility();
+  const { showPassword: showConfirm, toggle: toggleConfirm } = usePasswordVisibility();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
@@ -119,7 +120,7 @@ export default function ChangePasswordForm({ onBack }: Props) {
             rightSlot={
               <EyeToggle
                 show={showCurrent}
-                onToggle={() => setShowCurrent((s) => !s)}
+                onToggle={toggleCurrent}
                 label={
                   showCurrent ? "Hide current password" : "Show current password"
                 }
@@ -147,7 +148,7 @@ export default function ChangePasswordForm({ onBack }: Props) {
           rightSlot={
             <EyeToggle
               show={showNew}
-              onToggle={() => setShowNew((s) => !s)}
+              onToggle={toggleNew}
               label={showNew ? "Hide new password" : "Show new password"}
             />
           }
@@ -165,7 +166,7 @@ export default function ChangePasswordForm({ onBack }: Props) {
           rightSlot={
             <EyeToggle
               show={showConfirm}
-              onToggle={() => setShowConfirm((s) => !s)}
+              onToggle={toggleConfirm}
               label={
                 showConfirm ? "Hide confirm password" : "Show confirm password"
               }

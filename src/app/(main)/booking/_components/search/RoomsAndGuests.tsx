@@ -1,6 +1,7 @@
 import { typography } from '@/src/lib/typography';
 import { Minus, Plus } from "lucide-react";
 import { useState } from 'react';
+import { GUESTS_PER_ROOM, MAX_ROOMS } from '@/src/lib/constants';
 
 export interface Room {
     rooms: number;
@@ -62,8 +63,6 @@ function Counter({
     );
 }
 
-const GUESTS_PER_ROOM = 4;
-const MAX_ROOMS = 4;
 
 export default function RoomsAndGuests({
     rooms,
