@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Section from "@/src/components/common/Section";
 import { bookings, BookingStatus } from "@/src/lib/dummyBookings";
@@ -9,13 +9,19 @@ import BookingsFilter from "./_components/BookingsFilter";
 import BookingCard from "./_components/BookingCard";
 import { typography } from "@/src/lib/typography";
 
+
+
+
 const MONTH_NAMES = [
   "January", "February", "March", "April",
   "May", "June", "July", "August",
   "September", "October", "November", "December",
 ];
 
-export default function MyBookingsPage() {
+
+
+
+function MyBookingsContent() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<BookingStatus>("upcoming");
   const [roomTypeFilter, setRoomTypeFilter] = useState("All Rooms");
@@ -118,5 +124,13 @@ export default function MyBookingsPage() {
         )}
       </div>
     </Section>
+  );
+}
+
+export default function MyBookingsPage() {
+  return (
+    <Suspense fallback={null}>
+      <MyBookingsContent />
+    </Suspense>
   );
 }

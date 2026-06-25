@@ -22,7 +22,7 @@ const MONTHS = [
 ];
 
 const selectClass =
-  "appearance-none border border-primary text-primary text-xs pl-3 pr-7 h-9 rounded-xs font-arizona-sans-regular bg-white cursor-pointer focus:outline-none";
+  "appearance-none border border-primary text-primary text-xs pl-3 pr-7 h-9 rounded-xs font-arizona-sans-regular bg-white cursor-pointer focus:outline-none  w-36";
 
 function SelectWrapper({ children }: { children: React.ReactNode }) {
   return (
@@ -57,7 +57,7 @@ function MobileSelectRow({
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="appearance-none border border-primary text-primary text-xs pl-3 pr-7 h-8 rounded-xs font-arizona-sans-regular bg-white cursor-pointer focus:outline-none"
+          className="appearance-none border border-primary text-primary text-xs pl-3 pr-7 h-8 rounded-xs font-arizona-sans-regular bg-white cursor-pointer focus:outline-none  w-36"
         >
           {options.map((o) => (
             <option key={o} value={o}>{o}</option>
