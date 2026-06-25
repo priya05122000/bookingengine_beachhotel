@@ -3,22 +3,24 @@ import Image from "next/image";
 import Section from "@/src/components/common/Section";
 import { MapPin } from "lucide-react";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL;
+
 const navLinks = [
-  { label: "HOME", href: "/" },
-  { label: "ABOUT US", href: "/about" },
-  { label: "HOTEL FACILITIES", href: "/facilities" },
-  { label: "GALLERY", href: "/gallery" },
-  { label: "NEARBY DESTINATION", href: "/nearby" },
-  { label: "CONTACT US", href: "/contact" },
+  { label: "HOME", href: `${BASE_URL}/` },
+  { label: "ABOUT US", href: `${BASE_URL}/about` },
+  { label: "HOTEL FACILITIES", href: `${BASE_URL}/facilities` },
+  { label: "GALLERY", href: `${BASE_URL}/gallery` },
+  { label: "NEARBY DESTINATION", href: `${BASE_URL}/nearby` },
+  { label: "CONTACT US", href: `${BASE_URL}/contact` },
 ];
 
 const spaLinks = [
-  { label: "Rooms & Suites", href: "/rooms" },
-  { label: "Dining", href: "/dining" },
-  { label: "Spa", href: "/spa" },
-  { label: "Infinity Pool", href: "/infinity-pool" },
-  { label: "Executive Lounge", href: "/executive-lounge" },
-  { label: "Transportation", href: "/transportation" },
+  { label: "Rooms & Suites", href: `${BASE_URL}/rooms` },
+  { label: "Dining", href: `${BASE_URL}/dining` },
+  { label: "Spa", href: `${BASE_URL}/spa` },
+  { label: "Infinity Pool", href: `${BASE_URL}/infinity-pool` },
+  { label: "Executive Lounge", href: `${BASE_URL}/executive-lounge` },
+  { label: "Transportation", href: `${BASE_URL}/transportation` },
 ];
 
 const socialIcons: { href: string; label: string; path: string }[] = [
