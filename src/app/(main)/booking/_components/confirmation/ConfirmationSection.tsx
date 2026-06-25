@@ -96,7 +96,7 @@ export default function ConfirmationSection() {
       <div className="flex  flex-col lg:grid lg:grid-cols-[1fr_300px] gap-5 items-start">
         {/* Left: Booking Details */}
         <div className="w-full overflow-hidden lg:sticky lg:top-20 lg:self-start">
-          <div className="px-8 py-8 border border-primary bg-white">
+          <div className="px-6 py-6 border border-primary bg-white">
             <h3
               className={`${typography.textXl} font-arizona-sans-regular tracking-widest text-dark-gray uppercase mb-8`}
             >
@@ -343,7 +343,7 @@ export default function ConfirmationSection() {
       {/* ── Explore More ── */}
       <div className="bg-white px-6 py-8 md:mt-10 mb-0">
         <div className="grid grid-cols-1 sm:grid-cols-5 sm:gap-5 gap-4 items-stretch">
-          <div className="shadow-[-1px_4px_4px_0px_#00000040] sm:col-span-2 ">
+          <div className="shadow-[-1px_4px_4px_0px_#00000040] col-span-12  sm:col-span-2 ">
             <Image
               src="/images/invitationstay.jpg"
               alt={`explore-1`}
@@ -354,7 +354,7 @@ export default function ConfirmationSection() {
               priority
             />
           </div>
-          <div className="col-span-3 font-arizona-sans-regular h-full flex">
+          <div className="col-span-12 sm:col-span-3 font-arizona-sans-regular h-full flex">
             <div className="sm:col-span-3 w-full flex flex-col justify-between sm:p-4 space-y-6">
               <div>
                 <p

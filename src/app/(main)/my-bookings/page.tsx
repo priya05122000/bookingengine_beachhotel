@@ -9,11 +9,17 @@ import BookingsFilter from "./_components/BookingsFilter";
 import BookingCard from "./_components/BookingCard";
 import { typography } from "@/src/lib/typography";
 
+
+
+
 const MONTH_NAMES = [
   "January", "February", "March", "April",
   "May", "June", "July", "August",
   "September", "October", "November", "December",
 ];
+
+
+
 
 function MyBookingsContent() {
   const searchParams = useSearchParams();
