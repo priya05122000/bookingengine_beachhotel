@@ -222,7 +222,7 @@ function InvoiceFooter() {
 
 const InvoicePreview = forwardRef<HTMLDivElement, Props>((_props, ref) => {
     return (
-        <div ref={ref} className="p-10 space-y-8 bg-white text-gray-800">
+        <div ref={ref} className="pt-10 px-10 pb-20 space-y-8 bg-white text-gray-800">
             <InvoiceHeader />
             <GuestDetails />
             <ChargesTable />
