@@ -148,6 +148,8 @@ export default function Footer() {
 
                   <ScrollLink
                     href={`${BASE_URL}/contact-us#contact-form`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="type-body-sm flex items-center gap-2 uppercase underline underline-offset-4 hover:text-accent transition-colors w-fit"
                   >
                     <ClipboardList size={15} />
