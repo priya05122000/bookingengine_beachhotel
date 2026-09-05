@@ -127,25 +127,14 @@ export default function Footer() {
                   <SocialIconLinks variant="dark" />
                 </div>
                 <div className="flex flex-col space-y-2 mt-8">
-                  <div className="flex items-center gap-2">
+                  <a
+                    href={`tel:${PHONE_NUMBER}`}
+                    className="type-body-sm flex items-center gap-2  hover:text-accent transition-colors"
+                  >
                     <Phone size={15} />
+                    {PHONE_NUMBER_DISPLAY}
+                  </a>
 
-                    <a
-                      href={`tel:${PHONE_NUMBER}`}
-                      className="type-body-sm hover:text-accent transition-colors"
-                    >
-                      {PHONE_NUMBER_DISPLAY}
-                    </a>
-
-                    <span className="type-body-sm">|</span>
-
-                    <a
-                      href={`tel:${RECEPTION_PHONE_NUMBER}`}
-                      className="type-body-sm hover:text-accent transition-colors"
-                    >
-                      {RECEPTION_PHONE_NUMBER_DISPLAY}
-                    </a>
-                  </div>
 
                   <a
                     href="mailto:support@thebeachhotel.in"
