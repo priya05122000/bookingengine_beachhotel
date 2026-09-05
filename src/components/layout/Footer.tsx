@@ -4,7 +4,7 @@ import Section from "@/src/components/common/Section";
 import SocialIconLinks from "@/src/components/common/SocialIconLinks";
 import ScrollLink from "@/src/components/common/ScrollLink";
 import { Mail, MapPin, Phone, ClipboardList } from "lucide-react";
-import { BOOKING_URL, PHONE_NUMBER, PHONE_NUMBER_DISPLAY } from "@/src/lib/site-links";
+import { BOOKING_URL, PHONE_NUMBER, PHONE_NUMBER_DISPLAY, RECEPTION_PHONE_NUMBER, RECEPTION_PHONE_NUMBER_DISPLAY } from "@/src/lib/site-links";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
@@ -87,6 +87,8 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="type-label tracking-widest uppercase hover:text-accent transition-colors"
                     >
                       {link.label}
@@ -117,7 +119,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_2.5fr] gap-10 lg:gap-6 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_2.5fr] xl:grid-cols-[1fr_2.5fr] gap-10 lg:gap-6 ">
             <div className=" flex flex-col justify-between gap-5">
               <div>
                 <div className="mt-6 lg:mt-4 xl:mt-2">
@@ -125,13 +127,25 @@ export default function Footer() {
                   <SocialIconLinks variant="dark" />
                 </div>
                 <div className="flex flex-col space-y-2 mt-8">
-                  <a
-                    href={`tel:${PHONE_NUMBER}`}
-                    className="type-body-sm flex items-center gap-2  hover:text-accent transition-colors"
-                  >
+                  <div className="flex items-center gap-2">
                     <Phone size={15} />
-                    {PHONE_NUMBER_DISPLAY}
-                  </a>
+
+                    <a
+                      href={`tel:${PHONE_NUMBER}`}
+                      className="type-body-sm hover:text-accent transition-colors"
+                    >
+                      {PHONE_NUMBER_DISPLAY}
+                    </a>
+
+                    <span className="type-body-sm">|</span>
+
+                    <a
+                      href={`tel:${RECEPTION_PHONE_NUMBER}`}
+                      className="type-body-sm hover:text-accent transition-colors"
+                    >
+                      {RECEPTION_PHONE_NUMBER_DISPLAY}
+                    </a>
+                  </div>
 
                   <a
                     href="mailto:support@thebeachhotel.in"
@@ -141,10 +155,15 @@ export default function Footer() {
                     support@thebeachhotel.in
                   </a>
 
-                  <div className="type-body-sm flex gap-2  hover:text-accent transition-colors">
-                    <MapPin size={15} className="mt-0.5" />
-                    Beach Rd, Kanniyakumari, Tamil Nadu 629702, India
-                  </div>
+                  <a
+                    href="https://maps.app.goo.gl/ZSH8BojKYomwLvUSA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="type-body-sm flex gap-2 hover:text-accent transition-colors"
+                  >
+                    <MapPin size={15} className="mt-0.5 shrink-0" />
+                    Erumanayakkanpatti Beach Road, Kanyakumari, Tamil Nadu 629702
+                  </a>
 
                   <ScrollLink
                     href={`${BASE_URL}/contact-us#contact-form`}
@@ -163,6 +182,8 @@ export default function Footer() {
                 <div className="flex items-center gap-2 type-overline font-arizona-regular text-white">
                   <Link
                     href={`${BASE_URL}/terms-and-conditions`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="transition-colors hover:underline underline-offset-4 decoration-white/50  hover:text-white"
                   >
                     Terms &amp; Condition
@@ -170,6 +191,8 @@ export default function Footer() {
                   <span>|</span>
                   <Link
                     href={`${BASE_URL}/privacy-policy`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="transition-colors hover:underline underline-offset-4 decoration-white/50  hover:text-white"
                   >
                     Privacy Policy
