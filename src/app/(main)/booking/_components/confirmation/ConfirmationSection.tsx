@@ -84,6 +84,13 @@ export default function ConfirmationSection() {
             <br />
             thebeachhotel@gmail.com
           </p>
+          <button
+            onClick={handleDownloadInvoice}
+            disabled={downloading}
+            className="mt-3 bg-primary text-white px-4 h-9 rounded-xs text-xs font-arizona-sans-regular uppercase tracking-widest cursor-pointer disabled:opacity-70 disabled:cursor-wait"
+          >
+            {downloading ? "Downloading..." : "Download Invoice"}
+          </button>
         </div>
       </div>
 

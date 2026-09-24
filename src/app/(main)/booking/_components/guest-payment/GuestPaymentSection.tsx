@@ -6,7 +6,65 @@ import { typography } from "@/src/lib/typography";
 import Link from "next/link";
 import CountryDropdown from "./CountryDropdown";
 
-function SummaryCard({ promo, setPromo }: { promo: string; setPromo: (v: string) => void }) {
+// Check-in/out dates and the nights/rooms/guests line
+function StayDetails() {
+  return (
+    <>
+          <div className="flex items-start justify-between my-3 border-t border-gray-100 pt-3">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
+                  Check - In
+                </p>
+                <p className="text-xs text-primary">Mon, 23 May 2026</p>
+                <p className="text-dark-gray mt-0.5 text-xs">From 6:00 pm</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
+                  Check - Out
+                </p>
+                <p className="text-primary text-xs">Mon, 23 May 2026</p>
+                <p className="text-dark-gray mt-0.5 text-xs">by 6:00 pm</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() =>
+                window.dispatchEvent(
+                  new CustomEvent("search:check-availability", {
+                    detail: { step: 0, showPackages: true },
+                  }),
+                )
+              }
+              className="text-xs lg:text-sm font-arizona-sans-regular text-primary cursor-pointer underline underline-offset-2 py-0.5 shrink-0"
+            >
+              EDIT
+            </button>
+          </div>
+
+          <div className="text-xs border-t border-gray-100 font-arizona-sans-regular text-dark-gray mt-3 flex flex-wrap gap-1.5 pt-3">
+            <span>2 NIGHT </span>
+            <span>|</span>
+            <span> 3 ROOM </span>
+            <span>|</span>
+            <span> 4 ADULT</span>
+            <span>|</span>
+            <span> 2 CHILDREN</span>
+          </div>
+    </>
+  );
+}
+
+function SummaryCard({
+  promo,
+  setPromo,
+  hideStay = false,
+}: {
+  promo: string;
+  setPromo: (v: string) => void;
+  /** Desktop shows the stay details in the left column instead */
+  hideStay?: boolean;
+}) {
   return (
     <div className="bg-white shadow-[-1px_4px_4px_0px_#00000040]">
       <img
@@ -52,47 +110,7 @@ function SummaryCard({ promo, setPromo }: { promo: string; setPromo: (v: string)
           </button>
         </div>
 
-        <div className="flex items-start justify-between my-3 border-t border-gray-100 pt-3">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
-                Check - In
-              </p>
-              <p className="text-xs text-primary">Mon, 23 May 2026</p>
-              <p className="text-dark-gray mt-0.5 text-xs">From 6:00 pm</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-dark-gray uppercase font-arizona-sans-regular tracking-widest text-xs lg:text-sm">
-                Check - Out
-              </p>
-              <p className="text-primary text-xs">Mon, 23 May 2026</p>
-              <p className="text-dark-gray mt-0.5 text-xs">by 6:00 pm</p>
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={() =>
-              window.dispatchEvent(
-                new CustomEvent("search:check-availability", {
-                  detail: { step: 0, showPackages: true },
-                }),
-              )
-            }
-            className="text-xs lg:text-sm font-arizona-sans-regular text-primary cursor-pointer underline underline-offset-2 py-0.5 shrink-0"
-          >
-            EDIT
-          </button>
-        </div>
-
-        <div className="text-xs border-t border-gray-100 font-arizona-sans-regular text-dark-gray mt-3 flex flex-wrap gap-1.5 pt-3">
-          <span>2 NIGHT </span>
-          <span>|</span>
-          <span> 3 ROOM </span>
-          <span>|</span>
-          <span> 4 ADULT</span>
-          <span>|</span>
-          <span> 2 CHILDREN</span>
-        </div>
+        {!hideStay && <StayDetails />}
 
         <div className="mt-3 pt-3 border-t border-gray-100 font-arizona-light">
           <div className="flex items-baseline justify-between gap-2">
@@ -234,6 +252,34 @@ export default function GuestPaymentSection() {
             <SummaryCard promo={promo} setPromo={setPromo} />
           </div>
 
+          {/* Stay details, total and BOOK NOW — desktop only */}
+          <div className="hidden lg:block border border-primary bg-white">
+            {/* Drop the top divider StayDetails uses inside the card */}
+            <div className="px-5 pb-5 pt-2 [&>div:first-child]:border-t-0">
+              <StayDetails />
+              <div className="flex items-baseline justify-between mt-3 pt-3 border-t border-gray-700 text-base lg:text-lg font-arizona-light tracking-[0.04em]">
+                <span className="text-primary uppercase tracking-wide">Total</span>
+                <span className="text-primary">
+                  INR <span className="text-lg">82,45,678</span>
+                </span>
+              </div>
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={() =>
+                    window.dispatchEvent(
+                      new CustomEvent("search:check-availability", {
+                        detail: { step: 3 },
+                      }),
+                    )
+                  }
+                  className="bg-primary text-white h-10 px-8 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer"
+                >
+                  BOOK NOW
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Available Add Ons */}
           <div className="border border-primary bg-white">
             <h4
@@ -283,19 +329,7 @@ export default function GuestPaymentSection() {
 
         {/* ── Right column: summary card — desktop only ── */}
         <aside className="hidden lg:block w-full lg:sticky lg:top-20 lg:self-start">
-          <SummaryCard promo={promo} setPromo={setPromo} />
-          <button
-            onClick={() =>
-              window.dispatchEvent(
-                new CustomEvent("search:check-availability", {
-                  detail: { step: 3 },
-                }),
-              )
-            }
-            className="mt-4 w-full bg-primary text-white h-10 rounded-xs text-xs lg:text-sm font-arizona-sans-regular tracking-widest cursor-pointer"
-          >
-            BOOK NOW
-          </button>
+          <SummaryCard promo={promo} setPromo={setPromo} hideStay />
         </aside>
       </div>
 

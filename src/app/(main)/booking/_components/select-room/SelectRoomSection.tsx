@@ -2,14 +2,44 @@
 
 import React from "react";
 import { PackageItem } from "./types";
-import PackageList from "./PackageList";
+import PackageList, { Counter, QtyState } from "./PackageList";
 import PriceSidebar from "./PriceSidebar";
 import RoomDetailsModal from "./RoomDetailsModal";
 import { typography } from "@/src/lib/typography";
-import { Flower2, Sofa, Wifi, ChevronUp, X, CheckCheck } from "lucide-react";
+import {
+  Flower2,
+  Sofa,
+  Wifi,
+  ChevronUp,
+  ChevronDown,
+  X,
+  CheckCheck,
+} from "lucide-react";
 import Link from "next/link";
 import { parsePrice, formatINR } from "@/src/lib/priceUtils";
 import { useModalClose } from "@/src/hooks/useModalClose";
+
+const ADULTS_PER_ROOM = 2;
+const CHILDREN_PER_ROOM = 3;
+const MAX_CHILD_AGE = 17;
+const FULL_ROOM_CHILD_AGE_LIMIT = 14;
+// Shared width for the Rooms, Adults, Children and child age controls
+const FIELD_WIDTH = "w-32 md:w-26 lg:w-32";
+// FIELD_WIDTH from sm up only, so the mobile grid cell sets the width below sm
+const FIELD_WIDTH_SM_UP = "sm:w-32 md:w-26 lg:w-32";
+// Mobile compact table: Adults | Children under a ROOM heading
+const MOBILE_ROW = "grid grid-cols-2 items-center gap-3";
+
+type RoomGuests = { adults: number; children: number; ages: (string | null)[] };
+
+const newRoomGuests = (): RoomGuests => ({ adults: 1, children: 0, ages: [] });
+
+// A room may hold 3 children only if every child is under FULL_ROOM_CHILD_AGE_LIMIT
+const isRoomInvalid = (g: RoomGuests) =>
+  g.children === CHILDREN_PER_ROOM &&
+  g.ages
+    .slice(0, g.children)
+    .some((a) => a != null && Number(a) >= FULL_ROOM_CHILD_AGE_LIMIT);
 
 type Props = {
   showPackages: boolean;
@@ -32,13 +62,27 @@ export default function SelectRoomSection({
   >([]);
   const [openQtyFor, setOpenQtyFor] = React.useState<string | null>(null);
   const [openPackagesFor, setOpenPackagesFor] = React.useState<string | null>(
-    null,
+    null
+  );
+  const [openRoomQtyFor, setOpenRoomQtyFor] = React.useState<string | null>(
+    null
+  );
+  const [roomQty, setRoomQty] = React.useState<Record<string, QtyState>>({});
+  const [roomGuests, setRoomGuests] = React.useState<
+    Record<string, RoomGuests[]>
+  >({});
+  const [roomCounts, setRoomCounts] = React.useState<Record<string, number>>(
+    {}
+  );
+  const [openRoomChildAge, setOpenRoomChildAge] = React.useState<string | null>(
+    null
   );
   const [promo, setPromo] = React.useState("");
   const [showPriceSheet, setShowPriceSheet] = React.useState(false);
-  const { closing: closingSheet, triggerClose: closePriceSheet } = useModalClose({
-    onClose: () => setShowPriceSheet(false),
-  });
+  const { closing: closingSheet, triggerClose: closePriceSheet } =
+    useModalClose({
+      onClose: () => setShowPriceSheet(false),
+    });
 
   function openPriceSheet() {
     setShowPriceSheet(true);
@@ -46,7 +90,7 @@ export default function SelectRoomSection({
 
   const totalAmount = React.useMemo(
     () => selected.reduce((sum, s) => sum + parsePrice(s.price), 0),
-    [selected],
+    [selected]
   );
 
   React.useEffect(() => {
@@ -221,15 +265,94 @@ export default function SelectRoomSection({
     },
   ];
 
-  function togglePackages(roomId: string) {
-    setOpenPackagesFor((prev) => (prev === roomId ? null : roomId));
+  // All room rows ever filled in for this room type, including ones hidden by
+  // lowering the room count, so re-adding a room restores its guests and ages
+  function getAllRoomGuests(roomTypeId: string, minLength = 1): RoomGuests[] {
+    const all = roomGuests[roomTypeId] ?? [];
+    return all.length >= minLength
+      ? all
+      : [
+          ...all,
+          ...Array.from({ length: minLength - all.length }, newRoomGuests),
+        ];
+  }
+
+  function getRoomGuests(roomTypeId: string): RoomGuests[] {
+    const count = roomCounts[roomTypeId] ?? 1;
+    return getAllRoomGuests(roomTypeId, count).slice(0, count);
+  }
+
+  function setRoomCount(roomTypeId: string, count: number) {
+    const all = getAllRoomGuests(roomTypeId, count);
+    setRoomGuests((prev) => ({ ...prev, [roomTypeId]: all }));
+    setRoomCounts((prev) => ({ ...prev, [roomTypeId]: count }));
+  }
+
+  function updateRoomGuests(
+    roomTypeId: string,
+    roomIndex: number,
+    patch: Partial<RoomGuests>
+  ) {
+    const next = getAllRoomGuests(roomTypeId, roomIndex + 1).map((g, i) =>
+      i === roomIndex ? { ...g, ...patch } : g
+    );
+    setRoomGuests((prev) => ({ ...prev, [roomTypeId]: next }));
+  }
+
+  function setChildAge(
+    roomTypeId: string,
+    roomIndex: number,
+    childIndex: number,
+    age: string
+  ) {
+    const ages = [...getRoomGuests(roomTypeId)[roomIndex].ages];
+    ages[childIndex] = age;
+    updateRoomGuests(roomTypeId, roomIndex, { ages });
+  }
+
+  function toggleRoomQty(roomId: string) {
+    setOpenRoomQtyFor((prev) => (prev === roomId ? null : roomId));
+  }
+
+  function confirmRoomQty(room: {
+    id: string;
+    name: string;
+    subtitle: string;
+    price: string;
+  }) {
+    const guests = getRoomGuests(room.id);
+    const totals = {
+      rooms: guests.length,
+      adults: guests.reduce((sum, g) => sum + g.adults, 0),
+      children: guests.reduce((sum, g) => sum + g.children, 0),
+    };
+    // Totals seed the package picker
+    setRoomQty((prev) => ({ ...prev, [room.id]: totals }));
+
+    // Add the room at its "From" nightly rate to the price summary; choosing a
+    // package for this room later replaces this line (see PackageList below)
+    const nightly = parsePrice(room.price);
+    addPackage(
+      {
+        id: room.id,
+        title: room.name,
+        subtitle: room.subtitle,
+        details: `${room.price} x ${totals.rooms} Room${totals.rooms > 1 ? "s" : ""}`,
+        price: `INR ${formatINR(nightly * totals.rooms)}`,
+      },
+      totals.rooms,
+      totals.adults,
+      totals.children
+    );
+
+    setOpenRoomQtyFor(null);
   }
 
   function addPackage(
     pkg: PackageItem,
     rooms: number,
     adults: number,
-    children: number,
+    children: number
   ) {
     setSelected((s) => {
       const exists = s.some((p) => p.id === pkg.id);
@@ -359,14 +482,370 @@ export default function SelectRoomSection({
                       </button>
                     ) : (
                       <button
-                        onClick={() => togglePackages(room.id)}
-                        className="mt-4 bg-primary text-white px-4 h-10 rounded-xs font-arizona-sans-regular uppercase text-xs lg:text-sm tracking-[0.15em] cursor-pointer"
+                        onClick={() => toggleRoomQty(room.id)}
+                        className="mt-4 bg-primary text-white px-4 py-1 rounded-xs font-arizona-sans-regular uppercase text-xs lg:text-sm tracking-[0.15em] cursor-pointer"
                       >
-                        Select Packages
+                        Add Room
                       </button>
                     )}
                   </div>
                 </div>
+
+                {openRoomQtyFor === room.id &&
+                  (() => {
+                    const guests = getRoomGuests(room.id);
+                    const hasInvalidRoom = guests.some(isRoomInvalid);
+                    return (
+                      <div className="rounded-xs text-sm tracking-[.15em]">
+                        <div className="flex items-center justify-between mb-4">
+                          <h4
+                            className={`text-base lg:text-xl font-arizona-sans-regular tracking-widest text-primary ${typography.textBase}`}
+                          >
+                            ROOMS &amp; GUESTS
+                          </h4>
+                          <button
+                            aria-label="Close"
+                            className="text-dark-gray text-lg leading-none cursor-pointer"
+                            onClick={() => setOpenRoomQtyFor(null)}
+                          >
+                            ×
+                          </button>
+                        </div>
+                        <div>
+                          <div className="w-full">
+                            <div className="mt-1 border border-gray-200 rounded-md px-3">
+                              {/* Same stacked counter and width as Adults/Children:
+                                  half the row on mobile, FIELD_WIDTH from sm up */}
+                              <div className={`${MOBILE_ROW} sm:flex py-2 border-b border-gray-100`}>
+                                <div className={FIELD_WIDTH_SM_UP}>
+                                  <Counter
+                                    stacked
+                                    label="Rooms"
+                                    value={guests.length}
+                                    min={1}
+                                    max={room.availableRooms}
+                                    onInc={() =>
+                                      setRoomCount(room.id, guests.length + 1)
+                                    }
+                                    onDec={() =>
+                                      setRoomCount(room.id, guests.length - 1)
+                                    }
+                                  />
+                                </div>
+                              </div>
+                              {guests.map((g, r) => {
+                                const fullRoom =
+                                  g.children === CHILDREN_PER_ROOM;
+                                // A child aged 14+ caps the room at 2 children
+                                const hasOlderChild = g.ages
+                                  .slice(0, g.children)
+                                  .some(
+                                    (a) =>
+                                      a != null &&
+                                      Number(a) >= FULL_ROOM_CHILD_AGE_LIMIT
+                                  );
+                                const childCapReached =
+                                  hasOlderChild &&
+                                  g.children >= CHILDREN_PER_ROOM - 1;
+                                return (
+                                  <div
+                                    key={r}
+                                    className="py-2 border-b border-gray-100 last:border-b-0"
+                                  >
+                                    <div className="hidden sm:flex flex-wrap items-end gap-x-3 gap-y-1">
+                                      <span className="w-full pt-1 text-xs font-arizona-sans-regular uppercase tracking-[.15em] text-primary">
+                                        Room {r + 1}
+                                      </span>
+                                      <div className={FIELD_WIDTH}>
+                                        <Counter
+                                          stacked
+                                          label="Adults"
+                                          value={g.adults}
+                                          min={1}
+                                          max={ADULTS_PER_ROOM}
+                                          onInc={() =>
+                                            updateRoomGuests(room.id, r, {
+                                              adults: g.adults + 1,
+                                            })
+                                          }
+                                          onDec={() =>
+                                            updateRoomGuests(room.id, r, {
+                                              adults: g.adults - 1,
+                                            })
+                                          }
+                                        />
+                                      </div>
+                                      <div className={FIELD_WIDTH}>
+                                        <Counter
+                                          stacked
+                                          label="Children"
+                                          sublabel={`0 - ${MAX_CHILD_AGE}`}
+                                          value={g.children}
+                                          min={0}
+                                          max={CHILDREN_PER_ROOM}
+                                          incDisabled={childCapReached}
+                                          onInc={() =>
+                                            updateRoomGuests(room.id, r, {
+                                              children: g.children + 1,
+                                            })
+                                          }
+                                          onDec={() =>
+                                            updateRoomGuests(room.id, r, {
+                                              children: g.children - 1,
+                                            })
+                                          }
+                                        />
+                                      </div>
+                                      {Array.from(
+                                        { length: g.children },
+                                        (_, c) => {
+                                          const key = `${room.id}-${r}-${c}`;
+                                          const age = g.ages[c];
+                                          return (
+                                            <div
+                                              key={c}
+                                              className={`${FIELD_WIDTH} flex flex-col gap-1.5 py-2`}
+                                            >
+                                              <span className="text-[10px] font-arizona-sans-regular text-dark-gray whitespace-nowrap uppercase">
+                                                Child {c + 1}
+                                              </span>
+                                              <div className="relative">
+                                                <button
+                                                  type="button"
+                                                  onClick={() =>
+                                                    setOpenRoomChildAge(
+                                                      openRoomChildAge === key
+                                                        ? null
+                                                        : key
+                                                    )
+                                                  }
+                                                  className="w-full h-7 flex items-center justify-between border border-primary bg-white px-2 text-sm text-dark-gray cursor-pointer"
+                                                >
+                                                  <span>
+                                                    {age
+                                                      ? `${age} ${
+                                                          age === "1"
+                                                            ? "yr"
+                                                            : "yrs"
+                                                        }`
+                                                      : "Select"}
+                                                  </span>
+                                                  <ChevronDown
+                                                    size={14}
+                                                    className={`transition-transform ${
+                                                      openRoomChildAge === key
+                                                        ? "rotate-180"
+                                                        : ""
+                                                    }`}
+                                                  />
+                                                </button>
+                                                {openRoomChildAge === key && (
+                                                  <ul className="absolute top-full left-0 z-30 mt-1 w-full bg-white border border-primary shadow-sm max-h-48 overflow-y-auto">
+                                                    {Array.from(
+                                                      {
+                                                        // With 3 children, only ages below the limit are allowed
+                                                        length: fullRoom
+                                                          ? FULL_ROOM_CHILD_AGE_LIMIT
+                                                          : MAX_CHILD_AGE + 1,
+                                                      },
+                                                      (_, a) => (
+                                                        <li
+                                                          key={a}
+                                                          onMouseDown={() => {
+                                                            setChildAge(
+                                                              room.id,
+                                                              r,
+                                                              c,
+                                                              String(a)
+                                                            );
+                                                            setOpenRoomChildAge(
+                                                              null
+                                                            );
+                                                          }}
+                                                          className={`px-3 py-2 text-sm cursor-pointer  ${
+                                                            age === String(a)
+                                                              ? "bg-primary/10 font-medium"
+                                                              : "text-dark-gray"
+                                                          }`}
+                                                        >
+                                                          {a}{" "}
+                                                          {a === 1
+                                                            ? "yr"
+                                                            : "yrs"}
+                                                        </li>
+                                                      )
+                                                    )}
+                                                  </ul>
+                                                )}
+                                              </div>
+                                            </div>
+                                          );
+                                        }
+                                      )}
+                                    </div>
+
+                                    {/* Mobile: compact table row */}
+                                    <div className="sm:hidden">
+                                      <span className="block pt-1 pb-2 text-xs font-arizona-sans-regular uppercase tracking-[.15em] text-primary">
+                                        Room {r + 1}
+                                      </span>
+                                      <div className={MOBILE_ROW}>
+                                        <Counter
+                                          stacked
+                                          label="Adults"
+                                          value={g.adults}
+                                          min={1}
+                                          max={ADULTS_PER_ROOM}
+                                          onInc={() =>
+                                            updateRoomGuests(room.id, r, {
+                                              adults: g.adults + 1,
+                                            })
+                                          }
+                                          onDec={() =>
+                                            updateRoomGuests(room.id, r, {
+                                              adults: g.adults - 1,
+                                            })
+                                          }
+                                        />
+                                        <Counter
+                                          stacked
+                                          label="Children"
+                                          sublabel={`0 - ${MAX_CHILD_AGE}`}
+                                          value={g.children}
+                                          min={0}
+                                          max={CHILDREN_PER_ROOM}
+                                          incDisabled={childCapReached}
+                                          onInc={() =>
+                                            updateRoomGuests(room.id, r, {
+                                              children: g.children + 1,
+                                            })
+                                          }
+                                          onDec={() =>
+                                            updateRoomGuests(room.id, r, {
+                                              children: g.children - 1,
+                                            })
+                                          }
+                                        />
+                                      </div>
+                                      {g.children > 0 && (
+                                        <div
+                                          // 1–2 children line up with the Adults/Children counters; 3 share the row
+                                          className={`mt-1 grid gap-2 ${g.children === CHILDREN_PER_ROOM ? "grid-cols-3" : "grid-cols-2"}`}
+                                        >
+                                          {Array.from(
+                                            { length: g.children },
+                                            (_, c) => {
+                                              // "m-" keeps mobile keys apart from the desktop dropdowns
+                                              const key = `m-${room.id}-${r}-${c}`;
+                                              const age = g.ages[c];
+                                              return (
+                                                <div
+                                                  key={c}
+                                                  className="flex flex-col gap-1.5 py-2"
+                                                >
+                                                  <span className="text-[10px] font-arizona-sans-regular uppercase tracking-[.15em] text-dark-gray">
+                                                    Child {c + 1}
+                                                  </span>
+                                                  <div className="relative">
+                                                    <button
+                                                      type="button"
+                                                      onClick={() =>
+                                                        setOpenRoomChildAge(
+                                                          openRoomChildAge === key
+                                                            ? null
+                                                            : key
+                                                        )
+                                                      }
+                                                      className="w-full h-7 flex items-center justify-between border border-primary bg-white pl-2 pr-2 text-xs text-dark-gray cursor-pointer"
+                                                    >
+                                                      <span>
+                                                        {age
+                                                          ? `${age} ${age === "1" ? "yr" : "yrs"}`
+                                                          : "Age"}
+                                                      </span>
+                                                      <ChevronDown
+                                                        size={12}
+                                                        className={`transition-transform ${openRoomChildAge === key ? "rotate-180" : ""}`}
+                                                      />
+                                                    </button>
+                                                    {openRoomChildAge === key && (
+                                                      <ul className="absolute top-full left-0 z-30 mt-1 w-full bg-white border border-primary shadow-sm max-h-48 overflow-y-auto overscroll-contain">
+                                                        {Array.from(
+                                                          {
+                                                            // With 3 children, only ages below the limit are allowed
+                                                            length: fullRoom
+                                                              ? FULL_ROOM_CHILD_AGE_LIMIT
+                                                              : MAX_CHILD_AGE + 1,
+                                                          },
+                                                          (_, a) => (
+                                                            <li
+                                                              key={a}
+                                                              onClick={() => {
+                                                                setChildAge(
+                                                                  room.id,
+                                                                  r,
+                                                                  c,
+                                                                  String(a)
+                                                                );
+                                                                setOpenRoomChildAge(
+                                                                  null
+                                                                );
+                                                              }}
+                                                              className={`px-2 py-2 text-xs cursor-pointer hover:bg-primary/10 ${age === String(a) ? "bg-primary/10 font-medium" : "text-dark-gray"}`}
+                                                            >
+                                                              {a}{" "}
+                                                              {a === 1 ? "yr" : "yrs"}
+                                                            </li>
+                                                          )
+                                                        )}
+                                                      </ul>
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              );
+                                            }
+                                          )}
+                                        </div>
+                                      )}
+                                    </div>
+                                    {fullRoom && (
+                                      <p className="text-[10px] font-arizona-sans-regular tracking-wide mt-1 text-red-500">
+                                        {isRoomInvalid(g)
+                                          ? `${CHILDREN_PER_ROOM} children are allowed in a room only when all are below ${FULL_ROOM_CHILD_AGE_LIMIT} years. With a child aged ${FULL_ROOM_CHILD_AGE_LIMIT}+, only ${
+                                              CHILDREN_PER_ROOM - 1
+                                            } children can stay in this room — add another room or reduce children.`
+                                          : `If ${CHILDREN_PER_ROOM} children are selected, all ${CHILDREN_PER_ROOM} children must be under ${FULL_ROOM_CHILD_AGE_LIMIT} years old.`}
+                                      </p>
+                                    )}
+                                    {!fullRoom && childCapReached && (
+                                      <p className="text-[10px] font-arizona-sans-regular tracking-wide mt-1 text-red-500">
+                                        A child aged {FULL_ROOM_CHILD_AGE_LIMIT}
+                                        + is selected, so this room can have
+                                        only {CHILDREN_PER_ROOM - 1} children.
+                                      </p>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          <div className="mt-3 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                            <p className="text-[10px] text-dark-gray font-arizona-sans-regular tracking-wide">
+                              A valid ID proof is required for each child at the
+                              time of check-in.
+                            </p>
+                            <button
+                              disabled={hasInvalidRoom}
+                              className="self-end shrink-0 px-4 py-1 bg-primary text-white rounded-xs text-sm cursor-pointer uppercase tracking-[.15em] font-arizona-sans-regular disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+                              onClick={() => confirmRoomQty(room)}
+                            >
+                              Add Room
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
 
                 {openPackagesFor === room.id && (
                   <PackageList
@@ -374,7 +853,12 @@ export default function SelectRoomSection({
                     selected={selected}
                     openQtyFor={openQtyFor}
                     setOpenQtyFor={setOpenQtyFor}
-                    addPackage={addPackage}
+                    addPackage={(pkg, rooms, adults, children) => {
+                      // A chosen package replaces the room's "From" rate line
+                      removePackage(room.id);
+                      addPackage(pkg, rooms, adults, children);
+                    }}
+                    defaultQty={roomQty[room.id]}
                   />
                 )}
               </div>
@@ -432,10 +916,16 @@ export default function SelectRoomSection({
       {showPriceSheet && (
         <>
           <div
-            className={`fixed inset-0 z-40 bg-black/50 xl:hidden cursor-pointer ${closingSheet ? "animate-fade-out" : "animate-fade-in"}`}
+            className={`fixed inset-0 z-40 bg-black/50 xl:hidden cursor-pointer ${
+              closingSheet ? "animate-fade-out" : "animate-fade-in"
+            }`}
             onClick={closePriceSheet}
           />
-          <div className={`fixed bottom-0 left-0 right-0 z-50 xl:hidden bg-white rounded-t-2xl shadow-[0_-4px_24px_0_rgba(0,0,0,0.18)] flex flex-col max-h-[80vh] ${closingSheet ? "animate-slide-down" : "animate-slide-up"}`}>
+          <div
+            className={`fixed bottom-0 left-0 right-0 z-50 xl:hidden bg-white rounded-t-2xl shadow-[0_-4px_24px_0_rgba(0,0,0,0.18)] flex flex-col max-h-[80vh] ${
+              closingSheet ? "animate-slide-down" : "animate-slide-up"
+            }`}
+          >
             <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-100 shrink-0">
               <div className="flex flex-col">
                 <span className="text-[10px] font-arizona-sans-regular tracking-widest text-dark-gray uppercase">
@@ -472,7 +962,7 @@ export default function SelectRoomSection({
           <button
             type="button"
             onClick={openPriceSheet}
-            className="flex items-center gap-2 cursor-pointer min-w-50"
+            className="flex items-center gap-2 cursor-pointer min-w-0 flex-1"
             aria-label="View price details"
           >
             <div className="flex flex-col items-baseline">
@@ -492,10 +982,14 @@ export default function SelectRoomSection({
               window.dispatchEvent(
                 new CustomEvent("search:check-availability", {
                   detail: { step: 2 },
-                }),
+                })
               )
             }
-            className={`h-10 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase ${selected.length > 0 ? "bg-primary text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+            className={`shrink-0 h-10 px-6 rounded-xs font-arizona-sans-regular tracking-widest text-xs uppercase ${
+              selected.length > 0
+                ? "bg-primary text-white cursor-pointer"
+                : "bg-gray-200 text-gray-400 cursor-not-allowed"
+            }`}
           >
             PROCEED
           </button>

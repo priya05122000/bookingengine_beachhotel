@@ -8,13 +8,16 @@ import { Minus, Plus, X, ChevronDown } from "lucide-react";
 import { PackageItem } from "./types";
 import { typography } from "@/src/lib/typography";
 
-function Counter({
+export function Counter({
   label,
   sublabel,
   value,
   min,
   max,
   incDisabled,
+  stacked,
+  inlineSublabel,
+  controlClassName = "",
   onInc,
   onDec,
 }: {
@@ -24,26 +27,49 @@ function Counter({
   min: number;
   max: number;
   incDisabled?: boolean;
+  /** Label above the control instead of beside it */
+  stacked?: boolean;
+  /** Sublabel on the same line as the label */
+  inlineSublabel?: boolean;
+  /** Extra classes for the bordered −/+ box, e.g. a fixed width */
+  controlClassName?: string;
   onInc: () => void;
   onDec: () => void;
 }) {
+  // In the fixed-height stacked box, fill only the space inside the border so
+  // the hover background doesn't paint over it
+  const btnHeight = stacked ? "h-full" : "h-7";
   return (
-    <div className="flex items-center justify-between py-2">
-      <div>
-        <p className="text-xs font-arizona-sans-regular uppercase tracking-[.15em] text-dark-gray">
+    <div
+      className={`py-2 ${
+        stacked ? "flex flex-col gap-1.5" : "flex items-center justify-between"
+      }`}
+    >
+      <div
+        className={
+          stacked || inlineSublabel
+            ? "flex items-baseline gap-2 whitespace-nowrap"
+            : ""
+        }
+      >
+        <p className="text-[10px] font-arizona-sans-regular uppercase tracking-[.15em] text-dark-gray">
           {label}
         </p>
         {sublabel && (
           <p className="text-[10px] text-silver font-arizona-sans-regular tracking-[0.15em]">
-            {sublabel}
+            ({sublabel})
           </p>
         )}
       </div>
-      <div className="flex items-center gap-3 border border-primary font-arizona">
+      <div
+        className={`flex items-center gap-3 border border-primary font-arizona ${
+          stacked ? "w-full h-7 justify-between" : ""
+        } ${controlClassName}`}
+      >
         <button
           onClick={onDec}
           disabled={value <= min}
-          className="w-7 h-7 flex items-center justify-center text-primary cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors"
+          className={`w-7 ${btnHeight} flex items-center justify-center text-primary cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors`}
         >
           <Minus size={12} />
         </button>
@@ -51,7 +77,7 @@ function Counter({
         <button
           onClick={onInc}
           disabled={value >= max || incDisabled}
-          className="w-7 h-7 flex items-center justify-center text-primary cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors"
+          className={`w-7 ${btnHeight} flex items-center justify-center text-primary cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray transition-colors`}
         >
           <Plus size={12} />
         </button>
@@ -69,8 +95,9 @@ type Props = {
     pkg: PackageItem,
     rooms: number,
     adults: number,
-    children: number,
+    children: number
   ) => void;
+  defaultQty?: QtyState;
 };
 
 export type SelectedPackage = PackageItem & {
@@ -79,7 +106,7 @@ export type SelectedPackage = PackageItem & {
   children: number;
 };
 
-type QtyState = { rooms: number; adults: number; children: number };
+export type QtyState = { rooms: number; adults: number; children: number };
 
 export default function PackageList({
   packages,
@@ -87,11 +114,14 @@ export default function PackageList({
   openQtyFor,
   setOpenQtyFor,
   addPackage,
+  defaultQty,
 }: Props) {
   const [qty, setQty] = useState<Record<string, QtyState>>({});
 
   //new
-  const [childAges, setChildAges] = useState<Record<string, (string | null)[]>>({});
+  const [childAges, setChildAges] = useState<Record<string, (string | null)[]>>(
+    {}
+  );
 
   const [openDetailsFor, setOpenDetailsFor] = useState<string | null>(null);
 
@@ -114,7 +144,6 @@ export default function PackageList({
     setQty((prev) => ({ ...prev, [id]: { ...getQty(id), children: n } }));
   }
 
-
   //new
   function setChildAge(id: string, index: number, age: string) {
     setChildAges((prev) => {
@@ -130,7 +159,9 @@ export default function PackageList({
 
   function guestLabel(rooms: number, adults: number, children: number) {
     if (rooms === 0 && adults === 0) return "";
-    return `${rooms} Room${rooms > 1 ? "s" : ""} · ${adults} Adult${adults > 1 ? "s" : ""}${children > 0 ? ` · ${children} Child${children > 1 ? "ren" : ""}` : ""}`;
+    return `${rooms} Room${rooms > 1 ? "s" : ""} · ${adults} Adult${
+      adults > 1 ? "s" : ""
+    }${children > 0 ? ` · ${children} Child${children > 1 ? "ren" : ""}` : ""}`;
   }
 
   return (
@@ -150,13 +181,13 @@ export default function PackageList({
           // While popup is open show live counter values; after Add Room show committed values
           const displayRooms = isOpen
             ? liveQty.rooms
-            : (committedPkg?.rooms ?? liveQty.rooms);
+            : committedPkg?.rooms ?? liveQty.rooms;
           const displayAdults = isOpen
             ? liveQty.adults
-            : (committedPkg?.adults ?? liveQty.adults);
+            : committedPkg?.adults ?? liveQty.adults;
           const displayChildren = isOpen
             ? liveQty.children
-            : (committedPkg?.children ?? liveQty.children);
+            : committedPkg?.children ?? liveQty.children;
 
           return (
             <div
@@ -191,12 +222,20 @@ export default function PackageList({
                       className="text-xs text-dark-gray underline cursor-help"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setOpenDetailsFor(openDetailsFor === pkg.id ? null : pkg.id);
+                        setOpenDetailsFor(
+                          openDetailsFor === pkg.id ? null : pkg.id
+                        );
                       }}
                     >
                       Details
                     </div>
-                    <div className={`absolute top-full sm:right-0 z-20 mt-2 w-64 bg-white border border-primary/32 rounded-xs p-2 text-xs lg:text-sm shadow-[-1px_4px_4px_0px_#00000040] transition-opacity text-dark-gray space-y-1 ${openDetailsFor === pkg.id ? "opacity-100 visible" : "opacity-0 invisible group-hover:opacity-100 group-hover:visible"}`}>
+                    <div
+                      className={`absolute top-full sm:right-0 z-20 mt-2 w-64 bg-white border border-primary/32 rounded-xs p-2 text-xs lg:text-sm shadow-[-1px_4px_4px_0px_#00000040] transition-opacity text-dark-gray space-y-1 ${
+                        openDetailsFor === pkg.id
+                          ? "opacity-100 visible"
+                          : "opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+                      }`}
+                    >
                       {pkg.priceBreakdown ? (
                         <>
                           {pkg.priceBreakdown.entries.map((entry, i) => (
@@ -250,9 +289,23 @@ export default function PackageList({
                       className="bg-primary uppercase border tracking-[.15em] text-white px-3 py-1 rounded-xs text-xs lg:text-sm cursor-pointer"
                       onClick={() => {
                         if (!qty[pkg.id]) {
+                          // Seed from the room-level selection, clamped to this package's availability
+                          const rooms = Math.min(
+                            defaultQty?.rooms ?? 1,
+                            pkg.availableRooms ?? 1
+                          );
+                          const maxGuests = rooms * 4;
+                          const adults = Math.min(
+                            defaultQty?.adults ?? 1,
+                            maxGuests
+                          );
+                          const children = Math.min(
+                            defaultQty?.children ?? 0,
+                            maxGuests - adults
+                          );
                           setQty((prev) => ({
                             ...prev,
-                            [pkg.id]: { rooms: 1, adults: 1, children: 0 },
+                            [pkg.id]: { rooms, adults, children },
                           }));
                         }
                         setOpenQtyFor(pkg.id);
@@ -308,7 +361,7 @@ export default function PackageList({
                           />
                           <Counter
                             label="Children"
-                            sublabel="0 - 12 yrs"
+                            sublabel="0 - 12"
                             value={liveQty.children}
                             min={0}
                             max={liveQty.rooms * 4}
@@ -337,17 +390,18 @@ export default function PackageList({
                               </p>
 
                               <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                                {Array.from({ length: liveQty.children }).map((_, index) => (
-                                  <div
-                                    key={index}
-                                    className="flex items-center justify-between gap-2"
-                                  >
-                                    <span className="text-xs font-arizona-sans-regular text-dark-gray">
-                                      Child {index + 1}
-                                    </span>
+                                {Array.from({ length: liveQty.children }).map(
+                                  (_, index) => (
+                                    <div
+                                      key={index}
+                                      className="flex items-center justify-between gap-2"
+                                    >
+                                      <span className="text-xs font-arizona-sans-regular text-dark-gray">
+                                        Child {index + 1}
+                                      </span>
 
-                                    {/* remove this */}
-                                    {/* <select
+                                      {/* remove this */}
+                                      {/* <select
                                       value={childAges[pkg.id]?.[index] ?? ""}
                                       onChange={(e) =>
                                         setChildAge(pkg.id, index, e.target.value)
@@ -363,65 +417,86 @@ export default function PackageList({
                                       ))}
                                     </select> */}
 
-                                    {/* new */}
+                                      {/* new */}
 
-                                    <div className="relative">
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          setOpenChildAge(
-                                            openChildAge === `${pkg.id}-${index}`
-                                              ? null
-                                              : `${pkg.id}-${index}`,
-                                          )
-                                        }
-                                        className="w-24 h-9 flex items-center justify-between border border-primary bg-white px-2 text-sm text-dark-gray cursor-pointer"
-                                      >
-                                        <span>
-                                          {childAges[pkg.id]?.[index]
-                                            ? `${childAges[pkg.id][index]} ${childAges[pkg.id][index] === "1" ? "yr" : "yrs"
-                                            }`
-                                            : "Select"}
-                                        </span>
+                                      <div className="relative">
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                            setOpenChildAge(
+                                              openChildAge ===
+                                                `${pkg.id}-${index}`
+                                                ? null
+                                                : `${pkg.id}-${index}`
+                                            )
+                                          }
+                                          className="w-24 h-9 flex items-center justify-between border border-primary bg-white px-2 text-sm text-dark-gray cursor-pointer"
+                                        >
+                                          <span>
+                                            {childAges[pkg.id]?.[index]
+                                              ? `${childAges[pkg.id][index]} ${
+                                                  childAges[pkg.id][index] ===
+                                                  "1"
+                                                    ? "yr"
+                                                    : "yrs"
+                                                }`
+                                              : "Select"}
+                                          </span>
 
-                                        <ChevronDown
-                                          size={14}
-                                          className={`transition-transform ${openChildAge === `${pkg.id}-${index}` ? "rotate-180" : ""
+                                          <ChevronDown
+                                            size={14}
+                                            className={`transition-transform ${
+                                              openChildAge ===
+                                              `${pkg.id}-${index}`
+                                                ? "rotate-180"
+                                                : ""
                                             }`}
-                                        />
-                                      </button>
+                                          />
+                                        </button>
 
-                                      {openChildAge === `${pkg.id}-${index}` && (
-                                        <ul className="absolute top-full left-0 z-50 mt-1 w-24 bg-white border border-primary shadow-sm max-h-48 overflow-y-auto">
-                                          {Array.from({ length: 13 }, (_, age) => (
-                                            <li
-                                              key={age}
-                                              onMouseDown={() => {
-                                                setChildAge(pkg.id, index, String(age));
-                                                setOpenChildAge(null);
-                                              }}
-                                              className={`px-3 py-2 text-sm cursor-pointer hover:bg-primary/10 ${childAges[pkg.id]?.[index] === String(age)
-                                                ? "bg-primary/10 font-medium"
-                                                : "text-dark-gray"
-                                                }`}
-                                            >
-                                              {age} {age === 1 ? "yr" : "yrs"}
-                                            </li>
-                                          ))}
-                                        </ul>
-                                      )}
+                                        {openChildAge ===
+                                          `${pkg.id}-${index}` && (
+                                          <ul className="absolute top-full left-0 z-50 mt-1 w-24 bg-white border border-primary shadow-sm max-h-48 overflow-y-auto">
+                                            {Array.from(
+                                              { length: 13 },
+                                              (_, age) => (
+                                                <li
+                                                  key={age}
+                                                  onMouseDown={() => {
+                                                    setChildAge(
+                                                      pkg.id,
+                                                      index,
+                                                      String(age)
+                                                    );
+                                                    setOpenChildAge(null);
+                                                  }}
+                                                  className={`px-3 py-2 text-sm cursor-pointer hover:bg-primary/10 ${
+                                                    childAges[pkg.id]?.[
+                                                      index
+                                                    ] === String(age)
+                                                      ? "bg-primary/10 font-medium"
+                                                      : "text-dark-gray"
+                                                  }`}
+                                                >
+                                                  {age}{" "}
+                                                  {age === 1 ? "yr" : "yrs"}
+                                                </li>
+                                              )
+                                            )}
+                                          </ul>
+                                        )}
+                                      </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  )
+                                )}
                               </div>
 
                               <p className="text-[10px] text-dark-gray font-arizona-sans-regular tracking-wide my-4">
-                                A valid ID proof is required for each child at the time of check-in.
+                                A valid ID proof is required for each child at
+                                the time of check-in.
                               </p>
                             </div>
                           )}
-
-
 
                           <div className="flex justify-start mt-2">
                             <button
@@ -431,7 +506,7 @@ export default function PackageList({
                                   pkg,
                                   liveQty.rooms,
                                   liveQty.adults,
-                                  liveQty.children,
+                                  liveQty.children
                                 );
                                 setOpenQtyFor(null);
                               }}
@@ -507,7 +582,7 @@ export default function PackageList({
                               />
                               <Counter
                                 label="Children"
-                                sublabel="0 - 12 yrs"
+                                sublabel="0 - 12"
                                 value={liveQty.children}
                                 min={0}
                                 max={liveQty.rooms * 4}
@@ -537,7 +612,9 @@ export default function PackageList({
                                   </p>
 
                                   <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                                    {Array.from({ length: liveQty.children }).map((_, index) => (
+                                    {Array.from({
+                                      length: liveQty.children,
+                                    }).map((_, index) => (
                                       <div
                                         key={index}
                                         className="flex items-center justify-between gap-2"
@@ -551,7 +628,8 @@ export default function PackageList({
                                             type="button"
                                             onClick={() =>
                                               setOpenChildAge(
-                                                openChildAge === `${pkg.id}-${index}`
+                                                openChildAge ===
+                                                  `${pkg.id}-${index}`
                                                   ? null
                                                   : `${pkg.id}-${index}`
                                               )
@@ -560,43 +638,57 @@ export default function PackageList({
                                           >
                                             <span>
                                               {childAges[pkg.id]?.[index]
-                                                ? `${childAges[pkg.id][index]} ${childAges[pkg.id][index] === "1"
-                                                  ? "yr"
-                                                  : "yrs"
-                                                }`
+                                                ? `${
+                                                    childAges[pkg.id][index]
+                                                  } ${
+                                                    childAges[pkg.id][index] ===
+                                                    "1"
+                                                      ? "yr"
+                                                      : "yrs"
+                                                  }`
                                                 : "Select"}
                                             </span>
 
                                             <ChevronDown
                                               size={14}
-                                              className={`transition-transform ${openChildAge === `${pkg.id}-${index}`
-                                                ? "rotate-180"
-                                                : ""
-                                                }`}
+                                              className={`transition-transform ${
+                                                openChildAge ===
+                                                `${pkg.id}-${index}`
+                                                  ? "rotate-180"
+                                                  : ""
+                                              }`}
                                             />
                                           </button>
 
-                                          {openChildAge === `${pkg.id}-${index}` && (
+                                          {openChildAge ===
+                                            `${pkg.id}-${index}` && (
                                             <ul className="absolute bottom-full left-0 z-[60] mb-1 w-24 bg-white border border-primary shadow-sm max-h-48 overflow-y-auto">
-                                              {Array.from({ length: 13 }, (_, age) => (
-                                                <li
-                                                  key={age}
-                                                  onMouseDown={() => {
-                                                    setChildAge(
-                                                      pkg.id,
-                                                      index,
-                                                      String(age)
-                                                    );
-                                                    setOpenChildAge(null);
-                                                  }}
-                                                  className={`px-3 py-2 text-sm cursor-pointer hover:bg-primary/10 ${childAges[pkg.id]?.[index] === String(age)
-                                                    ? "bg-primary/10 font-medium"
-                                                    : "text-dark-gray"
+                                              {Array.from(
+                                                { length: 13 },
+                                                (_, age) => (
+                                                  <li
+                                                    key={age}
+                                                    onMouseDown={() => {
+                                                      setChildAge(
+                                                        pkg.id,
+                                                        index,
+                                                        String(age)
+                                                      );
+                                                      setOpenChildAge(null);
+                                                    }}
+                                                    className={`px-3 py-2 text-sm cursor-pointer hover:bg-primary/10 ${
+                                                      childAges[pkg.id]?.[
+                                                        index
+                                                      ] === String(age)
+                                                        ? "bg-primary/10 font-medium"
+                                                        : "text-dark-gray"
                                                     }`}
-                                                >
-                                                  {age} {age === 1 ? "yr" : "yrs"}
-                                                </li>
-                                              ))}
+                                                  >
+                                                    {age}{" "}
+                                                    {age === 1 ? "yr" : "yrs"}
+                                                  </li>
+                                                )
+                                              )}
                                             </ul>
                                           )}
                                         </div>
@@ -605,7 +697,8 @@ export default function PackageList({
                                   </div>
 
                                   <p className="text-[10px] text-dark-gray font-arizona-sans-regular tracking-wide mt-4">
-                                    A valid ID proof is required for each child at the time of check-in.
+                                    A valid ID proof is required for each child
+                                    at the time of check-in.
                                   </p>
                                 </div>
                               )}
@@ -617,7 +710,7 @@ export default function PackageList({
                                     pkg,
                                     liveQty.rooms,
                                     liveQty.adults,
-                                    liveQty.children,
+                                    liveQty.children
                                   );
                                   setOpenQtyFor(null);
                                 }}
@@ -628,7 +721,7 @@ export default function PackageList({
                           </div>
                         );
                       })(),
-                      document.body,
+                      document.body
                     )}
                 </div>
               </div>
