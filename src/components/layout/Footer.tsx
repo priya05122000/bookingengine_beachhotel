@@ -135,7 +135,6 @@ export default function Footer() {
                     {PHONE_NUMBER_DISPLAY}
                   </a>
 
-
                   <a
                     href="mailto:support@thebeachhotel.in"
                     className="type-body-sm flex items-center gap-2 hover:text-accent transition-colors"

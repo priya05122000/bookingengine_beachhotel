@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { Minus, Plus, X } from "lucide-react";
+
+//new
+import { Minus, Plus, X, ChevronDown } from "lucide-react";
 import { PackageItem } from "./types";
 import { typography } from "@/src/lib/typography";
 
@@ -87,7 +89,14 @@ export default function PackageList({
   addPackage,
 }: Props) {
   const [qty, setQty] = useState<Record<string, QtyState>>({});
+
+  //new
+  const [childAges, setChildAges] = useState<Record<string, (string | null)[]>>({});
+
   const [openDetailsFor, setOpenDetailsFor] = useState<string | null>(null);
+
+  //new
+  const [openChildAge, setOpenChildAge] = useState<string | null>(null);
 
   function getQty(id: string): QtyState {
     return qty[id] ?? { rooms: 0, adults: 0, children: 0 };
@@ -103,6 +112,20 @@ export default function PackageList({
 
   function setChildren(id: string, n: number) {
     setQty((prev) => ({ ...prev, [id]: { ...getQty(id), children: n } }));
+  }
+
+
+  //new
+  function setChildAge(id: string, index: number, age: string) {
+    setChildAges((prev) => {
+      const ages = [...(prev[id] ?? [])];
+      ages[index] = age;
+
+      return {
+        ...prev,
+        [id]: ages,
+      };
+    });
   }
 
   function guestLabel(rooms: number, adults: number, children: number) {
@@ -248,7 +271,7 @@ export default function PackageList({
                       const atGuestLimit =
                         liveQty.adults + liveQty.children >= maxGuests;
                       return (
-                        <div className="hidden md:block absolute top-full right-0 z-20 w-56 bg-white border border-primary/32 rounded-xs px-4 pb-4 pt-2 text-sm shadow-[-1px_4px_4px_0px_#00000040] tracking-[.15em]">
+                        <div className="hidden md:block absolute top-full right-0 z-20 w-92 bg-white border border-primary/32 rounded-xs px-4 pb-4 pt-2 text-sm shadow-[-1px_4px_4px_0px_#00000040] tracking-[.15em]">
                           <button
                             aria-label="Close"
                             className="text-dark-gray text-end w-full mb-1 hover:text-dark-gray text-lg leading-none cursor-pointer"
@@ -285,7 +308,7 @@ export default function PackageList({
                           />
                           <Counter
                             label="Children"
-                            sublabel="0 - 8 yrs"
+                            sublabel="0 - 12 yrs"
                             value={liveQty.children}
                             min={0}
                             max={liveQty.rooms * 4}
@@ -297,6 +320,7 @@ export default function PackageList({
                               setChildren(pkg.id, liveQty.children - 1)
                             }
                           />
+
                           {atGuestLimit && (
                             <p className="text-[10px] text-red-500 font-arizona-sans-regular tracking-widest mt-1">
                               Max {maxGuests} guest{maxGuests > 1 ? "s" : ""}{" "}
@@ -304,6 +328,101 @@ export default function PackageList({
                               {liveQty.rooms > 1 ? "s" : ""} (4 per room).
                             </p>
                           )}
+
+                          {/* New */}
+                          {liveQty.children > 0 && (
+                            <div className="mt-3 border-t border-gray-200 pt-3">
+                              <p className="text-xs font-arizona-sans-regular uppercase tracking-[.15em] text-dark-gray mb-4">
+                                Age of Children
+                              </p>
+
+                              <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                                {Array.from({ length: liveQty.children }).map((_, index) => (
+                                  <div
+                                    key={index}
+                                    className="flex items-center justify-between gap-2"
+                                  >
+                                    <span className="text-xs font-arizona-sans-regular text-dark-gray">
+                                      Child {index + 1}
+                                    </span>
+
+                                    {/* remove this */}
+                                    {/* <select
+                                      value={childAges[pkg.id]?.[index] ?? ""}
+                                      onChange={(e) =>
+                                        setChildAge(pkg.id, index, e.target.value)
+                                      }
+                                      className="w-24 h-9 border border-gray-300 rounded-md px-2 text-sm font-arizona-sans-regular bg-white"
+                                    >
+                                      <option value="">Select</option>
+
+                                      {Array.from({ length: 18 }, (_, age) => (
+                                        <option key={age} value={age}>
+                                          {age} {age === 1 ? "yr" : "yrs"}
+                                        </option>
+                                      ))}
+                                    </select> */}
+
+                                    {/* new */}
+
+                                    <div className="relative">
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          setOpenChildAge(
+                                            openChildAge === `${pkg.id}-${index}`
+                                              ? null
+                                              : `${pkg.id}-${index}`,
+                                          )
+                                        }
+                                        className="w-24 h-9 flex items-center justify-between border border-primary bg-white px-2 text-sm text-dark-gray cursor-pointer"
+                                      >
+                                        <span>
+                                          {childAges[pkg.id]?.[index]
+                                            ? `${childAges[pkg.id][index]} ${childAges[pkg.id][index] === "1" ? "yr" : "yrs"
+                                            }`
+                                            : "Select"}
+                                        </span>
+
+                                        <ChevronDown
+                                          size={14}
+                                          className={`transition-transform ${openChildAge === `${pkg.id}-${index}` ? "rotate-180" : ""
+                                            }`}
+                                        />
+                                      </button>
+
+                                      {openChildAge === `${pkg.id}-${index}` && (
+                                        <ul className="absolute top-full left-0 z-50 mt-1 w-24 bg-white border border-primary shadow-sm max-h-48 overflow-y-auto">
+                                          {Array.from({ length: 13 }, (_, age) => (
+                                            <li
+                                              key={age}
+                                              onMouseDown={() => {
+                                                setChildAge(pkg.id, index, String(age));
+                                                setOpenChildAge(null);
+                                              }}
+                                              className={`px-3 py-2 text-sm cursor-pointer hover:bg-primary/10 ${childAges[pkg.id]?.[index] === String(age)
+                                                ? "bg-primary/10 font-medium"
+                                                : "text-dark-gray"
+                                                }`}
+                                            >
+                                              {age} {age === 1 ? "yr" : "yrs"}
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      )}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+
+                              <p className="text-[10px] text-dark-gray font-arizona-sans-regular tracking-wide my-4">
+                                A valid ID proof is required for each child at the time of check-in.
+                              </p>
+                            </div>
+                          )}
+
+
+
                           <div className="flex justify-start mt-2">
                             <button
                               className="px-4 py-1 bg-primary text-white rounded-xs text-sm cursor-pointer uppercase tracking-[.15em] font-arizona-sans-regular"
@@ -388,7 +507,7 @@ export default function PackageList({
                               />
                               <Counter
                                 label="Children"
-                                sublabel="0 - 8 yrs"
+                                sublabel="0 - 12 yrs"
                                 value={liveQty.children}
                                 min={0}
                                 max={liveQty.rooms * 4}
@@ -400,6 +519,7 @@ export default function PackageList({
                                   setChildren(pkg.id, liveQty.children - 1)
                                 }
                               />
+
                               {atGuestLimit && (
                                 <p className="text-[10px] text-red-500 tracking-widest mt-1">
                                   Max {maxGuests} guest
@@ -408,6 +528,88 @@ export default function PackageList({
                                   room).
                                 </p>
                               )}
+
+                              {/* new */}
+                              {liveQty.children > 0 && (
+                                <div className="mt-3 border-t border-gray-200 pt-3">
+                                  <p className="text-xs font-arizona-sans-regular uppercase tracking-[.15em] text-dark-gray mb-4">
+                                    Age of Children
+                                  </p>
+
+                                  <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                                    {Array.from({ length: liveQty.children }).map((_, index) => (
+                                      <div
+                                        key={index}
+                                        className="flex items-center justify-between gap-2"
+                                      >
+                                        <span className="text-xs font-arizona-sans-regular text-dark-gray">
+                                          Child {index + 1}
+                                        </span>
+
+                                        <div className="relative">
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              setOpenChildAge(
+                                                openChildAge === `${pkg.id}-${index}`
+                                                  ? null
+                                                  : `${pkg.id}-${index}`
+                                              )
+                                            }
+                                            className="w-26 h-9 flex items-center justify-between border border-primary bg-white px-2 text-sm text-dark-gray cursor-pointer"
+                                          >
+                                            <span>
+                                              {childAges[pkg.id]?.[index]
+                                                ? `${childAges[pkg.id][index]} ${childAges[pkg.id][index] === "1"
+                                                  ? "yr"
+                                                  : "yrs"
+                                                }`
+                                                : "Select"}
+                                            </span>
+
+                                            <ChevronDown
+                                              size={14}
+                                              className={`transition-transform ${openChildAge === `${pkg.id}-${index}`
+                                                ? "rotate-180"
+                                                : ""
+                                                }`}
+                                            />
+                                          </button>
+
+                                          {openChildAge === `${pkg.id}-${index}` && (
+                                            <ul className="absolute bottom-full left-0 z-[60] mb-1 w-24 bg-white border border-primary shadow-sm max-h-48 overflow-y-auto">
+                                              {Array.from({ length: 13 }, (_, age) => (
+                                                <li
+                                                  key={age}
+                                                  onMouseDown={() => {
+                                                    setChildAge(
+                                                      pkg.id,
+                                                      index,
+                                                      String(age)
+                                                    );
+                                                    setOpenChildAge(null);
+                                                  }}
+                                                  className={`px-3 py-2 text-sm cursor-pointer hover:bg-primary/10 ${childAges[pkg.id]?.[index] === String(age)
+                                                    ? "bg-primary/10 font-medium"
+                                                    : "text-dark-gray"
+                                                    }`}
+                                                >
+                                                  {age} {age === 1 ? "yr" : "yrs"}
+                                                </li>
+                                              ))}
+                                            </ul>
+                                          )}
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+
+                                  <p className="text-[10px] text-dark-gray font-arizona-sans-regular tracking-wide mt-4">
+                                    A valid ID proof is required for each child at the time of check-in.
+                                  </p>
+                                </div>
+                              )}
+
                               <button
                                 className="mt-4 w-full py-3 bg-primary text-white uppercase tracking-[.15em] text-sm cursor-pointer font-arizona-sans-regular"
                                 onClick={() => {
