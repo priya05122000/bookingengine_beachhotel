@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ChevronDown,
   ChevronUp,
@@ -18,9 +18,23 @@ type Props = {
 
 const IMAGES = [
   "/images/Rectangle.png",
+  "/images/invitationstay.jpg",
   "/images/Rectangle.png",
+  "/images/invitationstay.jpg",
   "/images/Rectangle.png",
+  "/images/invitationstay.jpg",
+  "/images/Rectangle.png",
+  "/images/invitationstay.jpg",
+  "/images/Rectangle.png",
+  "/images/invitationstay.jpg",
+  "/images/Rectangle.png",
+  "/images/invitationstay.jpg",
 ];
+
+const VISIBLE_THUMBS = 4;
+const THUMB_GAP = "8px";
+// Width of one thumbnail so VISIBLE_THUMBS fit exactly, edge to edge
+const THUMB_WIDTH = `calc((100% - ${VISIBLE_THUMBS - 1} * ${THUMB_GAP}) / ${VISIBLE_THUMBS})`;
 
 const SECTIONS = [
   {
@@ -49,14 +63,20 @@ export default function RoomDetailsModal({ onClose }: Props) {
   const [activeImg, setActiveImg] = useState(0);
   const [openSection, setOpenSection] = useState("KEY FEATURES");
   const { closing, triggerClose: handleClose } = useModalClose({ onClose });
+  const [thumbStart, setThumbStart] = useState(0);
+  const maxThumbStart = Math.max(0, IMAGES.length - VISIBLE_THUMBS);
 
-  const prev = () => {
-    setActiveImg((i) => (i - 1 + IMAGES.length) % IMAGES.length);
-  };
+  // Keep the active image inside the visible thumbnail window
+  useEffect(() => {
+    setThumbStart((start) => {
+      if (activeImg < start) return activeImg;
+      if (activeImg >= start + VISIBLE_THUMBS) return activeImg - VISIBLE_THUMBS + 1;
+      return start;
+    });
+  }, [activeImg]);
 
-  const next = () => {
-    setActiveImg((i) => (i + 1) % IMAGES.length);
-  };
+  const prevThumbs = () => setThumbStart((s) => Math.max(0, s - 1));
+  const nextThumbs = () => setThumbStart((s) => Math.min(maxThumbStart, s + 1));
 
   const toggleSection = (title: string) => {
     setOpenSection((s) => (s === title ? "" : title));
@@ -99,55 +119,74 @@ export default function RoomDetailsModal({ onClose }: Props) {
 
           {/* CONTENT */}
           {/* CONTENT */}
-          <div className="flex flex-col lg:flex-row flex-1">
+          <div className="flex flex-col lg:flex-row flex-1 lg:min-h-0">
             {/* LEFT IMAGE SECTION */}
-            <div className="w-full lg:w-[68%] flex flex-col shrink-0">
+            <div className="w-full lg:w-[68%] flex flex-col shrink-0 lg:min-h-0">
               {/* Main Image */}
-              <div className="relative h-70 sm:h-100 lg:flex-1 overflow-hidden">
-                <img
-                  src={IMAGES[activeImg]}
-                  alt="room"
-                  className="w-full h-full object-cover"
-                />
+              <div className="relative h-70 sm:h-100 lg:h-auto lg:flex-1 lg:min-h-0 overflow-hidden">
+                {IMAGES.map((src, index) => (
+                  <img
+                    key={index}
+                    src={src}
+                    alt="room"
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${activeImg === index ? "opacity-100" : "opacity-0"
+                      }`}
+                  />
+                ))}
 
-
-
-                {/* Navigation */}
-                <div className="absolute bottom-3 right-3 flex gap-2">
-                  <button
-                    onClick={prev}
-                    className="w-10 h-10 bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                  >
-                    <ChevronLeft size={18} />
-                  </button>
-
-                  <button
-                    onClick={next}
-                    className="w-10 h-10 bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                  >
-                    <ChevronRight size={18} />
-                  </button>
-                </div>
               </div>
 
               {/* Thumbnails */}
-              <div className="h-20 md:h-24 lg:h-32 flex gap-2 mt-2 px-2 shrink-0">
-                {IMAGES.map((src, index) => (
+              <div className="relative h-20 md:h-24 lg:h-32 mt-2 shrink-0">
+                {thumbStart > 0 && (
                   <button
-                    key={index}
-                    onClick={() => setActiveImg(index)}
-                    className={`overflow-hidden transition-all duration-300 cursor-pointer ${activeImg === index
-                      ? "opacity-50"
-                      : "opacity-100"
-                      }`}
+                    onClick={prevThumbs}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-7 h-7 bg-white/90 text-primary shadow flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer"
                   >
-                    <img
-                      src={src}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
+                    <ChevronLeft size={16} />
                   </button>
-                ))}
+                )}
+
+                <div className="w-full h-full overflow-hidden">
+                  <div
+                    className="flex h-full transition-transform duration-500 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
+                    style={{
+                      gap: THUMB_GAP,
+                      transform: `translateX(calc(-${thumbStart} * (${THUMB_WIDTH} + ${THUMB_GAP})))`,
+                    }}
+                  >
+                    {IMAGES.map((src, index) => (
+                      <div
+                        key={index}
+                        className="h-full shrink-0"
+                        style={{ width: THUMB_WIDTH }}
+                      >
+                        <button
+                          onClick={() => setActiveImg(index)}
+                          className={`w-full h-full overflow-hidden transition-all duration-300 cursor-pointer ${activeImg === index
+                            ? "opacity-50"
+                            : "opacity-100"
+                            }`}
+                        >
+                          <img
+                            src={src}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {thumbStart < maxThumbStart && (
+                  <button
+                    onClick={nextThumbs}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-7 h-7 bg-white/90 text-primary shadow flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                )}
               </div>
             </div>
 

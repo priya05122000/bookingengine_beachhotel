@@ -1,67 +1,61 @@
-
 import React from "react";
 import BookingStepBar from "./BookingStepBar";
 import { typography } from "@/src/lib/typography";
 import Image from "next/image";
 
 type Props = {
-    steps: string[];
-    activeStep: number;
-    enabledUpTo: number;
-    children: React.ReactNode;
+  steps: string[];
+  activeStep: number;
+  enabledUpTo: number;
+  children: React.ReactNode;
 };
 
 export default function BookingShell({
-    steps,
-    activeStep,
-    enabledUpTo,
-    children,
+  steps,
+  activeStep,
+  enabledUpTo,
+  children,
 }: Props) {
-    return (
+  return (
+    <>
+      {activeStep === 0 && (
+        <div className="hidden md:block">
+          <div className=" flex justify-center">
+            <Image
+              src="/images/logo.png"
+              alt="banner"
+              width={300}
+              height={150}
+              className="w-auto h-full object-cover mb-10 "
+              style={{ width: "auto" }}
+            />
+          </div>
 
-        <>
-            {activeStep === 0 && (
-                <div className="hidden md:block">
+          <Image
+            src="/images/Rectangle.png"
+            alt="banner"
+            width={1600}
+            height={900}
+            className="w-full h-64 object-cover "
+          />
+        </div>
+      )}
 
-                    <div className=" flex justify-center">
-                        <Image
-                            src="/images/logo.png"
-                            alt='banner'
-                            width={300}
-                            height={150}
-                            className='w-auto h-full object-cover mb-10 '
-                        />
-                    </div>
+      <div className="bg-primary/4 px-6 py-10 md:p-10">
+        <h1
+          className={`text-center tracking-[.08em] text-primary  uppercase font-arizona-regular mb-8 md:mb-12 ${typography.textFoXl}`}
+        >
+          Book Your Stay
+        </h1>
 
+        <BookingStepBar
+          steps={steps}
+          activeStep={activeStep}
+          enabledUpTo={enabledUpTo}
+        />
 
-                    <Image
-                        src="/images/Rectangle.png"
-                        alt='banner'
-                        width={1600}
-                        height={900}
-                        className='w-full h-64 object-cover '
-                    />
-                </div>
-
-            )}
-
-            <div className="bg-primary/4 px-6 py-10 md:p-10">
-                <h1
-                    className={`text-center tracking-[.08em] text-primary  uppercase font-arizona-regular mb-8 md:mb-12 ${typography.textFoXl}`}
-                >
-                    Book Your Stay
-                </h1>
-
-                <BookingStepBar
-                    steps={steps}
-                    activeStep={activeStep}
-                    enabledUpTo={enabledUpTo}
-                />
-
-                {children}
-            </div>
-        </>
-
-
-    );
+        {children}
+      </div>
+    </>
+  );
 }
